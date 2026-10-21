@@ -18,7 +18,7 @@ for (const width of [390, 1440]) {
     const url = base + (r === "/" ? "" : r);
     await page.goto(url, { waitUntil: "networkidle" }).catch(() => {});
     await page.evaluate(() => document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-visible")));
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(800);
     const name = (r === "/" ? "home" : r.slice(1).replace(/\//g, "_")) + `-${width}.png`;
     await page.screenshot({ path: path.join(out, name), fullPage: true });
     console.log("shot", name);

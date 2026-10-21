@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { company, disclosure } from "@/data/site";
 import { LegalPage } from "@/components/ui/LegalPage";
@@ -19,10 +19,10 @@ export default function TermsPage() {
 
       <h2>2. Information about AT&amp;T services, prices and offers</h2>
       <ul>
-        <li>Prices, promotions, plan features and terms shown on this website are published by AT&amp;T. They are shown with the date they were verified on att.com and may change at any time without notice.</li>
+        <li>Prices, promotions, plan features and terms shown on this website are published by AT&amp;T and may change at any time without notice.</li>
         <li>Prices exclude taxes and fees unless stated. Availability, speeds and eligibility depend on your address, credit approval and AT&amp;T&apos;s terms.</li>
         <li>AT&amp;T services are subject to AT&amp;T&apos;s own service agreements and policies, which govern any service you choose.</li>
-        <li>Nothing on this website is an offer that can be accepted by using the website. A call-back request does not create a purchase or any obligation.</li>
+        <li>Nothing on this website is an offer that can be accepted by using the website. Contacting us does not create a purchase or any obligation.</li>
       </ul>
 
       <h2>3. Use of the website</h2>

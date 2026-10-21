@@ -19,7 +19,7 @@ export default function AccessibilityPage() {
         <li>Semantic page structure with landmarks, one main heading per page and a logical heading order.</li>
         <li>A &ldquo;Skip to main content&rdquo; link and full keyboard operation, with a visible focus indicator.</li>
         <li>Text and background colors tested for at least 4.5:1 contrast (3:1 for large text and interface components).</li>
-        <li>Form fields with visible labels, clear error messages and an error summary that receives focus.</li>
+        <li>Form fields with visible labels and clear error messages.</li>
         <li>An accessible cookie dialog that traps focus while open, closes with Escape and returns focus afterwards.</li>
         <li>Motion effects that are switched off when your device requests reduced motion.</li>
         <li>Automated testing with axe-core and Lighthouse on every page before release.</li>

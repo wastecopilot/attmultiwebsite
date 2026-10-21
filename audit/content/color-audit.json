@@ -1,0 +1,122 @@
+[
+  {
+    "token": "brand",
+    "hex": "#009FDB",
+    "attName": ".color-att-blue / .bg-att-blue",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "brandStrong",
+    "hex": "#00388F",
+    "attName": "--btn-primary-bgcolor / .bg-att-cobalt",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "brandHover",
+    "hex": "#0057B8",
+    "attName": "--btn-border-hover / .color-button-focus (cobalt-600)",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "link",
+    "hex": "#0072B2",
+    "attName": "--a-default-color / .color-func-blue",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "tint",
+    "hex": "#F2FAFD",
+    "attName": ".bg-att-blue-000",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "tint2",
+    "hex": "#DCF3FA",
+    "attName": ".bg-att-blue-100",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "ink",
+    "hex": "#1D2329",
+    "attName": ".color-gray-800 / --heading-color",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "inkMuted",
+    "hex": "#454B52",
+    "attName": ".color-gray-700",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "inputBorder",
+    "hex": "#686E74",
+    "attName": "--textfield-border / .color-gray-600",
+    "liveComputed": false,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "border",
+    "hex": "#DCDFE3",
+    "attName": ".border-gray-300 / --accordion-border",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "surface",
+    "hex": "#FFFFFF",
+    "attName": ".bg-white",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "surfaceAlt",
+    "hex": "#F3F4F6",
+    "attName": ".border-gray-200 / --bgcolor",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "night",
+    "hex": "#002837",
+    "attName": ".bg-dark-accent / .color-cobalt-800",
+    "liveComputed": false,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "danger",
+    "hex": "#C70032",
+    "attName": "--form-error-dot / .color-red-600 / --color-urgent",
+    "liveComputed": true,
+    "liveStylesheet": true,
+    "result": "PASS"
+  },
+  {
+    "token": "success",
+    "hex": "#2D7E24",
+    "attName": "--color-success / .color-green-600",
+    "liveComputed": false,
+    "liveStylesheet": true,
+    "result": "PASS"
+  }
+]

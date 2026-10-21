@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { company } from "@/data/site";
 import { LegalPage } from "@/components/ui/LegalPage";

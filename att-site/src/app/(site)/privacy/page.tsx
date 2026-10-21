@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { company } from "@/data/site";
 import { LegalPage } from "@/components/ui/LegalPage";
@@ -23,24 +23,22 @@ export default function PrivacyPage() {
 
       <h2>2. Information we collect</h2>
       <h3>Information you give us</h3>
-      <p>When you request a call back, we collect your full name, telephone number, ZIP code, the service you are interested in and your consent to be contacted, together with the exact consent wording you agreed to and the date and time.</p>
-      <p>When you email or call us, we receive the information you choose to share.</p>
+      <p>When you call or email us, we receive the information you choose to share, such as your name, telephone number, service address and the services you are interested in.</p>
       <h3>Information collected automatically</h3>
       <ul>
         <li>Technical information such as browser type, device type, pages viewed and the referring page, collected by Google Analytics when analytics cookies are allowed.</li>
         <li>Advertising measurement information, such as Google Ads click identifiers (gclid, gbraid, wbraid) and campaign (utm) parameters, used to measure calls and enquiries that come from our ads, when advertising cookies are allowed.</li>
         <li>Your cookie choice, stored in a strictly necessary cookie.</li>
       </ul>
-      <p>The ZIP code entered in the &ldquo;Check my ZIP&rdquo; tool stays in your browser and is not sent to us or to analytics providers unless you submit the call-back form.</p>
+      <p>The ZIP code entered in the availability tool stays in your browser and is not sent to us or to analytics providers.</p>
 
       <h2>3. How we use information</h2>
       <ul>
-        <li>To respond to your enquiry about AT&amp;T services and to call you if you asked us to.</li>
-        <li>To keep a record of your consent to be contacted.</li>
+        <li>To respond to your enquiry about AT&amp;T services.</li>
         <li>To measure and improve the website and our advertising, subject to your cookie choices.</li>
         <li>To comply with legal obligations and to protect our rights.</li>
       </ul>
-      <p>We do not use the information you submit for any purpose that is unrelated to your enquiry.</p>
+      <p>We do not use the information you provide for any purpose that is unrelated to your enquiry.</p>
 
       <h2>4. How we share information</h2>
       <ul>
@@ -67,16 +65,15 @@ export default function PrivacyPage() {
         browser is honored as an opt-out of advertising cookies. Details are in our <Link href="/cookie-policy">Cookie Policy</Link>.
       </p>
 
-      <h2>6. Calls and text messages</h2>
+      <h2>6. Calls and email</h2>
       <p>
-        If you check the consent box on our call-back form, we may contact you at the number you provided about AT&amp;T services, including by calls and text messages that may use automated
-        technology or a prerecorded voice. Consent is not a condition of any purchase. You can revoke consent at any time by telling us during a call or by emailing{" "}
-        <a href={`mailto:${company.email}`}>{company.email}</a>.
+        When you call or email us, we use the details you provide only to respond to your enquiry about AT&amp;T services. You may ask us at any time not to contact you again by
+        emailing <a href={`mailto:${company.email}`}>{company.email}</a>.
       </p>
 
       <h2>7. Retention</h2>
       <p>
-        We keep enquiry information only as long as needed to respond to you and to meet legal and record-keeping obligations, including records of consent. Your cookie choice is stored for 12
+        We keep enquiry information only as long as needed to respond to you and to meet legal and record-keeping obligations. Your cookie choice is stored for 12
         months; advertising click identifiers for up to 90 days.
       </p>
 

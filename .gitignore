@@ -9,3 +9,9 @@ research/raw/*.html
 .DS_Store
 Thumbs.db
 *.log
+
+# Raw Gemini image downloads (watermarked, ~147 MB). Optimized copies are in att-site/public/images/.
+/images/
+
+# Lighthouse HTML viewers duplicate the JSON reports next to them
+audit/lighthouse/*.html

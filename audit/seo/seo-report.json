@@ -1,0 +1,459 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "title": "AT&T Authorized Retailer: Fiber, Internet Air & Wireless",
+    "titleLength": 56,
+    "description": "Compare AT&T Fiber, AT&T Internet Air, AT&T wireless and AT&T Phone plans with an independent authorized retailer. Prices verified on att.com.",
+    "descriptionLength": 142,
+    "canonical": "https://authorizedinternetretailer.net/att/",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 30,
+    "jsonld": [
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/internet",
+    "status": 200,
+    "title": "AT&T Home Internet: Fiber & Internet Air Plans",
+    "titleLength": 46,
+    "description": "Compare AT&T home internet: AT&T Fiber from $50/mo. and AT&T Internet Air 5G home internet at $55/mo., with AT&T's full offer terms and dates.",
+    "descriptionLength": 142,
+    "canonical": "https://authorizedinternetretailer.net/att/internet",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 22,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/internet/fiber",
+    "status": 200,
+    "title": "AT&T Fiber Internet Plans & Prices | Authorized Retailer",
+    "titleLength": 56,
+    "description": "AT&T Fiber plans from $50/mo. with AutoPay: Internet 300, 500, 1000 and 5000, with and without an AT&T wireless plan. Prices verified on att.com.",
+    "descriptionLength": 145,
+    "canonical": "https://authorizedinternetretailer.net/att/internet/fiber",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 24,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/internet/internet-air",
+    "status": 200,
+    "title": "AT&T Internet Air 5G Home Internet: $55/mo.",
+    "titleLength": 43,
+    "description": "AT&T Internet Air delivers home internet over AT&T's 5G network for $55/mo. with AutoPay & Paperless bill. No annual contract. See AT&T's full offer terms.",
+    "descriptionLength": 155,
+    "canonical": "https://authorizedinternetretailer.net/att/internet/internet-air",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 18,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/wireless",
+    "status": 200,
+    "title": "AT&T Wireless Plans, Deals & Switching Offers",
+    "titleLength": 45,
+    "description": "AT&T Unlimited Your Way plans from $30/mo. per line with 4 lines, switching offers and phone deals, each with AT&T's full terms and the date verified.",
+    "descriptionLength": 150,
+    "canonical": "https://authorizedinternetretailer.net/att/wireless",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 20,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/wireless/plans",
+    "status": 200,
+    "title": "AT&T Unlimited Plans: Elite, Premium, Extra, Value",
+    "titleLength": 50,
+    "description": "Compare AT&T Elite 2.0, Premium 2.0, Extra 2.0 and Value 2.0: $70, $50, $40 and $30 per line with 4 lines and AutoPay. Full AT&T plan terms included.",
+    "descriptionLength": 149,
+    "canonical": "https://authorizedinternetretailer.net/att/wireless/plans",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 17,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/wireless/deals",
+    "status": 200,
+    "title": "AT&T Phone Deals: iPhone & Samsung Trade-In Offers",
+    "titleLength": 50,
+    "description": "Current AT&T phone deals: up to $1,200 off iPhone 18 Pro, iPhone Duo and Samsung Galaxy Z Flip8 or Fold8 with an eligible trade-in. Full AT&T terms.",
+    "descriptionLength": 148,
+    "canonical": "https://authorizedinternetretailer.net/att/wireless/deals",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 13,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/wireless/switch",
+    "status": 200,
+    "title": "Switch to AT&T: Up to $800 per Line, Keep Your Number",
+    "titleLength": 53,
+    "description": "Switch to AT&T and keep your number. Current AT&T offers: up to $800 per line via reward card, or up to $360 in credits when you bring your own phone.",
+    "descriptionLength": 150,
+    "canonical": "https://authorizedinternetretailer.net/att/wireless/switch",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 13,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/phone",
+    "status": 200,
+    "title": "AT&T Phone Home Phone Service from $24.99/mo.",
+    "titleLength": 45,
+    "description": "AT&T Phone digital home phone service: Unlimited North America at $24.99/mo. for 12 months and International Plus II at $34.99/mo. See AT&T's full terms.",
+    "descriptionLength": 153,
+    "canonical": "https://authorizedinternetretailer.net/att/phone",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 14,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/deals",
+    "status": 200,
+    "title": "Current AT&T Deals & Promotions | Authorized Retailer",
+    "titleLength": 53,
+    "description": "Every current AT&T promotion and plan price in one place: AT&T Fiber, Internet Air, wireless, switching offers and AT&T Phone, each dated and with full terms.",
+    "descriptionLength": 158,
+    "canonical": "https://authorizedinternetretailer.net/att/deals",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 31,
+    "jsonld": [
+      "BreadcrumbList",
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/check-availability",
+    "status": 200,
+    "title": "Check AT&T Availability at Your Address",
+    "titleLength": 39,
+    "description": "Start with your ZIP code, then confirm which AT&T Fiber, Internet Air, wireless and AT&T Phone services are available at your address with a specialist.",
+    "descriptionLength": 152,
+    "canonical": "https://authorizedinternetretailer.net/att/check-availability",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 8,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "title": "About Us | Independent AT&T Authorized Retailer",
+    "titleLength": 47,
+    "description": "Transtech Marketing Network LLC is an independent authorized retailer of AT&T services based in Melville, New York. Learn how we present AT&T plans and prices.",
+    "descriptionLength": 159,
+    "canonical": "https://authorizedinternetretailer.net/att/about",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 10,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/faq",
+    "status": 200,
+    "title": "AT&T Fiber, Internet Air & Wireless FAQ",
+    "titleLength": 39,
+    "description": "Answers about AT&T Fiber, AT&T Internet Air, AT&T wireless plans and AT&T Phone: pricing, AutoPay, availability, installation, contracts and this retailer.",
+    "descriptionLength": 155,
+    "canonical": "https://authorizedinternetretailer.net/att/faq",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 24,
+    "jsonld": [
+      "BreadcrumbList",
+      "FAQPage",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/contact",
+    "status": 200,
+    "title": "Contact Us | AT&T Authorized Retailer",
+    "titleLength": 37,
+    "description": "Call, email or request a call back from Transtech Marketing Network LLC, an independent authorized retailer of AT&T services.",
+    "descriptionLength": 125,
+    "canonical": "https://authorizedinternetretailer.net/att/contact",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 7,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/privacy",
+    "status": 200,
+    "title": "Privacy Policy | Authorized Internet Retailer",
+    "titleLength": 45,
+    "description": "How Transtech Marketing Network LLC collects, uses and protects personal information on this website, and the privacy choices and rights available to you.",
+    "descriptionLength": 154,
+    "canonical": "https://authorizedinternetretailer.net/att/privacy",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 19,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/terms",
+    "status": 200,
+    "title": "Terms of Use | Authorized Internet Retailer",
+    "titleLength": 43,
+    "description": "Terms that apply to your use of this website, operated by Transtech Marketing Network LLC, an independent authorized retailer of AT&T services.",
+    "descriptionLength": 143,
+    "canonical": "https://authorizedinternetretailer.net/att/terms",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 16,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/cookie-policy",
+    "status": 200,
+    "title": "Cookie Policy | Authorized Internet Retailer",
+    "titleLength": 44,
+    "description": "Which cookies this website uses for necessary functions, analytics and advertising measurement, how long they last, and how to change your choice.",
+    "descriptionLength": 146,
+    "canonical": "https://authorizedinternetretailer.net/att/cookie-policy",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 10,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/do-not-sell-or-share",
+    "status": 200,
+    "title": "Do Not Sell or Share My Personal Information",
+    "titleLength": 44,
+    "description": "California (CCPA/CPRA) and other state privacy rights: how to opt out of the sale or sharing of personal information and targeted advertising on this website.",
+    "descriptionLength": 158,
+    "canonical": "https://authorizedinternetretailer.net/att/do-not-sell-or-share",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 11,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/accessibility",
+    "status": 200,
+    "title": "Accessibility Statement | Authorized Internet Retailer",
+    "titleLength": 54,
+    "description": "Transtech Marketing Network LLC aims for this website to meet WCAG 2.2 Level AA. Read about the measures we take and how to report an accessibility barrier.",
+    "descriptionLength": 156,
+    "canonical": "https://authorizedinternetretailer.net/att/accessibility",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 10,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/disclaimer",
+    "status": 200,
+    "title": "Disclaimer: Independent Authorized Retailer of AT&T",
+    "titleLength": 51,
+    "description": "This website is operated by Transtech Marketing Network LLC, an independent authorized retailer of AT&T services. It is not AT&T's official website.",
+    "descriptionLength": 148,
+    "canonical": "https://authorizedinternetretailer.net/att/disclaimer",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 10,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/sitemap-page",
+    "status": 200,
+    "title": "Site Map | Authorized Internet Retailer",
+    "titleLength": 39,
+    "description": "All pages on this website: AT&T home internet, AT&T Fiber, AT&T Internet Air, wireless plans and deals, AT&T Phone, company information and policies.",
+    "descriptionLength": 149,
+    "canonical": "https://authorizedinternetretailer.net/att/sitemap-page",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 10,
+    "jsonld": [
+      "BreadcrumbList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/lp/fiber",
+    "status": 200,
+    "title": "AT&T Fiber 1 GIG: $70/mo. for 12 Months",
+    "titleLength": 39,
+    "description": "AT&T Fiber Internet 1000 for $70/mo. for 12 months with AutoPay & Paperless bill, or $50/mo. with an eligible AT&T wireless plan. Full AT&T terms shown.",
+    "descriptionLength": 152,
+    "canonical": "https://authorizedinternetretailer.net/att/internet/fiber",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 7,
+    "jsonld": [
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/lp/internet-air",
+    "status": 200,
+    "title": "AT&T Internet Air: $55/mo. 5G Home Internet",
+    "titleLength": 43,
+    "description": "AT&T Internet Air 5G home internet for $55/mo. with AutoPay & Paperless bill. $0 self-setup, no annual contract. Not available in all areas. Full terms shown.",
+    "descriptionLength": 158,
+    "canonical": "https://authorizedinternetretailer.net/att/internet/internet-air",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 6,
+    "jsonld": [
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/lp/wireless",
+    "status": 200,
+    "title": "AT&T Unlimited Plans from $30/mo. per Line",
+    "titleLength": 42,
+    "description": "AT&T Value 2.0 from $30/mo. per line with 4 lines and AutoPay, plus AT&T Extra, Premium and Elite 2.0. Switching offers available. Full AT&T terms shown.",
+    "descriptionLength": 153,
+    "canonical": "https://authorizedinternetretailer.net/att/wireless/plans",
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image",
+    "h1": 1,
+    "headings": 7,
+    "jsonld": [
+      "ItemList",
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  },
+  {
+    "path": "/this-page-does-not-exist",
+    "status": 404,
+    "title": "Page Not Found | Authorized Internet Retailer",
+    "titleLength": 45,
+    "description": "The page you requested could not be found.",
+    "descriptionLength": 42,
+    "canonical": null,
+    "ogImage": "https://authorizedinternetretailer.net/att/opengraph-image?9f6f9b06475e5804",
+    "h1": 1,
+    "headings": 5,
+    "jsonld": [
+      "Organization",
+      "WebSite"
+    ],
+    "errors": []
+  }
+]

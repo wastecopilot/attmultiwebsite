@@ -13,7 +13,7 @@ export function PlanCard({
   badge,
   headingLevel = "h3",
   showAlt = true,
-  ctaLabel = "Call",
+  ctaLabel = "Call Now",
 }: {
   offer: Offer;
   featured?: boolean;
@@ -50,7 +50,7 @@ export function PlanCard({
       <AsOf offer={offer} />
       {offer.features?.length ? <CheckList className="mt-5 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
-        <PhoneLink placement="plan-card" offerId={offer.id} value={value} className="btn btn-primary w-full" prefix={ctaLabel} />
+        <PhoneLink placement="plan-card" offerId={offer.id} value={value} className="btn btn-primary w-full" label={ctaLabel} />
         <FinePrint offer={offer} />
       </div>
     </article>
@@ -75,7 +75,7 @@ export function PromoCard({ offer, headingLevel = "h3" }: { offer: Offer; headin
       <AsOf offer={offer} />
       {offer.features?.length ? <CheckList className="mt-4 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
-        <PhoneLink placement="promo-card" offerId={offer.id} value={offer.price?.amount ?? 0} className="btn btn-secondary w-full" prefix="Call" />
+        <PhoneLink placement="promo-card" offerId={offer.id} value={offer.price?.amount ?? 0} className="btn btn-primary w-full" label="Call Now" />
         <FinePrint offer={offer} />
       </div>
     </article>

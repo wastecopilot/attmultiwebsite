@@ -1,0 +1,163 @@
+{
+  "requests": [
+    {
+      "t": 240,
+      "method": "GET",
+      "type": "document",
+      "url": "http://localhost:3100/att/internet/fiber"
+    },
+    {
+      "t": 307,
+      "method": "GET",
+      "type": "font",
+      "url": "http://localhost:3100/att/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2"
+    },
+    {
+      "t": 307,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/1x6obpmlu1_c2.js"
+    },
+    {
+      "t": 360,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/2r4s4h5xul1n-.js"
+    },
+    {
+      "t": 366,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/2khxl0v1q4i6n.js"
+    },
+    {
+      "t": 366,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/0-stp0pt3uw0f.js"
+    },
+    {
+      "t": 397,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/turbopack-3ngest1rbtm7x.js"
+    },
+    {
+      "t": 397,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/0mxw36ofrb85q.js"
+    },
+    {
+      "t": 402,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/0umf92h1sb77c.js"
+    },
+    {
+      "t": 402,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/3fdn8uwq0kd89.js"
+    },
+    {
+      "t": 403,
+      "method": "GET",
+      "type": "script",
+      "url": "http://localhost:3100/att/_next/static/chunks/1trcm01ot6-fl.js"
+    },
+    {
+      "t": 403,
+      "method": "GET",
+      "type": "script",
+      "url": "https://www.googletagmanager.com/gtag/js?id=AW-0000000000"
+    },
+    {
+      "t": 1380,
+      "method": "GET",
+      "type": "script",
+      "url": "https://www.googletagmanager.com/gtag/js?id=G-DEV0000000&cx=c&gtm=4e6aj1"
+    },
+    {
+      "t": 1385,
+      "method": "GET",
+      "type": "script",
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/0000000000/?random=1792569231295&cv=11&fst=1792569231295&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6aj1z8e_AW-0000000000za208xecxf1&gcd=13t3t3t3t5l1&dma=0&tag_exp=115616985~115938465~115938468~118131810~118897920~118897930~119793973~120385423~120469145~120469153~121246026~121246034&u_w=1280&u_h=720&url=http%3A%2F%2Flocalhost%3A3100%2Fatt%2Finternet%2Ffiber&rcb=2&frm=0&tiba=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=2119822256.1792569231&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=4"
+    },
+    {
+      "t": 1388,
+      "method": "POST",
+      "type": "fetch",
+      "url": "https://www.google.com/rmkt/collect/0000000000/?random=1792569231295&cv=11&fst=1792569231295&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6aj1z8e_AW-0000000000za208xecxf1&gcd=13t3t3t3t5l1&dma=0&tag_exp=115616985~115938465~115938468~118131810~118897920~118897930~119793973~120385423~120469145~120469153~121246026~121246034&u_w=1280&u_h=720&url=http%3A%2F%2Flocalhost%3A3100%2Fatt%2Finternet%2Ffiber&rcb=2&frm=0&tiba=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=2119822256.1792569231&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=68&gcp=5"
+    },
+    {
+      "t": 1388,
+      "method": "GET",
+      "type": "script",
+      "url": "https://www.gstatic.com/wcm/loader.js"
+    },
+    {
+      "t": 1388,
+      "method": "POST",
+      "type": "fetch",
+      "url": "https://www.google.com/ccm/collect?rcb=2&frm=0&apvc=1&auid=2119822256.1792569231&dt=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&tid=AW-0000000000&en=page_view&dl=http%3A%2F%2Flocalhost%3A3100%2Fatt%2Finternet%2Ffiber&scrsrc=www.googletagmanager.com&rnd=406734741.1792569231&navt=n&npa=0&_tu=CA&gtm=45be6aj1z8e_AW-0000000000za208xecxf1&gcs=G111&gcd=13t3t3t3t5l1&dma=0&tag_exp=115616985~115938465~115938468~118131810~118897920~118897930~119793973~120385423~120469145~120469153~121246026~121246034&tft=1792569231364&tfd=1142&tids=AW-0000000000&fmt=8"
+    },
+    {
+      "t": 1392,
+      "method": "POST",
+      "type": "fetch",
+      "url": "https://ad.doubleclick.net/ccm/s/collect?auid=2119822256.1792569231&gtm=45be6aj1z8e_AW-0000000000za208xecxf1&fmt=8"
+    },
+    {
+      "t": 1701,
+      "method": "GET",
+      "type": "script",
+      "url": "http://www.gstatic.com/call-tracking/call-tracking_9.js"
+    },
+    {
+      "t": 1826,
+      "method": "POST",
+      "type": "fetch",
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-DEV0000000&gtm=45je6aj1z8d_G-DEV0000000za208xf1&_p=1792569230326&gcs=G111&gcd=13t3t3t3t5l1&npa=0&dma=0&cid=1822802981.1792569232&frm=0&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=1&tag_exp=115616986~115938465~115938469~118897920~118897930~120385423~120469145~120469153~121246026~121246034&sid=1792569231&sct=1&seg=0&dl=http%3A%2F%2Flocalhost%2Fatt%2Finternet%2Ffiber&dt=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&_tu=CA&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=1585"
+    },
+    {
+      "t": 1871,
+      "method": "GET",
+      "type": "xhr",
+      "url": "https://www.googleadservices.com/pagead/conversion/0000000000/wcm?cc=ZZ&dn=2025550147&cl=DEV-TEST-LABEL&dma=0&npa=0&ct_eid=2"
+    },
+    {
+      "t": 2791,
+      "method": "GET",
+      "type": "fetch",
+      "url": "https://www.googleadservices.com/pagead/conversion/0000000000/?random=1792569232730&cv=11&fst=1792569232730&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be6aj1za200xecxf1&gcs=G111&gcd=13t3t3t3t5l1&dma=0&tag_exp=115616985~115938465~115938468~118131810~118897920~118897930~119793973~120385423~120469145~120469153~121246026~121246034&u_w=1280&u_h=720&url=http%3A%2F%2Flocalhost%3A3100%2Fatt%2Finternet%2Ffiber&rcb=2&label=DEV-TEST-LABEL&gtm_ee=1&frm=0&tiba=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&value=70&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=2119822256.1792569231&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&_tu=CA&gcl_ctr=1~0~0~0&data=event%3Dconversion%3Btransport_type%3Dbeacon&category=acrcp_v1_512&ept=5"
+    }
+  ],
+  "conversionHit": "https://www.googleadservices.com/pagead/conversion/0000000000/?random=1792569232730&cv=11&fst=1792569232730&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be6aj1za200xecxf1&gcs=G111&gcd=13t3t3t3t5l1&dma=0&tag_exp=115616985~115938465~115938468~118131810~118897920~118897930~119793973~120385423~120469145~120469153~121246026~121246034&u_w=1280&u_h=720&url=http%3A%2F%2Flocalhost%3A3100%2Fatt%2Finternet%2Ffiber&rcb=2&label=DEV-TEST-LABEL&gtm_ee=1&frm=0&tiba=AT%26T%20Fiber%20Internet%20Plans%20%26%20Prices%20%7C%20Authorized%20Retailer&value=70&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=2119822256.1792569231&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B8.0.0.0%7CChromium%3B156.0.8078.4%7CHeadlessChrome%3B156.0.8078.4&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&_tu=CA&gcl_ctr=1~0~0~0&data=event%3Dconversion%3Btransport_type%3Dbeacon&category=acrcp_v1_512&ept=5",
+  "phoneClickEvent": {
+    "event": "phone_click",
+    "page": "/att/internet/fiber",
+    "offer_id": "fiber-1000",
+    "value": 70,
+    "currency": "USD",
+    "placement": "plan-card",
+    "gtm.uniqueEventId": 13
+  },
+  "conversion": [
+    "event",
+    "conversion",
+    {
+      "send_to": "AW-0000000000/DEV-TEST-LABEL",
+      "value": 70,
+      "currency": "USD",
+      "transport_type": "beacon"
+    }
+  ],
+  "swapConfig": [
+    "config",
+    "AW-0000000000/DEV-TEST-LABEL",
+    {
+      "phone_conversion_number": "(202) 555-0147"
+    }
+  ]
+}

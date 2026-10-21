@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { usePathname } from "next/navigation";
 import { mobileNav } from "@/data/nav";
 import { CloseIcon, MenuIcon } from "@/components/ui/Icons";

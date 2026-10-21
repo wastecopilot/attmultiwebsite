@@ -1,32 +1,15 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import type { ReactNode } from "react";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { PhoneLink } from "@/components/PhoneLink";
-import { CheckIcon } from "@/components/ui/Icons";
+import { CheckIcon, ClockIcon } from "@/components/ui/Icons";
+import { SiteImage, imageSrc } from "@/components/ui/SiteImage";
+import type { ImageKey } from "@/data/images";
 import { company } from "@/data/site";
 
+/** BreadcrumbList structured data for search engines (no visible breadcrumb trail). */
 export function Breadcrumbs({ trail }: { trail: { name: string; path: string }[] }) {
-  const full = [{ name: "Home", path: "/" }, ...trail];
-  return (
-    <>
-      <nav aria-label="Breadcrumb" className="breadcrumbs">
-        <ol>
-          {full.map((t, i) =>
-            i === full.length - 1 ? (
-              <li key={t.path} aria-current="page">
-                {t.name}
-              </li>
-            ) : (
-              <li key={t.path}>
-                <Link href={t.path}>{t.name}</Link>
-              </li>
-            ),
-          )}
-        </ol>
-      </nav>
-      <JsonLd data={breadcrumbJsonLd(full)} />
-    </>
-  );
+  return <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, ...trail])} />;
 }
 
 export function SectionHeading({
@@ -69,13 +52,17 @@ export function CheckList({ items, className = "" }: { items: ReactNode[]; class
   );
 }
 
-/** Page header for inner pages: breadcrumbs, H1, intro and optional right-hand content. */
+/**
+ * Page header for inner pages: H1, intro and optional right-hand content. When the page's image slot has a
+ * file, it becomes a full-bleed photo header with a dark overlay and white text (as in the reference design).
+ */
 export function PageHeader({
   trail,
   eyebrow,
   title,
   intro,
   aside,
+  image,
   children,
 }: {
   trail: { name: string; path: string }[];
@@ -83,14 +70,22 @@ export function PageHeader({
   title: ReactNode;
   intro?: ReactNode;
   aside?: ReactNode;
+  image?: ImageKey;
   children?: ReactNode;
 }) {
+  const photo = image && imageSrc(image) ? image : null;
   return (
-    <section className="hero border-b border-border">
-      <div className="container-x py-10 md:py-14">
-        <Breadcrumbs trail={trail} />
-        <div className={`mt-6 grid gap-10 ${aside ? "lg:grid-cols-[1.15fr_1fr] lg:items-start" : ""}`}>
-          <div>
+    <section className={photo ? "hero-photo" : "hero border-b border-border"}>
+      {photo ? (
+        <>
+          <SiteImage slot={photo} fill preload sizes="100vw" className="hero-photo-img" />
+          <div className="hero-photo-overlay" aria-hidden="true" />
+        </>
+      ) : null}
+      <Breadcrumbs trail={trail} />
+      <div className="container-x relative py-12 md:py-16 lg:py-20">
+        <div className={`grid gap-10 ${aside ? "lg:grid-cols-[1.15fr_1fr] lg:items-center" : ""}`}>
+          <div className={photo ? "hero-copy" : undefined}>
             {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
             <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-ink md:text-5xl">{title}</h1>
             {intro ? <div className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{intro}</div> : null}
@@ -103,26 +98,65 @@ export function PageHeader({
   );
 }
 
-/** Closing call-to-action band used at the bottom of most pages. */
+/** Closing call-to-action used at the bottom of most pages (reference design: light panel with a call button). */
 export function CallBand({ title, text, offerId, value = 0, placement }: { title: string; text: string; offerId?: string; value?: number; placement: string }) {
   return (
-    <section className="band-brand on-dark" aria-labelledby={`${placement}-title`}>
-      <div className="container-x flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between md:py-14">
-        <div className="max-w-2xl">
-          <h2 id={`${placement}-title`} className="text-2xl font-bold text-white md:text-3xl">
-            {title}
-          </h2>
-          <p className="mt-3 text-lg text-white/90">{text}</p>
-          <p className="mt-2 text-sm text-white/90">Specialists available {company.hoursShort}.</p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-inverse btn-lg" prefix="Call" />
-          <Link href="/check-availability" className="btn btn-ghost-inverse btn-lg">
-            Check availability
-          </Link>
+    <section className="section" aria-labelledby={`${placement}-title`}>
+      <div className="container-x">
+        <div className="call-panel">
+          <div className="max-w-2xl">
+            <h2 id={`${placement}-title`} className="text-2xl font-bold text-brand-strong md:text-3xl">
+              {title}
+            </h2>
+            <p className="mt-2 text-lg text-ink-muted">{text}</p>
+            <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
+              <ClockIcon className="h-4 w-4 shrink-0" /> {company.hoursShort}
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg" label="Call Now" />
+            <Link href="/check-availability" className="btn btn-secondary btn-lg">
+              Check Availability
+            </Link>
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/** Light call-to-action panel (reference design: "Want the numbers first?"), used in place of contact forms. */
+export function CallPanel({
+  id,
+  title,
+  text,
+  offerId,
+  value = 0,
+  placement,
+  headingLevel = "h2",
+}: {
+  id: string;
+  title: string;
+  text: string;
+  offerId?: string;
+  value?: number;
+  placement: string;
+  headingLevel?: "h2" | "h3";
+}) {
+  const H = headingLevel;
+  return (
+    <div className="call-panel" role="region" aria-labelledby={id}>
+      <div className="max-w-2xl">
+        <H id={id} className="text-2xl font-bold text-brand-strong">
+          {title}
+        </H>
+        <p className="mt-2 text-ink-muted">{text}</p>
+        <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
+          <ClockIcon className="h-4 w-4 shrink-0" /> {company.hoursShort}
+        </p>
+      </div>
+      <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg shrink-0" label="Call Now" />
+    </div>
   );
 }
 

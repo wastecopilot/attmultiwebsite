@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { company } from "@/data/site";
 import { LegalPage } from "@/components/ui/LegalPage";
@@ -32,6 +32,7 @@ export default function CookiePolicyPage() {
       </ul>
       <p>We use Google Consent Mode. When a category is off, Google tags do not set cookies for that category and send only cookieless signals as described by Google.</p>
       <h2>3. Cookies we use</h2>
+      <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Cookies used on this website">
       <table>
         <thead>
           <tr>
@@ -56,6 +57,7 @@ export default function CookiePolicyPage() {
           ))}
         </tbody>
       </table>
+      </div>
       <h2>4. Browser controls</h2>
       <p>You can also block or delete cookies in your browser settings. Blocking strictly necessary cookies means the website cannot remember your choice.</p>
       <h2>5. More information</h2>

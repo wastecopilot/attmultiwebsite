@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
@@ -6,13 +6,11 @@ import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
-import { CtaLink } from "@/components/ui/CtaLink";
-import { LeadForm } from "@/components/forms/LeadForm";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = pageMetadata({
   title: "AT&T Fiber Internet Plans & Prices | Authorized Retailer",
-  description: "AT&T Fiber plans from $50/mo. with AutoPay: Internet 300, 500, 1000 and 5000, with and without an AT&T wireless plan. Prices verified on att.com.",
+  description: "AT&T Fiber plans from $50/mo. with AutoPay: Internet 300, 500, 1000 and 5000, with lower pricing when combined with an eligible AT&T wireless plan.",
   path: "/internet/fiber",
 });
 
@@ -29,26 +27,29 @@ export default function FiberPage() {
           { name: "Internet", path: "/internet" },
           { name: "AT&T Fiber", path: "/internet/fiber" },
         ]}
+        image="fiberHero"
         eyebrow="AT&T Fiber"
-        title="AT&T Fiber internet plans"
-        intro="Fiber-optic home internet from AT&T with equal upload and download speeds, up to 5 GIG where available. Compare all four speeds and see how an eligible AT&T wireless plan lowers the price."
+        title="AT&T Fiber Internet Plans"
+        intro="Fiber-optic home internet with equal upload and download speeds, up to 5 GIG where available. Pricing is reduced when combined with an eligible AT&T wireless plan."
         aside={
           <div className="card card-featured p-6">
-            <p className="badge">AT&amp;T&apos;s featured fiber offer</p>
-            <p className="mt-3 text-lg font-bold text-ink">{featured.title} · {featured.speed}</p>
+            <p className="badge">Featured Offer</p>
+            <p className="mt-3 text-lg font-bold text-ink">
+              {featured.title} · {featured.speed}
+            </p>
             <p className="mt-2 text-ink">
               <span className="text-4xl font-extrabold tracking-tight">{formatMoney(featured.price!.amount)}</span>
               <span className="font-semibold text-ink-muted">/mo.</span> <span className="text-sm font-semibold">{featured.price!.qualifier}</span>
             </p>
             <p className="mt-1 text-sm text-ink-muted">
-              {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo. · Then {formatMoney(featured.price!.thenAmount!)}/mo. after 12 months · Plus taxes &amp; fees
+              {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo. · {formatMoney(featured.price!.thenAmount!)}/mo. after 12 months · Plus taxes &amp; fees
             </p>
             <AsOf offer={featured} />
             <FinePrint offer={featured} />
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-              <PhoneLink placement="fiber-header" offerId={featured.id} value={featured.price!.amount} className="btn btn-primary" prefix="Call" />
+              <PhoneLink placement="fiber-header" offerId={featured.id} value={featured.price!.amount} className="btn btn-primary" label="Call Now" />
               <a href="#plans" className="btn btn-secondary">
-                Compare all speeds
+                Compare Speeds
               </a>
             </div>
           </div>
@@ -56,17 +57,17 @@ export default function FiberPage() {
       >
         <CheckList
           className="mt-6 text-ink"
-          items={["Equal upload and download speeds", "No annual contract and no data caps, per AT&T", "AT&T All-Fi Wi-Fi included with every fiber plan", "Lower price with an eligible AT&T unlimited wireless plan"]}
+          items={["Equal upload and download speeds", "No annual contract and no data caps", "AT&T All-Fi Wi-Fi included with every plan", "Reduced pricing with an eligible AT&T unlimited wireless plan"]}
         />
       </PageHeader>
 
       <section id="plans" className="section scroll-mt-28" aria-labelledby="plans-title">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Speeds and prices"
+            eyebrow="Plans and Pricing"
             id="plans-title"
-            title="Choose an AT&T Fiber speed"
-            intro="Prices include AT&T's $10/mo. AutoPay & Paperless bill discount. Internet 500, 1000 and 5000 also include AT&T's 12-month new-customer discount; the regular rate applies afterwards."
+            title="AT&T Fiber Speed Tiers"
+            intro="Prices include the $10/mo. AutoPay & Paperless bill discount. Internet 500, 1000 and 5000 include a 12-month discount for new customers, after which the regular rate applies."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {tiers.map((t) => (
@@ -78,8 +79,8 @@ export default function FiberPage() {
 
       <section className="section section-alt" aria-labelledby="table-title">
         <div className="container-x">
-          <SectionHeading eyebrow="At a glance" id="table-title" title="AT&T Fiber prices side by side" intro="Monthly prices published on att.com, plus taxes and fees." />
-          <div className="mt-8 overflow-x-auto rounded-xl" tabIndex={0} role="region" aria-labelledby="table-title">
+          <SectionHeading eyebrow="Comparison" id="table-title" title="AT&T Fiber Pricing at a Glance" intro="Monthly prices, plus taxes and fees." />
+          <div className="mt-8 overflow-x-auto rounded-xl" tabIndex={0} role="region" aria-label="AT&T Fiber price table (scrolls horizontally on small screens)">
             <table className="data-table min-w-[44rem] bg-surface">
               <caption className="sr-only">AT&amp;T Fiber monthly prices by plan</caption>
               <thead>
@@ -94,13 +95,13 @@ export default function FiberPage() {
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Speed (as labelled by AT&amp;T)</th>
+                  <th scope="row">Speed</th>
                   {tiers.map((t) => (
                     <td key={t.id}>{t.speed}</td>
                   ))}
                 </tr>
                 <tr>
-                  <th scope="row">Price with AutoPay &amp; Paperless bill</th>
+                  <th scope="row">With AutoPay &amp; Paperless bill</th>
                   {tiers.map((t) => (
                     <td key={t.id}>
                       {formatMoney(t.price!.amount)}/mo.{t.price!.thenAmount ? " for 12 mos." : ""}
@@ -116,7 +117,7 @@ export default function FiberPage() {
                   ))}
                 </tr>
                 <tr>
-                  <th scope="row">After the 12-month discount</th>
+                  <th scope="row">After 12 months</th>
                   {tiers.map((t) => (
                     <td key={t.id}>{t.price!.thenAmount ? `${formatMoney(t.price!.thenAmount)}/mo.` : "No change"}</td>
                   ))}
@@ -131,8 +132,8 @@ export default function FiberPage() {
             </table>
           </div>
           <p className="mt-4 text-sm text-ink-muted">
-            Speeds are based on a wired connection; actual speeds may vary. For 5 GIG, AT&amp;T states a single-device wired speed maximum of 4.7 Gbps. Up to $99 installation fee may apply. See each
-            plan&apos;s offer details above for AT&amp;T&apos;s complete terms.
+            Speeds are based on a wired connection; actual speeds may vary. For 5 GIG, the single-device wired speed maximum is 4.7 Gbps. An installation fee of up to $99 may apply. Complete offer
+            details appear with each plan above.
           </p>
           <AsOf offer={featured} />
         </div>
@@ -140,13 +141,13 @@ export default function FiberPage() {
 
       <section className="section" aria-labelledby="extras-title">
         <div className="container-x">
-          <SectionHeading eyebrow="Add-ons and savings" id="extras-title" title="Upgrade your Wi-Fi or bundle with wireless" />
+          <SectionHeading eyebrow="Add-Ons and Savings" id="extras-title" title="Wi-Fi Upgrades and Bundle Savings" />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             <PromoCard offer={allFiPro} />
             <PromoCard offer={bundle} />
           </div>
           <p className="mt-6 text-ink-muted">
-            Looking for wireless plans to pair with AT&amp;T Fiber? <Link href="/wireless/plans" className="link">Compare AT&amp;T unlimited plans</Link>.
+            Pair AT&amp;T Fiber with a wireless plan: <Link href="/wireless/plans" className="link">compare AT&amp;T unlimited plans</Link>.
           </p>
         </div>
       </section>
@@ -154,28 +155,16 @@ export default function FiberPage() {
       <section className="section section-alt" aria-labelledby="fiber-faq-title">
         <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div>
-            <SectionHeading eyebrow="AT&T Fiber questions" id="fiber-faq-title" title="Frequently asked questions" />
-            <CtaLink href="/faq" cta="fiber-faq-all" variant="secondary" className="mt-6">
-              All questions
-            </CtaLink>
+            <SectionHeading eyebrow="AT&T Fiber" id="fiber-faq-title" title="Frequently Asked Questions" />
+            <Link href="/faq" className="link mt-6 inline-block font-semibold">
+              View All FAQs
+            </Link>
           </div>
           <FaqList items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
         </div>
       </section>
 
-      <section className="section" aria-labelledby="fiber-lead-title">
-        <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Availability"
-            id="fiber-lead-title"
-            title="Find out whether AT&T Fiber serves your address"
-            intro="AT&T confirms fiber availability for each address. Request a call back and a specialist will confirm the speeds and prices available to you."
-          />
-          <LeadForm offerId={featured.id} value={featured.price!.amount} defaultInterest="AT&T Fiber" headingLevel="h3" />
-        </div>
-      </section>
-
-      <CallBand placement="fiber-band" title="Questions about AT&T Fiber?" text="A specialist can confirm the AT&T Fiber speeds available at your address and the bundle discount you qualify for." offerId={featured.id} value={featured.price!.amount} />
+      <CallBand placement="fiber-band" title="Confirm AT&T Fiber at Your Address" text="AT&T Fiber availability is confirmed by street address. Call to confirm the speeds, pricing and wireless discount available to you." offerId={featured.id} value={featured.price!.amount} />
       <JsonLd data={offersJsonLd(tiers, "/internet/fiber")} />
     </>
   );

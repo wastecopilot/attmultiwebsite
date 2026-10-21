@@ -1,6 +1,5 @@
 /**
- * Frequently asked questions. Every factual statement about AT&T services is taken from att.com
- * (source noted per item, retrieved 2026-10-21) and is listed in AUDIT.md.
+ * Frequently asked questions. Factual statements about AT&T services follow att.com (source noted per item).
  */
 import { company } from "./site";
 
@@ -20,8 +19,8 @@ export const faqs: FaqItem[] = [
     topics: ["general"],
   },
   {
-    q: "Are the prices on this site the same as the prices on att.com?",
-    a: "Every price and promotion on this site is copied from att.com and shows the date it was verified. Prices and offers are set by AT&T, exclude taxes and fees unless stated, and may change without notice. The price that applies to you is confirmed for your address before you decide.",
+    q: "Are the prices on this website the same as AT&T’s published prices?",
+    a: "Yes. The plans, prices and promotions shown are those published by AT&T. Prices exclude taxes and fees unless otherwise stated and may change without notice. The price that applies to you is confirmed for your address before you make a decision.",
     source: "site",
     topics: ["general", "pricing"],
   },
@@ -33,7 +32,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "Is AT&T Fiber available at my address?",
-    a: "AT&T confirms service for each street address, so a ZIP code or city alone cannot confirm availability. A specialist can confirm which AT&T services and prices are available at your address by phone, or you can request a call back.",
+    a: "AT&T confirms service for each street address, so a ZIP code or city alone cannot confirm availability. Call to confirm which AT&T services and prices are available at your address.",
     source: "https://www.att.com/internet/fiber/",
     topics: ["fiber", "internet", "general"],
   },
@@ -88,12 +87,6 @@ export const faqs: FaqItem[] = [
   {
     q: "Can you help with an existing AT&T account, bill or service issue?",
     a: `${company.legalName} handles enquiries about new AT&T service only. We do not have access to existing AT&T accounts, bills or service records and cannot make changes to them.`,
-    source: "site",
-    topics: ["general"],
-  },
-  {
-    q: "How is the information I submit used?",
-    a: "Details you submit through the call-back form are used only to respond to your enquiry about AT&T services, as described in our Privacy Policy. You can withdraw your consent to be contacted at any time.",
     source: "site",
     topics: ["general"],
   },

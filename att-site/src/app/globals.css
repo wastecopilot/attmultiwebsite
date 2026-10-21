@@ -483,8 +483,8 @@ p {
   border-color: var(--att-danger);
 }
 .field-check {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   accent-color: var(--att-brand-strong);
   flex-shrink: 0;
 }
@@ -552,8 +552,8 @@ html[data-consent="unset"] .cookie-banner {
   align-items: flex-start;
 }
 .consent-row input {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin-top: 0.15rem;
   accent-color: var(--att-brand-strong);
   flex-shrink: 0;
@@ -788,4 +788,100 @@ details[open] > summary .faq-icon {
 }
 .faq-icon {
   transition: transform 0.2s ease;
+}
+
+/* Below-the-fold sections skip layout/paint until they approach the viewport (content stays in the DOM
+   and the accessibility tree). The first section of each page (hero / page header) is never deferred. */
+main > .section,
+main > section.band-brand,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* ------------------------------------------------------------------ photo headers & call panel */
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--att-night);
+  color: #fff;
+}
+.hero-photo-img {
+  object-fit: cover;
+  object-position: center;
+}
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(0 40 55 / 0.92) 0%, rgb(0 40 55 / 0.78) 45%, rgb(0 40 55 / 0.35) 100%);
+}
+/* Below 1024px the photo becomes a banner above the copy, so the text sits on solid navy and the photo stays fully visible. */
+@media (max-width: 1023.98px) {
+  .hero-photo {
+    --hero-photo-h: clamp(190px, 36vw, 300px);
+  }
+  .hero-photo .hero-photo-img {
+    position: relative !important;
+    display: block;
+    inset: auto !important;
+    width: 100% !important;
+    height: var(--hero-photo-h) !important;
+  }
+  .hero-photo-overlay {
+    inset: 0 0 auto;
+    height: var(--hero-photo-h);
+    background: linear-gradient(180deg, rgb(0 40 55 / 0) 55%, rgb(0 40 55 / 0.85) 100%);
+  }
+}
+.hero-photo .hero-copy h1,
+.hero-photo .hero-copy .text-ink {
+  color: #fff;
+}
+.hero-photo .hero-copy .eyebrow {
+  color: var(--att-brand-tint-2);
+}
+.hero-photo .hero-copy .text-ink-muted,
+.hero-photo .hero-copy .as-of {
+  color: var(--att-night-muted);
+}
+.hero-photo .hero-copy .check-list svg {
+  color: var(--att-brand);
+}
+.hero-photo .hero-copy .btn-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.8);
+}
+.hero-photo .hero-copy .btn-secondary:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+.hero-photo .hero-copy :focus-visible {
+  outline-color: #fff;
+}
+.call-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  border: 1.5px solid var(--att-brand-strong);
+  border-radius: 1.25rem;
+  background: var(--att-brand-tint);
+}
+@media (min-width: 768px) {
+  .call-panel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.25rem;
+  }
+}
+.card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1rem 1rem 0 0;
+  margin: -1.5rem -1.5rem 1.25rem;
+}
+.card-media img {
+  object-fit: cover;
 }

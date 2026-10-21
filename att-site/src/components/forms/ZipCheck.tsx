@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { PhoneLink } from "@/components/PhoneLink";
 
@@ -10,18 +9,16 @@ interface ZipCheckProps {
   value?: number;
   /** Where the widget sits, sent with zip_check. */
   placement: string;
-  /** Called with the ZIP after a valid entry (used by /check-availability to prefill the form). */
+  /** Called with the ZIP after a valid entry. */
   onChecked?: (zip: string) => void;
-  /** Show the "request a call back" link (hidden on /check-availability, where the form is on the page). */
-  showFormLink?: boolean;
   tone?: "light" | "dark";
 }
 
 /**
- * ZIP entry that leads to the call CTA and the lead form. It never displays an availability result:
- * AT&T confirms service per street address, so the next step is always a call or a call-back request.
+ * ZIP entry that leads to the Call Now button. It never displays an availability result: AT&T confirms
+ * service per street address, so the next step is always a call.
  */
-export function ZipCheck({ offerId, value = 0, placement, onChecked, showFormLink = true, tone = "light" }: ZipCheckProps) {
+export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "light" }: ZipCheckProps) {
   const uid = useId();
   const [zip, setZip] = useState("");
   const [error, setError] = useState("");
@@ -72,23 +69,18 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, showFormLin
           ) : null}
         </div>
         <button type="submit" className={`btn ${dark ? "btn-inverse" : "btn-primary"} sm:mt-7`}>
-          Check my ZIP
+          Check Availability
         </button>
       </form>
       <div ref={resultRef} tabIndex={-1} aria-live="polite" className="outline-none">
         {checkedZip ? (
           <div className={`mt-4 rounded-xl p-4 text-sm ${dark ? "bg-white/10 text-white" : "bg-surface-alt text-ink"}`}>
-            <p className="font-semibold">Next step for ZIP code {checkedZip}</p>
+            <p className="font-semibold">ZIP code {checkedZip}: next step</p>
             <p className={`mt-1 ${dark ? "text-white/90" : "text-ink-muted"}`}>
-              AT&amp;T confirms service for each street address, so a ZIP code alone cannot show which plans are available. A specialist can confirm the services and prices for your address.
+              AT&amp;T confirms service at the street-address level. Call to confirm the services and pricing available at your address.
             </p>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-              <PhoneLink placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-inverse" : "btn-primary"} btn-sm`} prefix="Call" />
-              {showFormLink ? (
-                <Link href="/check-availability#request" className={`btn ${dark ? "btn-ghost-inverse" : "btn-secondary"} btn-sm`}>
-                  Request a call back
-                </Link>
-              ) : null}
+              <PhoneLink placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-inverse" : "btn-primary"} btn-sm`} label="Call Now" />
             </div>
           </div>
         ) : null}

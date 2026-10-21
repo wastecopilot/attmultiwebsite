@@ -3,10 +3,10 @@ import { getOffer } from "@/data/offers";
 import { LandingTemplate } from "@/components/landing/LandingTemplate";
 
 export const metadata = pageMetadata({
-  title: "AT&T Internet Air 5G Home Internet: $55/mo.",
-  description: "AT&T Internet Air 5G home internet for $55/mo. with AutoPay & Paperless bill. $0 self-setup, no annual contract. Not available in all areas. Full terms shown.",
+  title: "AT&T Internet Air: $55/mo. 5G Home Internet",
+  description: "AT&T Internet Air 5G home internet for $55/mo. with AutoPay & Paperless bill. $0 self-setup and no annual contract. Not available in all areas.",
   path: "/lp/internet-air",
-  noindex: true,
+  canonicalPath: "/internet/internet-air",
 });
 
 export default function InternetAirLanding() {
@@ -15,10 +15,10 @@ export default function InternetAirLanding() {
     <LandingTemplate
       offer={offer}
       path="/lp/internet-air"
-      eyebrow="AT&T Internet Air · Independent authorized retailer"
-      title="AT&T Internet Air 5G home internet for $55/mo."
-      intro="Home internet delivered over AT&T's 5G wireless network. Plug in the included AT&T All-Fi Hub and connect in minutes."
-      interest="AT&T Internet Air"
+      image="airHero"
+      eyebrow="AT&T Internet Air · Authorized Retailer"
+      title="AT&T Internet Air 5G Home Internet for $55/mo."
+      intro="Home internet delivered over the AT&T 5G network. Plug in the included AT&T All-Fi Hub and connect in minutes."
       benefits={[
         "$0 self-setup with the included AT&T All-Fi Hub",
         "No overage fees and no annual contract",

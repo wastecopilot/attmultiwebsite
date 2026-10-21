@@ -1,0 +1,202 @@
+[
+  {
+    "page": "/",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/internet",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/internet/fiber",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/internet/internet-air",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/wireless",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/wireless/plans",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/wireless/deals",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/wireless/switch",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/phone",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/deals",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/check-availability",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/about",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/faq",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/contact",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/privacy",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/terms",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/cookie-policy",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/do-not-sell-or-share",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/accessibility",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/disclaimer",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/sitemap-page",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/lp/fiber",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/lp/internet-air",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/lp/wireless",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  },
+  {
+    "page": "/this-page-does-not-exist",
+    "rule": "dev-values",
+    "why": "development test values (allowed only in dev/audit builds, reported for awareness)",
+    "matches": [
+      "202) 555-0147"
+    ]
+  }
+]

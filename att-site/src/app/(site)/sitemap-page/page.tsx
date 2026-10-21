@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/ui/Sections";
 
@@ -10,37 +10,37 @@ export const metadata = pageMetadata({
 
 const groups = [
   {
-    heading: "Home internet",
+    heading: "Home Internet",
     links: [
-      ["/internet", "AT&T home internet plans"],
-      ["/internet/fiber", "AT&T Fiber internet plans"],
-      ["/internet/internet-air", "AT&T Internet Air 5G home internet"],
-      ["/check-availability", "Check AT&T service at your address"],
+      ["/internet", "AT&T Home Internet Plans"],
+      ["/internet/fiber", "AT&T Fiber Internet Plans"],
+      ["/internet/internet-air", "AT&T Internet Air 5G Home Internet"],
+      ["/check-availability", "Check AT&T Service Availability"],
     ],
   },
   {
     heading: "Wireless",
     links: [
-      ["/wireless", "AT&T wireless plans and deals"],
-      ["/wireless/plans", "AT&T unlimited plans compared"],
-      ["/wireless/deals", "AT&T phone deals and trade-in offers"],
-      ["/wireless/switch", "Switch to AT&T and keep your number"],
+      ["/wireless", "AT&T Wireless Plans and Offers"],
+      ["/wireless/plans", "AT&T Unlimited Plans"],
+      ["/wireless/deals", "AT&T Smartphone Deals"],
+      ["/wireless/switch", "Switch to AT&T"],
     ],
   },
   {
-    heading: "Home phone and deals",
+    heading: "Home Phone and Deals",
     links: [
-      ["/phone", "AT&T Phone home phone service"],
-      ["/deals", "All current AT&T deals and promotions"],
+      ["/phone", "AT&T Home Phone Service"],
+      ["/deals", "Current AT&T Deals and Promotions"],
     ],
   },
   {
     heading: "Company",
     links: [
       ["/", "Home"],
-      ["/about", "About us"],
-      ["/faq", "Frequently asked questions"],
-      ["/contact", "Contact us"],
+      ["/about", "About Us"],
+      ["/faq", "Frequently Asked Questions"],
+      ["/contact", "Contact Us"],
     ],
   },
   {
@@ -59,7 +59,7 @@ const groups = [
 export default function SitemapPage() {
   return (
     <>
-      <PageHeader trail={[{ name: "Site map", path: "/sitemap-page" }]} title="Site map" intro="Every page on this website." />
+      <PageHeader trail={[{ name: "Site map", path: "/sitemap-page" }]} title="Site Map" intro="A complete list of pages on this website." />
       <div className="container-x grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-3">
         {groups.map((g) => (
           <section key={g.heading} aria-labelledby={`sm-${g.heading.toLowerCase().replace(/[^a-z]+/g, "-")}`}>

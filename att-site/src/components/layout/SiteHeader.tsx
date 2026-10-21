@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { primaryNav } from "@/data/nav";
 import { disclosure } from "@/data/site";
 import { env } from "@/lib/env";
@@ -27,7 +27,7 @@ export function Wordmark() {
 /** One-line disclosure shown above the header on every page. */
 export function DisclosureStrip() {
   return (
-    <div className="disclosure-strip">
+    <section className="disclosure-strip" aria-label="Retailer disclosure">
       <div className="container-x flex items-center justify-center gap-2 py-2 text-center">
         <p>
           {disclosure.short}{" "}
@@ -36,7 +36,7 @@ export function DisclosureStrip() {
           </Link>
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

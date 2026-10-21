@@ -1,0 +1,424 @@
+[
+  {
+    "id": "fiber-300",
+    "title": "AT&T Internet 300",
+    "price": "$50.00/mo. with AutoPay & Paperless bill",
+    "sourceUrl": "https://www.att.com/internet/fiber/",
+    "retrievedAt": "2026-10-21T06:09:28.874Z",
+    "refetchedAt": "2026-10-21T07:50:54.513Z",
+    "refetchStatus": 200,
+    "videoRef": "0:49 (hero card), 0:52 (tier card), 0:86 (terms table)",
+    "checks": [
+      {
+        "item": "price $50.00/mo.",
+        "live": true
+      },
+      {
+        "item": "with-wireless price $35.00",
+        "live": true
+      },
+      {
+        "item": "was price $60.00",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "3/6",
+    "result": "PASS"
+  },
+  {
+    "id": "fiber-500",
+    "title": "AT&T Internet 500",
+    "price": "$60.00/mo. for 12 mos. with AutoPay & Paperless bill",
+    "sourceUrl": "https://www.att.com/internet/fiber/",
+    "retrievedAt": "2026-10-21T06:09:28.874Z",
+    "refetchedAt": "2026-10-21T07:50:54.513Z",
+    "refetchStatus": 200,
+    "videoRef": "0:52 (tier card), 0:86 (terms table)",
+    "checks": [
+      {
+        "item": "price $60.00/mo.",
+        "live": true
+      },
+      {
+        "item": "with-wireless price $45.00",
+        "live": true
+      },
+      {
+        "item": "was price $75.00",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "3/6",
+    "result": "PASS"
+  },
+  {
+    "id": "fiber-1000",
+    "title": "AT&T Internet 1000",
+    "price": "$70.00/mo. for 12 mos. with AutoPay & Paperless bill",
+    "sourceUrl": "https://www.att.com/internet/fiber/",
+    "retrievedAt": "2026-10-21T06:09:28.874Z",
+    "refetchedAt": "2026-10-21T07:50:54.513Z",
+    "refetchStatus": 200,
+    "videoRef": "0:52 (tier card, POPULAR), 0:86 (terms table)",
+    "checks": [
+      {
+        "item": "price $70.00/mo.",
+        "live": true
+      },
+      {
+        "item": "with-wireless price $50.00",
+        "live": true
+      },
+      {
+        "item": "was price $90.00",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "3/6",
+    "result": "PASS"
+  },
+  {
+    "id": "fiber-5000",
+    "title": "AT&T Internet 5000",
+    "price": "$110.00/mo. for 12 mos. with AutoPay & Paperless bill",
+    "sourceUrl": "https://www.att.com/internet/fiber/",
+    "retrievedAt": "2026-10-21T06:09:28.874Z",
+    "refetchedAt": "2026-10-21T07:50:54.513Z",
+    "refetchStatus": 200,
+    "videoRef": "0:52 (tier card), 0:86 (terms table)",
+    "checks": [
+      {
+        "item": "price $110.00/mo.",
+        "live": true
+      },
+      {
+        "item": "with-wireless price $85.00",
+        "live": true
+      },
+      {
+        "item": "was price $135.00",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "3/6",
+    "result": "PASS"
+  },
+  {
+    "id": "internet-air",
+    "title": "AT&T Internet Air",
+    "price": "$55.00/mo. with AutoPay & Paperless bill",
+    "sourceUrl": "https://www.att.com/internet/internet-service-plans/",
+    "retrievedAt": "2026-10-21T06:11:06.323Z",
+    "refetchedAt": "2026-10-21T07:51:27.681Z",
+    "refetchStatus": 200,
+    "videoRef": "0:64–0:67 (standalone card)",
+    "checks": [
+      {
+        "item": "price $55.00/mo.",
+        "live": false
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "FAIL"
+  },
+  {
+    "id": "all-fi-pro",
+    "title": "AT&T All-Fi Pro",
+    "price": "$25.00/mo. add-on, plus tax",
+    "sourceUrl": "https://www.att.com/wi-fi/",
+    "retrievedAt": "2026-10-21T06:21:18.108Z",
+    "refetchedAt": "2026-10-21T07:51:56.426Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "price $25.00/mo.",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "4/4",
+    "result": "PASS"
+  },
+  {
+    "id": "bundle-fiber-wireless",
+    "title": "AT&T Fiber + AT&T Wireless bundle savings",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/bundles/",
+    "retrievedAt": "2026-10-21T06:17:51.312Z",
+    "refetchedAt": "2026-10-21T07:52:25.057Z",
+    "refetchStatus": 200,
+    "videoRef": "0:72–0:75 (bundle section; video headline \"20% off\" not confirmed on att.com)",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (3/3)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "1/3",
+    "result": "PASS"
+  },
+  {
+    "id": "phone-unlimited-north-america",
+    "title": "AT&T Phone Unlimited North America",
+    "price": "$24.99/mo. for 12 mos.",
+    "sourceUrl": "https://www.att.com/home-phone/",
+    "retrievedAt": "2026-10-21T06:29:20.823Z",
+    "refetchedAt": "2026-10-21T07:52:55.236Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "price $24.99/mo.",
+        "live": false
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "FAIL"
+  },
+  {
+    "id": "phone-international-plus-ii",
+    "title": "AT&T Phone International Plus II",
+    "price": "$34.99/mo. for 12 mos.",
+    "sourceUrl": "https://www.att.com/home-phone/",
+    "retrievedAt": "2026-10-21T06:29:20.823Z",
+    "refetchedAt": "2026-10-21T07:52:55.236Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "price $34.99/mo.",
+        "live": false
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "FAIL"
+  },
+  {
+    "id": "wireless-elite-2",
+    "title": "AT&T Elite 2.0℠",
+    "price": "$70.00/mo. per line when you get 4 lines",
+    "sourceUrl": "https://www.att.com/plans/unlimited-data-plans/",
+    "retrievedAt": "2026-10-21T06:13:48.628Z",
+    "refetchedAt": "2026-10-21T07:53:23.122Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "price $70.00/mo. per line",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-premium-2",
+    "title": "AT&T Premium 2.0℠",
+    "price": "$50.00/mo. per line when you get 4 lines",
+    "sourceUrl": "https://www.att.com/plans/unlimited-data-plans/",
+    "retrievedAt": "2026-10-21T06:13:48.628Z",
+    "refetchedAt": "2026-10-21T07:53:23.122Z",
+    "refetchStatus": 200,
+    "videoRef": "0:68–0:70 (\"$50.00/line/mo\" for 4 lines)",
+    "checks": [
+      {
+        "item": "price $50.00/mo. per line",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-extra-2",
+    "title": "AT&T Extra 2.0℠",
+    "price": "$40.00/mo. per line when you get 4 lines",
+    "sourceUrl": "https://www.att.com/plans/unlimited-data-plans/",
+    "retrievedAt": "2026-10-21T06:13:48.628Z",
+    "refetchedAt": "2026-10-21T07:53:23.122Z",
+    "refetchStatus": 200,
+    "videoRef": "0:68–0:70 (\"$40.00/line/mo\" for 4 lines)",
+    "checks": [
+      {
+        "item": "price $40.00/mo. per line",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-value-2",
+    "title": "AT&T Value 2.0℠",
+    "price": "$30.00/mo. per line when you get 4 lines",
+    "sourceUrl": "https://www.att.com/plans/unlimited-data-plans/",
+    "retrievedAt": "2026-10-21T06:13:48.628Z",
+    "refetchedAt": "2026-10-21T07:53:23.122Z",
+    "refetchStatus": 200,
+    "videoRef": "0:68–0:70 (\"$30.00/line/mo\" for 4 lines)",
+    "checks": [
+      {
+        "item": "price $30.00/mo. per line",
+        "live": true
+      },
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (4/4)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/4",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-switch-reward-800",
+    "title": "Up to $800 Reward Card Switcher Offer",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/wireless/switch-and-save/",
+    "retrievedAt": "2026-10-21T06:30:10.625Z",
+    "refetchedAt": "2026-10-21T07:53:51.497Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (3/3)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/3",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-byod-credit-360",
+    "title": "BYOD Bill Credit Switcher Offer",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/wireless/switch-and-save/",
+    "retrievedAt": "2026-10-21T06:30:10.625Z",
+    "refetchedAt": "2026-10-21T07:53:51.497Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (2/2)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/2",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-new-line-5-off",
+    "title": "Unlimited Your Way new line discount",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/wireless/switch-and-save/",
+    "retrievedAt": "2026-10-21T06:15:12.316Z",
+    "refetchedAt": "2026-10-21T07:53:51.497Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (1/1)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "1/1",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-trade-in-samsung-z8",
+    "title": "Samsung Galaxy Z Flip8 and Z Fold8 Series Trade-in Offer",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/wireless/switch-and-save/",
+    "retrievedAt": "2026-10-21T06:30:10.625Z",
+    "refetchedAt": "2026-10-21T07:53:51.497Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/6",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-trade-in-iphone-18",
+    "title": "iPhone 17, iPhone 18 Pro Series & iPhone Duo Trade-in Offer",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/",
+    "retrievedAt": "2026-10-21T06:07:22.737Z",
+    "refetchedAt": "2026-10-21T07:54:20.133Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (6/6)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/6",
+    "result": "PASS"
+  },
+  {
+    "id": "wireless-appreciation-savings",
+    "title": "AT&T Appreciation Savings℠",
+    "price": "—",
+    "sourceUrl": "https://www.att.com/bundles/",
+    "retrievedAt": "2026-10-21T06:28:09.227Z",
+    "refetchedAt": "2026-10-21T07:52:25.057Z",
+    "refetchStatus": 200,
+    "videoRef": "",
+    "checks": [
+      {
+        "item": "fine print paragraphs verbatim in att.com evidence (12/12)",
+        "live": true
+      }
+    ],
+    "finePrintParagraphsOnLivePage": "0/12",
+    "result": "PASS"
+  }
+]

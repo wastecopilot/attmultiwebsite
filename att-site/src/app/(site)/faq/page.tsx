@@ -10,9 +10,9 @@ export const metadata = pageMetadata({
 });
 
 const sections = [
-  { id: "faq-general", title: "About this website", topics: ["general"] },
+  { id: "faq-general", title: "About This Website", topics: ["general"] },
   { id: "faq-internet", title: "AT&T Fiber and AT&T Internet Air", topics: ["internet", "fiber", "air"] },
-  { id: "faq-wireless", title: "AT&T wireless", topics: ["wireless"] },
+  { id: "faq-wireless", title: "AT&T Wireless", topics: ["wireless"] },
   { id: "faq-phone", title: "AT&T Phone", topics: ["phone"] },
 ] as const;
 
@@ -25,7 +25,7 @@ export default function FaqPage() {
   });
   return (
     <>
-      <PageHeader trail={[{ name: "FAQ", path: "/faq" }]} eyebrow="Help" title="Frequently asked questions" intro="Facts about AT&T services on this page come from att.com and were verified on October 21, 2026." />
+      <PageHeader trail={[{ name: "FAQ", path: "/faq" }]} image="faqHero" eyebrow="Support" title="Frequently Asked Questions" intro="Answers to common questions about AT&T plans, pricing, availability and installation." />
       <div className="container-x py-12 md:py-16">
         <div className="grid gap-14">
           {grouped.map((g) => (
@@ -38,7 +38,7 @@ export default function FaqPage() {
           ))}
         </div>
       </div>
-      <CallBand placement="faq-band" title="Have another question?" text="A specialist can answer questions about AT&T plans, prices and availability at your address." />
+      <CallBand placement="faq-band" title="Have Another Question?" text="Call to speak with a specialist about AT&T plans, pricing and availability at your address." />
       <JsonLd data={faqJsonLd(faqs.map((f) => ({ q: f.q, a: f.a })))} />
     </>
   );

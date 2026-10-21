@@ -10,11 +10,11 @@ export function formatMoney(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
 }
 
-/** "Pricing as of Oct 21, 2026 · source: att.com" — shown with every price and promotion. */
+/** "Pricing as of Oct 21, 2026" — shown with every price and promotion. */
 export function AsOf({ offer, className = "" }: { offer: Pick<Offer, "retrievedAt" | "sourceUrl">; className?: string }) {
   return (
     <p className={`as-of ${className}`}>
-      As of <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>. Prices and offers are set by AT&amp;T and may change.
+      Pricing as of <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>
     </p>
   );
 }
@@ -58,17 +58,10 @@ export function FinePrint({ offer, open = false }: { offer: Offer; open?: boolea
   return (
     <details className="fine-print" open={open}>
       <summary>
-        Offer details and fine print<span className="sr-only"> for {offer.title}</span>
+        See offer details<span className="sr-only"> for {offer.title}</span>
       </summary>
       <div className="fine-print-body">
         <p>{offer.finePrint}</p>
-        <p className="mt-2">
-          Source:{" "}
-          <a href={offer.sourceUrl} rel="nofollow noopener" target="_blank" className="link">
-            att.com<span className="sr-only"> (opens in a new tab)</span>
-          </a>
-          , retrieved <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>.
-        </p>
       </div>
     </details>
   );

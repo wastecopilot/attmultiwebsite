@@ -1,10 +1,8 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { footerNav, legalNav } from "@/data/nav";
 import { company, disclosure } from "@/data/site";
-import { offersVerifiedAt } from "@/data/offers";
 import { PhoneLink } from "@/components/PhoneLink";
 import { CookieSettingsLink } from "@/components/consent/CookieBanner";
-import { formatAsOf } from "@/components/offers/OfferBits";
 import { Wordmark } from "./SiteHeader";
 
 const COPYRIGHT_YEAR = 2026;
@@ -18,8 +16,8 @@ export function SiteFooter({ minimal = false }: { minimal?: boolean }) {
           <p className="font-semibold text-white">{disclosure.full}</p>
           <p className="mt-2 text-sm text-night-muted">{disclosure.trademark}</p>
           <p className="mt-2 text-sm text-night-muted">
-            Prices and offers shown were verified on att.com on {formatAsOf(offersVerifiedAt)}. They are set by AT&amp;T, exclude taxes and fees unless stated, and may
-            change without notice. Service availability depends on the address.
+            Prices and offers are set by AT&amp;T, exclude taxes and fees unless otherwise stated, and are subject to change without notice. Service availability
+            varies by address.
           </p>
         </div>
 
@@ -79,7 +77,7 @@ export function SiteFooter({ minimal = false }: { minimal?: boolean }) {
               </Link>
             </li>
             <li>
-              <CookieSettingsLink className="text-night-muted underline underline-offset-2 hover:text-white" />
+              <CookieSettingsLink className="inline-block min-h-6 py-0.5 text-night-muted underline underline-offset-2 hover:text-white" />
             </li>
           </ul>
           <p className="mt-5 text-xs text-night-muted">

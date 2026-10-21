@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { readConsent, saveConsent } from "@/lib/consent";
 
 /**
@@ -35,14 +35,9 @@ export function CookieBanner() {
   }, []);
 
   useEffect(() => {
-    const stored = readConsent();
-    if (stored) {
-      markChosen(); // re-apply after React strict-mode remounts in development
-      setAnalytics(stored.analytics);
-      setAds(stored.ads);
-    } else {
-      document.documentElement.setAttribute("data-consent", "unset");
-    }
+    // The dialog's checkboxes are synced from the stored choice in openDialog().
+    if (readConsent()) markChosen(); // re-apply after React strict-mode remounts in development
+    else document.documentElement.setAttribute("data-consent", "unset");
     const open = () => openDialog(document.activeElement as HTMLElement | null);
     window.addEventListener("att:open-consent", open);
     return () => window.removeEventListener("att:open-consent", open);

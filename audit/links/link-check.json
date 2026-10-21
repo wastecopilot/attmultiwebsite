@@ -1,0 +1,401 @@
+[
+  {
+    "url": "http://localhost:3100/att/disclaimer",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/internet",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/wireless",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/phone",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/deals",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/check-availability",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/internet/fiber",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/internet/internet-air",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/wireless/plans",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/wireless/deals",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/wireless/switch",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/faq",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/contact",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "https://www.att.com/internet/fiber/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/deals",
+      "/lp/fiber"
+    ]
+  },
+  {
+    "url": "https://www.att.com/internet/internet-service-plans/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/internet-air",
+      "/deals",
+      "/lp/internet-air"
+    ]
+  },
+  {
+    "url": "https://www.att.com/plans/unlimited-data-plans/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/wireless",
+      "/wireless/plans",
+      "/deals",
+      "/lp/wireless"
+    ]
+  },
+  {
+    "url": "https://www.att.com/home-phone/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/phone",
+      "/deals"
+    ]
+  },
+  {
+    "url": "https://www.att.com/bundles/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/wireless/plans",
+      "/deals"
+    ]
+  },
+  {
+    "url": "https://www.att.com/wireless/switch-and-save/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/wireless",
+      "/wireless/plans",
+      "/wireless/deals",
+      "/wireless/switch"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/about",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/sitemap-page",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/privacy",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/terms",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/cookie-policy",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/do-not-sell-or-share",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "http://localhost:3100/att/accessibility",
+    "internal": true,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/",
+      "/internet",
+      "/internet/fiber",
+      "/internet/internet-air",
+      "/wireless"
+    ]
+  },
+  {
+    "url": "https://www.att.com/wi-fi/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/internet/fiber",
+      "/deals"
+    ]
+  },
+  {
+    "url": "https://www.att.com/",
+    "internal": false,
+    "status": 200,
+    "ok": true,
+    "note": "",
+    "from": [
+      "/wireless/deals",
+      "/deals",
+      "/disclaimer"
+    ]
+  }
+]

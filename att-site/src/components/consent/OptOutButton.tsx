@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { readConsent, saveConsent } from "@/lib/consent";
+
+const subscribe = () => () => {};
+const adsOff = () => {
+  const c = readConsent();
+  return c ? !c.ads : false;
+};
 
 /** One-click opt-out of sale/sharing (turns advertising cookies off for this browser, keeps the analytics choice). */
 export function OptOutButton() {
-  const [optedOut, setOptedOut] = useState<boolean | null>(null);
-  useEffect(() => {
-    const c = readConsent();
-    setOptedOut(c ? !c.ads : false);
-  }, []);
+  // The consent cookie is read after hydration; null on the server so the markup matches.
+  const stored = useSyncExternalStore(subscribe, adsOff, () => null);
+  const [clicked, setOptedOut] = useState(false);
+  const optedOut = clicked || stored;
   return (
     <div className="not-prose mt-4 rounded-xl border border-border bg-surface-alt p-5">
       <button

@@ -15,6 +15,8 @@ interface PhoneLinkProps {
   /** Text shown before the number, e.g. "Call". The number itself is always rendered as plain text so
    *  Google's website call-conversion script can swap it. */
   prefix?: ReactNode;
+  /** Button text shown instead of the number (e.g. "Call Now"). Header and footer show the number itself. */
+  label?: string;
   children?: ReactNode;
 }
 
@@ -22,19 +24,21 @@ interface PhoneLinkProps {
  * The only component that renders the order-line phone number. Every click fires the GA4/GTM
  * `phone_click` event and the Google Ads call conversion.
  */
-export function PhoneLink({ offerId, value = 0, placement, className, prefix, children }: PhoneLinkProps) {
+export function PhoneLink({ offerId, value = 0, placement, className, prefix, label, children }: PhoneLinkProps) {
   const onClick = () => {
     track("phone_click", { offer_id: offerId, value, placement });
     trackCallConversion({ value });
   };
   return (
     <a href={`tel:${env.phoneTel}`} onClick={onClick} className={className} data-phone-link={placement} data-offer-id={offerId ?? "none"}>
-      {children ?? (
+      {children ?? (label ? (
+        <span>{label}</span>
+      ) : (
         <>
           {prefix ? <>{prefix} </> : null}
           <span className="whitespace-nowrap">{env.phoneDisplay}</span>
         </>
-      )}
+      ))}
     </a>
   );
 }

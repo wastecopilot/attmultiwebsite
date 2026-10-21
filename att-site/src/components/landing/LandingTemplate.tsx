@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import type { Offer } from "@/data/offer-types";
+import type { ImageKey } from "@/data/images";
 import { company } from "@/data/site";
 import { PhoneLink } from "@/components/PhoneLink";
 import { ZipCheck } from "@/components/forms/ZipCheck";
-import { LeadForm, type SERVICE_OPTIONS } from "@/components/forms/LeadForm";
 import { AsOf, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
-import { CheckList } from "@/components/ui/Sections";
+import { CallPanel, CheckList } from "@/components/ui/Sections";
 import { ClockIcon } from "@/components/ui/Icons";
+import { SiteImage, imageSrc } from "@/components/ui/SiteImage";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
 interface LandingProps {
@@ -16,28 +17,35 @@ interface LandingProps {
   title: string;
   intro: string;
   benefits: string[];
-  interest: (typeof SERVICE_OPTIONS)[number];
+  image?: ImageKey;
   secondary?: ReactNode;
 }
 
 /**
- * Distraction-free landing template for paid search: one offer, its conditions and fine print visible
- * without scrolling, a single primary action (call), and the call-back form. No navigation menu.
+ * Distraction-free landing template for paid search: one offer with its conditions and offer details
+ * visible without scrolling, a single primary action (Call Now), and no navigation menu.
  */
-export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, interest, secondary }: LandingProps) {
+export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, image, secondary }: LandingProps) {
   const value = offer.price?.amount ?? 0;
+  const photo = image && imageSrc(image) ? image : null;
   return (
     <>
-      <section className="hero" aria-labelledby="lp-title">
-        <div className="container-x grid gap-8 py-8 md:py-12 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:py-16">
-          <div>
+      <section className={`relative overflow-hidden ${photo ? "hero-photo" : "hero"}`} aria-labelledby="lp-title">
+        {photo ? (
+          <>
+            <SiteImage slot={photo} fill preload sizes="100vw" className="hero-photo-img" />
+            <div className="hero-photo-overlay" aria-hidden="true" />
+          </>
+        ) : null}
+        <div className="container-x relative grid gap-8 py-8 md:py-12 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-16">
+          <div className={photo ? "hero-copy" : undefined}>
             <p className="eyebrow">{eyebrow}</p>
             <h1 id="lp-title" className="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
               {title}
             </h1>
             <p className="mt-4 max-w-xl text-lg text-ink-muted">{intro}</p>
             <div className="mt-6 hidden lg:block">
-              <PhoneLink placement="lp-hero" offerId={offer.id} value={value} className="btn btn-primary btn-lg" prefix="Call" />
+              <PhoneLink placement="lp-hero" offerId={offer.id} value={value} className="btn btn-primary btn-lg" label="Call Now" />
               <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
                 <ClockIcon className="h-4 w-4" /> {company.hoursShort}
               </p>
@@ -61,7 +69,7 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
               </p>
             ) : null}
             <AsOf offer={offer} />
-            <PhoneLink placement="lp-offer" offerId={offer.id} value={value} className="btn btn-primary mt-4 w-full lg:hidden" prefix="Call" />
+            <PhoneLink placement="lp-offer" offerId={offer.id} value={value} className="btn btn-primary mt-4 w-full lg:hidden" label="Call Now" />
             <FinePrint offer={offer} />
           </div>
         </div>
@@ -71,11 +79,11 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
         <div className="container-x grid gap-6 py-8 md:grid-cols-[1fr_1.2fr] md:items-center">
           <div>
             <h2 id="lp-zip-title" className="text-xl font-bold text-ink">
-              Check service at your address
+              Check Service Availability
             </h2>
-            <p className="mt-1 text-ink-muted">AT&amp;T confirms availability for each street address.</p>
+            <p className="mt-1 text-ink-muted">AT&amp;T service is confirmed by street address.</p>
           </div>
-          <ZipCheck placement="lp-zip" offerId={offer.id} value={value} showFormLink={false} />
+          <ZipCheck placement="lp-zip" offerId={offer.id} value={value} />
         </div>
       </section>
 
@@ -83,14 +91,21 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
         <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <div>
             <h2 id="lp-more-title" className="text-2xl font-bold text-ink md:text-3xl">
-              What is included
+              What Is Included
             </h2>
             <CheckList className="mt-5 text-ink" items={benefits} />
-            {secondary ? <div className="mt-8">{secondary}</div> : null}
           </div>
-          <div id="request">
-            <LeadForm offerId={offer.id} value={value} defaultInterest={interest} headingLevel="h2" />
-          </div>
+          {secondary ? <div>{secondary}</div> : null}
+        </div>
+        <div className="container-x mt-12">
+          <CallPanel
+            id="lp-call-panel"
+            title="Confirm Pricing for Your Address"
+            text="Call to confirm availability, pricing and any promotions that apply at your address."
+            placement="lp-call-panel"
+            offerId={offer.id}
+            value={value}
+          />
         </div>
       </section>
       <JsonLd data={offersJsonLd([offer], path)} />

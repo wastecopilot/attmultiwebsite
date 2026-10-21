@@ -1,0 +1,373 @@
+[
+  {
+    "label": "/ @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/internet @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/internet/fiber @390",
+    "violations": 0,
+    "passes": 47,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/internet/internet-air @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/plans @390",
+    "violations": 0,
+    "passes": 47,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/deals @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/switch @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/phone @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/deals @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/check-availability @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/about @390",
+    "violations": 0,
+    "passes": 42,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/faq @390",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/contact @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/privacy @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/terms @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/cookie-policy @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/do-not-sell-or-share @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/accessibility @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/disclaimer @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/sitemap-page @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/lp/fiber @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/lp/internet-air @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/lp/wireless @390",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/this-page-does-not-exist @390",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/ @1440",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/internet @1440",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/internet/fiber @1440",
+    "violations": 0,
+    "passes": 46,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/internet/internet-air @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/plans @1440",
+    "violations": 0,
+    "passes": 46,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/deals @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/wireless/switch @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/phone @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/deals @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/check-availability @1440",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/about @1440",
+    "violations": 0,
+    "passes": 42,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/faq @1440",
+    "violations": 0,
+    "passes": 41,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/contact @1440",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/privacy @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/terms @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/cookie-policy @1440",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/do-not-sell-or-share @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/accessibility @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/disclaimer @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/sitemap-page @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "/lp/fiber @1440",
+    "violations": 0,
+    "passes": 46,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/lp/internet-air @1440",
+    "violations": 0,
+    "passes": 46,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/lp/wireless @1440",
+    "violations": 0,
+    "passes": 46,
+    "incomplete": 2,
+    "details": []
+  },
+  {
+    "label": "/this-page-does-not-exist @1440",
+    "violations": 0,
+    "passes": 40,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "cookie preferences dialog (open)",
+    "violations": 0,
+    "passes": 22,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "lead form with validation errors",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  },
+  {
+    "label": "ZIP check next-step panel",
+    "violations": 0,
+    "passes": 45,
+    "incomplete": 1,
+    "details": []
+  }
+]

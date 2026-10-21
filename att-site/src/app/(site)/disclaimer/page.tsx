@@ -1,8 +1,6 @@
-import Link from "next/link";
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { company, disclosure } from "@/data/site";
-import { offersVerifiedAt } from "@/data/offers";
-import { formatAsOf } from "@/components/offers/OfferBits";
 import { LegalPage } from "@/components/ui/LegalPage";
 
 export const metadata = pageMetadata({
@@ -30,7 +28,7 @@ export default function DisclaimerPage() {
       <h2>3. Prices, offers and availability</h2>
       <ul>
         <li>
-          All prices and promotions are AT&amp;T&apos;s. They were verified on att.com on the date shown with each offer (most recently {formatAsOf(offersVerifiedAt)}) and may change without notice.
+          All prices and promotions are published by AT&amp;T and may change without notice.
         </li>
         <li>Prices exclude taxes and fees unless stated, and many require AutoPay and paperless billing, a minimum number of lines, an eligible plan or a trade-in, as described in each offer&apos;s details.</li>
         <li>Service availability, speeds and eligibility depend on your address and on AT&amp;T&apos;s terms. Speeds are based on a wired connection; actual speeds may vary.</li>
