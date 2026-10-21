@@ -11,7 +11,10 @@
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "test:tags": "node node_modules/@playwright/test/cli.js test tests/tags.spec.ts",
     "research:crawl": "node scripts/research/crawl-att.mjs ../research/raw/pages",
-    "research:colors": "node scripts/research/extract-colors.mjs ../research/raw/colors.json"
+    "research:colors": "node scripts/research/extract-colors.mjs ../research/raw/colors.json",
+    "build:audit": "node scripts/build-audit.mjs",
+    "start:audit": "node scripts/start-audit.mjs",
+    "check:contrast": "node node_modules/tsx/dist/cli.mjs scripts/research/contrast.ts"
   },
   "dependencies": {
     "next": "16.4.2",

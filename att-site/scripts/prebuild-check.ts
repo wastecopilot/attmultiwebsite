@@ -7,12 +7,12 @@
  *   2. any offer in src/data/offers.ts has no att.com sourceUrl, was retrieved more than 14 days ago,
  *      or has already expired.
  */
-import nextEnv from "@next/env";
+import { loadEnvConfig } from "@next/env";
 import path from "node:path";
 import { offers, OFFER_MAX_AGE_DAYS } from "../src/data/offers";
 
 const projectDir = path.resolve(__dirname, "..");
-const { loadedEnvFiles } = nextEnv.loadEnvConfig(projectDir, false);
+const { loadedEnvFiles } = loadEnvConfig(projectDir, false);
 
 const auditMode = process.env.ALLOW_TEST_ENV === "1";
 const errors: string[] = [];
