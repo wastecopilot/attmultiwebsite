@@ -14,10 +14,11 @@ export const company = {
   legalName: "Transtech Marketing Network LLC",
   wordmark: "Authorized Retailer",
   descriptor: "Independent authorized retailer of AT&T services",
-  streetAddress: "70 Bagatelle Rd",
-  locality: "Melville",
+  // Address from https://urbanwirelessusa.com/disclaimer (owner direction, 2026-10-21).
+  streetAddress: "84 East Old Country Road",
+  locality: "Hicksville",
   region: "NY",
-  postalCode: "11747",
+  postalCode: "11801",
   country: "US",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "admin@authorizedinternetretailer.net",
   hours: [

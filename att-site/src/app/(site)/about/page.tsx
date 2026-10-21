@@ -5,7 +5,7 @@ import { CallBand, CheckList, PageHeader, SectionHeading } from "@/components/ui
 
 export const metadata = pageMetadata({
   title: "About Us | Independent AT&T Authorized Retailer",
-  description: `${company.legalName} is an independent authorized retailer of AT&T services based in Melville, New York, assisting customers with AT&T home internet and wireless.`,
+  description: `${company.legalName} is an independent authorized retailer of AT&T services based in Hicksville, New York, assisting customers with AT&T home internet and wireless.`,
   path: "/about",
 });
 
