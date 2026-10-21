@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { rootCss } from "@/styles/tokens";
-import { buildTagSnippet } from "@/lib/tag-snippet";
+import { buildTagSnippet, gtagSrc, gtmSrc } from "@/lib/tag-snippet";
 import { env } from "@/lib/env";
 import { SITE_URL, company, disclosure } from "@/data/site";
 import { CookieBanner } from "@/components/consent/CookieBanner";
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Consent Mode v2 defaults + gtag(), then loads gtag.js/GTM. Must stay the first script we add to <head>. */}
         <script id="consent-and-tags" dangerouslySetInnerHTML={{ __html: buildTagSnippet() }} />
         <style dangerouslySetInnerHTML={{ __html: rootCss() }} />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {gtagSrc() || gtmSrc() ? <link rel="preconnect" href="https://www.googletagmanager.com" /> : null}
       </head>
       <body>
         <a href="#main" className="skip-link">

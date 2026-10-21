@@ -34,15 +34,15 @@ The preview uses clearly fake test values (phone number (202) 555-0147, dummy ta
 ## 3. Settings you must fill in before publishing (environment variables)
 
 The phone number and tracking IDs are not written into the code. They are read from "environment variables".
-**The production build refuses to run** if any of them is missing or looks like a test/placeholder value.
+**The production build refuses to run** if the phone number is missing, or if any value that is set looks like a test/placeholder value. The three Google IDs can be left out until the accounts exist: the site then loads no Google tags. Add them later in Vercel and redeploy to switch tracking on.
 
 | Setting | What to enter | Example format |
 |---|---|---|
 | `NEXT_PUBLIC_PHONE_DISPLAY` | The order-line number exactly as it should appear | `(877) 365-2069` format: (###) ###-#### |
 | `NEXT_PUBLIC_PHONE_TEL` | The same number for tap-to-call | `+1` followed by 10 digits |
-| `NEXT_PUBLIC_GTM_ID` | Google Analytics 4 ID (`G-…`) **or** Google Tag Manager ID (`GTM-…`) | `G-` + letters/digits |
-| `NEXT_PUBLIC_GADS_ID` | Google Ads account tag ID | `AW-` + digits |
-| `NEXT_PUBLIC_GADS_CALL_LABEL` | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
+| `NEXT_PUBLIC_GTM_ID` (optional until available) | Google Analytics 4 ID (`G-…`) **or** Google Tag Manager ID (`GTM-…`) | `G-` + letters/digits |
+| `NEXT_PUBLIC_GADS_ID` (optional until available) | Google Ads account tag ID | `AW-` + digits |
+| `NEXT_PUBLIC_GADS_CALL_LABEL` (optional until available) | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
 | `NEXT_PUBLIC_GADS_SWAP_LABEL` (optional) | Conversion label for "calls from website" (number swap); if empty, the call label is used | |
 | `NEXT_PUBLIC_CONTACT_EMAIL` (optional) | Email address shown on the Contact page and in the footer | defaults to admin@authorizedinternetretailer.net |
 

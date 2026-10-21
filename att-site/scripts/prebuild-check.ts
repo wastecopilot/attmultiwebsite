@@ -2,8 +2,8 @@
  * Runs automatically before `npm run build` (npm "prebuild" hook) and before `npm run build:audit`.
  *
  * Fails the build when:
- *   1. a required environment variable is missing, malformed or looks like a placeholder
- *      (production builds only; audit builds accept the labelled test values from .env.local), or
+ *   1. the phone number is missing, or any environment variable that is set is malformed or looks like a
+ *      placeholder (production builds only; audit builds accept the labelled test values from .env.local), or
  *   2. any offer in src/data/offers.ts has no att.com sourceUrl, was retrieved more than 14 days ago,
  *      or has already expired.
  */
@@ -19,13 +19,10 @@ const errors: string[] = [];
 const notes: string[] = [];
 
 // ---------------------------------------------------------------- environment
-const REQUIRED = [
-  "NEXT_PUBLIC_PHONE_DISPLAY",
-  "NEXT_PUBLIC_PHONE_TEL",
-  "NEXT_PUBLIC_GTM_ID",
-  "NEXT_PUBLIC_GADS_ID",
-  "NEXT_PUBLIC_GADS_CALL_LABEL",
-] as const;
+const REQUIRED = ["NEXT_PUBLIC_PHONE_DISPLAY", "NEXT_PUBLIC_PHONE_TEL"] as const;
+// Google tag IDs may be left unset until the accounts exist: the site then loads no Google tags and sends
+// no conversions. When set, they must be real values in the right format.
+const TAG_IDS = ["NEXT_PUBLIC_GTM_ID", "NEXT_PUBLIC_GADS_ID", "NEXT_PUBLIC_GADS_CALL_LABEL"] as const;
 
 const PLACEHOLDER = [
   /x{3,}/i,
@@ -36,7 +33,7 @@ const PLACEHOLDER = [
   /your[-_ ]/i,
 ];
 
-const FORMAT: Record<(typeof REQUIRED)[number], RegExp> = {
+const FORMAT: Record<(typeof REQUIRED)[number] | (typeof TAG_IDS)[number], RegExp> = {
   NEXT_PUBLIC_PHONE_DISPLAY: /^\(\d{3}\) \d{3}-\d{4}$/,
   NEXT_PUBLIC_PHONE_TEL: /^\+1\d{10}$/,
   NEXT_PUBLIC_GTM_ID: /^(GTM-[A-Z0-9]{4,}|G-[A-Z0-9]{6,})$/,
@@ -47,10 +44,14 @@ const FORMAT: Record<(typeof REQUIRED)[number], RegExp> = {
 const sourceOf = (name: string) =>
   loadedEnvFiles.find((f) => Object.prototype.hasOwnProperty.call(f.contents, name))?.path ?? "process environment";
 
-for (const name of REQUIRED) {
+for (const name of [...REQUIRED, ...TAG_IDS]) {
   const value = (process.env[name] ?? "").trim();
   if (!value) {
-    errors.push(`${name} is missing. Set it in .env.production (or the hosting provider's environment settings).`);
+    if ((REQUIRED as readonly string[]).includes(name)) {
+      errors.push(`${name} is missing. Set it in .env.production (or the hosting provider's environment settings).`);
+    } else {
+      notes.push(`${name} is not set; the matching Google tracking is off until it is added and the site is rebuilt.`);
+    }
     continue;
   }
   const looksPlaceholder = PLACEHOLDER.some((re) => re.test(value)) || (process.env[`${name}_IS_TEST`] ?? "") === "1";

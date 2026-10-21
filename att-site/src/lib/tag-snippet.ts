@@ -17,7 +17,7 @@ export function buildTagSnippet(): string {
   const cfg = {
     ga4: ga4Id,
     ads: env.adsId,
-    swap: env.adsSwapLabel ? `${env.adsId}/${env.adsSwapLabel}` : "",
+    swap: env.adsId && env.adsSwapLabel ? `${env.adsId}/${env.adsSwapLabel}` : "",
     phone: env.phoneDisplay,
     regions: STRICT_CONSENT_REGIONS,
     cookie: CONSENT_COOKIE,
