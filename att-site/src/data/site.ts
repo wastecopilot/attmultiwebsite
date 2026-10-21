@@ -21,7 +21,8 @@ export const company = {
   region: "NY",
   postalCode: "11801",
   country: "US",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "admin@authorizedinternetretailer.net",
+  // Email as published on https://urbanwirelessusa.com/disclaimer.
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Backoffice@urbanwirelessusa.com",
   hours: [
     { days: "Monday–Friday", open: "8:00 AM", close: "9:00 PM", tz: "ET" },
     { days: "Saturday–Sunday", open: "9:00 AM", close: "6:00 PM", tz: "ET" },
