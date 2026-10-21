@@ -1,6 +1,6 @@
 # Authorized Internet Retailer website (AT&T services)
 
-Multipage website for Transtech Marketing Network LLC, an independent authorized retailer of AT&T Fiber,
+Multipage website for Urban Wireless, an independent authorized retailer of AT&T Fiber,
 AT&T Internet Air, AT&T wireless and AT&T Phone. Built with Next.js, TypeScript and Tailwind CSS and served at `/att`.
 
 | Folder / file | Contents |

@@ -8,7 +8,7 @@ This document explains, in plain language, how to run, update and publish the we
 ## 1. What you have
 
 - A 24-page website (plus a "page not found" page) about AT&T Fiber, AT&T Internet Air, AT&T wireless and AT&T Phone,
-  run by Transtech Marketing Network LLC as an independent authorized retailer.
+  run by Urban Wireless as an independent authorized retailer.
 - Every price and promotion comes from one file, `att-site/src/data/offers.ts`, copied from att.com on 21 October
   2026, with AT&T's full fine print and the date it was checked.
 - Phone-call tracking for Google Ads and Google Analytics, a cookie banner, and privacy controls.

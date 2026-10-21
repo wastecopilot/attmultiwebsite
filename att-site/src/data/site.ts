@@ -11,10 +11,11 @@ export const BASE_PATH = "/att";
 export const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
 
 export const company = {
-  legalName: "Transtech Marketing Network LLC",
+  // Operator name and address: Urban Wireless (https://urbanwirelessusa.com), owner direction 2026-10-21.
+  legalName: "Urban Wireless",
   wordmark: "Authorized Retailer",
   descriptor: "Independent authorized retailer of AT&T services",
-  // Address from https://urbanwirelessusa.com/disclaimer (owner direction, 2026-10-21).
+  // Address as published on https://urbanwirelessusa.com/disclaimer.
   streetAddress: "84 East Old Country Road",
   locality: "Hicksville",
   region: "NY",

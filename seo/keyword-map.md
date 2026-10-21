@@ -17,7 +17,7 @@ title, H1, description, headings and copy. Landing pages (`/lp/*`) are `noindex`
 | `/att/deals` | AT&T deals and promotions | current AT&T offers, AT&T bundle savings | Current AT&T Deals & Promotions \| Authorized Retailer | All current AT&T deals and promotions |
 | `/att/check-availability` | AT&T availability by address | is AT&T Fiber available at my address | Check AT&T Availability at Your Address | Check AT&T service at your address |
 | `/att/faq` | AT&T internet FAQ | AT&T AutoPay discount, AT&T installation fee, AT&T contract | AT&T Fiber, Internet Air & Wireless FAQ | Frequently asked questions |
-| `/att/about` | independent AT&T authorized retailer | Transtech Marketing Network LLC | About Us \| Independent AT&T Authorized Retailer | About Transtech Marketing Network LLC |
+| `/att/about` | independent AT&T authorized retailer | Urban Wireless | About Us \| Independent AT&T Authorized Retailer | About Urban Wireless |
 | `/att/contact` | contact AT&T authorized retailer | call back, sales hours | Contact Us \| AT&T Authorized Retailer | Contact us |
 | `/att/privacy`, `/terms`, `/cookie-policy`, `/do-not-sell-or-share`, `/accessibility`, `/disclaimer`, `/sitemap-page` | (navigational; brand + policy name) | — | "<Policy> \| Authorized Internet Retailer" | Policy name |
 
