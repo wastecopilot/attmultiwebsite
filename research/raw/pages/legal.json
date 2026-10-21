@@ -1,0 +1,67 @@
+{
+  "slug": "legal",
+  "url": "https://www.att.com/legal/legal-policy-center.html",
+  "finalUrl": "https://www.att.com/legal/legal-policy-center.html",
+  "status": 200,
+  "retrievedAt": "2026-10-21T06:41:04.409Z",
+  "title": "Legal Policy Center - AT&T",
+  "metaDescription": "Learn more about the AT&T Access ID Terms of Service.",
+  "canonical": "https://www.att.com/legal/terms.html",
+  "outline": [
+    {
+      "tag": "h1",
+      "text": "Legal Policy Center",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "General Policies",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Wireless",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Business",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Home Phone",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Internet & Email",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "U-verse®",
+      "visible": true
+    }
+  ],
+  "mainText": "Personal\nBusiness\nFind a store\nVer en español\nSkip Navigation\nMenu\nDeals\nWireless\nInternet\nAccessories\nPrepaid\nSupport\nAccount\nStart of main content\nLegal Policy Center\nPolicy Center Home\nGeneral Policies\n►\nWireless\nInternet\nBusiness\nTelephone\n\nThis page contains general policies and terms applicable to a variety of AT&T services and products. Please refer to specific product or service pages for further information.\n\nGeneral Policies\nAcceptable Use Policy\nAccess ID Terms of Service\nAT&T Web Services Terms of Use\nAT&T Consumer Service Agreement\nAT&T Consumer Service Agreement - FAQ Information\nAT&T Prior Consumer Service Agreement\nOpen Internet Policy\nPrivacy Notice\nMore General Policies Documents\nWireless\n\n \n\nSee the Business section if you purchase wireless services as a business or via a business account or discount.\n\nAT&T Consumer Service Agreement\nAT&T Consumer Service Agreement - FAQ Information\nAT&T Prior Consumer Service Agreement\nCustomer Agreement and Plans - AT&T Prepaid℠\nData Services Agreement\nApplications, Services and Features\nPolicies and Processes\nMore Wireless Documents\nBusiness\n\n \n\nThis section contains documents regarding some AT&T services and features for our Business customers and our wireless customers purchasing under a Business account or discount.\n\nEnd User License Agreement - AT&T Navigation Services, AT&T Global Navigator, and AT&T Maps\nAgreement for Global Network Access to Internet Services for Business Customers Only\nEnd User License Agreement - Android\nEnd User License Agreement - iOS\nProgram License Agreement\nMore Business Documents\nHome Phone\nService Publications\nMaintenance Plan\nConnecTech Terms of Services\nMore Home Phone Documents\nInternet & Email\nAT&T Fixed Wireless Service Terms\nAT&T Internet Consumer Fee Schedule\nAT&T Internet Terms of Service\nAT&T Web Services Terms of Use\nU-verse®\nAT&T U-verse® TV and AT&T Phone Terms of Service\nVoice and TV Fee Schedule\nMobile Service & Support Tool",
+  "footerText": null,
+  "footerLinks": [],
+  "modalTexts": [
+    "► Customer Agreement and Plans - AT&T Prepaid℠",
+    "AT&T Prepaid℠ AutoPay Terms for customers enrolled effective 4/24/17",
+    "AT&T Prepaid℠ AutoPay Terms for customers enrolled prior to 4/24/17",
+    "Information on Wireless Telephones and Health",
+    "Warranty Exchange Program Terms and Conditions",
+    "Other Charges Applicable to Wireless Services",
+    "Privacy Notice For AT&T Installment Plan Agreement",
+    "This page contains general policies and terms applicable to a variety of AT&T services and products. Please refer to specific product or service pages for further information.",
+    "General Policies Acceptable Use Policy Access ID Terms of Service AT&T Web Services Terms of Use AT&T Consumer Service Agreement AT&T Consumer Service Agreement - FAQ Information AT&T Prior Consumer Service Agreement Open Internet Policy Privacy Notice More General Policies Documents",
+    "Wireless See the Business section if you purchase wireless services as a business or via a business account or discount. AT&T Consumer Service Agreement AT&T Consumer Service Agreement - FAQ Information AT&T Prior Consumer Service Agreement Customer Agreement and Plans - AT&T Prepaid℠ Data Services Agreement Applications, Services and Features Policies and Processes More Wireless Documents",
+    "Business This section contains documents regarding some AT&T services and features for our Business customers and our wireless customers purchasing under a Business account or discount. End User License Agreement - AT&T Navigation Services, AT&T Global Navigator, and AT&T Maps Agreement for Global Network Access to Internet Services for Business Customers Only End User License Agreement - Android End User License Agreement - iOS Program License Agreement More Business Documents",
+    "Home Phone Service Publications Maintenance Plan ConnecTech Terms of Services More Home Phone Documents",
+    "Internet & Email AT&T Fixed Wireless Service Terms AT&T Internet Consumer Fee Schedule AT&T Internet Terms of Service AT&T Web Services Terms of Use",
+    "U-verse® AT&T U-verse® TV and AT&T Phone Terms of Service Voice and TV Fee Schedule Mobile Service & Support Tool"
+  ],
+  "openedDialogs": []
+}

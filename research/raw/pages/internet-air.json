@@ -1,0 +1,848 @@
+{
+  "slug": "internet-air",
+  "url": "https://www.att.com/internet/internet-air/",
+  "finalUrl": "https://www.att.com/internet/internet-air/",
+  "status": 200,
+  "retrievedAt": "2026-10-21T06:10:19.980Z",
+  "title": "AT&T Internet Air: 5G Wireless Home Internet for $55/mo",
+  "metaDescription": "Get reliable 5G internet service to send emails, stream movies and TV shows, and more with AT&T Internet Air. Check availibility at your address today.",
+  "canonical": "https://www.att.com/internet/internet-air/",
+  "outline": [
+    {
+      "tag": "h2",
+      "text": "Shop",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bundles",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Home internet & phone",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Devices",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Accessories",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Brands",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Get the new iPhone 18 Pro for $0 with eligible iPhone trade-in",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Trending deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Device & accessory deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Subscriptions",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Switch to AT&T and learn how to get up to $800/line to break your contract",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Discounts by occupation",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Discounts by affiliation",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Partner savings",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Difference",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Why choose us",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Exceptional coverage",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Sports",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Music, Arts & Culture",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Internet",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless/Phones",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Technology",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Support",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Account",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "My device",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Device options",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless help",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Equipment",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Troubleshooting",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Home phone",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Welcome back!",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Account overview",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Welcome back!",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Account overview",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Quick actions",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Shop",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Deals",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Difference",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Support",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Plans & services",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Bundles",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Home internet & phone",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Quick actions",
+      "visible": false
+    },
+    {
+      "tag": "h1",
+      "text": "AT&T Internet Air: 5G Wireless Home Internet for $55/mo",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Internet Air 5G starting at $55/mo.",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Unlimited, fast, reliable 5G internet",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Complete Wi-Fi® coverage",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "No annual contract, no overage fees",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Easy, $0 self-setup",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Now backed by the AT&T Guarantee®",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Set up Internet Air in three simple steps",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Download",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Sign in",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Set up",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Available nationwide for as low as $30/mo.",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Reliable connection. Affordable price.",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Articles and resources",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "What is Internet Air?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How to set up Internet Air",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Test your internet speed",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Frequently asked questions",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "What is AT&T Internet Air?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How do I find out if AT&T Internet Air is available at my address, and how do I sign up?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How much does AT&T Internet Air cost?",
+      "visible": true
+    },
+    {
+      "tag": "h1",
+      "text": "Experience fast, reliable home internet with AT&T Internet Air",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Where AT&T Internet service is available",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Looking for more?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Get AT&T Fiber",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Learn About AT&T Fiber",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Explore Home internet from AT&T",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Existing customers & support",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Shop",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Trending",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Top phone & data plans",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Switch to AT&T",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Featured deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Shop cell phones by brand",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Tablets & Watches",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Accessories by Brand",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Resources",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "AT&T",
+      "visible": true
+    }
+  ],
+  "mainText": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en español\nShop\nDeals\nAT&T Difference\nSupport\nSearch or chat\n\nStart of main content\nAT&T Internet Air: 5G Wireless Home Internet for $55/mo\n\nAT&T Internet Air®​\n\nAT&T Internet Air 5G starting at $55/mo.\n\nAn unlimited, fast connection you can count on, with no data caps. Delivered over our 5G wireless network.\n\nPrice plus taxes and fees. AutoPay & paperless bill required. Not available in all areas. In rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a min. of 30 min. Additionally, AT&T may temporarily slow data speeds if the network is busy. 5G coverage not available in all areas.\nAddress\nCheck availability\nThis is a business address\nCall 855.592.1101\n\nWhat is AT&T Internet Air?​ ​\n\nUnlimited, fast, reliable 5G internet\n\nOne simple plan for home internet you can count on. Delivered over our 5G wireless network.​\n\nIn rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a min. of 30 min. Additionally, AT&T may temporarily slow data speeds if the network is busy. 5G coverage not available in all areas.\nShop Internet Air\nComplete Wi-Fi® coverage\nEnjoy a strong Wi-Fi signal with our\nAT&T All-Fi Hub®.\nNo annual contract,\nno overage fees\nEasy, $0 self-setup\nPlug in your included equipment and get connected in minutes.\nNow backed by the\nAT&T Guarantee®\nIf an outage causes your connection to drop, your bill drops too.\nCredit for downtime lasting 20 minutes or more. Restrictions and exclusions apply. See att.com/why-att/guarantee for full details.\nSet up Internet Air in three simple steps\n\nOnce your new equipment is delivered, it’s quick and easy to get started.\n\nDownload\n\nGet the AT&T Smart Home Manager app on your smartphone.\n\nSign in\n\nCreate your account and follow the steps for self-setup.\n\nSet up\n\nScan the QR code on your All-Fi Hub to get connected.\n\nAT&T Internet Air™ for Business\n\nAvailable nationwide for as low as $30/mo.\nGet fast, reliable internet, powered by the 5G network.\nPrice plus fees with an eligible AT&T Business wireless plan. AutoPay and paperless bill req’d. Req’s compatible plan & device. Coverage not available everywhere. Learn more at att.com/5Gnetwork. See offer details\nLearn more\n\nAccess from AT&T\n\nReliable connection. Affordable price.\n\nSee if you qualify for special pricing on home internet.\n\nLimited availability/areas. See offer details\nLearn more\nArticles and resources\nWhat is Internet Air?\nFind out how AT&T Internet Air can get you online.\nLearn more\nHow to set up Internet Air\nGet instructions for connecting your All-Fi Hub.\nGet started\nTest your internet speed\nSee your current download and upload speeds.\nGet started\nFrequently asked questions\nExpand all\nWhat is AT&T Internet Air?\nHow do I find out if AT&T Internet Air is available at my address, and how do I sign up?\nHow much does AT&T Internet Air cost?\nView more\nExperience fast, reliable home internet with AT&T Internet Air\n\nStep into the future of home connectivity with AT&T Internet Air. Delivered over the advanced AT&T 5G wireless network, AT&T Internet Air gives you fast, reliable home internet for streaming, gaming, working remotely, and connecting multiple devices. AT&T Internet Air is a fixed wireless internet alternative to traditional wired or cable internet —AT&T Internet Air is a 5G home internet solution that’s easy to set up. (Service and 5G coverage not available in all areas. See att.com/wirelesscoverage to check 5G coverage in your area) In rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a min. of 30 min.\n\nWhy choose AT&T Internet Air as your home internet provider?\nWith AT&T Internet Air, you get:\n\n \nNo annual contracts\nNo hidden equipment fees\nStraightforward pricing\nUnlimited data and no overage charges\n \n\nAT&T may temporarily slow data speeds if the network is busy.\nGetting started is simple. Just plug in your AT&T All-Fi Hub, follow the easy setup instructions, and you’re connected — no technician required.\n\n5G home internet for modern lifestyles\nAT&T Internet Air brings you strong Wi-Fi at home. Delivered over the AT&T 5G network, you can set up home internet without waiting for cables or complicated installations.\n\nExplore all AT&T home internet options\nAT&T offers a full range of home internet solutions. If you want the fastest available speeds, check out fiber internet. To see if AT&T Fiber is available near you, use our fiber internet availability map. Not sure what’s available at your address? Find out with our internet availability by address tool. You can also compare internet plans to pick the perfect fit for your household.\n\nTest and optimize your home internet connection\nAlready have service? Make sure you’re getting the speeds you need by running a quick internet speed test.\n\nReady to get online with AT&T Internet Air?\nEnjoy home internet delivered over the 5G wireless network with no annual contracts, no hidden fees, and hassle-free setup. Signing up is easy get started today.\n\nWhere AT&T Internet service is available\nAlabama\nArizona\nArkansas\nCalifornia\nColorado\nConnecticut\nDelaware \nDistrict of Columbia\nFlorida\nGeorgia\nIdaho \nIllinois\nIndiana\nIowa\nKansas\nKentucky\nLouisiana\nMaine \nMaryland\nMassachusetts\nMichigan\nMinnesota\nMississippi\nMissouri\nMontana\nNebraska \nNevada\nNew Hampshire \nNew Jersey \nNew Mexico\nNew York\nNorth Carolina\nNorth Dakota\nOhio\nOklahoma\nOregon \nPennsylvania\nRhode Island \nSouth Carolina\nSouth Dakota \nTennessee\nTexas\nUtah\nVermont\nVirginia \nWashington\nWest Virginia\nWisconsin\nWyoming\nLooking for more?\nGet AT&T Fiber\nAT&T Fiber internet\nInternet & phone bundles\nGigabit internet\nFiber for multi-family properties\nAT&T Fiber coverage map\nAT&T Fiber in my area\nAT&T Access low-cost internet\nLearn About AT&T Fiber\nFiber internet explained\nAT&T Fiber installation\nFiber internet vs cable\nAT&T Fiber vs Google fiber\nAT&T Fiber vs Spectrum internet\nAT&T Fiber vs Xfinity internet\nLearn about AT&T internet\nExplore Home internet from AT&T\nHome internet from AT&T\nOrder high speed internet\nInternet plans, speeds & pricing\nAT&T internet availability\nAT&T Air 5g home internet\nAT&T All-Fi home Wi-Fi\nAT&T extended Wi-Fi coverage service\nSmart home & connected devices\nInternet for gamers\nExisting customers & support\nPay my AT&T bill\nUpgrade my internet speed\nCheck internet speed\nOptimize my connection\nAT&T HomeTech protection\nAT&T ActiveArmor internet security\nCyber Aware security tips\nCheck for outage\nInternet support\natt.com/\nAT&T High-Speed Home Internet/\nAT&T Internet Air 5G Fixed Wireless Internet\nShop\nCell phones\nFiber internet\nHome internet\nTablets\nSmartwatches\nWireless accessories\nPrepaid phones\nTrending\niPhone 18 Pro Max\niPhone 18 Pro\nFoldable iPhone Duo\niPhone 17 Pro Max\nSamsung Galaxy S26 Ultra\nSamsung Galaxy Z Fold8 Ultra\nSamsung Galaxy Z Fold8\nSamsung Galaxy Z Flip8\nTop phone & data plans\nUnlimited phone plans\nInternational plans\nAdd a line\nUpgrade\nTablet data plans\nMobile hotspot plans\nNext Up Anytime\nSwitch to AT&T\nSwitch to AT&T\nHow to switch phone carriers\nInternet speed test\nBring your own device\nCell phone trade-in\nTransfer your internet service\nDevice IMEI finder\nFeatured deals\nHoliday Gift Guide\nBlack Friday Deals\nCyber Monday Deals\nAT&T Deals & Promotions\nCell phone deals\niPhone deals\nSamsung deals\nPhone and internet bundle deals\nCredit card discount\nFree phone deals for new customers\nNo trade-in deals\nShop cell phones by brand\nNew Apple iPhones\nNew Samsung Galaxy phones\nNew Google Pixel phones\nNew Motorola Moto phones\nNew Sonim phones\nTablets & Watches\nNew Apple iPad\nNew Samsung Galaxy Tab\nNew Apple Watch\nNew Samsung Galaxy Watch\nNew Google Pixel Watch\nNew Kids Smart Watch\nAccessories by Brand\nApple accessories\nAT&T accessories\nSamsung accessories\nOtterbox phone cases\nBeats headphones\nResources\nBundle internet and wireless\nWhat is Internet Air?\nHow to use your phone internationally\nWhat is fiber internet?\nWhat is eSIM?\nReturn or exchange your wireless device\nWhat is wifi?\nAT&T\nFind a store\nNewsroom\nInvestor Relations\nCorporate Responsibility\nCareers\nHelp & info\nAT&T Guarantee\nBroadband Facts Machine Readable Files\nScreen share code\nTechbuzz blog\nFeedback\nLLMs\nSite map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.\n\nFeedback",
+  "footerText": "Shop\nCell phones\nFiber internet\nHome internet\nTablets\nSmartwatches\nWireless accessories\nPrepaid phones\nTrending\niPhone 18 Pro Max\niPhone 18 Pro\nFoldable iPhone Duo\niPhone 17 Pro Max\nSamsung Galaxy S26 Ultra\nSamsung Galaxy Z Fold8 Ultra\nSamsung Galaxy Z Fold8\nSamsung Galaxy Z Flip8\nTop phone & data plans\nUnlimited phone plans\nInternational plans\nAdd a line\nUpgrade\nTablet data plans\nMobile hotspot plans\nNext Up Anytime\nSwitch to AT&T\nSwitch to AT&T\nHow to switch phone carriers\nInternet speed test\nBring your own device\nCell phone trade-in\nTransfer your internet service\nDevice IMEI finder\nFeatured deals\nHoliday Gift Guide\nBlack Friday Deals\nCyber Monday Deals\nAT&T Deals & Promotions\nCell phone deals\niPhone deals\nSamsung deals\nPhone and internet bundle deals\nCredit card discount\nFree phone deals for new customers\nNo trade-in deals\nShop cell phones by brand\nNew Apple iPhones\nNew Samsung Galaxy phones\nNew Google Pixel phones\nNew Motorola Moto phones\nNew Sonim phones\nTablets & Watches\nNew Apple iPad\nNew Samsung Galaxy Tab\nNew Apple Watch\nNew Samsung Galaxy Watch\nNew Google Pixel Watch\nNew Kids Smart Watch\nAccessories by Brand\nApple accessories\nAT&T accessories\nSamsung accessories\nOtterbox phone cases\nBeats headphones\nResources\nBundle internet and wireless\nWhat is Internet Air?\nHow to use your phone internationally\nWhat is fiber internet?\nWhat is eSIM?\nReturn or exchange your wireless device\nWhat is wifi?\nAT&T\nFind a store\nNewsroom\nInvestor Relations\nCorporate Responsibility\nCareers\nHelp & info\nAT&T Guarantee\nBroadband Facts Machine Readable Files\nScreen share code\nTechbuzz blog\nFeedback\nLLMs\nSite map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.",
+  "footerLinks": [
+    {
+      "text": "Cell phones",
+      "href": "https://www.att.com/buy/phones/"
+    },
+    {
+      "text": "Fiber internet",
+      "href": "https://www.att.com/internet/fiber/"
+    },
+    {
+      "text": "Home internet",
+      "href": "https://www.att.com/internet/"
+    },
+    {
+      "text": "Tablets",
+      "href": "https://www.att.com/buy/tablets/"
+    },
+    {
+      "text": "Smartwatches",
+      "href": "https://www.att.com/buy/wearables/"
+    },
+    {
+      "text": "Wireless accessories",
+      "href": "https://www.att.com/accessories/"
+    },
+    {
+      "text": "Prepaid phones",
+      "href": "https://www.att.com/prepaid/"
+    },
+    {
+      "text": "iPhone 18 Pro Max",
+      "href": "https://www.att.com/buy/phones/apple-iphone-18-pro-max.html"
+    },
+    {
+      "text": "iPhone 18 Pro",
+      "href": "https://www.att.com/buy/phones/apple-iphone-18-pro.html"
+    },
+    {
+      "text": "Foldable iPhone Duo",
+      "href": "https://www.att.com/buy/phones/apple-iphone-duo.html"
+    },
+    {
+      "text": "iPhone 17 Pro Max",
+      "href": "https://www.att.com/buy/phones/apple-iphone-17-pro-max.html"
+    },
+    {
+      "text": "Samsung Galaxy S26 Ultra",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-s26-ultra.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Fold8 Ultra",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-fold8-ultra.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Fold8",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-fold8.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Flip8",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-flip8.html"
+    },
+    {
+      "text": "Unlimited phone plans",
+      "href": "https://www.att.com/plans/wireless/"
+    },
+    {
+      "text": "International plans",
+      "href": "https://www.att.com/international/"
+    },
+    {
+      "text": "Add a line",
+      "href": "https://www.att.com/plans/add-a-line/"
+    },
+    {
+      "text": "Upgrade",
+      "href": "https://www.att.com/plans/phone-upgrade/"
+    },
+    {
+      "text": "Tablet data plans",
+      "href": "https://www.att.com/plans/tablet-ipad-data-plans/"
+    },
+    {
+      "text": "Mobile hotspot plans",
+      "href": "https://www.att.com/plans/tethering/"
+    },
+    {
+      "text": "Next Up Anytime",
+      "href": "https://www.att.com/plans/next-up-anytime/"
+    },
+    {
+      "text": "Switch to AT&T",
+      "href": "https://www.att.com/wireless/switch-and-save/"
+    },
+    {
+      "text": "How to switch phone carriers",
+      "href": "https://www.att.com/wireless/how-to-switch-phone-carrier/"
+    },
+    {
+      "text": "Internet speed test",
+      "href": "https://www.att.com/support/speedtest/"
+    },
+    {
+      "text": "Bring your own device",
+      "href": "https://www.att.com/wireless/byod/"
+    },
+    {
+      "text": "Cell phone trade-in",
+      "href": "https://tradein.att.com/"
+    },
+    {
+      "text": "Transfer your internet service",
+      "href": "https://www.att.com/moving/"
+    },
+    {
+      "text": "Device IMEI finder",
+      "href": "https://www.att.com/wireless/imei-finder/"
+    },
+    {
+      "text": "Holiday Gift Guide",
+      "href": "https://www.att.com/deals/holiday-gift-guide/"
+    },
+    {
+      "text": "Black Friday Deals",
+      "href": "https://www.att.com/deals/black-friday/"
+    },
+    {
+      "text": "Cyber Monday Deals",
+      "href": "https://www.att.com/deals/cyber-monday/"
+    },
+    {
+      "text": "AT&T Deals & Promotions",
+      "href": "https://www.att.com/deals/"
+    },
+    {
+      "text": "Cell phone deals",
+      "href": "https://www.att.com/deals/cell-phone-deals/"
+    },
+    {
+      "text": "iPhone deals",
+      "href": "https://www.att.com/deals/iphone-deals/"
+    },
+    {
+      "text": "Samsung deals",
+      "href": "https://www.att.com/buy/phones/browse/samsung_hasdeals/"
+    },
+    {
+      "text": "Phone and internet bundle deals",
+      "href": "https://www.att.com/bundles/internet-wireless/"
+    },
+    {
+      "text": "Credit card discount",
+      "href": "https://www.att.com/deals/att-points-plus-citi/"
+    },
+    {
+      "text": "Free phone deals for new customers",
+      "href": "https://www.att.com/buy/phones/browse/free/"
+    },
+    {
+      "text": "No trade-in deals",
+      "href": "https://www.att.com/buy/phones/browse/nontradeinoffer/"
+    },
+    {
+      "text": "New Apple iPhones",
+      "href": "https://www.att.com/buy/phones/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy phones",
+      "href": "https://www.att.com/buy/phones/browse/samsung/"
+    },
+    {
+      "text": "New Google Pixel phones",
+      "href": "https://www.att.com/buy/phones/browse/google/"
+    },
+    {
+      "text": "New Motorola Moto phones",
+      "href": "https://www.att.com/buy/phones/browse/motorola/"
+    },
+    {
+      "text": "New Sonim phones",
+      "href": "https://www.att.com/buy/phones/browse/sonim/"
+    },
+    {
+      "text": "New Apple iPad",
+      "href": "https://www.att.com/buy/tablets/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy Tab",
+      "href": "https://www.att.com/buy/tablets/browse/samsung/"
+    },
+    {
+      "text": "New Apple Watch",
+      "href": "https://www.att.com/buy/wearables/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy Watch",
+      "href": "https://www.att.com/buy/wearables/browse/samsung/"
+    },
+    {
+      "text": "New Google Pixel Watch",
+      "href": "https://www.att.com/buy/wearables/browse/google/"
+    },
+    {
+      "text": "New Kids Smart Watch",
+      "href": "https://www.att.com/buy/wearables/att-amigo-jr-watch.html"
+    },
+    {
+      "text": "Apple accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/apple/"
+    },
+    {
+      "text": "AT&T accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/att/"
+    },
+    {
+      "text": "Samsung accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/samsung/"
+    },
+    {
+      "text": "Otterbox phone cases",
+      "href": "https://www.att.com/buy/accessories/browse/cases/otterbox/"
+    },
+    {
+      "text": "Beats headphones",
+      "href": "https://www.att.com/buy/accessories/browse/headphones/beats/"
+    },
+    {
+      "text": "Bundle internet and wireless",
+      "href": "https://www.att.com/bundles/"
+    },
+    {
+      "text": "What is Internet Air?",
+      "href": "https://www.att.com/internet/what-is-internet-air/"
+    },
+    {
+      "text": "How to use your phone internationally",
+      "href": "https://www.att.com/wireless/how-to-use-your-cell-phone-internationally/"
+    },
+    {
+      "text": "What is fiber internet?",
+      "href": "https://www.att.com/blog/what-is-fiber-internet/"
+    },
+    {
+      "text": "What is eSIM?",
+      "href": "https://www.att.com/wireless/what-is-esim/"
+    },
+    {
+      "text": "Return or exchange your wireless device",
+      "href": "https://www.att.com/wireless/return-policy/"
+    },
+    {
+      "text": "What is wifi?",
+      "href": "https://www.att.com/blog/what-is-wifi/"
+    },
+    {
+      "text": "Find a store",
+      "href": "https://www.att.com/stores/"
+    },
+    {
+      "text": "Newsroom",
+      "href": "https://about.att.com/?source=EB00CO0000000000L&wtExtndSource=footer"
+    },
+    {
+      "text": "Investor Relations",
+      "href": "https://investors.att.com/"
+    },
+    {
+      "text": "Corporate Responsibility",
+      "href": "https://sustainability.att.com/"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.att.jobs/"
+    },
+    {
+      "text": "Help & info",
+      "href": "https://www.att.com/support/"
+    },
+    {
+      "text": "AT&T Guarantee",
+      "href": "https://www.att.com/why-att/guarantee/"
+    },
+    {
+      "text": "Broadband Facts Machine Readable Files",
+      "href": "https://www.att.com/broadbandlabels/broadband-facts-machine-readable-plans/"
+    },
+    {
+      "text": "Screen share code",
+      "href": "https://www.att.com/internet/internet-air/#"
+    },
+    {
+      "text": "Techbuzz blog",
+      "href": "https://www.att.com/blog/"
+    },
+    {
+      "text": "Feedback",
+      "href": "https://www.att.com/internet/internet-air/#"
+    },
+    {
+      "text": "LLMs",
+      "href": "https://www.att.com/llms.txt"
+    },
+    {
+      "text": "Site map",
+      "href": "https://www.att.com/sitemap/"
+    },
+    {
+      "text": "Coverage maps",
+      "href": "https://www.att.com/maps/wireless-coverage.html"
+    },
+    {
+      "text": "Terms of use",
+      "href": "https://www.att.com/legal/terms.attWebsiteTermsOfUse.html"
+    },
+    {
+      "text": "Accessibility",
+      "href": "https://about.att.com/sites/accessibility"
+    },
+    {
+      "text": "Broadband details",
+      "href": "https://about.att.com/sites/broadband"
+    },
+    {
+      "text": "Legal policy center",
+      "href": "https://www.att.com/legal/legal-policy-center.html"
+    },
+    {
+      "text": "Advertising choices",
+      "href": "https://about.att.com/privacy/privacy-notice.html#choice"
+    },
+    {
+      "text": "Privacy center",
+      "href": "https://about.att.com/privacy.html"
+    },
+    {
+      "text": "Your Privacy Choices",
+      "href": "https://about.att.com/privacy/choices-and-controls.html"
+    },
+    {
+      "text": "Health Privacy Notice",
+      "href": "https://about.att.com/privacy/StateLawApproach/washington-health-privacy-notice.html"
+    },
+    {
+      "text": "Cyber Security",
+      "href": "https://about.att.com/pages/cyberaware"
+    },
+    {
+      "text": "FCC public files",
+      "href": "https://publicfiles.fcc.gov/cable-profile/999999-at&t-u-verse"
+    }
+  ],
+  "modalTexts": [
+    "Your cart is empty Let's get shopping! Explore bundles Shop phones",
+    "Sign in Create an account Forgot user ID? Make a payment Pay without signing in Go to my prepaid account",
+    "Shop Plans & services Devices & accessories Deals New & featured Customer discounts View all deals AT&T Difference Our competitive edge Our sponsorships Our blog Support Bill & account Wireless Internet Home phone View all support AT&T Business Find a store Ver en español Back Shop Plans & services Bundles Internet + wireless AT&T OneConnect Internet + home phone Customers 55+ Wireless Explore wireless Phone plans Build-A-Plan Network coverage Prepaid International add-ons Connected car Home internet & phone Explore home internet Check availability Fiber internet 5G home internet All-Fi Pro Home phone Quick actions Upgrade Add a line Bring your own phone Switch & save",
+    "Price plus taxes and fees. AutoPay & paperless bill required. Not available in all areas. In rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a min. of 30 min. Additionally, AT&T may temporarily slow data speeds if the network is busy. 5G coverage not available in all areas.",
+    "Credit for downtime lasting 20 minutes or more. Restrictions and exclusions apply. See att.com/why-att/guarantee for full details.",
+    "Price plus fees with an eligible AT&T Business wireless plan. AutoPay and paperless bill req’d. Req’s compatible plan & device. Coverage not available everywhere. Learn more at att.com/5Gnetwork. See offer details",
+    "Limited availability/areas. See offer details",
+    "Internet Air typical speeds are based on AT&T internal speed test data. About 75% of customers tested received speeds within the range or higher, and 25% received lower speeds. In rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a minimum of 30 minutes. AT&T may temporarily slow data speeds if the network is busy. 5G coverage not available everywhere.",
+    "Not available in all areas. 5G coverage not available everywhere.",
+    "Site map Coverage maps Terms of use Accessibility Broadband details Legal policy center Advertising choices Privacy center Your Privacy Choices Health Privacy Notice Cyber Security FCC public files",
+    "© 2026 AT&T Intellectual Property. All rights reserved."
+  ],
+  "openedDialogs": []
+}

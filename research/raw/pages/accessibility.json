@@ -1,0 +1,156 @@
+{
+  "slug": "accessibility",
+  "url": "https://about.att.com/sites/accessibility",
+  "finalUrl": "https://about.att.com/sites/accessibility",
+  "status": 200,
+  "retrievedAt": "2026-10-21T06:42:05.537Z",
+  "title": "AT&T Accessibility",
+  "metaDescription": "Accessibility is about making sure that everyone can connect with friends, family and entertainment to experience the world.",
+  "canonical": "https://about.att.com/sites/accessibility",
+  "outline": [
+    {
+      "tag": "h3",
+      "text": "Accessibility Nav HTML",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Accessibility Nav CSS",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Accessibility Nav JS",
+      "visible": false
+    },
+    {
+      "tag": "h1",
+      "text": "Conquering the Accessibility Divide",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Determination. Innovation. Inspiration.",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How Accessible Tech Helps People with Disabilities in Emergencies",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "ChatGPT Breaks Barriers for People with Disabilities",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How Artificial Intelligence (AI) Helps Improve Accessibility",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Accessing Your World",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Vision",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Hearing and Speech",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Cognitive",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Mobility",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Aging",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Code snippet: Hide this Column",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Accessibility Today, Inclusion Tomorrow",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Find Devices",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "***DO NOT REMOVE!***",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Code snippet: Accessibility Base CSS / JS",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "GVP Video Style Update",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Facts and Stats Custom CSS",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "homepageCustom CSS",
+      "visible": false
+    }
+  ],
+  "mainText": "Conquering the Accessibility Divide\n\n\"The promise is community, connection and unlimited innovation...the future of technology for everyone.\"\n- Gloria Lewis, VP Compliance and Head of Accessibility\n\nDetermination. Innovation. Inspiration.\n\nRead stories of how these aspirations converge in accessibility\nfor the more than 61 million people in the U.S. living with disabilities.\n\n\nHow Accessible Tech Helps People with Disabilities in Emergencies\n\nAre you emergency-ready? Discover how tools like smart alerts, text-to-911, and AT&T’s reliable network are closing the gap for the disabled community.\n\nSee how tech can save lives\nChatGPT Breaks Barriers for People with Disabilities\n\nChatGPT is transforming lives by empowering people with disabilities to communicate, learn, and complete daily tasks with ease. Discover how AI is creating a more inclusive world.\n\nLearn how ChatGPT empowers users\nHow Artificial Intelligence (AI) Helps Improve Accessibility\n\nDiscover how Artificial Intelligence (AI) is transforming accessibility in the digital world—making access to information and technology easier for everyone, especially those with disabilities.\n\nLearn how AI improves accessibility\n\nView more stories\n\nAccessing Your World\n\nConnecting with friends, family and entertainment from wherever we work or play and whenever we want should be easy – for everyone. Our dedication to accessibility comes through in the products and services we offer.    \n\n\nVision\n\nScreenreaders, talking guides and dictation apps are just some of the products to help the blind or those with low vision get to know their devices or just get connected.\n\nLearn about vision-related tools\nHearing and Speech\n\nFind out which devices are hearing aid-compatible. Need information on real time text (RTT), text telephone (TTY) or closed captioning? We can help with that, too.\n\nExplore hearing- and speech-assistive tools\nCognitive\n\nGet help to stay on track. Learn how to use memory apps, calendars and other reminders to move you through your day.\n\nDiscover cognitive-assistive tools\nMobility\n\nGet more information on accessible phones, tablets, mobile apps and smart homes. Also learn about helpful phone features such as voice commands or gestures to make connecting easier.\n\nRead about mobility-supportive tools\nAging\n\nLearn more about specialized equipment, senior discounts and customer service options. Visit any of the other product sections that best describe your specialized need(s).\n\nView aging-related tools\nAccessibility Today, Inclusion Tomorrow\nWhat does inclusion mean to you?\nFind Devices\n\n\nShop online\n\nLocate a store\n\n \n \n ",
+  "footerText": "Privacy Notice Terms of Use Accessibility Contact Us Shop Subscribe to AT&T News Your Privacy Choices\n\n© 2026 AT&T Intellectual Property. All rights reserved.",
+  "footerLinks": [
+    {
+      "text": "Privacy Notice",
+      "href": "http://about.att.com/sites/web_policy"
+    },
+    {
+      "text": "Terms of Use",
+      "href": "https://www.att.com/legal/terms.attWebsiteTermsOfUse.html"
+    },
+    {
+      "text": "Accessibility",
+      "href": "https://www.att.com/accessibility"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.att.com/support/contact-us/?source=EPcc000000000000U&wtExtndSource=Footer_Newsroom_DGen"
+    },
+    {
+      "text": "Shop",
+      "href": "https://www.att.com/?source=EPcc000000000000U&wtExtndSource=%20Homepage_Newsroom_DGen"
+    },
+    {
+      "text": "Subscribe to AT&T News",
+      "href": "https://about.att.com/pages/subscribe-att-news"
+    },
+    {
+      "text": "Your Privacy Choices",
+      "href": "https://about.att.com/csr/home/privacy/rights_choices.html"
+    }
+  ],
+  "modalTexts": [],
+  "openedDialogs": []
+}

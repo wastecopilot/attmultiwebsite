@@ -1,0 +1,56 @@
+{
+  "slug": "broadband-details",
+  "url": "https://about.att.com/sites/broadband",
+  "finalUrl": "https://about.att.com/sites/broadband",
+  "status": 200,
+  "retrievedAt": "2026-10-21T06:42:50.425Z",
+  "title": "AT&T Broadband Internet Access Services",
+  "metaDescription": "AT&T provides information about network practices, performance characteristics, and commercial terms, consistent with the FCC’s open internet rules.",
+  "canonical": "https://about.att.com/sites/broadband",
+  "outline": [
+    {
+      "tag": "h1",
+      "text": "Broadband Internet Access Services",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Custom CSS",
+      "visible": false
+    }
+  ],
+  "mainText": "Broadband Internet Access Services\n\nEn Español\n\nInformation About the Network Practices, Performance Characteristics & Commercial Terms of AT&T's Mass Market Broadband Internet Access Services\n\nAt AT&T, we want our customers to have information to more fully understand and enjoy the services we offer. To help keep customers informed about our mass market broadband internet access services, the AT&T website (www.att.com) describes the mass market wireless and wired broadband internet access services we offer. In this document, we provide information about the network practices, performance characteristics, and commercial terms applicable to our mass market wired, mobile and Wi-Fi broadband internet access services, consistent with the Federal Communications Commission’s Open Internet Rules. This information should help customers make informed choices about how to use those services, and will assist providers of internet applications, content and services in developing, marketing and maintaining their internet offerings. We encourage mass market customers and other users of our network to familiarize themselves with this information, and to provide AT&T with feedback about our mass market broadband internet access services so that we can continue to provide an excellent experience. Quantum Fiber customers, please refer to the Quantum Fiber Internet Service Disclosure https://www.quantumfiber.com/internet-service-disclosure.html\n\nNothing in this document changes your rights and obligations, or ours, under our terms of service associated with the applicable products, Acceptable Use Policy (“AUP”) or Privacy Policy. This document and the information contained in it are provided for informational purposes only and may be changed at any time, without notice.\n\n \n \n ",
+  "footerText": "Privacy Notice Terms of Use Accessibility Contact Us Shop Subscribe to AT&T News Your Privacy Choices\n\n© 2026 AT&T Intellectual Property. All rights reserved.",
+  "footerLinks": [
+    {
+      "text": "Privacy Notice",
+      "href": "http://about.att.com/sites/web_policy"
+    },
+    {
+      "text": "Terms of Use",
+      "href": "https://www.att.com/legal/terms.attWebsiteTermsOfUse.html"
+    },
+    {
+      "text": "Accessibility",
+      "href": "https://www.att.com/accessibility"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.att.com/support/contact-us/?source=EPcc000000000000U&wtExtndSource=Footer_Newsroom_DGen"
+    },
+    {
+      "text": "Shop",
+      "href": "https://www.att.com/?source=EPcc000000000000U&wtExtndSource=%20Homepage_Newsroom_DGen"
+    },
+    {
+      "text": "Subscribe to AT&T News",
+      "href": "https://about.att.com/pages/subscribe-att-news"
+    },
+    {
+      "text": "Your Privacy Choices",
+      "href": "https://about.att.com/csr/home/privacy/rights_choices.html"
+    }
+  ],
+  "modalTexts": [],
+  "openedDialogs": []
+}

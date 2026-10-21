@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "phone-deals",
+    "url": "https://www.att.com/deals/cell-phone-deals/",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:39:57.901Z",
+    "h1": "Our Best Cell Phone Deals: Apple, Samsung, Google Pixel",
+    "dialogs": 6
+  },
+  {
+    "slug": "legal",
+    "url": "https://www.att.com/legal/legal-policy-center.html",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:41:04.409Z",
+    "h1": "Legal Policy Center",
+    "dialogs": 0
+  },
+  {
+    "slug": "privacy",
+    "url": "https://about.att.com/privacy.html",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:41:43.424Z",
+    "h1": "Welcome to the AT&T Privacy Center",
+    "dialogs": 0
+  },
+  {
+    "slug": "accessibility",
+    "url": "https://about.att.com/sites/accessibility",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:42:05.537Z",
+    "h1": "Conquering the Accessibility Divide",
+    "dialogs": 0
+  },
+  {
+    "slug": "broadband-details",
+    "url": "https://about.att.com/sites/broadband",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:42:50.425Z",
+    "h1": "Broadband Internet Access Services",
+    "dialogs": 0
+  },
+  {
+    "slug": "privacy-choices",
+    "url": "https://about.att.com/privacy/choices-and-controls.html",
+    "status": 200,
+    "retrievedAt": "2026-10-21T06:43:13.801Z",
+    "h1": "Your Choices and Controls",
+    "dialogs": 0
+  }
+]

@@ -1,0 +1,111 @@
+URL: https://about.att.com/sites/accessibility
+Final URL: https://about.att.com/sites/accessibility
+HTTP: 200
+Retrieved: 2026-10-21T06:42:05.537Z
+Title: AT&T Accessibility
+
+== OUTLINE ==
+H3 (hidden): Accessibility Nav HTML
+H3 (hidden): Accessibility Nav CSS
+H3 (hidden): Accessibility Nav JS
+H1: Conquering the Accessibility Divide
+H2: Determination. Innovation. Inspiration.
+H3: How Accessible Tech Helps People with Disabilities in Emergencies
+H3: ChatGPT Breaks Barriers for People with Disabilities
+H3: How Artificial Intelligence (AI) Helps Improve Accessibility
+H2: Accessing Your World
+H3: Vision
+H3: Hearing and Speech
+H3: Cognitive
+H3: Mobility
+H3: Aging
+H3 (hidden): Code snippet: Hide this Column
+H2: Accessibility Today, Inclusion Tomorrow
+H2: Find Devices
+H3 (hidden): ***DO NOT REMOVE!***
+H3 (hidden): Code snippet: Accessibility Base CSS / JS
+H3 (hidden): GVP Video Style Update
+H3 (hidden): Facts and Stats Custom CSS
+H3 (hidden): homepageCustom CSS
+
+== MAIN TEXT ==
+Conquering the Accessibility Divide
+
+"The promise is community, connection and unlimited innovation...the future of technology for everyone."
+- Gloria Lewis, VP Compliance and Head of Accessibility
+
+Determination. Innovation. Inspiration.
+
+Read stories of how these aspirations converge in accessibility
+for the more than 61 million people in the U.S. living with disabilities.
+
+
+How Accessible Tech Helps People with Disabilities in Emergencies
+
+Are you emergency-ready? Discover how tools like smart alerts, text-to-911, and AT&T’s reliable network are closing the gap for the disabled community.
+
+See how tech can save lives
+ChatGPT Breaks Barriers for People with Disabilities
+
+ChatGPT is transforming lives by empowering people with disabilities to communicate, learn, and complete daily tasks with ease. Discover how AI is creating a more inclusive world.
+
+Learn how ChatGPT empowers users
+How Artificial Intelligence (AI) Helps Improve Accessibility
+
+Discover how Artificial Intelligence (AI) is transforming accessibility in the digital world—making access to information and technology easier for everyone, especially those with disabilities.
+
+Learn how AI improves accessibility
+
+View more stories
+
+Accessing Your World
+
+Connecting with friends, family and entertainment from wherever we work or play and whenever we want should be easy – for everyone. Our dedication to accessibility comes through in the products and services we offer.    
+
+
+Vision
+
+Screenreaders, talking guides and dictation apps are just some of the products to help the blind or those with low vision get to know their devices or just get connected.
+
+Learn about vision-related tools
+Hearing and Speech
+
+Find out which devices are hearing aid-compatible. Need information on real time text (RTT), text telephone (TTY) or closed captioning? We can help with that, too.
+
+Explore hearing- and speech-assistive tools
+Cognitive
+
+Get help to stay on track. Learn how to use memory apps, calendars and other reminders to move you through your day.
+
+Discover cognitive-assistive tools
+Mobility
+
+Get more information on accessible phones, tablets, mobile apps and smart homes. Also learn about helpful phone features such as voice commands or gestures to make connecting easier.
+
+Read about mobility-supportive tools
+Aging
+
+Learn more about specialized equipment, senior discounts and customer service options. Visit any of the other product sections that best describe your specialized need(s).
+
+View aging-related tools
+Accessibility Today, Inclusion Tomorrow
+What does inclusion mean to you?
+Find Devices
+
+
+Shop online
+
+Locate a store
+
+ 
+ 
+ 
+
+== OPENED DIALOGS ==
+
+== DOM MODAL / LEGAL TEXT ==
+
+== FOOTER ==
+Privacy Notice Terms of Use Accessibility Contact Us Shop Subscribe to AT&T News Your Privacy Choices
+
+© 2026 AT&T Intellectual Property. All rights reserved.

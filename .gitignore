@@ -1,0 +1,11 @@
+# Large binary evidence kept locally only (reproducible from the video / live crawl)
+reference/att-recording.mp4
+reference/frames/1fps/*.png
+reference/frames/scenes/*.png
+research/raw/pages/*.png
+research/raw/*.html
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

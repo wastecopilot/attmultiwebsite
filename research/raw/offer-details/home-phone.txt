@@ -1,0 +1,47 @@
+URL: https://www.att.com/home-phone/
+Retrieved: 2026-10-21T06:29:20.823Z
+Triggers found: 3
+
+=== Dialog #0
+CONTEXT: Phone Unlimited North America $$24.99 per month. $24.99/mo. for 12 mos. plus taxes & fees Restrictions apply. See offer details Call 844.886.4258 See features & benefits Unlimited nationwide calling within the U.S. and to Canada, Mexico, Puerto Rico, the U.S. Virgin Islands, Guam, and the Northern Marianas Calls to other countries at additional cost per-minute
+Geographic and service restrictions apply to AT&T Phone services.
+
+Unlimited North America Plan: Pricing ($24.99/mo per line; maximum of two) for the first 12 mos only for new residential AT&T Phone customers only. After 12 mos., or loss of eligibility, then prevailing rate applies, (currently $34.99/mo) unless cancelled or changed prior to the end of 12 months. Pricing subject to change. Must maintain all bundled services to receive continual discount on plan. Includes unlimited nationwide calling within the U.S., plus calls to Canada, Mexico and U.S. Territories. International calls billed at additional per minute rates. An additional per minute rate may apply for international calls terminating on mobile phones. Pricing excludes taxes, additional fees and other charges, including a monthly Administrative Fee, Regulatory Cost Recovery Charge. See att.com/fees for details.
+
+AT&T PHONE: AT&T Phone service is provided over an Internet Protocol connection and powered by electricity in your home. Service may require AT&T Internet (min 1.5Mbps or higher). Unless you provide any necessary backup battery power, AT&T Phone service, including 911 dialing, will not function during a power outage. See att.com/batterybackup more details.
+
+Offers may not be combined with certain other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers. 
+
+©2025 AT&T Intellectual Property. All rights reserved. AT&T, the AT&T logo, and all other AT&T marks contained herein are trademarks of AT&T Intellectual Property and/or AT&T affiliated companies. Subsidiaries and affiliates of AT&T Inc. provide products and services under the AT&T brand. All other trademarks are the property of their respective owners.
+
+=== Dialog #1
+CONTEXT: Phone International Plus II $$34.99 per month. $34.99/mo. for 12 mos. plus taxes & fees Restrictions apply. See offer details Call 844.886.4258 See features & benefits Unlimited calling to over 50 countries including Canada and Mexico; unlimited nationwide calling within the United States, Puerto Rico, U.S. Virgin Islands, Guam, and the Northern Marianas. View list of countries Low international r
+Geographic and service restrictions apply to AT&T Phone services. 
+
+International Plus II Plan: Pricing ($34.99/mo) for the first 12 mos for new residential AT&T Phone customers. After 12 mos., or loss of eligibility, then prevailing rate applies, (currently $44.99/mo) unless cancelled or changed prior to the end of 12 months. Includes unlimited nationwide calling within the U.S. plus calls to Canada, Mexico, U.S. Territories and unlimited calling to 50+ countries. An additional per minute rate may apply for international calls terminating on mobile phones. Pricing excludes taxes, additional fees and other charges, including a monthly Administrative Fee, and a Regulatory Cost Recovery Charge. For one time AT&T transactional fees, see att.com/fees for details. Pricing subject to change.
+
+AT&T PHONE: AT&T Phone service is provided over an Internet Protocol connection and powered by electricity in your home. Service may require AT&T Internet (min 1.5Mbps or higher) for an add’l cost. Unless you provide any necessary backup battery power, AT&T Phone service, including 911 dialing, will not function during a power outage. See att.com/batterybackup for more details.
+
+Offers may not be combined with certain other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers. 
+
+©2025 AT&T Intellectual Property. All rights reserved. AT&T, the AT&T logo, and all other AT&T marks contained herein are trademarks of AT&T Intellectual Property and/or AT&T affiliated companies. Subsidiaries and affiliates of AT&T Inc. provide products and services under the AT&T brand. All other trademarks are the property of their respective owners.
+
+=== Dialog #2
+CONTEXT: Internet price w/eligible AutoPay & Paperless billing. Data overages may apply. 12 mos pricing for Phone only. Geo & svc restr’s apply. See offer details.
+Offer Details
+
+Geographic and service restrictions apply to AT&T Phone and Internet services. Not all speeds available in all areas. 
+
+INTERNET OFFER: Autopay & Paperless Bill Discount: $10/mo if enrolled in both Paperless Billing and AutoPay w/ a bank account. Discount reduced to $5/mo when enrolled in AutoPay with a debit card or the AT&T Points Plus Card from Citi. No discount if enrolled in AutoPay with any other credit card. Pay full plan cost until discount starts w/in 2 bills. Must maintain valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly State Cost Recovery charge which is not government-required applies in NV. OH, TX. Taxes also apply. For one time AT&T transactional fees, see www.att.com/fees for details. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms. 
+
+†Data Allowance: For plans (768k-75M): $10 charge applies for each additional 50GB (up to $100/mo). Unlimited data allowance available with Internet 100 and higher plans or may also be purchased separately for an add’l $30/mo. For more info, go to www.att.com/internet-usage. 
+
+Speed based on wired connection. Actual speeds may vary. For more information, go to www.att.com/speed101. 
+
+Phone Unlimited North America Plan: Pricing ($24.99/mo) for the first 12 mos only for new residential customers only. After 12 mos., or loss of eligibility, then prevailing rate applies, (currently $34.99/mo) unless cancelled or changed prior to the end of 12 months. Pricing subject to change. Includes unlimited nationwide calling within the U.S., plus calls to Canada, Mexico and U.S. Territories. International calls billed at additional per minute rates. An additional per minute rate may apply for international calls terminating on mobile phones. Pricing excludes taxes, additional fees and other charges, including a monthly Administrative Fee, Regulatory Cost Recovery Charge. See att.com/fees for details. 
+
+AT&T PHONE: AT&T Phone service is provided over an Internet Protocol connection and powered by electricity in your home. If bundled with AT&T Internet, minimum 1.5Mbps or higher is recommended. Unless you provide any necessary backup battery power, AT&T Phone service, including 911 dialing, will not function during a power outage. See att.com/batterybackup more details. 
+
+Offers may not be combined with certain other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers. 
+
+©2025 AT&T Intellectual Property. All rights reserved. AT&T, the AT&T logo, and all other AT&T marks contained herein are trademarks of AT&T Intellectual Property and/or AT&T affiliated companies. Subsidiaries and affiliates of AT&T Inc. provide products and services under the AT&T brand. All other trademarks are the property of their respective owners.

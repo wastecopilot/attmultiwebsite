@@ -1,0 +1,3724 @@
+[
+  {
+    "url": "https://www.att.com/",
+    "retrievedAt": "2026-10-21T06:35:47.285Z",
+    "samples": [
+      {
+        "role": "body",
+        "query": "body",
+        "selector": "html.theme-att-2022.isPC > body",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#searchChatOnStickyHeader",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-personal-link",
+        "text": "Personal",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-d-brandlogo",
+        "text": "",
+        "color": "#0072B2",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "h1",
+        "query": "h1",
+        "selector": "div#__next > h1.hidden-spoken",
+        "text": "AT&T Official Site | Our Best Wireless & Internet Service",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.pad-b-none > div.container.undefined > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl.color-att-blue",
+        "text": "Great connections start here",
+        "color": "#009FDB",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.mar-b-md > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > h2.mar-b-xs.heading-xl",
+        "text": "Get the new iPhone Duo for up to $1,200 off",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "42px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.text-center.grid-col-4 > div.jsx-410943750.slider-content-container-wrapper > div.jsx-410943750.slider-content > div.jsx-410943750.pad-l-none > h2.mar-b-xs.heading-xxl",
+        "text": "Get the new iPhone 18 Pro for $0",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "p#global-search-status",
+        "text": "",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "a#link-:Ro6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+        "text": "855-901-8124",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.max-width-background.mar-b-md > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > p.type-eyebrow-xl",
+        "text": "New & existing customers",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "24px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.text-center.grid-col-4 > div.jsx-410943750.slider-content-container-wrapper > div.jsx-410943750.slider-content > div.jsx-410943750.pad-l-none > p.type-eyebrow-xxl",
+        "text": "New & existing customers",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "p#__next-route-announcer__",
+        "text": "",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "textDecorationColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#DCDFE3",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-cart-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-account-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#legalId_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#heropanel_NPI-3_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#heroPanel-Preorder-lnk-5478",
+        "text": "Preorder",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.container > div.row.flex-wrap > div.text-center.offset0-md > div.jsx-1992011584.slider-image-container-wrapper > button.jsx-1992011584.slider-nav",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.container > div.row.flex-wrap > div.text-center.offset0-md > div.jsx-1992011584.slider-image-container-wrapper > button.jsx-1992011584.slider-nav",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#card-shuffle-legal-note-0_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#cardShuffle-Shop-now-lnk-1867",
+        "text": "Shop now",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "html.theme-att-2022.isPC",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#000000",
+        "backgroundColor": "transparent",
+        "fontFamily": "\"Times New Roman\"",
+        "fontWeight": "400",
+        "fontSize": "10px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header > nav.theme-att-2022.theme-base-bg",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.theme-base-bg.bgcolor",
+        "text": "Switch to AT&T and learn how to get up to $800/line to break",
+        "color": "#1D2329",
+        "backgroundColor": "#F2FAFD",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.theme-base-bg.bgcolor > div.container > div.row > div.jsx-2874297542.grid-",
+        "text": "Switch to AT&T and learn how to get up to $800/line to break",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div.theme-base-bg.bgcolor > div.container > div.row > div.jsx-2874297542.grid- > div.microbanner-pad.text-center",
+        "text": "Switch to AT&T and learn how to get up to $800/line to break",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.mar-b-md",
+        "text": "New & existing customers\n\nGet the new iPhone Duo for up to $",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.mar-b-md > div.jsx-1049057036.bg-art",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "#F3F4F6",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.mar-b-md > div.jsx-1049057036.bg-art > div.absolute-fill.bgcolor",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "#F3F4F6",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.mar-b-md > div.container.flex > div.row.flex-wrap",
+        "text": "New & existing customers\n\nGet the new iPhone Duo for up to $",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.max-width-background.mar-b-md > div.container.flex > div.row.flex-wrap > div.flex.flex-items-center",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.card-shuffle",
+        "text": "New & existing customers\n\nGet the new iPhone 18 Pro for $0\nL",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.card-shuffle > div.absolute-fill.bgcolor",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#__next > div > div.max-width-background.card-shuffle",
+        "text": "New & existing customers\n\nGet the new iPhone 18 Pro for $0\nL",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#legalId_Legal",
+        "text": "Up to $800 via reward card (redemption required). Restrictio",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#heropanel_NPI-3_Legal",
+        "text": "Req. trade-in of $230 or more & eligible plan. Terms and res",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#card-shuffle-legal-note-0_Legal",
+        "text": "Req. trade-in of $230 or more & eligible plan. Terms and res",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div.max-width-background.mar-b-md > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > p.type-eyebrow-xl",
+        "text": "New & existing customers",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "24px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div.text-center.grid-col-4 > div.jsx-410943750.slider-content-container-wrapper > div.jsx-410943750.slider-content > div.jsx-410943750.pad-l-none > p.type-eyebrow-xxl",
+        "text": "New & existing customers",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      }
+    ],
+    "census": [
+      {
+        "prop": "color",
+        "hex": "#1D2329",
+        "count": 21,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel",
+            "text": "Personal"
+          },
+          {
+            "selector": "a#mn-business-link",
+            "text": "Business"
+          },
+          {
+            "selector": "a#mn-find-store",
+            "text": "Find a store"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#454B52",
+        "count": 8,
+        "examples": [
+          {
+            "selector": "div#legalId_Legal > span",
+            "text": "Up to $800 via reward card (redemption r"
+          },
+          {
+            "selector": "div#legalId_Legal > button.btn-reset.nowrap",
+            "text": "See offer details"
+          },
+          {
+            "selector": "div#heropanel_NPI-3_Legal > span",
+            "text": "Req. trade-in of $230 or more & eligible"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#FFFFFF",
+        "count": 7,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-primary-row.height-xxxl-sm",
+            "text": "Shop\nDeals\nAT&T Difference\nSupport\nSearc"
+          },
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          },
+          {
+            "selector": "div#__next > div > div.max-width-background.card-shuffle",
+            "text": "New & existing customers\n\nGet the new iP"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#FFFFFF",
+        "count": 4,
+        "examples": [
+          {
+            "selector": "a#link-:Ro6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.type-xs.font-bold",
+            "text": "ORDER NOW"
+          },
+          {
+            "selector": "a#link-:Ro6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+            "text": "855-901-8124"
+          },
+          {
+            "selector": "a#heroPanel-Preorder-lnk-5478",
+            "text": "Preorder"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F3F4F6",
+        "count": 3,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray",
+            "text": "Personal\nBusiness\nFind a store\nVer en es"
+          },
+          {
+            "selector": "div#__next > div > div.max-width-background.mar-b-md > div.jsx-1049057036.bg-art",
+            "text": ""
+          },
+          {
+            "selector": "div#__next > div > div.max-width-background.mar-b-md > div.jsx-1049057036.bg-art > div.absolute-fill.bgcolor",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#00388F",
+        "count": 3,
+        "examples": [
+          {
+            "selector": "a#link-:Ro6j6: > div.jsx-3659518980.jsx-3442982364",
+            "text": "ORDER NOW\n\n855-901-8124"
+          },
+          {
+            "selector": "a#heroPanel-Preorder-lnk-5478",
+            "text": "Preorder"
+          },
+          {
+            "selector": "a#cardShuffle-Shop-now-lnk-1867",
+            "text": "Shop now"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#00388F",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "a#heroPanel-Preorder-lnk-5478",
+            "text": "Preorder"
+          },
+          {
+            "selector": "a#cardShuffle-Shop-now-lnk-1867",
+            "text": "Shop now"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#0057B8",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div.row.flex-wrap > div.text-center.offset0-md > div.jsx-1992011584.slider-image-container-wrapper > button.jsx-1992011584.slider-nav > span.jsx-1992011584.slider-nav-arrow-icon",
+            "text": ""
+          },
+          {
+            "selector": "div.row.flex-wrap > div.text-center.offset0-md > div.jsx-1992011584.slider-image-container-wrapper > button.jsx-1992011584.slider-nav > span.jsx-1992011584.slider-nav-arrow-icon",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#009FDB",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel > span.absolute.left",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#DCDFE3",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div#__next > div > div.theme-base-bg.bgcolor",
+            "text": "Switch to AT&T and learn how to get up t"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#0072B2",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div > div.type-base.rte-styles > strong > a > span.nowrap",
+            "text": "Shop now"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#009FDB",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.max-width-background.pad-b-none > div.container.undefined > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl.color-att-blue",
+            "text": "Great connections start here"
+          }
+        ]
+      }
+    ],
+    "cssVariables": {},
+    "computedVariables": {}
+  },
+  {
+    "url": "https://www.att.com/internet/fiber/",
+    "retrievedAt": "2026-10-21T06:36:19.986Z",
+    "samples": [
+      {
+        "role": "body",
+        "query": "body",
+        "selector": "html.theme-att-2022.isPC > body",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#searchChatOnStickyHeader",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-personal-link",
+        "text": "Personal",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-d-brandlogo",
+        "text": "",
+        "color": "#0072B2",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "h1",
+        "query": "h1",
+        "selector": "div#__next > h1.hidden-spoken",
+        "text": "AT&T Fiber Internet: 1 GIG Fiber Optic Internet for $70/mo.",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > h2.mar-b-xs.heading-xxl",
+        "text": "Get unlimited 1 GIG internet for $70/mo.",
+        "color": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.jsx-2623242557.check-availability-panel-v2 > div.container > div.grid-col-12.rel > div.text-center > h2.mar-b-xs.heading-xxl",
+        "text": "Stay connected with home internet",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.container > div.row.flex-wrap > div.grid-col-12.grid-col-12-md > div.jsx-1725204834 > h2.mar-b-xs.heading-xxl",
+        "text": "Choose how fast you want to go",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > h2.mar-b-none.heading-md",
+        "text": "300Mbps speed",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > h2.mar-b-none.heading-md",
+        "text": "500Mbps speed",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div#5-2 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > h2.mar-b-none.heading-md",
+        "text": "Up to 1 GIG speed",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div#5-3 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > h2.mar-b-none.heading-md",
+        "text": "Up to 5 GIG speed",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.pad-t-lg.pad-b-lg > div.flex-column.row-gap16-sm > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl",
+        "text": "AT&T Fiber—setting the bar for home internet",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "p#global-search-status",
+        "text": "",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+        "text": "866-389-0512",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > p.type-eyebrow-xxl",
+        "text": "AT&T Fiber®",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > div.type-base.mar-b-xs > p",
+        "text": "For your first year.",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.jsx-14099810.overlay-content > div.jsx-14099810.content-left > div.jsx-14099810 > div.type-base.mar-t-xxs > p",
+        "text": "Plus, get three months of YouTube TV and a $100 reward card.",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 300",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 500",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#5-2 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 1000",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#5-3 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 5000",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#plantoggle_internet-fiber-legalBottom_Legal > span > p",
+        "text": "Speeds based on wired connection. Actual customer speeds may",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "textDecorationColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#plantoggle_internet-fiber-legalBottom_Legal > span > p > a",
+        "text": "www.att.com/speed101",
+        "color": "#454B52",
+        "textDecorationColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r1:",
+        "text": "Learn more",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r2:",
+        "text": "Learn more",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r3:",
+        "text": "Learn more",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r4:",
+        "text": "Learn more",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#DCDFE3",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-cart-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-account-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#hero-panel-with-ckav-legal_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#heroPanelWithCkav-Shop-AT-T-Fiber-lnk-6122",
+        "text": "Shop AT&T Fiber",
+        "color": "#00388F",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#heroPanelWithCkav-Call-866-634-0879-lnk-6122",
+        "text": "Call 877.649.7206",
+        "color": "#00388F",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#overlay-legal-:R4ej6:-0_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#Check-availability-btn-7107",
+        "text": "Check availability",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-toggle-button-grp-0",
+        "text": "Without wireless plan",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-toggle-button-grp-1",
+        "text": "With wireless plan",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.jsx-3822438706.row > div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#plan_card-legal-5-0_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#plan-card-cta-5-0",
+        "text": "Shop now",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-card-accordion-5-0-btn",
+        "text": "Features & benefits",
+        "color": "#0072B2",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#plan_card-legal-5-1_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#plan-card-cta-5-1",
+        "text": "Shop now",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-card-accordion-5-1-btn",
+        "text": "Features & benefits",
+        "color": "#0072B2",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#plan_card-legal-5-2_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#plan-card-cta-5-2",
+        "text": "Shop now",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-card-accordion-5-2-btn",
+        "text": "Features & benefits",
+        "color": "#0072B2",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#plan_card-legal-5-3_Legal > button.btn-reset.nowrap",
+        "text": "See offer details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#plan-card-cta-5-3",
+        "text": "Shop now",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#plan-card-accordion-5-3-btn",
+        "text": "Features & benefits",
+        "color": "#0072B2",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.jsx-3822438706.row > div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#storyOffer-Add-All-Fi-Pro-lnk-0525",
+        "text": "Add All-Fi Pro",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#storyOffer-Check-availability-lnk-2239",
+        "text": "Check availability",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.container > div.row > div.grid-col-10.centered > div.text-center > button.btn-reset.link-text3",
+        "text": "Expand all",
+        "color": "#0072B2",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#faq-0-btn",
+        "text": "What are the benefits of upgrading to fiber internet?",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "24px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#faq-1-btn",
+        "text": "What is fiber internet, and how is it different from cable a",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "24px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "html.theme-att-2022.isPC",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#000000",
+        "backgroundColor": "transparent",
+        "fontFamily": "\"Times New Roman\"",
+        "fontWeight": "400",
+        "fontSize": "10px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header > nav.theme-att-2022.theme-base-bg",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.hpwc-root.width-full > div.max-width-background.hero-panel",
+        "text": "AT&T Fiber®\n\nGet unlimited 1 GIG internet for $70/mo. \n\nFor ",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.hpwc-root.width-full > div.max-width-background.hero-panel > div.jsx-1049057036.bg-art",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.hpwc-root.width-full > div.max-width-background.hero-panel > div.jsx-1049057036.bg-art > div.absolute-fill.bgcolor",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.hpwc-root.width-full > div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap",
+        "text": "AT&T Fiber®\n\nGet unlimited 1 GIG internet for $70/mo. \n\nFor ",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div.hpwc-root.width-full > div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex.flex-items-center",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.max-width-background > div.jsx-14099810.overlay-container > div.jsx-14099810.overlay-bottom-outer-style > div.theme-accent-bg.bgcolor",
+        "text": "Plus, get three months of YouTube TV and a $100 reward card.",
+        "color": "#1D2329",
+        "backgroundColor": "#F2FAFD",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div.jsx-14099810.overlay-bottom-outer-style > div.theme-accent-bg.bgcolor > div.container > div.row > div.jsx-2874297542.grid-",
+        "text": "Plus, get three months of YouTube TV and a $100 reward card.",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div.theme-accent-bg.bgcolor > div.container > div.row > div.jsx-2874297542.grid- > div.microbanner-pad.text-center",
+        "text": "Plus, get three months of YouTube TV and a $100 reward card.",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#5-0",
+        "text": "AT&T Internet 300\n\n300Mbps speed\nWas $60.00 per month.. Now ",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2200991819.card",
+        "text": "AT&T All-Fi Pro\n$25.00 /.mo plus taxes\n$\n25.00/.mo\nplus taxe",
+        "color": "#1D2329",
+        "backgroundColor": "#F2FAFD",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#__next > div > div > div.max-width-background.planToggleWrapper > div.jsx-1725204834.plan-toggle-cards-list-wrapper",
+        "text": "Page 1 of 2\nPage 2 of 2\n\nAT&T Internet 300\n\n300Mbps speed\nWa",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0",
+        "text": "AT&T Internet 300\n\n300Mbps speed\nWas $60.00 per month.. Now ",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#DCDFE3",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading",
+        "text": "AT&T Internet 300\n\n300Mbps speed",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2176973199.plan-card-pricing",
+        "text": "Was $60.00 per month.. Now $50.00. per month. plus taxes & f",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-cta",
+        "text": "Shop now",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-toggle-accordion-wrapr",
+        "text": "Features & benefits\nGame, stream, and video chat with confid",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2200991819.card",
+        "text": "AT&T All-Fi Pro\n$25.00 /.mo plus taxes\n$\n25.00/.mo\nplus taxe",
+        "color": "#1D2329",
+        "backgroundColor": "#F2FAFD",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-1",
+        "text": "AT&T Internet 500\n\n500Mbps speed\nWas $75.00 per month.. Now ",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#DCDFE3",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading",
+        "text": "AT&T Internet 500\n\n500Mbps speed",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2176973199.plan-card-pricing",
+        "text": "Was $75.00 per month.. Now $60.00. per month. plus taxes & f",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > div.jsx-2658774245.hp-ckav-legal-wrap",
+        "text": "Price plus taxes and fees after discount w/elig. Autopay & P",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#hero-panel-with-ckav-legal_Legal",
+        "text": "Price plus taxes and fees after discount w/elig. Autopay & P",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#overlay-legal-:R4ej6:-0_Legal",
+        "text": "Online only. W/1 GIG or higher plan. Ltd. avail/areas. Redem",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#plan_card-legal-5-0_Legal",
+        "text": "Price plus taxes and fees after $10/mo. discount w/ elig. Au",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#plan_card-legal-5-1_Legal",
+        "text": "Price plus taxes and fees after $10/mo. discount w/ elig. Au",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#plan_card-legal-5-2_Legal",
+        "text": "Price plus taxes and fees after $10/mo. discount w/ elig. Au",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#plan_card-legal-5-3_Legal",
+        "text": "Price plus taxes and fees after $10/mo. discount w/ elig. Au",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div > div > div.max-width-background.planToggleWrapper > div.jsx-1725204834.container > div.jsx-1725204834.mar-t-xs-sm",
+        "text": "Speeds based on wired connection. Actual customer speeds may",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "footer",
+        "query": "footer, [id*='footer' i], [class*='footer' i]",
+        "selector": "div > div > div.max-width-background.planToggleWrapper > div.jsx-1725204834.container > div.jsx-1725204834.mar-t-xs-sm",
+        "text": "Speeds based on wired connection. Actual customer speeds may",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "footer-link",
+        "query": "footer a, [id*='footer' i] a, [class*='footer' i] a",
+        "selector": "div#plantoggle_internet-fiber-legalBottom_Legal > span > p > a",
+        "text": "www.att.com/speed101",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > p.type-eyebrow-xxl",
+        "text": "AT&T Fiber®",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "26px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 300",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 500",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div#5-2 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 1000",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "badge",
+        "query": "[class*='badge' i], [class*='flag' i], [class*='eyebrow' i]",
+        "selector": "div#5-3 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199.plan-card-heading > p.type-eyebrow-md",
+        "text": "AT&T Internet 5000",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      }
+    ],
+    "census": [
+      {
+        "prop": "color",
+        "hex": "#1D2329",
+        "count": 107,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel",
+            "text": "Personal"
+          },
+          {
+            "selector": "a#mn-business-link",
+            "text": "Business"
+          },
+          {
+            "selector": "a#mn-find-store",
+            "text": "Find a store"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#454B52",
+        "count": 22,
+        "examples": [
+          {
+            "selector": "div#overlay-legal-:R4ej6:-0_Legal > span",
+            "text": "Online only. W/1 GIG or higher plan. Ltd"
+          },
+          {
+            "selector": "div#overlay-legal-:R4ej6:-0_Legal > button.btn-reset.nowrap",
+            "text": "See offer details"
+          },
+          {
+            "selector": "div.jsx-2176973199 > div.jsx-2176973199.plan-card-pricing > div.rel.price > div > div.strikethrough.type-13",
+            "text": "$60.00/mo."
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#FFFFFF",
+        "count": 14,
+        "examples": [
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.type-xs.font-bold",
+            "text": "ORDER NOW"
+          },
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+            "text": "866-389-0512"
+          },
+          {
+            "selector": "div.max-width-background.hero-panel > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > p.type-eyebrow-xxl",
+            "text": "AT&T Fiber®"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#FFFFFF",
+        "count": 13,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-primary-row.height-xxxl-sm",
+            "text": "Shop\nDeals\nAT&T Difference\nSupport\nSearc"
+          },
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          },
+          {
+            "selector": "a#heroPanelWithCkav-Shop-AT-T-Fiber-lnk-6122",
+            "text": "Shop AT&T Fiber"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#0072B2",
+        "count": 9,
+        "examples": [
+          {
+            "selector": "button#plan-card-accordion-5-0-btn > span.reading-width",
+            "text": "Features & benefits"
+          },
+          {
+            "selector": "button#plan-card-accordion-5-1-btn > span.reading-width",
+            "text": "Features & benefits"
+          },
+          {
+            "selector": "button#plan-card-accordion-5-2-btn > span.reading-width",
+            "text": "Features & benefits"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#00388F",
+        "count": 8,
+        "examples": [
+          {
+            "selector": "button#Check-availability-btn-7107",
+            "text": "Check availability"
+          },
+          {
+            "selector": "a#plan-card-cta-5-0",
+            "text": "Shop now"
+          },
+          {
+            "selector": "a#plan-card-cta-5-1",
+            "text": "Shop now"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#00388F",
+        "count": 7,
+        "examples": [
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364",
+            "text": "ORDER NOW\n\n866-389-0512"
+          },
+          {
+            "selector": "button#Check-availability-btn-7107",
+            "text": "Check availability"
+          },
+          {
+            "selector": "a#plan-card-cta-5-0",
+            "text": "Shop now"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#DCDFE3",
+        "count": 6,
+        "examples": [
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          },
+          {
+            "selector": "div#5-0",
+            "text": "AT&T Internet 300\n\n300Mbps speed\nWas $60"
+          },
+          {
+            "selector": "div#5-1",
+            "text": "AT&T Internet 500\n\n500Mbps speed\nWas $75"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F2FAFD",
+        "count": 6,
+        "examples": [
+          {
+            "selector": "div > div.max-width-background > div.jsx-14099810.overlay-container > div.jsx-14099810.overlay-bottom-outer-style > div.theme-accent-bg.bgcolor",
+            "text": "Plus, get three months of YouTube TV and"
+          },
+          {
+            "selector": "div#5-0 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2200991819.card",
+            "text": "AT&T All-Fi Pro\n$25.00 /.mo plus taxes\n$"
+          },
+          {
+            "selector": "div#5-1 > div.jsx-2176973199.pad-l-xs > div.jsx-2176973199.flex > div.jsx-2176973199 > div.jsx-2200991819.card",
+            "text": "AT&T All-Fi Pro\n$25.00 /.mo plus taxes\n$"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#00388F",
+        "count": 5,
+        "examples": [
+          {
+            "selector": "a#heroPanelWithCkav-Shop-AT-T-Fiber-lnk-6122",
+            "text": "Shop AT&T Fiber"
+          },
+          {
+            "selector": "a#heroPanelWithCkav-Call-866-634-0879-lnk-6122",
+            "text": "Call 877.649.7206"
+          },
+          {
+            "selector": "button#plan-toggle-button-grp-1",
+            "text": "With wireless plan"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F3F4F6",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray",
+            "text": "Personal\nBusiness\nFind a store\nVer en es"
+          },
+          {
+            "selector": "div#__next > div > div > div.max-width-background.planToggleWrapper",
+            "text": "Choose how fast you want to go\nWithout w"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#002837",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div#__next > div > div.hpwc-root.width-full > div.max-width-background.hero-panel > div.jsx-1049057036.bg-art",
+            "text": ""
+          },
+          {
+            "selector": "div > div.hpwc-root.width-full > div.max-width-background.hero-panel > div.jsx-1049057036.bg-art > div.absolute-fill.bgcolor",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#FFFFFF",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "a#heroPanelWithCkav-Shop-AT-T-Fiber-lnk-6122",
+            "text": "Shop AT&T Fiber"
+          },
+          {
+            "selector": "a#heroPanelWithCkav-Call-866-634-0879-lnk-6122",
+            "text": "Call 877.649.7206"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#686E74",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "input#input-addressInput",
+            "text": ""
+          },
+          {
+            "selector": "div.grid-col-12.rel > div.flex.flex-wrap > div.flex.flex-items-center > label.checkbox.flex > div.checkbox-skin",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#BDC2C7",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div.row.flex-wrap > div.grid-col-12.grid-col-12-md > div.row.flex-wrap > div.grid-col-6.grid-col-8-md > div.btn-group",
+            "text": "Without wireless plan\nWith wireless plan"
+          },
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#FFFFFF @ alpha 0.698",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          },
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#009FDB",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel > span.absolute.left",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#0057B8",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.slick-dots.order1 > div.slick-dots-wrapper.flex > ul.smooth-scroll > li.slick-active > button",
+            "text": "Page 1 of 2"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#0074B3",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F2F2F2",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "button#nebula_div_btn > div.kampyle_button",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#0154A0",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "button#nebula_div_btn > div.kampyle_button-text",
+            "text": "Feedback"
+          }
+        ]
+      }
+    ],
+    "cssVariables": {},
+    "computedVariables": {}
+  },
+  {
+    "url": "https://www.att.com/plans/unlimited-data-plans/",
+    "retrievedAt": "2026-10-21T06:36:51.095Z",
+    "samples": [
+      {
+        "role": "body",
+        "query": "body",
+        "selector": "html.theme-att-2022.isPC > body",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "header",
+        "query": "header, [class*='global-nav' i], [id*='header' i]",
+        "selector": "div#searchChatOnStickyHeader",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderBottomColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-personal-link",
+        "text": "Personal",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "nav-link",
+        "query": "header a, nav a",
+        "selector": "a#mn-d-brandlogo",
+        "text": "",
+        "color": "#0072B2",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "h1",
+        "query": "h1",
+        "selector": "div#__next > h1.hidden-spoken",
+        "text": "Unlimited Data Cell Phone Plans & Hotspot Data | AT&T",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.pad-t-lg > div.container.undefined > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl",
+        "text": "Get more with AT&T Unlimited Your Way®",
+        "color": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.pad-t-lg.pad-b-md > div.flex-column.row-gap16-sm > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl",
+        "text": "Unlimited possibilities",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.mar-t-sm > div.container.flex > div.row.flex-wrap > div.flex-self-center.pad-t-xl > h2.mar-b-xs.heading-xxl",
+        "text": "Stay connected.\nOr we’ll make it right.",
+        "color": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.mar-b-sm > div.container.rel > div.row.flex-wrap > div.text-center.grid-col-10 > h2.mar-b-xs.heading-xxl",
+        "text": "More lines, more savings",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "48px"
+      },
+      {
+        "role": "h2",
+        "query": "main h2, h2",
+        "selector": "div.max-width-background.pad-b-xs > div.container > div.row.flex-wrap > div.pad-t-none.grid-col-12 > h2.mar-b-xs.heading-lg",
+        "text": "Choice is yours, guaranteed",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "34px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "p#global-search-status",
+        "text": "",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+        "text": "888-498-7802",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div > div > div > div.type-base.rte-styles > p",
+        "text": "Get our best performance experience on the go with AT&T Turb",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.max-width-background.pad-t-lg > div.container.undefined > div.row.flex-items-stretch > div.rel.grid-col-10 > p.type-base.mar-t-xs",
+        "text": "Choice is yours, guaranteed. Mix and match any of our best p",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.pad-t-lg.pad-b-md > div.flex-column.row-gap16-sm > div.row.flex-items-stretch > div.rel.grid-col-10 > p.type-base.mar-t-xs",
+        "text": "Enjoy these great features, included with every unlimited pl",
+        "color": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#genericlist-1-2_Legal > span > p.paragraph",
+        "text": "AT&T may temporarily slow data speeds if the network is busy",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div#genericlist-1-2_Legal > span > p.paragraph",
+        "text": "1Roaming may be at 2G speeds. 2Req’s compatible plan & devic",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex > div.jsx-3897679333 > p.mar-b-none.inline",
+        "text": "Unlimited talk, text, & high-speed data that can’t slow down",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex > div.jsx-3897679333 > p.mar-b-none.inline",
+        "text": "AT&T 5GSM with 4K ultra high definition (UHD) streaming avai",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "body-text",
+        "query": "p",
+        "selector": "div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex > div.jsx-3897679333 > p.mar-b-none.inline",
+        "text": "Unlimited talk, text & high-speed data in 20 Latin American ",
+        "color": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "textDecorationColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-business-link",
+        "text": "Business",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#mn-find-store",
+        "text": "Find a store",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray > div.container.flex > div.flex > a.link-text.solo",
+        "text": "Ver en español",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div > div.type-base.rte-styles > p > strong > a",
+        "text": "Learn more",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#genericlist-1-2_Legal > span > p.paragraph > a",
+        "text": "att.com/5Gforyou",
+        "color": "#454B52",
+        "textDecorationColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#genericlist-1-2_Legal > span > p.paragraph > a",
+        "text": "Learn more",
+        "color": "#454B52",
+        "textDecorationColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div#heropanel-1-3_Legal > span > a",
+        "text": "att.com/guarantee",
+        "color": "#FFFFFF",
+        "textDecorationColor": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div.jsx-1711038927.flex-column > div.jsx-3897679333.flex > div.jsx-3897679333 > p.mar-b-none.inline > a",
+        "text": "20 Latin American countries",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "div.jsx-1711038927.flex-column > div.jsx-3897679333.flex > div.jsx-3897679333 > p.mar-b-none.inline > a",
+        "text": "20 Latin American countries",
+        "color": "#0072B2",
+        "textDecorationColor": "#0072B2",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r6:",
+        "text": "AT&T Signature SavingsSM",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "link",
+        "query": "p a, [class*='legal' i] a, a[class*='link' i]",
+        "selector": "a#link-:r7:",
+        "text": "AT&T Appreciation SavingsSM",
+        "color": "#1D2329",
+        "textDecorationColor": "#1D2329",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "15px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#mega-z1_skipnav_link",
+        "text": "Skip Navigation",
+        "color": "#F2FAFD",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#F2FAFD",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+        "text": "Search or chat",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#DCDFE3",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-cart-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#mega-account-btn",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div > div.theme-neutral-bg.bgcolor > div.container > div.row-nowrap.justify-center > button.btn-reset.inline-flex",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div > div.theme-neutral-bg.bgcolor > div.container > div.row-nowrap.justify-center > button.btn-reset.inline-flex",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "a#heroPanel-Learn-more-lnk-4843",
+        "text": "Learn more",
+        "color": "#00388F",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#FFFFFF",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#legal-basic-plancalculator-std-1-tab-0-plans_Legal > button.btn-reset.nowrap",
+        "text": "See details",
+        "color": "#454B52",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.jsx-3822438706.row > div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+        "text": "Select plan",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-add1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+        "text": "Select plan",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-add1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-2 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+        "text": "Select plan",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-2 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-2 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-add1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-3 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+        "text": "Select plans",
+        "color": "#FFFFFF",
+        "backgroundColor": "#00388F",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-bold, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-3 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-3 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-add1",
+        "text": "",
+        "color": "#00388F",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#00388F",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "div.jsx-3822438706.row > div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset",
+        "text": "",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#nebula_div_btn",
+        "text": "Feedback",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "\"Open Sans\", sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#nebula_div_btn > div.kampyle_button",
+        "text": "",
+        "color": "#0154A0",
+        "backgroundColor": "#F2F2F2",
+        "borderTopColor": "#0154A0",
+        "fontFamily": "\"Open Sans\", sans-serif",
+        "fontWeight": "400",
+        "fontSize": "16px"
+      },
+      {
+        "role": "button",
+        "query": "a[class*='btn' i], button[class*='btn' i], a[role='button'], [class*='button' i]",
+        "selector": "button#nebula_div_btn > div.kampyle_button-text",
+        "text": "Feedback",
+        "color": "#0154A0",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#0154A0",
+        "fontFamily": "\"Open Sans\", sans-serif",
+        "fontWeight": "400",
+        "fontSize": "14px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "html.theme-att-2022.isPC",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#000000",
+        "backgroundColor": "transparent",
+        "fontFamily": "\"Times New Roman\"",
+        "fontWeight": "400",
+        "fontSize": "10px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#meganavNXUILayoutconsumer_header > nav.theme-att-2022.theme-base-bg",
+        "text": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en españo",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.theme-neutral-bg.bgcolor",
+        "text": "Introducing SplitPaySM—the easiest way to share your wireles",
+        "color": "#1D2329",
+        "backgroundColor": "#F3F4F6",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.pad-t-lg",
+        "text": "Get more with AT&T Unlimited Your Way®\n\nChoice is yours, gua",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div.max-width-background.pad-t-lg > div.absolute-fill.bgcolor",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div > div.max-width-background.mar-t-sm",
+        "text": "Stay connected.\nOr we’ll make it right.\nAll our wireless pla",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div > div.max-width-background.mar-t-sm > div.jsx-1049057036.bg-art",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div > div.max-width-background.mar-t-sm > div.jsx-1049057036.bg-art > div.absolute-fill.bgcolor",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "#002837",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div > div.max-width-background.mar-t-sm > div.container.flex > div.row.flex-wrap",
+        "text": "Stay connected.\nOr we’ll make it right.\nAll our wireless pla",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div > div.max-width-background.mar-t-sm > div.container.flex > div.row.flex-wrap > div.flex.flex-items-center",
+        "text": "",
+        "color": "#FFFFFF",
+        "backgroundColor": "transparent",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div > div.max-width-background.mar-b-sm",
+        "text": "More lines, more savings",
+        "color": "#1D2329",
+        "backgroundColor": "#F3F4F6",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "hero",
+        "query": "[class*='hero' i], [class*='banner' i], [class*='bgcolor' i], [class*='theme-' i]",
+        "selector": "div#__next > div > div > div.max-width-background.mar-b-sm",
+        "text": "Choice is yours, guaranteed\nMix and match any of our best un",
+        "color": "#1D2329",
+        "backgroundColor": "#F3F4F6",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div#__next > div > div > div.max-width-background.mar-b-sm > div.jsx-1711545412.plan-calculator-cards-list-wrapper",
+        "text": "Choice is yours, guaranteed\nMix and match any of our best un",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.slick-track > div.slick-slide.slick-active > div > div.flex.justify-center > div.jsx-1711038927.theme-base-bg",
+        "text": "Our best plan\nAT&T Elite 2.0SM\n$70.00 per month. per line wh",
+        "color": "#1D2329",
+        "backgroundColor": "#FFFFFF",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div > div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.plan-card-heading",
+        "text": "AT&T Elite 2.0SM",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div > div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.plan-card-price",
+        "text": "$70.00 per month. per line when you get 4 lines\n$\n70.00/mo. ",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div > div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column",
+        "text": "Unlimited talk, text, & high-speed data that can’t slow down",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex",
+        "text": "Unlimited talk, text, & high-speed data that can’t slow down",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex",
+        "text": "AT&T 5GSM with 4K ultra high definition (UHD) streaming avai",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex",
+        "text": "Unlimited talk, text & high-speed data in 20 Latin American ",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex",
+        "text": "AT&T ActiveArmor® mobile security\n\nFree app with spam call b",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "card",
+        "query": "[class*='card' i]",
+        "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-1711038927.flex-column > div.jsx-3897679333.flex",
+        "text": "250GB hotspot data per line per month",
+        "color": "#1D2329",
+        "backgroundColor": "transparent",
+        "borderTopColor": "#1D2329",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "18px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#micro-banner-legal-0_Legal",
+        "text": "Select postpaid wireless plans only. Not available for custo",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#micro-banner-legal-1_Legal",
+        "text": "Req's compatible plan & 5G device. May take up to 15 minutes",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#multiCta-3_Legal",
+        "text": "AT&T may temporarily slow data speeds if the network is busy",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#genericlist-1-2_Legal",
+        "text": "AT&T may temporarily slow data speeds if the network is busy",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#heropanel-1-3_Legal",
+        "text": "Credit for wireless downtime lasting 60 minutes or more caus",
+        "color": "#FFFFFF",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      },
+      {
+        "role": "legal",
+        "query": "[class*='legal' i], [class*='disclaimer' i], small",
+        "selector": "div#legal-basic-plancalculator-std-1-tab-0-plans_Legal",
+        "text": "Prices  after AutoPay, paperless billing discount, and wirel",
+        "color": "#454B52",
+        "fontFamily": "font-regular, sans-serif",
+        "fontWeight": "400",
+        "fontSize": "12px"
+      }
+    ],
+    "census": [
+      {
+        "prop": "color",
+        "hex": "#1D2329",
+        "count": 121,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel",
+            "text": "Personal"
+          },
+          {
+            "selector": "a#mn-business-link",
+            "text": "Business"
+          },
+          {
+            "selector": "a#mn-find-store",
+            "text": "Find a store"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#FFFFFF",
+        "count": 17,
+        "examples": [
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.type-xs.font-bold",
+            "text": "ORDER NOW"
+          },
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > div.jsx-3659518980.jsx-3442982364 > p.type-xs.font-regular",
+            "text": "888-498-7802"
+          },
+          {
+            "selector": "div.max-width-background.pad-t-lg > div.container.undefined > div.row.flex-items-stretch > div.rel.grid-col-10 > h2.heading-xxl",
+            "text": "Get more with AT&T Unlimited Your Way®"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#454B52",
+        "count": 15,
+        "examples": [
+          {
+            "selector": "div#micro-banner-legal-0_Legal > span",
+            "text": "Select postpaid wireless plans only. Not"
+          },
+          {
+            "selector": "div#micro-banner-legal-1_Legal > span",
+            "text": "Req's compatible plan & 5G device. May t"
+          },
+          {
+            "selector": "div#genericlist-1-2_Legal > span > p.paragraph > b",
+            "text": "AT&T may temporarily slow data speeds if"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F2FAFD",
+        "count": 13,
+        "examples": [
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1 > svg.jsx-2189260899.round",
+            "text": ""
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-add1 > svg.jsx-2189260899.round",
+            "text": ""
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > div.jsx-2189260899.rel > button.jsx-2189260899.qty-remove1 > svg.jsx-2189260899.round",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#FFFFFF",
+        "count": 12,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-primary-row.height-xxxl-sm",
+            "text": "Shop\nDeals\nAT&T Difference\nSupport\nSearc"
+          },
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          },
+          {
+            "selector": "a#heroPanel-Learn-more-lnk-4843",
+            "text": "Learn more"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#0072B2",
+        "count": 9,
+        "examples": [
+          {
+            "selector": "div > div.type-base.rte-styles > strong > a > span.nowrap",
+            "text": "Learn more"
+          },
+          {
+            "selector": "div.type-base.rte-styles > p > strong > a > span.nowrap",
+            "text": "Learn more"
+          },
+          {
+            "selector": "div.jsx-3897679333 > div.jsx-3897679333.type-sm > div.type-sm.rte-styles > span.type-sm > a",
+            "text": "att.com/5Gforyou"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#009FDB",
+        "count": 5,
+        "examples": [
+          {
+            "selector": "a#mn-personal-link > span.rel > span.absolute.left",
+            "text": ""
+          },
+          {
+            "selector": "div.card.radius-lg > div.pad-xs > div.flex > div.hidden-mobile > div.round.overflow-hidden",
+            "text": ""
+          },
+          {
+            "selector": "div.card.radius-lg > div.pad-xs > div.flex > div.hidden-mobile > div.round.overflow-hidden",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#00388F",
+        "count": 5,
+        "examples": [
+          {
+            "selector": "a#link-:Rc6j6: > div.jsx-3659518980.jsx-3442982364",
+            "text": "ORDER NOW\n\n888-498-7802"
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+            "text": "Select plan"
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+            "text": "Select plan"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#00388F",
+        "count": 5,
+        "examples": [
+          {
+            "selector": "a#heroPanel-Learn-more-lnk-4843",
+            "text": "Learn more"
+          },
+          {
+            "selector": "span#qty-:r3:-Val",
+            "text": "1 line"
+          },
+          {
+            "selector": "span#qty-:r5:-Val",
+            "text": "1 line"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#BDC2C7",
+        "count": 5,
+        "examples": [
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          },
+          {
+            "selector": "div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.flex > div.jsx-1711038927.rel > div.jsx-1711038927.width-full",
+            "text": ""
+          },
+          {
+            "selector": "div.jsx-1711038927.flex > div.mar-t-xxxs.features-accordion > div.height-md-all.width-md-all > label.checkbox.flex > div.checkbox-skin",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F3F4F6",
+        "count": 4,
+        "examples": [
+          {
+            "selector": "div#megaNavContainerOverlay > div.mega-universal-nav-row.bg-ui-background-gray",
+            "text": "Personal\nBusiness\nFind a store\nVer en es"
+          },
+          {
+            "selector": "div#__next > div > div.theme-neutral-bg.bgcolor",
+            "text": "Introducing SplitPaySM—the easiest way t"
+          },
+          {
+            "selector": "div#__next > div > div > div.max-width-background.mar-b-sm",
+            "text": "More lines, more savings"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#002837",
+        "count": 4,
+        "examples": [
+          {
+            "selector": "div#__next > div > div.max-width-background.pad-t-lg",
+            "text": "Get more with AT&T Unlimited Your Way®\n\n"
+          },
+          {
+            "selector": "div#__next > div > div.max-width-background.pad-t-lg > div.absolute-fill.bgcolor",
+            "text": ""
+          },
+          {
+            "selector": "div#__next > div > div > div.max-width-background.mar-t-sm > div.jsx-1049057036.bg-art",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#00388F",
+        "count": 4,
+        "examples": [
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-0 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+            "text": "Select plan"
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-1 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+            "text": "Select plan"
+          },
+          {
+            "selector": "div#quantity-selector-plancardv2-basic-plancalculator-std-1-tab-0-2 > div.jsx-2189260899.qty-select-lg > button.jsx-2189260899.btn-primary",
+            "text": "Select plan"
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#686E74",
+        "count": 3,
+        "examples": [
+          {
+            "selector": "div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.flex > div.jsx-1711038927.rel > div.jsx-1711038927.top-8 > div.type-xs.font-bold",
+            "text": "Additional Features"
+          },
+          {
+            "selector": "div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.flex > div.jsx-1711038927.rel > div.jsx-1711038927.top-8 > div.type-xs.font-bold",
+            "text": "Additional Features"
+          },
+          {
+            "selector": "div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.flex > div.jsx-1711038927.rel > div.jsx-1711038927.top-8 > div.type-xs.font-bold",
+            "text": "Additional Features"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#FFFFFF @ alpha 0.698",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          },
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#686E74",
+        "count": 2,
+        "examples": [
+          {
+            "selector": "div.jsx-1711038927.flex > div.mar-t-xxxs.features-accordion > div.height-md-all.width-md-all > label.checkbox.flex > div.checkbox-skin",
+            "text": ""
+          },
+          {
+            "selector": "div.jsx-1711038927.flex > div.mar-t-xxxs.features-accordion > div.height-md-all.width-md-all > label.checkbox.flex > div.checkbox-skin",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#F2FAFD",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#mega-z1_skipnav_link",
+            "text": "Skip Navigation"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#DCDFE3",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div#searchChatOnStickyHeader > button.mega-search-chat-btn.mega-border-light-gray",
+            "text": "Search or chat"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#FFFFFF",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "a#heroPanel-Learn-more-lnk-4843",
+            "text": "Learn more"
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#0057B8",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.slick-dots.order1 > div.slick-dots-wrapper.flex > ul.smooth-scroll > li.slick-active > button",
+            "text": "Page 1 of 2"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#BAEEFC",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div > div.flex.justify-center > div.jsx-1711038927.theme-base-bg > div.jsx-1711038927.pad-sm-lg > div.jsx-439996175.inline-flex",
+            "text": "Our best plan"
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F8FAFB",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.jsx-1711038927.flex > div.mar-t-xxxs.features-accordion > div.height-md-all.width-md-all > label.checkbox.flex > div.checkbox-skin",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "border-color",
+        "hex": "#0074B3",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "div.jsx-3822438706.grid-col-12 > div.slick-slider.duc-slick > div.jsx-3741889289.grid-col-1 > button.jsx-3142907309.btn-reset > span.jsx-3142907309.inline-flex",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "background-color",
+        "hex": "#F2F2F2",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "button#nebula_div_btn > div.kampyle_button",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "prop": "color",
+        "hex": "#0154A0",
+        "count": 1,
+        "examples": [
+          {
+            "selector": "button#nebula_div_btn > div.kampyle_button-text",
+            "text": "Feedback"
+          }
+        ]
+      }
+    ],
+    "cssVariables": {},
+    "computedVariables": {}
+  }
+]
