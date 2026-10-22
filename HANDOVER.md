@@ -44,6 +44,7 @@ The phone number and tracking IDs are not written into the code. They are read f
 | `NEXT_PUBLIC_GADS_ID` (optional until available) | Google Ads account tag ID | `AW-` + digits |
 | `NEXT_PUBLIC_GADS_CALL_LABEL` (optional until available) | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
 | `NEXT_PUBLIC_GADS_SWAP_LABEL` (optional) | Conversion label for "calls from website" (number swap); if empty, the call label is used | |
+| `NEXT_PUBLIC_SITE_INDEXABLE` (optional) | `1` lets search engines index the site, `0` blocks them. Leave it unset: indexing is then off on a `*.vercel.app` address and on once a custom domain is attached. Set `1` if the live domain reaches this project through a rewrite from another project. | `1` or `0` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` (optional) | Email address shown on the Contact page and in the footer | defaults to Backoffice@urbanwirelessusa.com |
 
 **Where to put real values**

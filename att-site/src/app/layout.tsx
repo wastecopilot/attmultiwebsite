@@ -5,6 +5,7 @@ import "./globals.css";
 import { rootCss } from "@/styles/tokens";
 import { buildTagSnippet, gtagSrc, gtmSrc } from "@/lib/tag-snippet";
 import { env } from "@/lib/env";
+import { siteIndexable } from "@/lib/seo";
 import { SITE_URL, company, disclosure } from "@/data/site";
 import { CookieBanner } from "@/components/consent/CookieBanner";
 import { AttributionKeeper } from "@/components/AttributionKeeper";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   applicationName: "Authorized Internet Retailer",
   publisher: company.legalName,
   formatDetection: { telephone: false, address: false, email: false },
-  robots: { index: true, follow: true },
+  robots: { index: siteIndexable, follow: true },
 };
 
 export const viewport: Viewport = {

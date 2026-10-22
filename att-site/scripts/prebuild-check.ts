@@ -68,6 +68,15 @@ if (tel && display && tel !== display && tel !== `1${display}`) {
   errors.push(`NEXT_PUBLIC_PHONE_DISPLAY and NEXT_PUBLIC_PHONE_TEL are different numbers (${display} vs ${tel}).`);
 }
 
+// Mirrors siteIndexable in src/lib/seo.ts so the build log shows the indexing state.
+const forcedIndexing = process.env.NEXT_PUBLIC_SITE_INDEXABLE;
+const productionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "";
+if (forcedIndexing === "0" || (forcedIndexing !== "1" && productionUrl.endsWith(".vercel.app"))) {
+  notes.push(
+    `Search indexing is OFF for this build (production address: ${productionUrl || "n/a"}). It turns on when a custom domain is attached; set NEXT_PUBLIC_SITE_INDEXABLE=1 if the live domain reaches this project through a rewrite.`,
+  );
+}
+
 if (auditMode) {
   if (process.env.VERCEL || process.env.CI) {
     errors.push("ALLOW_TEST_ENV=1 (audit build) is not permitted on Vercel/CI. Audit builds are for local testing only.");

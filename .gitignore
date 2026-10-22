@@ -3,6 +3,7 @@ reference/att-recording.mp4
 reference/frames/1fps/*.png
 reference/frames/scenes/*.png
 research/raw/pages/*.png
+research/raw/pages-*/*.png
 research/raw/*.html
 
 # OS / editor

@@ -40,6 +40,13 @@ export const PAGES = [
   { slug: "accessibility", url: "https://about.att.com/sites/accessibility" },
   { slug: "broadband-details", url: "https://about.att.com/sites/broadband" },
   { slug: "privacy-choices", url: "https://about.att.com/privacy/choices-and-controls.html" },
+  // Added 2026-10-22 for the competitor audit follow-up
+  { slug: "oneconnect", url: "https://www.att.com/oneconnect/" },
+  { slug: "55-plus", url: "https://www.att.com/bundles/55-plus-internet-wireless/" },
+  { slug: "guarantee", url: "https://www.att.com/why-att/guarantee/" },
+  { slug: "moving", url: "https://www.att.com/moving/" },
+  { slug: "phone-advanced", url: "https://www.att.com/home-phone/phone-advanced/" },
+  { slug: "broadband-labels", url: "https://www.att.com/broadbandlabels/dapbbfacts" },
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

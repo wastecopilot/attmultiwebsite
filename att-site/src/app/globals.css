@@ -425,6 +425,18 @@ p {
   font-size: 0.8125rem;
   color: var(--att-ink-muted);
 }
+.bb-facts {
+  font-size: 0.8125rem;
+}
+.bb-facts a {
+  display: inline-block;
+  min-height: 1.5rem;
+  padding-block: 0.125rem;
+}
+.hero-photo .hero-copy .bb-facts a,
+.on-dark .bb-facts a {
+  color: #fff;
+}
 .fine-print {
   margin-top: 1rem;
   border-top: 1px solid var(--att-border);

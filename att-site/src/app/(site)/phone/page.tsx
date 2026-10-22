@@ -1,7 +1,7 @@
 import { pageMetadata } from "@/lib/seo";
-import { offersBy } from "@/data/offers";
+import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
-import { PlanCard } from "@/components/offers/OfferCard";
+import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -12,7 +12,8 @@ export const metadata = pageMetadata({
 });
 
 export default function PhonePage() {
-  const plans = offersBy("phone");
+  const plans = offersBy("phone").filter((p) => p.price);
+  const advanced = getOffer("phone-advanced");
   return (
     <>
       <PageHeader
@@ -57,7 +58,19 @@ export default function PhonePage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="phone-faq-title">
+      <section className="section" aria-labelledby="phone-advanced-title">
+        <div className="container-x grid gap-10 lg:grid-cols-2 lg:items-start">
+          <SectionHeading
+            eyebrow="AT&T Phone – Advanced"
+            id="phone-advanced-title"
+            title="Keep Your Current Home Phone"
+            intro="Instead of traditional wired phone lines, AT&T Phone – Advanced uses the AT&T cellular network and/or a broadband connection to provide home telephone service. It works with up to six devices and supports your current phone. Monthly pricing is confirmed when you call."
+          />
+          <PromoCard offer={advanced} />
+        </div>
+      </section>
+
+      <section className="section section-alt" aria-labelledby="phone-faq-title">
         <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading eyebrow="AT&T Phone" id="phone-faq-title" title="Frequently Asked Questions" />
           <FaqList items={faqsFor("phone").map((f) => ({ q: f.q, a: f.a }))} />

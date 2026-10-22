@@ -35,6 +35,7 @@ export const mobileNav: { heading: string; links: NavLink[] }[] = [
       { href: "/phone", label: "AT&T Phone (home phone)" },
       { href: "/deals", label: "All current deals" },
       { href: "/check-availability", label: "Check availability" },
+      { href: "/moving", label: "Moving to a new home" },
       { href: "/faq", label: "FAQ" },
       { href: "/contact", label: "Contact" },
     ],
@@ -49,6 +50,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
       { href: "/internet/fiber", label: "AT&T Fiber plans" },
       { href: "/internet/internet-air", label: "AT&T Internet Air" },
       { href: "/check-availability", label: "Check availability" },
+      { href: "/moving", label: "Moving to a new home" },
     ],
   },
   {

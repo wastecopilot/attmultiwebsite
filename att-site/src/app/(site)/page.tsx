@@ -21,16 +21,16 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
-const services: { id: string; href: string; name: string; icon: typeof FiberIcon; image: ImageKey; text: string; from: string; link: string }[] = [
+const services: { id: string; href: string; name: string; icon: typeof FiberIcon; image: ImageKey; text: string; from: string; note?: string; link: string }[] = [
   { id: "fiber-300", href: "/internet/fiber", name: "AT&T Fiber", icon: FiberIcon, image: "cardFiber", text: "Fiber-optic home internet with equal upload and download speeds, up to 5 GIG where available.", from: "From", link: "View AT&T Fiber Plans" },
   { id: "internet-air", href: "/internet/internet-air", name: "AT&T Internet Air", icon: AirIcon, image: "cardAir", text: "Home internet delivered over the AT&T 5G network, with self-setup and no annual contract.", from: "", link: "View AT&T Internet Air" },
-  { id: "wireless-value-2", href: "/wireless/plans", name: "AT&T Wireless", icon: WirelessIcon, image: "cardWireless", text: "Unlimited Your Way plans that can be combined across every line on one account.", from: "From", link: "View Unlimited Plans" },
+  { id: "wireless-value-2", href: "/wireless/plans", name: "AT&T Wireless", icon: WirelessIcon, image: "cardWireless", text: "Unlimited Your Way plans that can be combined across every line on one account.", from: "From", note: "after $10/mo. per line AutoPay & paperless bill discount", link: "View Unlimited Plans" },
   { id: "phone-unlimited-north-america", href: "/phone", name: "AT&T Phone", icon: HomePhoneIcon, image: "cardPhone", text: "Digital home phone service delivered over an AT&T internet connection.", from: "", link: "View AT&T Phone Plans" },
 ];
 
 export default function HomePage() {
   const hero = getOffer("fiber-1000");
-  const promos = [getOffer("bundle-fiber-wireless"), getOffer("wireless-switch-reward-800"), getOffer("wireless-byod-credit-360")];
+  const promos = [getOffer("bundle-55-plus"), getOffer("bundle-fiber-wireless"), getOffer("wireless-switch-reward-800")];
   const photo = Boolean(imageSrc("homeHero"));
   const specialistPhoto = Boolean(imageSrc("specialist"));
   return (
@@ -129,6 +129,7 @@ export default function HomePage() {
                       <span className="text-3xl font-extrabold tracking-tight">${o.price.amount % 1 ? o.price.amount.toFixed(2) : o.price.amount}</span>
                       <span className="text-sm font-semibold text-ink-muted">{o.price.unit}</span>
                       {o.price.qualifier ? <span className="block text-sm text-ink-muted">{o.price.qualifier}</span> : null}
+                      {s.note ? <span className="block text-sm text-ink-muted">{s.note}</span> : null}
                     </p>
                   ) : null}
                   <AsOf offer={o} />

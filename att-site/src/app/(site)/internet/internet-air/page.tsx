@@ -5,6 +5,7 @@ import { faqsFor } from "@/data/faq";
 import { PlanCard } from "@/components/offers/OfferCard";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { AirIcon, ShieldIcon, WifiIcon } from "@/components/ui/Icons";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
@@ -94,6 +95,8 @@ export default function InternetAirPage() {
           <FaqList items={faqs.map((f) => ({ q: f.q, a: f.a }))} />
         </div>
       </section>
+
+      <GuaranteeSection id="air-guarantee-title" items={["internet", "wireless"]} alt />
 
       <CallBand placement="air-band" title="Confirm AT&T Internet Air at Your Address" text="Call to confirm whether AT&T Internet Air or AT&T Fiber is available at your address." offerId={air.id} value={air.price!.amount} />
       <JsonLd data={offersJsonLd([air], "/internet/internet-air")} />

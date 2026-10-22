@@ -10,6 +10,12 @@ export const SITE_ORIGIN = "https://authorizedinternetretailer.net";
 export const BASE_PATH = "/att";
 export const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
 
+/**
+ * AT&T's Broadband Facts label lookup for dealers (address-based; Wireless and Wireline tabs). Linked next to
+ * every internet and wireless plan price. Verified 2026-10-22; confirm with the AT&T channel manager (OPEN_ITEMS).
+ */
+export const BROADBAND_FACTS_URL = "https://www.att.com/broadbandlabels/dapbbfacts";
+
 export const company = {
   // Operator name and address: Urban Wireless (https://urbanwirelessusa.com), owner direction 2026-10-21.
   legalName: "Urban Wireless",

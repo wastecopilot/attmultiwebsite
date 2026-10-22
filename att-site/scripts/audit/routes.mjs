@@ -11,6 +11,7 @@ export const ROUTES = [
   { path: "/phone", name: "AT&T Phone" },
   { path: "/deals", name: "Deals" },
   { path: "/check-availability", name: "Check availability" },
+  { path: "/moving", name: "Moving" },
   { path: "/about", name: "About" },
   { path: "/faq", name: "FAQ" },
   { path: "/contact", name: "Contact" },

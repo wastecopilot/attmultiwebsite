@@ -16,6 +16,7 @@ const groups = [
       ["/internet/fiber", "AT&T Fiber Internet Plans"],
       ["/internet/internet-air", "AT&T Internet Air 5G Home Internet"],
       ["/check-availability", "Check AT&T Service Availability"],
+      ["/moving", "AT&T Service for Your New Home"],
     ],
   },
   {

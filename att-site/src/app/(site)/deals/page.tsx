@@ -17,7 +17,7 @@ const groups: { title: string; id: string; categories: OfferCategory[]; intro: s
   { title: "AT&T Internet Air", id: "deals-air", categories: ["internet-air"], intro: "5G home internet with one simple plan." },
   { title: "AT&T Wireless Plans", id: "deals-wireless-plans", categories: ["wireless-plan"], intro: "Per line with 4 lines, after the AutoPay & paperless bill discount." },
   { title: "AT&T Wireless Promotions", id: "deals-wireless-promos", categories: ["wireless-promo"], intro: "Switching offers, new-line discounts, phone trade-in offers and group savings." },
-  { title: "AT&T Phone", id: "deals-phone", categories: ["phone"], intro: "12-month prices for new residential AT&T Phone customers." },
+  { title: "AT&T Phone", id: "deals-phone", categories: ["phone"], intro: "12-month prices for new residential AT&T Phone customers, and AT&T Phone – Advanced." },
 ];
 
 export default function DealsPage() {

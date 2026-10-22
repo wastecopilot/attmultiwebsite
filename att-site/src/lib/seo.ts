@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/data/site";
 
+/**
+ * Whether search engines may index this deployment. Off while the project's production address is a
+ * *.vercel.app staging URL (Vercel sets VERCEL_PROJECT_PRODUCTION_URL at build time), on everywhere else.
+ * NEXT_PUBLIC_SITE_INDEXABLE=1 forces it on (needed when the live domain reaches this project through a
+ * rewrite from another Vercel project); =0 forces it off.
+ */
+const forcedIndexing = process.env.NEXT_PUBLIC_SITE_INDEXABLE;
+export const siteIndexable =
+  forcedIndexing === "1" ? true : forcedIndexing === "0" ? false : !(process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "").endsWith(".vercel.app");
+
 interface PageSeo {
   /** Full <title>; must be under 60 characters (checked by scripts/audit/seo-check.mjs). */
   title: string;
@@ -35,7 +45,7 @@ export function pageMetadata({ title, description, path, noindex = false, canoni
       images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: "Authorized Internet Retailer: AT&T Fiber, Internet Air and wireless plans" }],
     },
     twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/twitter-image`] },
-    robots: noindex ? { index: false, follow: true } : { index: true, follow: true },
+    robots: noindex || !siteIndexable ? { index: false, follow: true } : { index: true, follow: true },
   };
 }
 

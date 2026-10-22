@@ -26,14 +26,13 @@ export function PlanCard({
   const value = offer.price?.amount ?? 0;
   return (
     <article className={`card flex h-full flex-col p-6 ${featured ? "card-featured" : ""}`} aria-labelledby={`${offer.id}-title`} data-reveal>
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          {offer.speed ? <p className="text-sm font-semibold tracking-wide text-ink-muted uppercase">{offer.speed}</p> : null}
-          <H id={`${offer.id}-title`} className="mt-1 text-xl font-bold text-ink">
-            {offer.title}
-          </H>
-        </div>
-        {badge ? <span className="badge shrink-0">{badge}</span> : null}
+      {/* Badge sits above the title so narrow cards keep the plan name on one line. */}
+      {badge ? <span className="badge self-start">{badge}</span> : null}
+      <div className={badge ? "mt-3" : undefined}>
+        {offer.speed ? <p className="text-sm font-semibold tracking-wide text-ink-muted uppercase">{offer.speed}</p> : null}
+        <H id={`${offer.id}-title`} className="mt-1 text-xl font-bold text-ink">
+          {offer.title}
+        </H>
       </div>
       {offer.price ? (
         <div className="mt-5">

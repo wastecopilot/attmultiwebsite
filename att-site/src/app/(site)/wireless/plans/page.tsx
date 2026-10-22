@@ -24,6 +24,9 @@ export default function WirelessPlansPage() {
   const plans = offersBy("wireless-plan");
   const newLine = getOffer("wireless-new-line-5-off");
   const appreciation = getOffer("wireless-appreciation-savings");
+  // Single-line rates come from each plan's altPrice in offers.ts (AT&T publishes none for Elite 2.0).
+  const singleLine = { label: "Price, single line (before discounts)", values: plans.map((p) => (p.altPrice ? `$${p.altPrice.price.amount}/mo.` : "Call for pricing")) };
+  const tableRows = [rows[0], singleLine, ...rows.slice(1)];
   return (
     <>
       <PageHeader
@@ -34,7 +37,7 @@ export default function WirelessPlansPage() {
         image="plansHero"
         eyebrow="AT&T Unlimited Your Way"
         title="AT&T Unlimited Plans"
-        intro="AT&T's four Unlimited Your Way plans can be combined on any line of the same account. Prices are per line with 4 lines, after the $10/mo. per line AutoPay & paperless bill discount."
+        intro="AT&T's four Unlimited Your Way plans can be combined on any line of the same account. Featured prices are per line with 4 lines, after the $10/mo. per line AutoPay & paperless bill discount; single-line rates are shown with each plan."
       >
         <CheckList
           className="mt-6 text-ink"
@@ -75,7 +78,7 @@ export default function WirelessPlansPage() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((r) => (
+                {tableRows.map((r) => (
                   <tr key={r.label}>
                     <th scope="row">{r.label}</th>
                     {r.values.map((v, i) => (
@@ -87,7 +90,7 @@ export default function WirelessPlansPage() {
             </table>
           </div>
           <p className="mt-4 text-sm text-ink-muted">
-            AT&amp;T may temporarily slow data speeds if the network is busy. Taxes and fees extra; monthly AT&amp;T fees apply per line, including an Administrative/Regulatory Cost Recovery Fee of up to $4.99. Complete offer details appear
+            Single-line prices are AT&amp;T&rsquo;s published rates before the AutoPay &amp; paperless bill discount. AT&amp;T may temporarily slow data speeds if the network is busy. Taxes and fees extra; monthly AT&amp;T fees apply per line, including an Administrative/Regulatory Cost Recovery Fee of up to $4.99. Complete offer details appear
             with each plan above.
           </p>
           <AsOf offer={plans[0]} />

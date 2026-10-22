@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "internet-fiber",
+    "url": "https://www.att.com/internet/fiber/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:24:19.415Z",
+    "h1": "AT&T Fiber Internet: 1 GIG Fiber Optic Internet for $70/mo.",
+    "dialogs": 1
+  },
+  {
+    "slug": "internet-air",
+    "url": "https://www.att.com/internet/internet-air/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:25:15.475Z",
+    "h1": "AT&T Internet Air: 5G Wireless Home Internet for $55/mo",
+    "dialogs": 0
+  },
+  {
+    "slug": "wireless-plans",
+    "url": "https://www.att.com/plans/unlimited-data-plans/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:26:04.291Z",
+    "h1": "Unlimited Data Cell Phone Plans & Hotspot Data | AT&T",
+    "dialogs": 0
+  },
+  {
+    "slug": "switch",
+    "url": "https://www.att.com/wireless/switch-and-save/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:26:48.300Z",
+    "h1": "Switch to AT&T Wireless: Deals, Offers & More | AT&T",
+    "dialogs": 0
+  },
+  {
+    "slug": "bundles",
+    "url": "https://www.att.com/bundles/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:27:42.520Z",
+    "h1": "Our Best Phone & Internet Bundle Deals | AT&T",
+    "dialogs": 2
+  },
+  {
+    "slug": "oneconnect",
+    "url": "https://www.att.com/oneconnect/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:28:30.281Z",
+    "h1": "AT&T OneConnect | Flat Price Wireless & Internet for All Your Devices",
+    "dialogs": 0
+  },
+  {
+    "slug": "55-plus",
+    "url": "https://www.att.com/bundles/55-plus-internet-wireless/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:29:18.661Z",
+    "h1": "AT&T 55+ Bundle Plans for Internet & Wireless",
+    "dialogs": 0
+  },
+  {
+    "slug": "guarantee",
+    "url": "https://www.att.com/why-att/guarantee/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:29:55.599Z",
+    "h1": "AT&T Guarantee: Reliable Connectivity & Service | AT&T",
+    "dialogs": 1
+  },
+  {
+    "slug": "moving",
+    "url": "https://www.att.com/moving/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:30:40.979Z",
+    "h1": "Get Internet at your New Address | AT&T Moving",
+    "dialogs": 1
+  },
+  {
+    "slug": "phone-advanced",
+    "url": "https://www.att.com/home-phone/phone-advanced/",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:31:22.066Z",
+    "h1": "AT&T Phone – Advanced | AT&T Home Phone",
+    "dialogs": 0
+  },
+  {
+    "slug": "broadband-labels",
+    "url": "https://www.att.com/broadbandlabels/dapbbfacts",
+    "status": 200,
+    "retrievedAt": "2026-10-22T10:32:09.267Z",
+    "h1": "Broadband facts for AT&T",
+    "dialogs": 0
+  }
+]

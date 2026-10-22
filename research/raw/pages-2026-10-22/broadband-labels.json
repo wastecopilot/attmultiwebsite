@@ -1,0 +1,83 @@
+{
+  "slug": "broadband-labels",
+  "url": "https://www.att.com/broadbandlabels/dapbbfacts",
+  "finalUrl": "https://www.att.com/broadbandlabels/dapbbfacts",
+  "status": 200,
+  "retrievedAt": "2026-10-22T10:32:09.267Z",
+  "title": "Broadband facts for AT&T",
+  "metaDescription": null,
+  "canonical": null,
+  "outline": [
+    {
+      "tag": "h1",
+      "text": "Broadband facts for AT&T",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Broadband facts",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Enter your address to get started",
+      "visible": true
+    }
+  ],
+  "mainText": "Broadband facts for AT&T\nVer en español\n\nAT&T\n\nBroadband facts\n\nWe’ve made it easy to learn everything about plans’ cost and performance.\n\nEnter your address to get started\nWireless\nWireline\nAddress\nCheck Availability\nSite map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.",
+  "footerText": "Site map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.",
+  "footerLinks": [
+    {
+      "text": "Site map",
+      "href": "https://www.att.com/sitemap/"
+    },
+    {
+      "text": "Coverage maps",
+      "href": "https://www.att.com/maps/wireless-coverage.html"
+    },
+    {
+      "text": "Terms of use",
+      "href": "https://www.att.com/legal/terms.attWebsiteTermsOfUse.html"
+    },
+    {
+      "text": "Accessibility",
+      "href": "https://about.att.com/sites/accessibility"
+    },
+    {
+      "text": "Broadband details",
+      "href": "https://about.att.com/sites/broadband"
+    },
+    {
+      "text": "Legal policy center",
+      "href": "https://www.att.com/legal/legal-policy-center.html"
+    },
+    {
+      "text": "Advertising choices",
+      "href": "https://about.att.com/privacy/privacy-notice.html#choice"
+    },
+    {
+      "text": "Privacy center",
+      "href": "https://about.att.com/privacy.html"
+    },
+    {
+      "text": "Your Privacy Choices",
+      "href": "https://about.att.com/privacy/choices-and-controls.html"
+    },
+    {
+      "text": "Health Privacy Notice",
+      "href": "https://about.att.com/privacy/StateLawApproach/washington-health-privacy-notice.html"
+    },
+    {
+      "text": "Cyber Security",
+      "href": "https://about.att.com/pages/cyberaware"
+    },
+    {
+      "text": "FCC public files",
+      "href": "https://publicfiles.fcc.gov/cable-profile/999999-at&t-u-verse"
+    }
+  ],
+  "modalTexts": [
+    "Site mapCoverage mapsTerms of useAccessibilityBroadband detailsLegal policy centerAdvertising choicesPrivacy centerYour Privacy ChoicesHealth Privacy NoticeCyber SecurityFCC public files"
+  ],
+  "openedDialogs": []
+}

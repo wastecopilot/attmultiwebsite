@@ -6,6 +6,7 @@ import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata = pageMetadata({
@@ -152,7 +153,9 @@ export default function FiberPage() {
         </div>
       </section>
 
-      <section className="section section-alt" aria-labelledby="fiber-faq-title">
+      <GuaranteeSection id="fiber-guarantee-title" items={["internet", "backup"]} alt />
+
+      <section className="section" aria-labelledby="fiber-faq-title">
         <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div>
             <SectionHeading eyebrow="AT&T Fiber" id="fiber-faq-title" title="Frequently Asked Questions" />

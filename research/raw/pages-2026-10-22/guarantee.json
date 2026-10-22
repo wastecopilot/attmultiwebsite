@@ -1,0 +1,867 @@
+{
+  "slug": "guarantee",
+  "url": "https://www.att.com/why-att/guarantee/",
+  "finalUrl": "https://www.att.com/why-att/guarantee/",
+  "status": 200,
+  "retrievedAt": "2026-10-22T10:29:55.599Z",
+  "title": "AT&T Guarantee: Reliable Connectivity & Service | AT&T",
+  "metaDescription": "Experience reliable connectivity, deals you want & prompt, friendly service for AT&T wireless & fiber internet. All guaranteed, or we make it right.",
+  "canonical": "https://www.att.com/why-att/guarantee/",
+  "outline": [
+    {
+      "tag": "h2",
+      "text": "Shop",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bundles",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Home internet & phone",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Devices",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Accessories",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Brands",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Get the new iPhone 18 Pro for $0 with eligible iPhone trade-in",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Trending deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Device & accessory deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Subscriptions",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Switch to AT&T and learn how to get up to $800/line to break your contract",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Discounts by occupation",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Discounts by affiliation",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Partner savings",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Difference",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Why choose us",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Exceptional coverage",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Sports",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Music, Arts & Culture",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Internet",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless/Phones",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Technology",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Backed by the AT&T Guarantee®",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Support",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Account",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "My device",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Device options",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless help",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Equipment",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Troubleshooting",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Home phone",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "America’s best guarantee",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Welcome back!",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Account overview",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Welcome back!",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Account overview",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Bill & payments",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Quick actions",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Shop",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Deals",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Difference",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Support",
+      "visible": false
+    },
+    {
+      "tag": "h2",
+      "text": "Plans & services",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Bundles",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Wireless",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Home internet & phone",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Quick actions",
+      "visible": false
+    },
+    {
+      "tag": "h1",
+      "text": "AT&T Guarantee: Reliable Connectivity & Service | AT&T",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Guarantee®",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "We’ve got your back",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "It works or you get a credit",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Your connection, our promise",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Great choices and pricing",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Prompt, friendly service you deserve",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "If fiber goes down, wireless steps up",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "First and only",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "What good is a new phone without the AT&T Guarantee?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "iPhone 18 Pro",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "iPhone 18 Pro Max",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "iPhone Duo",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Galaxy Z Fold8",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Galaxy Z Fold8 Ultra",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "iPhone 17 Pro Max",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "iPhone 17",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Champ Game Getaway presented by the AT&T Guarantee",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Take it from our customers",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "Frequently asked questions",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "What is the AT&T Guarantee?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Does the AT&T Guarantee cover both wireless and internet service?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "How does the AT&T Guarantee program work?",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "What kind of benefits should I expect if I have an experience that doesn’t meet the AT&T Guarantee commitments?",
+      "visible": true
+    },
+    {
+      "tag": "h2",
+      "text": "AT&T Guarantee program terms",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Terms",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "What is it?",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "How does it work?",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "What are the rules of the program?",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "How do these special offers work? Are they intended as compensation?",
+      "visible": false
+    },
+    {
+      "tag": "h3",
+      "text": "Shop",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Trending",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Top phone & data plans",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Switch to AT&T",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Featured deals",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Shop cell phones by brand",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Tablets & Watches",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Accessories by Brand",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "Resources",
+      "visible": true
+    },
+    {
+      "tag": "h3",
+      "text": "AT&T",
+      "visible": true
+    }
+  ],
+  "mainText": "Skip Navigation\nPersonal\nBusiness\nFind a store\nVer en español\nShop\nDeals\nAT&T Difference\nSupport\nSearch or chat\n\nStart of main content\nAT&T Guarantee: Reliable Connectivity & Service | AT&T\nAT&T Guarantee®\nConnectivity you depend on. Deals you want. Prompt, friendly service you deserve. ​All guaranteed, or we make it right.\nFinish the season in Vegas\nAT&T customers have a chance to win a trip for two to the 2027 CFP National Championship.\nTry your luck\nNO PURCHASE NECESSARY. Open to legal residents of the 50 U.S and D.C., current AT&T customers who are primary AT&T account holders as of Sept, 30, 2026 and 21+ at time of entry. Sweepstakes begins 10/1/26 and ends 12/13/26. Void where prohibited. For complete eligibility and entry details and Official Rules see AT&T & More Benefits online.\nWe’ve got your back\n\nWireless\n\nIt works or you get a credit\n\nIf there’s a qualifying network interruption, you’ll be credited for a full day of service.\n\nCredit for wireless downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Restrictions and exclusions apply. See details\nExplore wireless\n\nHome internet\n\nYour connection, our promise\n\nIf there’s an AT&T Fiber or Internet Air network interruption that lasts 20 minutes or more, you’ll be credited for a full day of service.\n\nRestrictions and exclusions apply. See details\nExplore home internet\n\nDeals\n\nGreat choices and pricing\n\nOur best smartphone deals don't require the most expensive plan. Plus, enjoy clear pricing on AT&T Fiber with no hidden fees or equipment charges.\n\nExplore deals\n\nCustomer care\n\nPrompt, friendly service you deserve\n\nSpeak to a friendly expert within 5 minutes or schedule a callback at a time that you choose.1 And when you have AT&T Fiber with Wireless, your tech support call stays with one knowledgeable agent from start to finish.2 Plus, enjoy same or next day fiber technician appointment availability. All guaranteed, or we'll make it right.\n\n1Five minutes begins once customer is routed to assistance. AT&T Fiber, AT&T Internet Air, and postpaid wireless customers only.\n2Single agent guarantee limited to technical assistance only. See details\n\nInternet Backup\n\nIf fiber goes down, wireless steps up\nWhen you have AT&T Fiber and an AT&T WirelessSM wireless plan, you get backup internet included for no extra cost. Guaranteed.\nAT&T Fiber only. Requires eligible wireless service, activation, and power source; speeds vary; AT&T may slow data speeds if the network is busy. Backup may not be available in all locations.\nAdd AT&T Fiber\nAdd wireless\nFirst and only\nAT&T is the first and only provider with a guarantee that includes both wireless and fiber networks.\n\t\n\nNetwork\n\nProactive bill credits for qualifying network outages1\n\n\t\n\nValue\n\nThe best deals on any smartphone without requiring the most expensive plan2\n\n\t\n\nService\n\nBenefit if your technical support wait time is 5+ minutes and you’re not offered a callback3\n\n\n\n\nAT&T\n\n\t\n\t\n\t\n\n\n\nVerizon\n\n\t\n\t\n\t\n\n\nT-Mobile\n\t\n\t\n\t\n\n\nXfinity\n\t\n\t\n\t\nCompetitor comparison based on publicly available data as of March 17, 2026. 1Credit for fiber or Internet Air downtime lasting 20 minutes or more; or for wireless downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Must be connected to impacted tower at onset of outage. Restrictions and exclusions apply. 2Offers vary by device. Restrictions may apply. 3Five minutes begins once customer is routed to technical support assistance.\nWhat good is a new phone without the AT&T Guarantee?\nConnect to the only network backed by the AT&T Guarantee.\nShow prices with trade-in\nON\nNew! $0 with trade-in\nApple\nRated4.1307out of 5 stars with1262reviews\n4.1\n1K\niPhone 18 Pro\nPrice was $33.34 per month, now undefined $0.00 per month\n$0.00/mo.  $33.34/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nNew! Save up to $1,200 with trade-in\nApple\nRated3.0085out of 5 stars with3304reviews\n3.0\n3K\niPhone 18 Pro Max\nPrice was $36.12 per month, now undefined $2.78 per month\n$2.78/mo.  $36.12/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nNew! Save up to $1,200 with trade-in\nApple\nRated5out of 5 stars with1reviews\n5.0\n1\niPhone Duo\nPrice was $55.56 per month, now undefined $22.23 per month\n$22.23/mo.  $55.56/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nSave up to $1,200 with trade-in\nSamsung\nRated4.7988out of 5 stars with3440reviews\n4.7\n3K\nGalaxy Z Fold8\nPrice was $52.78 per month, now undefined $19.45 per month\n$19.45/mo.  $52.78/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply.  All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nSave up to $1,200 with trade-in\nSamsung\nRated4.7989out of 5 stars with3337reviews\n4.7\n3K\nGalaxy Z Fold8 Ultra\nPrice was $58.34 per month, now undefined $25.00 per month\n$25.00/mo.  $58.34/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply.  All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nNew lines only. No trade-in\nApple\nRated4.1078out of 5 stars with27407reviews\n4.1\n27K\niPhone 17 Pro Max\nPrice was $33.34 per month, now undefined $19.99 per month\n$19.99/mo.  $33.34/mo.\nRequires new line & eligible plan. Price after credits over 36 mos. Includes additional $5.56/mo. bill credit for 36 mos. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\n$0 with trade-in\nApple\nRated4.0998out of 5 stars with4136reviews\n4.0\n4K\niPhone 17\nPrice was $25.84 per month, now undefined $0.00 per month\n$0.00/mo.  $25.84/mo.\nReq's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.\nSee offer details\nSlide 1\nSlide 2\nSlide 3\nShop our latest devices\n\n2027 CFP National Championship\n\nChamp Game Getaway presented by the AT&T Guarantee\nAT&T customers can enter for a chance to win an all-expenses-paid trip to Las Vegas for the 2027 CFP National Championship.\nNO PURCHASE NECESSARY. Open to legal residents of the 50 U.S and D.C., current AT&T customers who are primary AT&T account holders as of Sept, 30, 2026 and 21+ at time of entry. Sweepstakes begins 10/1/26 and ends 12/13/26. Void where prohibited. For complete eligibility and entry details and Official Rules see AT&T & More Benefits online.\nTry your luck\nTake it from our customers\n\n“This is why I’m here. Because AT&T gives me connectivity that I can depend on. They do everything they can to hold up that guarantee.”\n\nWireless customer | Aurora, MO\n\n“…It gives me confidence that AT&T will endeavor to address any issue that I have as fast as it is physically possible.”\n\nWireless and fiber customer | Fayetteville, NC\n\n“Because of that guarantee, because they act on that guarantee, I am with AT&T.”\n\nWireless and fiber customer | Fort Worth, TX\n\nFrequently asked questions\nExpand all\nWhat is the AT&T Guarantee?\nDoes the AT&T Guarantee cover both wireless and internet service?\nHow does the AT&T Guarantee program work?\nWhat kind of benefits should I expect if I have an experience that doesn’t meet the AT&T Guarantee commitments?\nView more\n\nInternet Backup: Req. an active AT&T Fiber plan and BGW320 or BGW620 residential gateway and an eligible active unlimited postpaid AT&T Wireless plan, or an active AT&T OneConnect plan with home internet activated, a BGW320 or BGW620 residential gateway and an eligible active wireless phone line. Backup service may be unavailable in certain areas and will not work during power outages. Account holder and authorized wireless user must activate Internet Backup feature via the Smart Home Manager app. Customers’ names and addresses on the fiber and wireless accounts need to match to be eligible. The smartphone for the authorized wireless line must be at home for the duration of the Fiber outage. Location tracking must be enabled on all devices. Android Devices only: Call managing must be enabled. Wireless Data Restrictions: AT&T may temporarily slow data speeds if the network is busy. Speed, coverage, and performance not guaranteed. Feature subject to change and may be discontinued at anytime without notice. Feature and both services subject to the AT&T Customer Service Agreement (att.com/CSA) and AT&T’s network management practices (att.com/broadbandinfo). \n\nNetwork Wireless Outage: Eligibility requires Consumer Postpaid wireless voice line on account in good standing. AT&T OneConnect, AT&T Build-A-Plan, AT&T Prepaid, and FirstNet customers are not eligible. Applies in the United States only (excludes U.S. territories). Eligible customers may receive a bill credit if AT&T determines, in its sole discretion, that there has been a qualifying wireless network outage (minimum 8 towers out for 60 or more minutes resulting from a single incident) and the customer: (i) was connected to an impacted tower at the time the outage occurs; and (ii) loses service for at least 60 consecutive minutes as a result of the outage. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, or outages caused by third parties. AT&T will identify lines qualifying for an outage bill credit and notify the account holder via SMS or email. Value of bill credit will be calculated using the daily rate customer is charged for wireless service only (excludes taxes, fees, device payments, and any add-on services) – i.e., monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for wireless service. Bill credits will be applied within 1-2 billing cycles. Wireless outage credits not covered proactively may be provided by calling AT&T or visiting an AT&T store. \n\nNetwork Fiber Outage: Residential AT&T Fiber customers only. AT&T OneConnect customers are not eligible. To qualify, customers must use AT&T-provided gateways. Customers in multi-dwelling units who do not have an account with AT&T are not eligible. Eligible customers may receive a bill credit or reward card if AT&T determines, in its sole discretion, that there has been a qualifying fiber network outage, and the outage lasts more than 20 minutes. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, loss of service due to downed or cut cable wires at a customer residence, issues with wiring inside customer residence, and power outages at customer premises. Also excludes outages resulting from planned maintenance for which advance notice is provided to the customer. Customers will receive notice of eligibility for benefit when notified of a qualifying outage. Value of bill credit or reward card will be calculated using the daily rate customer is charged for internet service only (excludes taxes, fees, and any add-on services) – i.e., monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for internet service. Bill credits will be applied within 1-2 billing cycles. In lieu of a bill credit, qualifying customers in multi-dwelling units who have an account with AT&T but are not billed by AT&T for internet service. \n\nNetwork Internet Air Outage: Residential AT&T Internet Air customers only. To qualify, customers must use AT&T-provided gateways. Eligible customers may receive a bill credit if AT&T determines, in its sole discretion, that there has been a qualifying outage, and that outage lasts more than 20 minutes. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, and power outages at customer premises. Customers will receive notice of eligibility for bill credit when notified of a qualifying outage. Value of bill credit will be calculated using the daily rate customer is charged for service only (excludes taxes, fees, and any add-on services), including monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for internet service. Bill credits will be applied within 1-2 billing cycles. \n\nCare: Schedule a callback for support. Eligible callbacks available for customers with one of the following: (i) consumer postpaid mobility (excludes AT&T Build-A-Plan and FirstNet), (ii) residential fiber service, (iii) AT&T Internet Air, or (iv) AT&T OneConnect.  Must call 611 or 800.331.0500 (wireless) or 800.288.2020 (AT&T Fiber or AT&T Internet Air) and follow prompts to be routed to an agent. Customers with both qualifying wireless and fiber services may call either support number. Once routed to the technical support queue, for hold times over five (5) minutes, customer can either schedule a time for a callback or agree to have AT&T call back when it’s their turn and not lose their place in queue. Customer will be eligible for a benefit if (i) customer does not receive a callback by five (5) minutes past their scheduled or announced callback time, (ii) customer is not offered a callback and waits more than 5 minutes, or (iii) customer answers callback and waits on hold again for more than 5 minutes. If any of the above occurs due to events beyond the control of AT&T, including but not limited to natural disasters, weather-related events or acts by third parties, the AT&T Guarantee does not apply. The AT&T Guarantee will also not apply during labor stoppages. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit. \n\nCare: Same or next day technician appointment availability. Residential AT&T Fiber and AT&T OneConnect (solely related to home internet service) customers only. Same or next day technician appointment availability applies only during normal business hours. Appointment times at sole discretion of AT&T. Customer is entitled to benefit only if no same or next day appointment is available. AT&T may not be able to schedule or send technicians due to events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events or acts by third parties, in which case AT&T Guarantee does not apply. The AT&T Guarantee will also not apply during labor stoppages. Excludes rescheduled appointments. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit. \n\nCare: When you have AT&T Fiber with Wireless, your tech support call stays with one knowledgeable agent from start to finish. Guaranteed, or we’ll make it right. Applies only to customers with both AT&T Fiber and consumer postpaid mobility services or AT&T OneConnect (excludes AT&T Build-A-Plan and FirstNet). Must call either 611 or 800.331.0500 (wireless) or 800.288.2020 (fiber) and follow prompts to be routed for technical support assistance. If customer is transferred to another technical agent during the call, customer is eligible for a benefit. AT&T Guarantee does not apply during events beyond the control of AT&T, including but not limited to natural disasters, weather-related events or acts by third parties. The AT&T Guarantee will also not apply during labor stoppages. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit. \n\nAT&T Guarantee program terms\natt.com/\nWhy AT&T/\nGuarantee\nShop\nCell phones\nFiber internet\nHome internet\nTablets\nSmartwatches\nWireless accessories\nPrepaid phones\nTrending\niPhone 18 Pro Max\niPhone 18 Pro\nFoldable iPhone Duo\niPhone 17 Pro Max\nSamsung Galaxy S26 Ultra\nSamsung Galaxy Z Fold8 Ultra\nSamsung Galaxy Z Fold8\nSamsung Galaxy Z Flip8\nTop phone & data plans\nUnlimited phone plans\nInternational plans\nAdd a line\nUpgrade\nTablet data plans\nMobile hotspot plans\nNext Up Anytime\nSwitch to AT&T\nSwitch to AT&T\nHow to switch phone carriers\nInternet speed test\nBring your own device\nCell phone trade-in\nTransfer your internet service\nDevice IMEI finder\nFeatured deals\nHoliday Gift Guide\nBlack Friday Deals\nCyber Monday Deals\nAT&T Deals & Promotions\nCell phone deals\niPhone deals\nSamsung deals\nPhone and internet bundle deals\nCredit card discount\nFree phone deals for new customers\nNo trade-in deals\nShop cell phones by brand\nNew Apple iPhones\nNew Samsung Galaxy phones\nNew Google Pixel phones\nNew Motorola Moto phones\nNew Sonim phones\nTablets & Watches\nNew Apple iPad\nNew Samsung Galaxy Tab\nNew Apple Watch\nNew Samsung Galaxy Watch\nNew Google Pixel Watch\nNew Kids Smart Watch\nAccessories by Brand\nApple accessories\nAT&T accessories\nSamsung accessories\nOtterbox phone cases\nBeats headphones\nResources\nBundle internet and wireless\nWhat is Internet Air?\nHow to use your phone internationally\nWhat is fiber internet?\nWhat is eSIM?\nReturn or exchange your wireless device\nWhat is wifi?\nAT&T\nFind a store\nNewsroom\nInvestor Relations\nCorporate Responsibility\nCareers\nHelp & info\nAT&T Guarantee\nBroadband Facts Machine Readable Files\nScreen share code\nTechbuzz blog\nFeedback\nLLMs\nSite map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.",
+  "footerText": "Shop\nCell phones\nFiber internet\nHome internet\nTablets\nSmartwatches\nWireless accessories\nPrepaid phones\nTrending\niPhone 18 Pro Max\niPhone 18 Pro\nFoldable iPhone Duo\niPhone 17 Pro Max\nSamsung Galaxy S26 Ultra\nSamsung Galaxy Z Fold8 Ultra\nSamsung Galaxy Z Fold8\nSamsung Galaxy Z Flip8\nTop phone & data plans\nUnlimited phone plans\nInternational plans\nAdd a line\nUpgrade\nTablet data plans\nMobile hotspot plans\nNext Up Anytime\nSwitch to AT&T\nSwitch to AT&T\nHow to switch phone carriers\nInternet speed test\nBring your own device\nCell phone trade-in\nTransfer your internet service\nDevice IMEI finder\nFeatured deals\nHoliday Gift Guide\nBlack Friday Deals\nCyber Monday Deals\nAT&T Deals & Promotions\nCell phone deals\niPhone deals\nSamsung deals\nPhone and internet bundle deals\nCredit card discount\nFree phone deals for new customers\nNo trade-in deals\nShop cell phones by brand\nNew Apple iPhones\nNew Samsung Galaxy phones\nNew Google Pixel phones\nNew Motorola Moto phones\nNew Sonim phones\nTablets & Watches\nNew Apple iPad\nNew Samsung Galaxy Tab\nNew Apple Watch\nNew Samsung Galaxy Watch\nNew Google Pixel Watch\nNew Kids Smart Watch\nAccessories by Brand\nApple accessories\nAT&T accessories\nSamsung accessories\nOtterbox phone cases\nBeats headphones\nResources\nBundle internet and wireless\nWhat is Internet Air?\nHow to use your phone internationally\nWhat is fiber internet?\nWhat is eSIM?\nReturn or exchange your wireless device\nWhat is wifi?\nAT&T\nFind a store\nNewsroom\nInvestor Relations\nCorporate Responsibility\nCareers\nHelp & info\nAT&T Guarantee\nBroadband Facts Machine Readable Files\nScreen share code\nTechbuzz blog\nFeedback\nLLMs\nSite map\nCoverage maps\nTerms of use\nAccessibility\nBroadband details\nLegal policy center\nAdvertising choices\nPrivacy center\nYour Privacy Choices\nHealth Privacy Notice\nCyber Security\nFCC public files\n©\n \n\n2026 AT&T Intellectual Property. All rights reserved.",
+  "footerLinks": [
+    {
+      "text": "Cell phones",
+      "href": "https://www.att.com/buy/phones/"
+    },
+    {
+      "text": "Fiber internet",
+      "href": "https://www.att.com/internet/fiber/"
+    },
+    {
+      "text": "Home internet",
+      "href": "https://www.att.com/internet/"
+    },
+    {
+      "text": "Tablets",
+      "href": "https://www.att.com/buy/tablets/"
+    },
+    {
+      "text": "Smartwatches",
+      "href": "https://www.att.com/buy/wearables/"
+    },
+    {
+      "text": "Wireless accessories",
+      "href": "https://www.att.com/accessories/"
+    },
+    {
+      "text": "Prepaid phones",
+      "href": "https://www.att.com/prepaid/"
+    },
+    {
+      "text": "iPhone 18 Pro Max",
+      "href": "https://www.att.com/buy/phones/apple-iphone-18-pro-max.html"
+    },
+    {
+      "text": "iPhone 18 Pro",
+      "href": "https://www.att.com/buy/phones/apple-iphone-18-pro.html"
+    },
+    {
+      "text": "Foldable iPhone Duo",
+      "href": "https://www.att.com/buy/phones/apple-iphone-duo.html"
+    },
+    {
+      "text": "iPhone 17 Pro Max",
+      "href": "https://www.att.com/buy/phones/apple-iphone-17-pro-max.html"
+    },
+    {
+      "text": "Samsung Galaxy S26 Ultra",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-s26-ultra.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Fold8 Ultra",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-fold8-ultra.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Fold8",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-fold8.html"
+    },
+    {
+      "text": "Samsung Galaxy Z Flip8",
+      "href": "https://www.att.com/buy/phones/samsung-galaxy-z-flip8.html"
+    },
+    {
+      "text": "Unlimited phone plans",
+      "href": "https://www.att.com/plans/wireless/"
+    },
+    {
+      "text": "International plans",
+      "href": "https://www.att.com/international/"
+    },
+    {
+      "text": "Add a line",
+      "href": "https://www.att.com/plans/add-a-line/"
+    },
+    {
+      "text": "Upgrade",
+      "href": "https://www.att.com/plans/phone-upgrade/"
+    },
+    {
+      "text": "Tablet data plans",
+      "href": "https://www.att.com/plans/tablet-ipad-data-plans/"
+    },
+    {
+      "text": "Mobile hotspot plans",
+      "href": "https://www.att.com/plans/tethering/"
+    },
+    {
+      "text": "Next Up Anytime",
+      "href": "https://www.att.com/plans/next-up-anytime/"
+    },
+    {
+      "text": "Switch to AT&T",
+      "href": "https://www.att.com/wireless/switch-and-save/"
+    },
+    {
+      "text": "How to switch phone carriers",
+      "href": "https://www.att.com/wireless/how-to-switch-phone-carrier/"
+    },
+    {
+      "text": "Internet speed test",
+      "href": "https://www.att.com/support/speedtest/"
+    },
+    {
+      "text": "Bring your own device",
+      "href": "https://www.att.com/wireless/byod/"
+    },
+    {
+      "text": "Cell phone trade-in",
+      "href": "https://tradein.att.com/"
+    },
+    {
+      "text": "Transfer your internet service",
+      "href": "https://www.att.com/moving/"
+    },
+    {
+      "text": "Device IMEI finder",
+      "href": "https://www.att.com/wireless/imei-finder/"
+    },
+    {
+      "text": "Holiday Gift Guide",
+      "href": "https://www.att.com/deals/holiday-gift-guide/"
+    },
+    {
+      "text": "Black Friday Deals",
+      "href": "https://www.att.com/deals/black-friday/"
+    },
+    {
+      "text": "Cyber Monday Deals",
+      "href": "https://www.att.com/deals/cyber-monday/"
+    },
+    {
+      "text": "AT&T Deals & Promotions",
+      "href": "https://www.att.com/deals/"
+    },
+    {
+      "text": "Cell phone deals",
+      "href": "https://www.att.com/deals/cell-phone-deals/"
+    },
+    {
+      "text": "iPhone deals",
+      "href": "https://www.att.com/deals/iphone-deals/"
+    },
+    {
+      "text": "Samsung deals",
+      "href": "https://www.att.com/buy/phones/browse/samsung_hasdeals/"
+    },
+    {
+      "text": "Phone and internet bundle deals",
+      "href": "https://www.att.com/bundles/internet-wireless/"
+    },
+    {
+      "text": "Credit card discount",
+      "href": "https://www.att.com/deals/att-points-plus-citi/"
+    },
+    {
+      "text": "Free phone deals for new customers",
+      "href": "https://www.att.com/buy/phones/browse/free/"
+    },
+    {
+      "text": "No trade-in deals",
+      "href": "https://www.att.com/buy/phones/browse/nontradeinoffer/"
+    },
+    {
+      "text": "New Apple iPhones",
+      "href": "https://www.att.com/buy/phones/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy phones",
+      "href": "https://www.att.com/buy/phones/browse/samsung/"
+    },
+    {
+      "text": "New Google Pixel phones",
+      "href": "https://www.att.com/buy/phones/browse/google/"
+    },
+    {
+      "text": "New Motorola Moto phones",
+      "href": "https://www.att.com/buy/phones/browse/motorola/"
+    },
+    {
+      "text": "New Sonim phones",
+      "href": "https://www.att.com/buy/phones/browse/sonim/"
+    },
+    {
+      "text": "New Apple iPad",
+      "href": "https://www.att.com/buy/tablets/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy Tab",
+      "href": "https://www.att.com/buy/tablets/browse/samsung/"
+    },
+    {
+      "text": "New Apple Watch",
+      "href": "https://www.att.com/buy/wearables/browse/apple/"
+    },
+    {
+      "text": "New Samsung Galaxy Watch",
+      "href": "https://www.att.com/buy/wearables/browse/samsung/"
+    },
+    {
+      "text": "New Google Pixel Watch",
+      "href": "https://www.att.com/buy/wearables/browse/google/"
+    },
+    {
+      "text": "New Kids Smart Watch",
+      "href": "https://www.att.com/buy/wearables/att-amigo-jr-watch.html"
+    },
+    {
+      "text": "Apple accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/apple/"
+    },
+    {
+      "text": "AT&T accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/att/"
+    },
+    {
+      "text": "Samsung accessories",
+      "href": "https://www.att.com/buy/accessories/browse/all/samsung/"
+    },
+    {
+      "text": "Otterbox phone cases",
+      "href": "https://www.att.com/buy/accessories/browse/cases/otterbox/"
+    },
+    {
+      "text": "Beats headphones",
+      "href": "https://www.att.com/buy/accessories/browse/headphones/beats/"
+    },
+    {
+      "text": "Bundle internet and wireless",
+      "href": "https://www.att.com/bundles/"
+    },
+    {
+      "text": "What is Internet Air?",
+      "href": "https://www.att.com/internet/what-is-internet-air/"
+    },
+    {
+      "text": "How to use your phone internationally",
+      "href": "https://www.att.com/wireless/how-to-use-your-cell-phone-internationally/"
+    },
+    {
+      "text": "What is fiber internet?",
+      "href": "https://www.att.com/blog/what-is-fiber-internet/"
+    },
+    {
+      "text": "What is eSIM?",
+      "href": "https://www.att.com/wireless/what-is-esim/"
+    },
+    {
+      "text": "Return or exchange your wireless device",
+      "href": "https://www.att.com/wireless/return-policy/"
+    },
+    {
+      "text": "What is wifi?",
+      "href": "https://www.att.com/blog/what-is-wifi/"
+    },
+    {
+      "text": "Find a store",
+      "href": "https://www.att.com/stores/"
+    },
+    {
+      "text": "Newsroom",
+      "href": "https://about.att.com/?source=EB00CO0000000000L&wtExtndSource=footer"
+    },
+    {
+      "text": "Investor Relations",
+      "href": "https://investors.att.com/"
+    },
+    {
+      "text": "Corporate Responsibility",
+      "href": "https://sustainability.att.com/"
+    },
+    {
+      "text": "Careers",
+      "href": "https://www.att.jobs/"
+    },
+    {
+      "text": "Help & info",
+      "href": "https://www.att.com/support/"
+    },
+    {
+      "text": "AT&T Guarantee",
+      "href": "https://www.att.com/why-att/guarantee/"
+    },
+    {
+      "text": "Broadband Facts Machine Readable Files",
+      "href": "https://www.att.com/broadbandlabels/broadband-facts-machine-readable-plans/"
+    },
+    {
+      "text": "Screen share code",
+      "href": "https://www.att.com/why-att/guarantee/#"
+    },
+    {
+      "text": "Techbuzz blog",
+      "href": "https://www.att.com/blog/"
+    },
+    {
+      "text": "Feedback",
+      "href": "https://www.att.com/why-att/guarantee/#"
+    },
+    {
+      "text": "LLMs",
+      "href": "https://www.att.com/llms.txt"
+    },
+    {
+      "text": "Site map",
+      "href": "https://www.att.com/sitemap/"
+    },
+    {
+      "text": "Coverage maps",
+      "href": "https://www.att.com/maps/wireless-coverage.html"
+    },
+    {
+      "text": "Terms of use",
+      "href": "https://www.att.com/legal/terms.attWebsiteTermsOfUse.html"
+    },
+    {
+      "text": "Accessibility",
+      "href": "https://about.att.com/sites/accessibility"
+    },
+    {
+      "text": "Broadband details",
+      "href": "https://about.att.com/sites/broadband"
+    },
+    {
+      "text": "Legal policy center",
+      "href": "https://www.att.com/legal/legal-policy-center.html"
+    },
+    {
+      "text": "Advertising choices",
+      "href": "https://about.att.com/privacy/privacy-notice.html#choice"
+    },
+    {
+      "text": "Privacy center",
+      "href": "https://about.att.com/privacy.html"
+    },
+    {
+      "text": "Your Privacy Choices",
+      "href": "https://about.att.com/privacy/choices-and-controls.html"
+    },
+    {
+      "text": "Health Privacy Notice",
+      "href": "https://about.att.com/privacy/StateLawApproach/washington-health-privacy-notice.html"
+    },
+    {
+      "text": "Cyber Security",
+      "href": "https://about.att.com/pages/cyberaware"
+    },
+    {
+      "text": "FCC public files",
+      "href": "https://publicfiles.fcc.gov/cable-profile/999999-at&t-u-verse"
+    }
+  ],
+  "modalTexts": [
+    "Your cart is empty Let's get shopping! Explore bundles Shop phones",
+    "Sign in Create an account Forgot user ID? Make a payment Pay without signing in Go to my prepaid account",
+    "Shop Plans & services Devices & accessories Deals New & featured Customer discounts View all deals AT&T Difference Our competitive edge Our sponsorships Our blog Support Bill & account Wireless Internet Home phone View all support AT&T Business Find a store Ver en español Back Shop Plans & services Bundles Internet + wireless AT&T OneConnect Internet + home phone Customers 55+ Wireless Explore wireless Phone plans Build-A-Plan Network coverage Prepaid International add-ons Connected car Home internet & phone Explore home internet Check availability Fiber internet AT&T Internet Air All-Fi Pro Home phone Quick actions Upgrade Add a line Bring your own phone Switch & save",
+    "NO PURCHASE NECESSARY. Open to legal residents of the 50 U.S and D.C., current AT&T customers who are primary AT&T account holders as of Sept, 30, 2026 and 21+ at time of entry. Sweepstakes begins 10/1/26 and ends 12/13/26. Void where prohibited. For complete eligibility and entry details and Official Rules see AT&T & More Benefits online.",
+    "Credit for wireless downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Restrictions and exclusions apply. See details",
+    "1Five minutes begins once customer is routed to assistance. AT&T Fiber, AT&T Internet Air, and postpaid wireless customers only. 2Single agent guarantee limited to technical assistance only. See details",
+    "AT&T Fiber only. Requires eligible wireless service, activation, and power source; speeds vary; AT&T may slow data speeds if the network is busy. Backup may not be available in all locations.",
+    "Competitor comparison based on publicly available data as of March 17, 2026. 1Credit for fiber or Internet Air downtime lasting 20 minutes or more; or for wireless downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Must be connected to impacted tower at onset of outage. Restrictions and exclusions apply. 2Offers vary by device. Restrictions may apply. 3Five minutes begins once customer is routed to technical support assistance.",
+    "Req's eligible plan & trade-in. Price after 36 mo. credits. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.See offer details",
+    "Requires new line & eligible plan. Price after credits over 36 mos. Includes additional $5.56/mo. bill credit for 36 mos. Other terms apply. All monthly pricing req's 0% APR, 36-mo. installment agmt. $0 down for well-qual. customers. Tax on full price due at sale. Restrictions apply.See offer details",
+    "1Credit for fiber and Internet Air downtime lasting 20 minutes or more; or for wireless and downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Must be connected to impacted tower at onset of outage. Restrictions and exclusions apply. Internet Backup: Fiber internet only. Requires eligible wireless service, activation, and power source; speeds vary; AT&T may slow data speeds if the network is busy. Backup may not be available in all locations. See att.com/guarantee for full details. 2Offers vary by device. Restrictions may apply. 3Five minutes begins once customer is routed to technical support assistance. AT&T Fiber and postpaid wireless customers only. 4Single agent guarantee limited to technical assistance only. For small business customers, learn more about the AT&T Guarantee at att.com/businessguarantee .",
+    "1Consumers only. Credit for downtime lasting 20 minutes or more; or for wireless downtime lasting 60 minutes or more caused by a single incident impacting 8 or more towers. Other restrictions and exclusions apply. 2Offers vary by device. Restrictions may apply.",
+    "Internet Backup: Req. an active AT&T Fiber plan and BGW320 or BGW620 residential gateway and an eligible active unlimited postpaid AT&T Wireless plan, or an active AT&T OneConnect plan with home internet activated, a BGW320 or BGW620 residential gateway and an eligible active wireless phone line. Backup service may be unavailable in certain areas and will not work during power outages. Account holder and authorized wireless user must activate Internet Backup feature via the Smart Home Manager app. Customers’ names and addresses on the fiber and wireless accounts need to match to be eligible. The smartphone for the authorized wireless line must be at home for the duration of the Fiber outage. Location tracking must be enabled on all devices. Android Devices only: Call managing must be enabled. Wireless Data Restrictions: AT&T may temporarily slow data speeds if the network is busy. Speed, coverage, and performance not guaranteed. Feature subject to change and may be discontinued at anytime without notice. Feature and both services subject to the AT&T Customer Service Agreement (att.com/CSA) and AT&T’s network management practices (att.com/broadbandinfo). Network Wireless Outage: Eligibility requires Consumer Postpaid wireless voice line on account in good standing. AT&T OneConnect, AT&T Build-A-Plan, AT&T Prepaid, and FirstNet customers are not eligible. Applies in the United States only (excludes U.S. territories). Eligible customers may receive a bill credit if AT&T determines, in its sole discretion, that there has been a qualifying wireless network outage (minimum 8 towers out for 60 or more minutes resulting from a single incident) and the customer: (i) was connected to an impacted tower at the time the outage occurs; and (ii) loses service for at least 60 consecutive minutes as a result of the outage. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, or outages caused by third parties. AT&T will identify lines qualifying for an outage bill credit and notify the account holder via SMS or email. Value of bill credit will be calculated using the daily rate customer is charged for wireless service only (excludes taxes, fees, device payments, and any add-on services) – i.e., monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for wireless service. Bill credits will be applied within 1-2 billing cycles. Wireless outage credits not covered proactively may be provided by calling AT&T or visiting an AT&T store. Network Fiber Outage: Residential AT&T Fiber customers only. AT&T OneConnect customers are not eligible. To qualify, customers must use AT&T-provided gateways. Customers in multi-dwelling units who do not have an account with AT&T are not eligible. Eligible customers may receive a bill credit or reward card if AT&T determines, in its sole discretion, that there has been a qualifying fiber network outage, and the outage lasts more than 20 minutes. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, loss of service due to downed or cut cable wires at a customer residence, issues with wiring inside customer residence, and power outages at customer premises. Also excludes outages resulting from planned maintenance for which advance notice is provided to the customer. Customers will receive notice of eligibility for benefit when notified of a qualifying outage. Value of bill credit or reward card will be calculated using the daily rate customer is charged for internet service only (excludes taxes, fees, and any add-on services) – i.e., monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for internet service. Bill credits will be applied within 1-2 billing cycles. In lieu of a bill credit, qualifying customers in multi-dwelling units who have an account with AT&T but are not billed by AT&T for internet service. Network Internet Air Outage: Residential AT&T Internet Air customers only. To qualify, customers must use AT&T-provided gateways. Eligible customers may receive a bill credit if AT&T determines, in its sole discretion, that there has been a qualifying outage, and that outage lasts more than 20 minutes. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, and power outages at customer premises. Customers will receive notice of eligibility for bill credit when notified of a qualifying outage. Value of bill credit will be calculated using the daily rate customer is charged for service only (excludes taxes, fees, and any add-on services), including monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for internet service. Bill credits will be applied within 1-2 billing cycles. Care: Schedule a callback for support. Eligible callbacks available for customers with one of the following: (i) consumer postpaid mobility (excludes AT&T Build-A-Plan and FirstNet), (ii) residential fiber service, (iii) AT&T Internet Air, or (iv) AT&T OneConnect. Must call 611 or 800.331.0500 (wireless) or 800.288.2020 (AT&T Fiber or AT&T Internet Air) and follow prompts to be routed to an agent. Customers with both qualifying wireless and fiber services may call either support number. Once routed to the technical support queue, for hold times over five (5) minutes, customer can either schedule a time for a callback or agree to have AT&T call back when it’s their turn and not lose their place in queue. Customer will be eligible for a benefit if (i) customer does not receive a callback by five (5) minutes past their scheduled or announced callback time, (ii) customer is not offered a callback and waits more than 5 minutes, or (iii) customer answers callback and waits on hold again for more than 5 minutes. If any of the above occurs due to events beyond the control of AT&T, including but not limited to natural disasters, weather-related events or acts by third parties, the AT&T Guarantee does not apply. The AT&T Guarantee will also not apply during labor stoppages. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit. Care: Same or next day technician appointment availability. Residential AT&T Fiber and AT&T OneConnect (solely related to home internet service) customers only. Same or next day technician appointment availability applies only during normal business hours. Appointment times at sole discretion of AT&T. Customer is entitled to benefit only if no same or next day appointment is available. AT&T may not be able to schedule or send technicians due to events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events or acts by third parties, in which case AT&T Guarantee does not apply. The AT&T Guarantee will also not apply during labor stoppages. Excludes rescheduled appointments. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit. Care: When you have AT&T Fiber with Wireless, your tech support call stays with one knowledgeable agent from start to finish. Guaranteed, or we’ll make it right. Applies only to customers with both AT&T Fiber and consumer postpaid mobility services or AT&T OneConnect (excludes AT&T Build-A-Plan and FirstNet). Must call either 611 or 800.331.0500 (wireless) or 800.288.2020 (fiber) and follow prompts to be routed for technical support assistance. If customer is transferred to another technical agent during the call, customer is eligible for a benefit. AT&T Guarantee does not apply during events beyond the control of AT&T, including but not limited to natural disasters, weather-related events or acts by third parties. The AT&T Guarantee will also not apply during labor stoppages. Customers with valid email addresses will receive notification of entitlement to benefit. Customer must redeem within thirty (30) days of notice or other such time as indicated on the email notification. Failure to redeem within the stated time forfeits right to benefit.",
+    "Site map Coverage maps Terms of use Accessibility Broadband details Legal policy center Advertising choices Privacy center Your Privacy Choices Health Privacy Notice Cyber Security FCC public files",
+    "© 2026 AT&T Intellectual Property. All rights reserved."
+  ],
+  "openedDialogs": [
+    {
+      "trigger": "See details",
+      "text": "Network Wireless Outage: Eligibility requires Consumer Postpaid wireless voice line on account in good standing. AT&T OneConnect, AT&T Build-A-Plan, AT&T Prepaid, and FirstNet customers are not eligible. Applies in the United States only ( excludes U.S. territories). Eligible customers may receive a bill credit if AT&T determines, in its sole discretion, that there has been a qualifying wireless network outage (minimum 8 towers out for 60 or more minutes resulting from a single incident) and the customer: (i) was connected to an impacted tower at the time the outage occurs; and (ii) loses service for at least 60 consecutive minutes as a result of the outage. Excludes events beyond the control of AT&T, including but not limited to, natural disasters, weather-related events, or outages caused by third parties. AT&T will identify lines qualifying for an outage bill credit and notify the account holder via SMS or email. Value of bill credit will be calculated using the daily rate customer is charged for wireless service only (excludes taxes, fees, device payments, and any add-on services) – i.e., monthly rate/days in month. For each qualifying outage, customer will be eligible for a bill credit equal to one day. If outage lasts for more than 24 hours, customer will receive credit for each additional day of the outage. In no circumstance will the credit(s) be more than the monthly rate the customer pays for wireless service. Bill credits will be applied within 1-2 billing cycles. Wireless outage credits not covered proactively may be provided by calling AT&T or visiting an AT&T store."
+    }
+  ]
+}

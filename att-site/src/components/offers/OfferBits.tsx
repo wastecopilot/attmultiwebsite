@@ -1,4 +1,5 @@
 import type { Offer, OfferPrice } from "@/data/offer-types";
+import { BROADBAND_FACTS_URL } from "@/data/site";
 
 const dateFmt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" });
 
@@ -10,12 +11,27 @@ export function formatMoney(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
 }
 
-/** "Pricing as of Oct 21, 2026" — shown with every price and promotion. */
-export function AsOf({ offer, className = "" }: { offer: Pick<Offer, "retrievedAt" | "sourceUrl">; className?: string }) {
+/** Plan categories that are broadband services under the FCC label rules (fixed and mobile). */
+const BROADBAND_CATEGORIES: Offer["category"][] = ["fiber", "internet-air", "wireless-plan", "bundle"];
+
+/**
+ * "Pricing as of Oct 21, 2026" — shown with every price and promotion. For internet and wireless plans it
+ * also links AT&T's Broadband Facts labels, so the label link always sits next to the plan's price.
+ */
+export function AsOf({ offer, className = "" }: { offer: Pick<Offer, "retrievedAt" | "category" | "title">; className?: string }) {
   return (
-    <p className={`as-of ${className}`}>
-      Pricing as of <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>
-    </p>
+    <>
+      <p className={`as-of ${className}`}>
+        Pricing as of <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>
+      </p>
+      {BROADBAND_CATEGORIES.includes(offer.category) ? (
+        <p className="bb-facts">
+          <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
+            AT&amp;T Broadband Facts label<span className="sr-only"> for {offer.title} (opens att.com in a new tab)</span>
+          </a>
+        </p>
+      ) : null}
+    </>
   );
 }
 

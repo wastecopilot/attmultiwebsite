@@ -6,6 +6,7 @@ import { PromoCard } from "@/components/offers/OfferCard";
 import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { SwapIcon, TagIcon, WirelessIcon } from "@/components/ui/Icons";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -103,7 +104,9 @@ export default function WirelessPage() {
         </div>
       </section>
 
-      <section className="section section-alt" aria-labelledby="w-faq-title">
+      <GuaranteeSection id="w-guarantee-title" items={["wireless", "backup"]} alt />
+
+      <section className="section" aria-labelledby="w-faq-title">
         <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading eyebrow="AT&T Wireless" id="w-faq-title" title="Frequently Asked Questions" />
           <FaqList items={faqsFor("wireless").map((f) => ({ q: f.q, a: f.a }))} />

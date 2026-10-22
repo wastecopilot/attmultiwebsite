@@ -1,0 +1,65 @@
+URL: https://www.att.com/broadbandlabels/dapbbfacts
+Final URL: https://www.att.com/broadbandlabels/dapbbfacts
+HTTP: 200
+Retrieved: 2026-10-22T10:32:09.267Z
+Title: Broadband facts for AT&T
+
+== OUTLINE ==
+H1: Broadband facts for AT&T
+H2: Broadband facts
+H2: Enter your address to get started
+
+== MAIN TEXT ==
+Broadband facts for AT&T
+Ver en español
+
+AT&T
+
+Broadband facts
+
+We’ve made it easy to learn everything about plans’ cost and performance.
+
+Enter your address to get started
+Wireless
+Wireline
+Address
+Check Availability
+Site map
+Coverage maps
+Terms of use
+Accessibility
+Broadband details
+Legal policy center
+Advertising choices
+Privacy center
+Your Privacy Choices
+Health Privacy Notice
+Cyber Security
+FCC public files
+©
+ 
+
+2026 AT&T Intellectual Property. All rights reserved.
+
+== OPENED DIALOGS ==
+
+== DOM MODAL / LEGAL TEXT ==
+--- Site mapCoverage mapsTerms of useAccessibilityBroadband detailsLegal policy centerAdvertising choicesPrivacy centerYour Privacy ChoicesHealth Privacy NoticeCyber SecurityFCC public files
+
+== FOOTER ==
+Site map
+Coverage maps
+Terms of use
+Accessibility
+Broadband details
+Legal policy center
+Advertising choices
+Privacy center
+Your Privacy Choices
+Health Privacy Notice
+Cyber Security
+FCC public files
+©
+ 
+
+2026 AT&T Intellectual Property. All rights reserved.
