@@ -1,10 +1,14 @@
 import type { Offer, OfferPrice } from "@/data/offer-types";
 import { BROADBAND_FACTS_URL } from "@/data/site";
+import { tr, type Locale } from "@/data/i18n";
 
-const dateFmt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+const dateFmt = {
+  en: new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
+  es: new Intl.DateTimeFormat("es-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
+};
 
-export function formatAsOf(iso: string): string {
-  return dateFmt.format(new Date(iso));
+export function formatAsOf(iso: string, locale: Locale = "en"): string {
+  return dateFmt[locale].format(new Date(iso));
 }
 
 export function formatMoney(n: number): string {
@@ -18,16 +22,16 @@ const BROADBAND_CATEGORIES: Offer["category"][] = ["fiber", "internet-air", "wir
  * "Pricing as of Oct 21, 2026" — shown with every price and promotion. For internet and wireless plans it
  * also links AT&T's Broadband Facts labels, so the label link always sits next to the plan's price.
  */
-export function AsOf({ offer, className = "" }: { offer: Pick<Offer, "retrievedAt" | "category" | "title">; className?: string }) {
+export function AsOf({ offer, className = "", locale = "en" }: { offer: Pick<Offer, "retrievedAt" | "category" | "title">; className?: string; locale?: Locale }) {
   return (
     <>
       <p className={`as-of ${className}`}>
-        Pricing as of <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt)}</time>
+        {locale === "es" ? "Precios vigentes al" : "Pricing as of"} <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt, locale)}</time>
       </p>
       {BROADBAND_CATEGORIES.includes(offer.category) ? (
         <p className="bb-facts">
           <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
-            AT&amp;T Broadband Facts label<span className="sr-only"> for {offer.title} (opens att.com in a new tab)</span>
+            {locale === "es" ? "Etiqueta de Broadband Facts de AT&T" : "AT&T Broadband Facts label"}
           </a>
         </p>
       ) : null}
@@ -36,14 +40,19 @@ export function AsOf({ offer, className = "" }: { offer: Pick<Offer, "retrievedA
 }
 
 /** Large price display: $70/mo. with optional struck "was" price and qualifier. */
-export function Price({ price, size = "lg" }: { price: OfferPrice; size?: "lg" | "md" }) {
+export function Price({ price, size = "lg", locale = "en" }: { price: OfferPrice; size?: "lg" | "md"; locale?: Locale }) {
   const [dollars, cents] = price.amount.toFixed(2).split(".");
+  const es = locale === "es";
+  const perMonth = tr("/mo.", locale);
   return (
     <div className="price">
       {price.was ? (
         <p className="price-was">
-          <span className="sr-only">Regular price </span>
-          <s>{formatMoney(price.was)}/mo.</s>
+          <span className="sr-only">{es ? "Precio regular " : "Regular price "}</span>
+          <s>
+            {formatMoney(price.was)}
+            {perMonth}
+          </s>
         </p>
       ) : null}
       <p className={size === "lg" ? "price-main" : "price-main price-md"}>
@@ -57,34 +66,46 @@ export function Price({ price, size = "lg" }: { price: OfferPrice; size?: "lg" |
           .{cents}
         </span>
         <span className="price-unit" aria-hidden="true">
-          {price.unit}
+          {tr(price.unit, locale)}
         </span>
         <span className="sr-only">
-          ${price.amount.toFixed(2)} {price.unit === "/mo. per line" ? "per month per line" : "per month"}
+          ${price.amount.toFixed(2)}{" "}
+          {price.unit === "/mo. per line" ? (es ? "al mes por línea" : "per month per line") : es ? "al mes" : "per month"}
         </span>
       </p>
-      {price.qualifier ? <p className="price-qualifier">{price.qualifier}</p> : null}
-      {price.thenAmount ? <p className="price-then">Then {formatMoney(price.thenAmount)}/mo. after the promotional period.</p> : null}
+      {price.qualifier ? <p className="price-qualifier">{tr(price.qualifier, locale)}</p> : null}
+      {price.thenAmount ? (
+        <p className="price-then">
+          {es
+            ? `Luego ${formatMoney(price.thenAmount)}/mes después del período promocional.`
+            : `Then ${formatMoney(price.thenAmount)}/mo. after the promotional period.`}
+        </p>
+      ) : null}
     </div>
   );
 }
 
-/** Fine print, always present in the HTML; the summary keeps the card compact. */
-export function FinePrint({ offer, open = false }: { offer: Offer; open?: boolean }) {
+/** Fine print, always present in the HTML; the summary keeps the card compact. AT&T's text stays in English. */
+export function FinePrint({ offer, open = false, locale = "en" }: { offer: Offer; open?: boolean; locale?: Locale }) {
   return (
     <details className="fine-print" open={open}>
       <summary>
-        See offer details<span className="sr-only"> for {offer.title}</span>
+        {locale === "es" ? "Ver detalles de la oferta (en inglés)" : "See offer details"}
+        <span className="sr-only"> {locale === "es" ? "de" : "for"} {offer.title}</span>
       </summary>
-      <div className="fine-print-body">
+      <div className="fine-print-body" lang="en">
         <p>{offer.finePrint}</p>
       </div>
     </details>
   );
 }
 
-/** Short conditions under a price, e.g. "Plus taxes and fees · AutoPay & Paperless bill required". */
+/** Short conditions under a price, e.g. "Plus taxes and fees · AutoPay & Paperless bill required" (AT&T's English wording). */
 export function Conditions({ items }: { items: string[] }) {
   if (!items.length) return null;
-  return <p className="conditions">{items.join(" · ")}</p>;
+  return (
+    <p className="conditions" lang="en">
+      {items.join(" · ")}
+    </p>
+  );
 }

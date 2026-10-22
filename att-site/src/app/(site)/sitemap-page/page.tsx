@@ -14,9 +14,14 @@ const groups = [
     links: [
       ["/internet", "AT&T Home Internet Plans"],
       ["/internet/fiber", "AT&T Fiber Internet Plans"],
+      ["/internet/fiber/internet-300", "AT&T Internet 300"],
+      ["/internet/fiber/internet-500", "AT&T Internet 500"],
+      ["/internet/fiber/internet-1000", "AT&T Internet 1000"],
+      ["/internet/fiber/internet-5000", "AT&T Internet 5000"],
       ["/internet/internet-air", "AT&T Internet Air 5G Home Internet"],
       ["/check-availability", "Check AT&T Service Availability"],
       ["/moving", "AT&T Service for Your New Home"],
+      ["/availability", "AT&T Fiber Availability by State"],
     ],
   },
   {
@@ -53,6 +58,20 @@ const groups = [
       ["/do-not-sell-or-share", "Do Not Sell or Share My Personal Information"],
       ["/accessibility", "Accessibility Statement"],
       ["/disclaimer", "Disclaimer"],
+    ],
+  },
+  {
+    heading: "En Español",
+    links: [
+      ["/es", "Inicio"],
+      ["/es/internet", "Internet para el hogar"],
+      ["/es/internet/fiber", "Planes de AT&T Fiber"],
+      ["/es/internet/internet-air", "AT&T Internet Air"],
+      ["/es/wireless", "Planes inalámbricos"],
+      ["/es/phone", "Teléfono residencial"],
+      ["/es/deals", "Ofertas actuales"],
+      ["/es/check-availability", "Verificar disponibilidad"],
+      ["/es/contact", "Contacto"],
     ],
   },
 ] as const;

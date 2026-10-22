@@ -47,6 +47,33 @@ export const PAGES = [
   { slug: "moving", url: "https://www.att.com/moving/" },
   { slug: "phone-advanced", url: "https://www.att.com/home-phone/phone-advanced/" },
   { slug: "broadband-labels", url: "https://www.att.com/broadbandlabels/dapbbfacts" },
+  // Added 2026-10-22: att.com state-level AT&T Fiber pages, listed in https://www.att.com/local/sitemap_0.xml / sitemap_1.xml
+  // (32 /local/fiber/<state> URLs exist; these are the 25 with the most city pages in the sitemap).
+  { slug: "state-california", url: "https://www.att.com/local/fiber/california" },
+  { slug: "state-texas", url: "https://www.att.com/local/fiber/texas" },
+  { slug: "state-florida", url: "https://www.att.com/local/fiber/florida" },
+  { slug: "state-illinois", url: "https://www.att.com/local/fiber/illinois" },
+  { slug: "state-georgia", url: "https://www.att.com/local/fiber/georgia" },
+  { slug: "state-michigan", url: "https://www.att.com/local/fiber/michigan" },
+  { slug: "state-alabama", url: "https://www.att.com/local/fiber/alabama" },
+  { slug: "state-tennessee", url: "https://www.att.com/local/fiber/tennessee" },
+  { slug: "state-north-carolina", url: "https://www.att.com/local/fiber/north-carolina" },
+  { slug: "state-louisiana", url: "https://www.att.com/local/fiber/louisiana" },
+  { slug: "state-ohio", url: "https://www.att.com/local/fiber/ohio" },
+  { slug: "state-mississippi", url: "https://www.att.com/local/fiber/mississippi" },
+  { slug: "state-kentucky", url: "https://www.att.com/local/fiber/kentucky" },
+  { slug: "state-indiana", url: "https://www.att.com/local/fiber/indiana" },
+  { slug: "state-missouri", url: "https://www.att.com/local/fiber/missouri" },
+  { slug: "state-south-carolina", url: "https://www.att.com/local/fiber/south-carolina" },
+  { slug: "state-wisconsin", url: "https://www.att.com/local/fiber/wisconsin" },
+  { slug: "state-oklahoma", url: "https://www.att.com/local/fiber/oklahoma" },
+  { slug: "state-minnesota", url: "https://www.att.com/local/fiber/minnesota" },
+  { slug: "state-kansas", url: "https://www.att.com/local/fiber/kansas" },
+  { slug: "state-arkansas", url: "https://www.att.com/local/fiber/arkansas" },
+  { slug: "state-utah", url: "https://www.att.com/local/fiber/utah" },
+  { slug: "state-washington", url: "https://www.att.com/local/fiber/washington" },
+  { slug: "state-colorado", url: "https://www.att.com/local/fiber/colorado" },
+  { slug: "state-arizona", url: "https://www.att.com/local/fiber/arizona" },
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

@@ -20,6 +20,8 @@ Anything that could not be confirmed from the two sources of truth (live att.com
 | O-12 | **Mandatory-fee disclosure (California SB 478)** | Prices follow AT&T's "plus taxes and fees" format; AT&T's own fine print lists non-government fees (per-line cost recovery fee, NV/OH/TX State Cost Recovery charge). Get counsel's view before targeting California in ads. | Counsel |
 | O-13 | **Channel eligibility of the new offers** | AT&T 55+ (att.com says it is ordered by phone on AT&T's own line) and AT&T Phone – Advanced were added on 2026-10-22; confirm both can be sold through the retailer channel (see O-08). | `bundle-55-plus`, `phone-advanced` in offers.ts |
 | O-14 | **FCC National Broadband Map link in the ZIP tool** | The current live page links broadbandmap.fcc.gov. It lists competing providers at the address, so it was not added; confirm AT&T allows it first. | `att-site/src/components/forms/ZipCheck.tsx` |
+| O-15 | **Remaining AT&T Fiber state pages** | att.com has 32 AT&T Fiber state pages; 25 are on the site. Not yet captured: Nevada, Iowa, Oregon, Nebraska, Pennsylvania, Idaho, New Mexico. att.com's own FAQ also says AT&T Fiber is offered in "21 states" without naming them, so the state pages only say that AT&T lists AT&T Fiber service areas in the state. | `att-site/src/data/states.ts` |
+| O-16 | **Spanish legal pages** | The Spanish pages link to the English Privacy, Terms, Cookie, Do Not Sell, Accessibility and Disclaimer pages (labelled "en inglés"). AT&T's conditions and fine print stay in English as published. Counsel should decide whether translated policies are needed. | `att-site/src/app/(es)/` |
 
 ## Seen in the sources but deliberately not built
 
@@ -38,5 +40,5 @@ Anything that could not be confirmed from the two sources of truth (live att.com
 | X-11 | "Reward cards on select plans*" chip | Recording 0:49 | Only online-only reward cards found on att.com. |
 | X-12 | "All-Fi Pro (Wi-Fi 7) included" with 5 Gig | Recording 0:52 | att.com sells All-Fi Pro as a $25/mo. add-on. Re-checked 2026-10-22: still $25/mo. on every tier, including Internet 5000. |
 | X-14 | AT&T OneConnect (fiber + wireless, taxes and fees included) | att.com /oneconnect/ (2026-10-22) | Bought online by new customers with their own unlocked eSIM phones; the page publishes no prices. |
-| X-15 | Spanish pages, a page per fiber tier and state availability pages | Competitor audit 2026-10-22 | Not built in this pass. |
+| X-15 | ~~Spanish pages, a page per fiber tier and state availability pages~~ **Built 2026-10-22** | Competitor audit 2026-10-22 | See DECISIONS D-41 and D-42, and O-15 and O-16. |
 | X-13 | TV / DIRECTV | Recording (all 102 frames checked) | The recording shows no TV or DIRECTV section; the only TV-related item found anywhere is X-03. |

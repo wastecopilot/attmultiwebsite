@@ -3,6 +3,56 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "@/components/ui/AppLink";
 import { readConsent, saveConsent } from "@/lib/consent";
+import type { Locale } from "@/data/i18n";
+
+const COPY = {
+  en: {
+    region: "Cookie consent",
+    banner: "We use cookies for site analytics and advertising measurement. Choose whether to allow them.",
+    policy: "Cookie Policy",
+    acceptAll: "Accept all",
+    reject: "Reject non-essential",
+    manage: "Manage preferences",
+    title: "Cookie preferences",
+    desc: "Your choice is stored on this device for 12 months. You can change it at any time from the \u201cCookie settings\u201d link in the footer.",
+    legend: "Cookie categories",
+    necessary: "Strictly necessary",
+    necessaryDesc: "Required for the site to work and to remember this choice. Always on.",
+    analytics: "Analytics",
+    analyticsDesc: "Measures page visits and site performance (Google Analytics).",
+    ads: "Advertising",
+    adsDesc: "Measures calls and enquiries that come from our ads (Google Ads), including click identifiers kept for up to 90 days.",
+    save: "Save preferences",
+    cancel: "Cancel",
+    accepted: "All cookies accepted.",
+    rejected: "Non-essential cookies rejected.",
+    saved: "Cookie preferences saved.",
+    settings: "Cookie settings",
+  },
+  es: {
+    region: "Consentimiento de cookies",
+    banner: "Usamos cookies para analizar el sitio y medir la publicidad. Elija si desea permitirlas.",
+    policy: "Política de cookies (en inglés)",
+    acceptAll: "Aceptar todas",
+    reject: "Rechazar las no esenciales",
+    manage: "Administrar preferencias",
+    title: "Preferencias de cookies",
+    desc: "Su elección se guarda en este dispositivo durante 12 meses. Puede cambiarla en cualquier momento desde el enlace \u201cConfiguración de cookies\u201d en el pie de página.",
+    legend: "Categorías de cookies",
+    necessary: "Estrictamente necesarias",
+    necessaryDesc: "Necesarias para que el sitio funcione y para recordar esta elección. Siempre activas.",
+    analytics: "Analítica",
+    analyticsDesc: "Mide las visitas a las páginas y el rendimiento del sitio (Google Analytics).",
+    ads: "Publicidad",
+    adsDesc: "Mide las llamadas y consultas que provienen de nuestros anuncios (Google Ads), incluidos los identificadores de clic que se guardan hasta 90 días.",
+    save: "Guardar preferencias",
+    cancel: "Cancelar",
+    accepted: "Se aceptaron todas las cookies.",
+    rejected: "Se rechazaron las cookies no esenciales.",
+    saved: "Se guardaron las preferencias de cookies.",
+    settings: "Configuración de cookies",
+  },
+} as const;
 
 /**
  * Cookie banner + preferences dialog.
@@ -15,7 +65,8 @@ import { readConsent, saveConsent } from "@/lib/consent";
  * - Every change calls gtag('consent','update', …) through saveConsent().
  * - The footer "Cookie settings" link dispatches `att:open-consent` to reopen the dialog.
  */
-export function CookieBanner() {
+export function CookieBanner({ locale = "en" }: { locale?: Locale }) {
+  const t = COPY[locale];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
   const [analytics, setAnalytics] = useState(true);
@@ -58,23 +109,23 @@ export function CookieBanner() {
 
   return (
     <>
-      <section className="cookie-banner" aria-label="Cookie consent" data-testid="cookie-banner">
+      <section className="cookie-banner" aria-label={t.region} data-testid="cookie-banner">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
           <p className="text-sm text-ink">
-            We use cookies for site analytics and advertising measurement. Choose whether to allow them.{" "}
+            {t.banner}{" "}
             <Link href="/cookie-policy" className="link">
-              Cookie Policy
+              {t.policy}
             </Link>
           </p>
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="btn btn-primary btn-sm" onClick={() => choose({ analytics: true, ads: true }, "All cookies accepted.")}>
-              Accept all
+            <button type="button" className="btn btn-primary btn-sm" onClick={() => choose({ analytics: true, ads: true }, t.accepted)}>
+              {t.acceptAll}
             </button>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: false, ads: false }, "Non-essential cookies rejected.")}>
-              Reject non-essential
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: false, ads: false }, t.rejected)}>
+              {t.reject}
             </button>
             <button type="button" className="btn btn-ghost btn-sm" onClick={(e) => openDialog(e.currentTarget)}>
-              Manage preferences
+              {t.manage}
             </button>
           </div>
         </div>
@@ -91,25 +142,25 @@ export function CookieBanner() {
           method="dialog"
           onSubmit={(e) => {
             e.preventDefault();
-            choose({ analytics, ads }, "Cookie preferences saved.");
+            choose({ analytics, ads }, t.saved);
           }}
         >
           <h2 id="consent-title" className="text-xl font-bold text-ink">
-            Cookie preferences
+            {t.title}
           </h2>
           <p id="consent-desc" className="mt-2 text-sm text-ink-muted">
-            Your choice is stored on this device for 12 months. You can change it at any time from the &ldquo;Cookie settings&rdquo; link in the footer.
+            {t.desc}
           </p>
           <fieldset className="mt-5 space-y-4">
-            <legend className="sr-only">Cookie categories</legend>
+            <legend className="sr-only">{t.legend}</legend>
             <div className="consent-row">
               <input id="c-necessary" type="checkbox" checked disabled aria-describedby="c-necessary-d" />
               <div>
                 <label htmlFor="c-necessary" className="font-semibold text-ink">
-                  Strictly necessary
+                  {t.necessary}
                 </label>
                 <p id="c-necessary-d" className="text-sm text-ink-muted">
-                  Required for the site to work and to remember this choice. Always on.
+                  {t.necessaryDesc}
                 </p>
               </div>
             </div>
@@ -117,10 +168,10 @@ export function CookieBanner() {
               <input id="c-analytics" type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} aria-describedby="c-analytics-d" />
               <div>
                 <label htmlFor="c-analytics" className="font-semibold text-ink">
-                  Analytics
+                  {t.analytics}
                 </label>
                 <p id="c-analytics-d" className="text-sm text-ink-muted">
-                  Measures page visits and site performance (Google Analytics).
+                  {t.analyticsDesc}
                 </p>
               </div>
             </div>
@@ -128,26 +179,26 @@ export function CookieBanner() {
               <input id="c-ads" type="checkbox" checked={ads} onChange={(e) => setAds(e.target.checked)} aria-describedby="c-ads-d" />
               <div>
                 <label htmlFor="c-ads" className="font-semibold text-ink">
-                  Advertising
+                  {t.ads}
                 </label>
                 <p id="c-ads-d" className="text-sm text-ink-muted">
-                  Measures calls and enquiries that come from our ads (Google Ads), including click identifiers kept for up to 90 days.
+                  {t.adsDesc}
                 </p>
               </div>
             </div>
           </fieldset>
           <div className="mt-6 flex flex-wrap gap-2">
             <button type="submit" className="btn btn-primary btn-sm">
-              Save preferences
+              {t.save}
             </button>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: true, ads: true }, "All cookies accepted.")}>
-              Accept all
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: true, ads: true }, t.accepted)}>
+              {t.acceptAll}
             </button>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: false, ads: false }, "Non-essential cookies rejected.")}>
-              Reject non-essential
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => choose({ analytics: false, ads: false }, t.rejected)}>
+              {t.reject}
             </button>
             <button type="button" className="btn btn-ghost btn-sm" onClick={closeDialog}>
-              Cancel
+              {t.cancel}
             </button>
           </div>
         </form>
@@ -160,10 +211,10 @@ export function CookieBanner() {
 }
 
 /** Footer link that reopens the preferences dialog. */
-export function CookieSettingsLink({ className }: { className?: string }) {
+export function CookieSettingsLink({ className, locale = "en" }: { className?: string; locale?: Locale }) {
   return (
     <button type="button" className={className} onClick={() => window.dispatchEvent(new Event("att:open-consent"))}>
-      Cookie settings
+      {COPY[locale].settings}
     </button>
   );
 }

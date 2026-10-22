@@ -26,6 +26,8 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     inlineCss: true,
+    // One root layout per route group (English, landing pages, Spanish) needs app/global-not-found.tsx for 404s.
+    globalNotFound: true,
   },
   async headers() {
     return [

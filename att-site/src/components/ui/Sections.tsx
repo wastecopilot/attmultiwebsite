@@ -5,11 +5,13 @@ import { PhoneLink } from "@/components/PhoneLink";
 import { CheckIcon, ClockIcon } from "@/components/ui/Icons";
 import { SiteImage, imageSrc } from "@/components/ui/SiteImage";
 import type { ImageKey } from "@/data/images";
-import { company } from "@/data/site";
+import { ui, type Locale } from "@/data/i18n";
 
 /** BreadcrumbList structured data for search engines (no visible breadcrumb trail). */
 export function Breadcrumbs({ trail }: { trail: { name: string; path: string }[] }) {
-  return <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, ...trail])} />;
+  // Spanish trails start at /es (their first entry is the Spanish home page).
+  const home = trail[0]?.path.startsWith("/es") ? [] : [{ name: "Home", path: "/" }];
+  return <JsonLd data={breadcrumbJsonLd([...home, ...trail])} />;
 }
 
 export function SectionHeading({
@@ -99,7 +101,8 @@ export function PageHeader({
 }
 
 /** Closing call-to-action used at the bottom of most pages (reference design: light panel with a call button). */
-export function CallBand({ title, text, offerId, value = 0, placement }: { title: string; text: string; offerId?: string; value?: number; placement: string }) {
+export function CallBand({ title, text, offerId, value = 0, placement, locale = "en" }: { title: string; text: string; offerId?: string; value?: number; placement: string; locale?: Locale }) {
+  const t = ui[locale];
   return (
     <section className="section" aria-labelledby={`${placement}-title`}>
       <div className="container-x">
@@ -110,13 +113,13 @@ export function CallBand({ title, text, offerId, value = 0, placement }: { title
             </h2>
             <p className="mt-2 text-lg text-ink-muted">{text}</p>
             <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
-              <ClockIcon className="h-4 w-4 shrink-0" /> {company.hoursShort}
+              <ClockIcon className="h-4 w-4 shrink-0" /> {t.hours}
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-            <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg" label="Call Now" />
-            <Link href="/check-availability" className="btn btn-secondary btn-lg">
-              Check Availability
+            <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg" label={t.callNow} />
+            <Link href={t.checkAvailabilityHref} className="btn btn-secondary btn-lg">
+              {t.checkAvailability}
             </Link>
           </div>
         </div>
@@ -134,6 +137,7 @@ export function CallPanel({
   value = 0,
   placement,
   headingLevel = "h2",
+  locale = "en",
 }: {
   id: string;
   title: string;
@@ -142,6 +146,7 @@ export function CallPanel({
   value?: number;
   placement: string;
   headingLevel?: "h2" | "h3";
+  locale?: Locale;
 }) {
   const H = headingLevel;
   return (
@@ -152,10 +157,10 @@ export function CallPanel({
         </H>
         <p className="mt-2 text-ink-muted">{text}</p>
         <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
-          <ClockIcon className="h-4 w-4 shrink-0" /> {company.hoursShort}
+          <ClockIcon className="h-4 w-4 shrink-0" /> {ui[locale].hours}
         </p>
       </div>
-      <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg shrink-0" label="Call Now" />
+      <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg shrink-0" label={ui[locale].callNow} />
     </div>
   );
 }

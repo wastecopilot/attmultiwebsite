@@ -86,5 +86,205 @@
     "retrievedAt": "2026-10-22T10:32:09.267Z",
     "h1": "Broadband facts for AT&T",
     "dialogs": 0
+  },
+  {
+    "slug": "state-california",
+    "url": "https://www.att.com/local/fiber/california",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:13:04.833Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in California - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-texas",
+    "url": "https://www.att.com/local/fiber/texas",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:13:53.913Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Texas - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-florida",
+    "url": "https://www.att.com/local/fiber/florida",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:15:22.912Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Florida - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-illinois",
+    "url": "https://www.att.com/local/fiber/illinois",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:16:06.435Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Illinois - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-georgia",
+    "url": "https://www.att.com/local/fiber/georgia",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:16:53.287Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Georgia - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-michigan",
+    "url": "https://www.att.com/local/fiber/michigan",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:17:37.288Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Michigan - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-alabama",
+    "url": "https://www.att.com/local/fiber/alabama",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:18:20.718Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Alabama - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-tennessee",
+    "url": "https://www.att.com/local/fiber/tennessee",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:19:03.279Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Tennessee - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-north-carolina",
+    "url": "https://www.att.com/local/fiber/north-carolina",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:19:43.673Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in North Carolina - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-louisiana",
+    "url": "https://www.att.com/local/fiber/louisiana",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:20:23.405Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Louisiana - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-ohio",
+    "url": "https://www.att.com/local/fiber/ohio",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:21:12.656Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Ohio - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-mississippi",
+    "url": "https://www.att.com/local/fiber/mississippi",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:22:09.391Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Mississippi - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-kentucky",
+    "url": "https://www.att.com/local/fiber/kentucky",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:23:11.718Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Kentucky - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-indiana",
+    "url": "https://www.att.com/local/fiber/indiana",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:24:03.192Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Indiana - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-missouri",
+    "url": "https://www.att.com/local/fiber/missouri",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:25:23.921Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Missouri - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-south-carolina",
+    "url": "https://www.att.com/local/fiber/south-carolina",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:26:04.432Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in South Carolina - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-wisconsin",
+    "url": "https://www.att.com/local/fiber/wisconsin",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:27:00.286Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Wisconsin - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-oklahoma",
+    "url": "https://www.att.com/local/fiber/oklahoma",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:27:44.636Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Oklahoma - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-minnesota",
+    "url": "https://www.att.com/local/fiber/minnesota",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:28:34.561Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Minnesota - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-kansas",
+    "url": "https://www.att.com/local/fiber/kansas",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:29:21.713Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Kansas - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-arkansas",
+    "url": "https://www.att.com/local/fiber/arkansas",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:30:02.794Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Arkansas - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-utah",
+    "url": "https://www.att.com/local/fiber/utah",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:30:47.080Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Utah - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-washington",
+    "url": "https://www.att.com/local/fiber/washington",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:31:27.685Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Washington - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-colorado",
+    "url": "https://www.att.com/local/fiber/colorado",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:32:47.676Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Colorado - ultrafast gigabit internet",
+    "dialogs": 0
+  },
+  {
+    "slug": "state-arizona",
+    "url": "https://www.att.com/local/fiber/arizona",
+    "status": 200,
+    "retrievedAt": "2026-10-22T11:33:41.516Z",
+    "h1": "Get the speed and reliability you've been looking for with the fastest internet¹ in Arizona - ultrafast gigabit internet",
+    "dialogs": 0
   }
 ]

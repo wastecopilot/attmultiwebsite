@@ -51,6 +51,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
       { href: "/internet/internet-air", label: "AT&T Internet Air" },
       { href: "/check-availability", label: "Check availability" },
       { href: "/moving", label: "Moving to a new home" },
+      { href: "/availability", label: "AT&T Fiber by state" },
     ],
   },
   {

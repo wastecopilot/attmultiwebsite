@@ -75,6 +75,15 @@ export default function FiberPage() {
               <PlanCard key={t.id} offer={t} featured={t.id === "fiber-1000"} badge={t.id === "fiber-1000" ? "Featured" : undefined} />
             ))}
           </div>
+          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2" aria-label="AT&T Fiber plan details">
+            {tiers.map((t) => (
+              <li key={t.id}>
+                <Link href={`/internet/fiber/${t.id.replace(/^fiber-/, "internet-")}`} className="link inline-block min-h-6 py-0.5 font-semibold">
+                  {t.title} Details
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

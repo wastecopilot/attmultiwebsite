@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/data/site";
+import { ENGLISH_PAGES, SPANISH_PAGES } from "@/data/i18n";
 
 /**
  * Whether search engines may index this deployment. Off while the project's production address is a
@@ -30,13 +31,18 @@ interface PageSeo {
 export function pageMetadata({ title, description, path, noindex = false, canonicalPath }: PageSeo): Metadata {
   // Absolute URL including the /att base path (relative values would resolve against the page path).
   const canonical = absoluteUrl(canonicalPath ?? path);
+  // English and Spanish versions of the same page point to each other (hreflang).
+  const spanish = path.startsWith("/es");
+  const en = spanish ? ENGLISH_PAGES[path] : SPANISH_PAGES[path] ? path : undefined;
+  const es = spanish ? path : SPANISH_PAGES[path];
+  const languages = en && es && !canonicalPath ? { "en-US": absoluteUrl(en), "es-US": absoluteUrl(es), "x-default": absoluteUrl(en) } : undefined;
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical },
+    alternates: languages ? { canonical, languages } : { canonical },
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale: spanish ? "es_US" : "en_US",
       siteName: "Authorized Internet Retailer",
       title,
       description,

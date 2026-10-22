@@ -2,15 +2,22 @@ import Link from "@/components/ui/AppLink";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { RootDocument, rootViewport } from "@/components/layout/RootDocument";
+import { SITE_URL } from "@/data/site";
+
+// Unmatched URLs anywhere in the app (it has one root layout per route group, so there is no shared layout to render a 404 inside).
+export const viewport = rootViewport;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`${SITE_URL}/`),
   title: { absolute: "Page Not Found | Authorized Internet Retailer" },
   description: "The page you requested could not be found.",
   robots: { index: false, follow: true },
 };
 
-export default function NotFound() {
+export default function GlobalNotFound() {
   return (
+    <RootDocument>
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main id="main" tabIndex={-1} className="flex-1 outline-none">
@@ -40,5 +47,6 @@ export default function NotFound() {
       </main>
       <SiteFooter />
     </div>
+    </RootDocument>
   );
 }

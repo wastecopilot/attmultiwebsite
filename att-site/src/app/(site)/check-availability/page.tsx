@@ -1,3 +1,4 @@
+import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { getOffer } from "@/data/offers";
 import { PageHeader, SectionHeading, CheckList, CallPanel } from "@/components/ui/Sections";
@@ -35,6 +36,11 @@ export default function CheckAvailabilityPage() {
               </li>
             </ol>
             <CheckList className="mt-8 text-ink-muted" items={["No obligation to purchase", "AT&T Fiber, AT&T Internet Air, AT&T wireless and AT&T Phone"]} />
+            <p className="mt-6">
+              <Link href="/availability" className="link font-semibold">
+                AT&amp;T Fiber Availability by State
+              </Link>
+            </p>
           </div>
           <div className="card p-6 md:p-8">
             <h2 className="text-2xl font-bold text-ink">Enter Your ZIP Code</h2>

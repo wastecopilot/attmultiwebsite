@@ -1,0 +1,418 @@
+{
+  "note": "State-level URLs listed in att.com local sitemaps. Sitemap index https://www.att.com/sitemap.xml -> https://www.att.com/local/sitemap.xml -> sitemap_0.xml, sitemap_1.xml. robots.txt (User-agent: *) allows /local/; only /es-us/local/* subfolders are disallowed. No /local/internet-air/ or other Internet Air state URLs exist in any att.com sitemap checked.",
+  "retrievedAt": {
+    "https://www.att.com/sitemap.xml": "2026-10-22T11:07:48.105Z",
+    "https://www.att.com/local/sitemap.xml": "2026-10-22T11:07:56.174Z",
+    "https://www.att.com/local/sitemap_0.xml": "2026-10-22T11:08:13.989Z",
+    "https://www.att.com/local/sitemap_1.xml": "2026-10-22T11:08:25.112Z"
+  },
+  "fiberStatePages": [
+    {
+      "url": "https://www.att.com/local/fiber/alabama",
+      "cityPagesInSitemap": 192,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/arizona",
+      "cityPagesInSitemap": 37,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/arkansas",
+      "cityPagesInSitemap": 62,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/california",
+      "cityPagesInSitemap": 591,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/colorado",
+      "cityPagesInSitemap": 50,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/florida",
+      "cityPagesInSitemap": 338,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/georgia",
+      "cityPagesInSitemap": 219,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/idaho",
+      "cityPagesInSitemap": 9,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/illinois",
+      "cityPagesInSitemap": 304,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/indiana",
+      "cityPagesInSitemap": 129,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/iowa",
+      "cityPagesInSitemap": 24,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/kansas",
+      "cityPagesInSitemap": 69,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/kentucky",
+      "cityPagesInSitemap": 132,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/louisiana",
+      "cityPagesInSitemap": 175,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/michigan",
+      "cityPagesInSitemap": 212,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/minnesota",
+      "cityPagesInSitemap": 70,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/mississippi",
+      "cityPagesInSitemap": 163,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/missouri",
+      "cityPagesInSitemap": 125,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/nebraska",
+      "cityPagesInSitemap": 10,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/nevada",
+      "cityPagesInSitemap": 20,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/new-mexico",
+      "cityPagesInSitemap": 1,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/north-carolina",
+      "cityPagesInSitemap": 177,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/ohio",
+      "cityPagesInSitemap": 169,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/oklahoma",
+      "cityPagesInSitemap": 72,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/oregon",
+      "cityPagesInSitemap": 23,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/pennsylvania",
+      "cityPagesInSitemap": 9,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/south-carolina",
+      "cityPagesInSitemap": 121,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/tennessee",
+      "cityPagesInSitemap": 185,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/texas",
+      "cityPagesInSitemap": 445,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/utah",
+      "cityPagesInSitemap": 60,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/washington",
+      "cityPagesInSitemap": 58,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/fiber/wisconsin",
+      "cityPagesInSitemap": 105,
+      "sitemap": "sitemap_1.xml"
+    }
+  ],
+  "internetStatePages": [
+    {
+      "url": "https://www.att.com/local/internet/alabama",
+      "cityPagesInSitemap": 502,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/arizona",
+      "cityPagesInSitemap": 98,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/arkansas",
+      "cityPagesInSitemap": 356,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/california",
+      "cityPagesInSitemap": 1080,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/colorado",
+      "cityPagesInSitemap": 142,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/connecticut",
+      "cityPagesInSitemap": 160,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/delaware",
+      "cityPagesInSitemap": 43,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/district-of-columbia",
+      "cityPagesInSitemap": 1,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/florida",
+      "cityPagesInSitemap": 556,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/georgia",
+      "cityPagesInSitemap": 539,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/idaho",
+      "cityPagesInSitemap": 62,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/illinois",
+      "cityPagesInSitemap": 858,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/indiana",
+      "cityPagesInSitemap": 526,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/iowa",
+      "cityPagesInSitemap": 228,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/kansas",
+      "cityPagesInSitemap": 318,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/kentucky",
+      "cityPagesInSitemap": 560,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/louisiana",
+      "cityPagesInSitemap": 417,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/maine",
+      "cityPagesInSitemap": 41,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/maryland",
+      "cityPagesInSitemap": 286,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/massachusetts",
+      "cityPagesInSitemap": 330,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/michigan",
+      "cityPagesInSitemap": 760,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/minnesota",
+      "cityPagesInSitemap": 354,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/mississippi",
+      "cityPagesInSitemap": 390,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/missouri",
+      "cityPagesInSitemap": 582,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/montana",
+      "cityPagesInSitemap": 37,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/nebraska",
+      "cityPagesInSitemap": 67,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/nevada",
+      "cityPagesInSitemap": 49,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/new-hampshire",
+      "cityPagesInSitemap": 93,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/new-jersey",
+      "cityPagesInSitemap": 429,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/new-mexico",
+      "cityPagesInSitemap": 70,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/new-york",
+      "cityPagesInSitemap": 958,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/north-carolina",
+      "cityPagesInSitemap": 510,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/north-dakota",
+      "cityPagesInSitemap": 35,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/ohio",
+      "cityPagesInSitemap": 861,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/oklahoma",
+      "cityPagesInSitemap": 456,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/oregon",
+      "cityPagesInSitemap": 157,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/pennsylvania",
+      "cityPagesInSitemap": 848,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/rhode-island",
+      "cityPagesInSitemap": 48,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/south-carolina",
+      "cityPagesInSitemap": 312,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/south-dakota",
+      "cityPagesInSitemap": 55,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/tennessee",
+      "cityPagesInSitemap": 466,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/texas",
+      "cityPagesInSitemap": 1166,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/utah",
+      "cityPagesInSitemap": 97,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/vermont",
+      "cityPagesInSitemap": 12,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/virginia",
+      "cityPagesInSitemap": 350,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/washington",
+      "cityPagesInSitemap": 219,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/west-virginia",
+      "cityPagesInSitemap": 170,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/wisconsin",
+      "cityPagesInSitemap": 440,
+      "sitemap": "sitemap_1.xml"
+    },
+    {
+      "url": "https://www.att.com/local/internet/wyoming",
+      "cityPagesInSitemap": 20,
+      "sitemap": "sitemap_1.xml"
+    }
+  ]
+}

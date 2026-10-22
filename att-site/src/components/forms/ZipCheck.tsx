@@ -3,6 +3,12 @@
 import { useId, useRef, useState, type FormEvent } from "react";
 import { track } from "@/lib/analytics";
 import { PhoneLink } from "@/components/PhoneLink";
+import type { Locale } from "@/data/i18n";
+
+const COPY = {
+  en: { error: "Enter a 5-digit ZIP code.", form: "Check service by ZIP code", label: "ZIP code", button: "Check Availability", next: (z: string) => `ZIP code ${z}: next step`, text: "AT&T confirms service at the street-address level. Call to confirm the services and pricing available at your address.", call: "Call Now" },
+  es: { error: "Ingrese un código postal de 5 dígitos.", form: "Verificar el servicio por código postal", label: "Código postal", button: "Verificar disponibilidad", next: (z: string) => `Código postal ${z}: siguiente paso`, text: "AT&T confirma el servicio para cada dirección. Llame para confirmar los servicios y precios disponibles en su dirección.", call: "Llamar ahora" },
+} as const;
 
 interface ZipCheckProps {
   offerId?: string;
@@ -12,13 +18,15 @@ interface ZipCheckProps {
   /** Called with the ZIP after a valid entry. */
   onChecked?: (zip: string) => void;
   tone?: "light" | "dark";
+  locale?: Locale;
 }
 
 /**
  * ZIP entry that leads to the Call Now button. It never displays an availability result: AT&T confirms
  * service per street address, so the next step is always a call.
  */
-export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "light" }: ZipCheckProps) {
+export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "light", locale = "en" }: ZipCheckProps) {
+  const t = COPY[locale];
   const uid = useId();
   const [zip, setZip] = useState("");
   const [error, setError] = useState("");
@@ -28,7 +36,7 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "lig
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!/^\d{5}$/.test(zip)) {
-      setError("Enter a 5-digit ZIP code.");
+      setError(t.error);
       return;
     }
     setError("");
@@ -42,10 +50,10 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "lig
   const dark = tone === "dark";
   return (
     <div>
-      <form onSubmit={onSubmit} noValidate className="flex flex-col gap-2 sm:flex-row sm:items-start" aria-label="Check service by ZIP code">
+      <form onSubmit={onSubmit} noValidate className="flex flex-col gap-2 sm:flex-row sm:items-start" aria-label={t.form}>
         <div className="flex-1">
           <label htmlFor={`${uid}-zip`} className={dark ? "field-label text-white" : "field-label"}>
-            ZIP code
+            {t.label}
           </label>
           <input
             id={`${uid}-zip`}
@@ -69,18 +77,18 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "lig
           ) : null}
         </div>
         <button type="submit" className={`btn ${dark ? "btn-inverse" : "btn-primary"} sm:mt-7`}>
-          Check Availability
+          {t.button}
         </button>
       </form>
       <div ref={resultRef} tabIndex={-1} aria-live="polite" className="outline-none">
         {checkedZip ? (
           <div className={`mt-4 rounded-xl p-4 text-sm ${dark ? "bg-white/10 text-white" : "bg-surface-alt text-ink"}`}>
-            <p className="font-semibold">ZIP code {checkedZip}: next step</p>
+            <p className="font-semibold">{t.next(checkedZip)}</p>
             <p className={`mt-1 ${dark ? "text-white/90" : "text-ink-muted"}`}>
-              AT&amp;T confirms service at the street-address level. Call to confirm the services and pricing available at your address.
+              {t.text}
             </p>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-              <PhoneLink placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-inverse" : "btn-primary"} btn-sm`} label="Call Now" />
+              <PhoneLink placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-inverse" : "btn-primary"} btn-sm`} label={t.call} />
             </div>
           </div>
         ) : null}

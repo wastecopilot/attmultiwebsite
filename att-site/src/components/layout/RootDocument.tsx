@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { rootCss } from "@/styles/tokens";
 import { buildTagSnippet, gtagSrc, gtmSrc } from "@/lib/tag-snippet";
 import { env } from "@/lib/env";
 import { siteIndexable } from "@/lib/seo";
 import { SITE_URL, company, disclosure } from "@/data/site";
+import { ui, type Locale } from "@/data/i18n";
 import { CookieBanner } from "@/components/consent/CookieBanner";
 import { AttributionKeeper } from "@/components/AttributionKeeper";
 import { RevealObserver } from "@/components/RevealObserver";
@@ -15,7 +16,8 @@ import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/components/seo/Json
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
-export const metadata: Metadata = {
+/** Metadata shared by every root layout ((site), (landing), (es)). */
+export const rootMetadata: Metadata = {
   // metadataBase includes /att so relative canonicals and file-based OG image URLs resolve under the base path.
   metadataBase: new URL(`${SITE_URL}/`),
   title: { default: "AT&T Fiber, Internet Air & Wireless | Authorized Retailer", template: "%s | Authorized Retailer" },
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   robots: { index: siteIndexable, follow: true },
 };
 
-export const viewport: Viewport = {
+export const rootViewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#FFFFFF",
@@ -34,9 +36,15 @@ export const viewport: Viewport = {
 
 const showBuildBadge = env.isDev || env.buildLabel === "AUDIT";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+/**
+ * The <html> document for every page. The app has one root layout per route group so the Spanish pages can
+ * declare lang="es"; all of them render through this component.
+ */
+export function RootDocument({ locale = "en", children }: { locale?: Locale; children: ReactNode }) {
   return (
-    <html lang="en-US" className={inter.variable} suppressHydrationWarning>
+    <html lang={locale === "es" ? "es-US" : "en-US"} className={inter.variable} suppressHydrationWarning>
+      {/* Rendered by the root layouts; the rule only recognises <head> inside layout files (next/head is Pages Router). */}
+      {/* eslint-disable-next-line @next/next/no-head-element */}
       <head>
         {/* Consent Mode v2 defaults + gtag(), then loads gtag.js/GTM. Must stay the first script we add to <head>. */}
         <script id="consent-and-tags" dangerouslySetInnerHTML={{ __html: buildTagSnippet() }} />
@@ -45,11 +53,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <a href="#main" className="skip-link">
-          Skip to main content
+          {ui[locale].skip}
         </a>
         {children}
-        <MobileCallBar />
-        <CookieBanner />
+        <MobileCallBar locale={locale} />
+        <CookieBanner locale={locale} />
         <AttributionKeeper />
         <RevealObserver />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />

@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/data/site";
-import { offersVerifiedAt } from "@/data/offers";
+import { offersBy, offersVerifiedAt } from "@/data/offers";
+import { SPANISH_PAGES } from "@/data/i18n";
+import { fiberStates } from "@/data/states";
 
 // Landing pages (/lp/*) are excluded: they are noindex templates for paid search.
 const PAGES: { path: string; priority: number; changeFrequency: "daily" | "weekly" | "monthly" | "yearly" }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/internet", priority: 0.9, changeFrequency: "weekly" },
   { path: "/internet/fiber", priority: 0.9, changeFrequency: "weekly" },
+  ...offersBy("fiber").map((o) => ({ path: `/internet/fiber/${o.id.replace(/^fiber-/, "internet-")}`, priority: 0.8, changeFrequency: "weekly" as const })),
   { path: "/internet/internet-air", priority: 0.9, changeFrequency: "weekly" },
   { path: "/wireless", priority: 0.9, changeFrequency: "weekly" },
   { path: "/wireless/plans", priority: 0.8, changeFrequency: "weekly" },
@@ -16,6 +19,8 @@ const PAGES: { path: string; priority: number; changeFrequency: "daily" | "weekl
   { path: "/deals", priority: 0.8, changeFrequency: "weekly" },
   { path: "/check-availability", priority: 0.7, changeFrequency: "monthly" },
   { path: "/moving", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/availability", priority: 0.6, changeFrequency: "monthly" },
+  ...fiberStates.map((s) => ({ path: `/availability/${s.slug}`, priority: 0.5, changeFrequency: "monthly" as const })),
   { path: "/about", priority: 0.5, changeFrequency: "yearly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.5, changeFrequency: "yearly" },
@@ -26,6 +31,7 @@ const PAGES: { path: string; priority: number; changeFrequency: "daily" | "weekl
   { path: "/accessibility", priority: 0.3, changeFrequency: "yearly" },
   { path: "/disclaimer", priority: 0.3, changeFrequency: "yearly" },
   { path: "/sitemap-page", priority: 0.2, changeFrequency: "monthly" },
+  ...Object.values(SPANISH_PAGES).map((path) => ({ path, priority: 0.6, changeFrequency: "weekly" as const })),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
