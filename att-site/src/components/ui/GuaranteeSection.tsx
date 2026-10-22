@@ -1,5 +1,4 @@
 import { guarantee, type GuaranteeKey } from "@/data/guarantee";
-import { formatAsOf } from "@/components/offers/OfferBits";
 import { SectionHeading } from "@/components/ui/Sections";
 import { ShieldIcon } from "@/components/ui/Icons";
 
@@ -23,9 +22,8 @@ export function GuaranteeSection({ id, items, alt = false }: { id: string; items
           })}
         </ul>
         <p className="as-of mt-6">
-          Terms as of <time dateTime={guarantee.retrievedAt}>{formatAsOf(guarantee.retrievedAt)}</time> ·{" "}
           <a href={guarantee.sourceUrl} target="_blank" rel="noopener" className="link inline-block min-h-6 py-0.5">
-            Full AT&amp;T Guarantee terms<span className="sr-only"> (opens att.com in a new tab)</span>
+            Full AT&amp;T Guarantee terms
           </a>
         </p>
       </div>

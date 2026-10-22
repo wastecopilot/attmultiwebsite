@@ -4,7 +4,7 @@ import type { ImageKey } from "@/data/images";
 import { company } from "@/data/site";
 import { PhoneLink } from "@/components/PhoneLink";
 import { ZipCheck } from "@/components/forms/ZipCheck";
-import { AsOf, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
+import { BroadbandFacts, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
 import { CallPanel, CheckList } from "@/components/ui/Sections";
 import { ClockIcon } from "@/components/ui/Icons";
 import { SiteImage, imageSrc } from "@/components/ui/SiteImage";
@@ -68,7 +68,7 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
                 {offer.altPrice.label}: ${offer.altPrice.price.amount}/mo. {offer.altPrice.price.qualifier}.
               </p>
             ) : null}
-            <AsOf offer={offer} />
+            <BroadbandFacts offer={offer} />
             <PhoneLink placement="lp-offer" offerId={offer.id} value={value} className="btn btn-primary mt-4 w-full lg:hidden" label="Call Now" />
             <FinePrint offer={offer} />
           </div>

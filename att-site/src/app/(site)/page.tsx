@@ -8,7 +8,7 @@ import { PhoneLink } from "@/components/PhoneLink";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { PromoCard } from "@/components/offers/OfferCard";
-import { AsOf, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
+import { BroadbandFacts, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
 import { CallPanel, CheckList, FaqList, SectionHeading } from "@/components/ui/Sections";
 import { AirIcon, FiberIcon, HomePhoneIcon, MapPinIcon, ShieldIcon, DocumentIcon, WirelessIcon, ClockIcon } from "@/components/ui/Icons";
 import { HeroArt } from "@/components/ui/HeroArt";
@@ -79,7 +79,7 @@ export default function HomePage() {
                 {hero.altPrice.label}: ${hero.altPrice.price.amount}/mo. {hero.altPrice.price.qualifier}.
               </p>
             ) : null}
-            <AsOf offer={hero} />
+            <BroadbandFacts offer={hero} />
             <FinePrint offer={hero} />
           </div>
         </div>
@@ -132,7 +132,7 @@ export default function HomePage() {
                       {s.note ? <span className="block text-sm text-ink-muted">{s.note}</span> : null}
                     </p>
                   ) : null}
-                  <AsOf offer={o} />
+                  <BroadbandFacts offer={o} />
                   <FinePrint offer={o} />
                   <Link href={s.href} className="link mt-auto pt-5 font-semibold">
                     {s.link}

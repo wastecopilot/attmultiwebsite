@@ -6,7 +6,7 @@ import { PlanCard } from "@/components/offers/OfferCard";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
 import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
-import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
+import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { AirIcon, ShieldIcon, WifiIcon } from "@/components/ui/Icons";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -38,7 +38,7 @@ export default function InternetAirPage() {
               <span className="font-semibold text-ink-muted">/mo.</span> <span className="text-sm font-semibold">{air.price!.qualifier}</span>
             </p>
             <p className="mt-1 text-sm text-ink-muted">{air.conditions.join(" · ")}</p>
-            <AsOf offer={air} />
+            <BroadbandFacts offer={air} />
             <FinePrint offer={air} />
             <PhoneLink placement="air-header" offerId={air.id} value={air.price!.amount} className="btn btn-primary mt-4 w-full" label="Call Now" />
           </div>

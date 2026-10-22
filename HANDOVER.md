@@ -79,7 +79,7 @@ All prices, plan names, promotions and fine print live in **`att-site/src/data/o
 | `conditions` | Short conditions shown under the price |
 | `finePrint` | AT&T's full offer details, copied word for word from att.com |
 | `sourceUrl` | The att.com page the offer was checked on |
-| `retrievedAt` | When it was checked (date and time) — shown to visitors as "Pricing as of …" |
+| `retrievedAt` | When it was checked (date and time) — not shown to visitors; it drives the 14-day freshness check |
 | `expiresAt` | AT&T's end date, or `null` if none is published |
 
 To update:

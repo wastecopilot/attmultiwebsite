@@ -4,7 +4,6 @@ import { pageMetadata } from "@/lib/seo";
 import { offersBy } from "@/data/offers";
 import { fiberStates, getFiberState } from "@/data/states";
 import { PlanCard } from "@/components/offers/OfferCard";
-import { formatAsOf } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
@@ -63,7 +62,6 @@ export default async function FiberStatePage({ params }: { params: Promise<{ sta
               <a href={s.sourceUrl} target="_blank" rel="noopener" className="link inline-block min-h-6 py-0.5">
                 AT&amp;T Fiber in {s.state} on att.com
               </a>
-              , retrieved <time dateTime={s.retrievedAt}>{formatAsOf(s.retrievedAt)}</time>
             </p>
           </div>
           <div className="card p-6 md:p-8">

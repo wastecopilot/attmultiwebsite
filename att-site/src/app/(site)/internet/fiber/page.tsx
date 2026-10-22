@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
 import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
-import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
+import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
 import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
@@ -45,7 +45,7 @@ export default function FiberPage() {
             <p className="mt-1 text-sm text-ink-muted">
               {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo. · {formatMoney(featured.price!.thenAmount!)}/mo. after 12 months · Plus taxes &amp; fees
             </p>
-            <AsOf offer={featured} />
+            <BroadbandFacts offer={featured} />
             <FinePrint offer={featured} />
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
               <PhoneLink placement="fiber-header" offerId={featured.id} value={featured.price!.amount} className="btn btn-primary" label="Call Now" />
@@ -145,7 +145,7 @@ export default function FiberPage() {
             Speeds are based on a wired connection; actual speeds may vary. For 5 GIG, the single-device wired speed maximum is 4.7 Gbps. An installation fee of up to $99 may apply. Complete offer
             details appear with each plan above.
           </p>
-          <AsOf offer={featured} />
+          <BroadbandFacts offer={featured} />
         </div>
       </section>
 

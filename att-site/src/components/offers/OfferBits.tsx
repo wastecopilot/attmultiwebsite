@@ -2,15 +2,6 @@ import type { Offer, OfferPrice } from "@/data/offer-types";
 import { BROADBAND_FACTS_URL } from "@/data/site";
 import { tr, type Locale } from "@/data/i18n";
 
-const dateFmt = {
-  en: new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
-  es: new Intl.DateTimeFormat("es-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
-};
-
-export function formatAsOf(iso: string, locale: Locale = "en"): string {
-  return dateFmt[locale].format(new Date(iso));
-}
-
 export function formatMoney(n: number): string {
   return Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
 }
@@ -18,24 +9,15 @@ export function formatMoney(n: number): string {
 /** Plan categories that are broadband services under the FCC label rules (fixed and mobile). */
 const BROADBAND_CATEGORIES: Offer["category"][] = ["fiber", "internet-air", "wireless-plan", "bundle"];
 
-/**
- * "Pricing as of Oct 21, 2026" — shown with every price and promotion. For internet and wireless plans it
- * also links AT&T's Broadband Facts labels, so the label link always sits next to the plan's price.
- */
-export function AsOf({ offer, className = "", locale = "en" }: { offer: Pick<Offer, "retrievedAt" | "category" | "title">; className?: string; locale?: Locale }) {
+/** Link to AT&T's Broadband Facts labels, placed next to every internet, wireless and bundle price (FCC label rules). */
+export function BroadbandFacts({ offer, locale = "en" }: { offer: Pick<Offer, "category">; locale?: Locale }) {
+  if (!BROADBAND_CATEGORIES.includes(offer.category)) return null;
   return (
-    <>
-      <p className={`as-of ${className}`}>
-        {locale === "es" ? "Precios vigentes al" : "Pricing as of"} <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt, locale)}</time>
-      </p>
-      {BROADBAND_CATEGORIES.includes(offer.category) ? (
-        <p className="bb-facts">
-          <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
-            {locale === "es" ? "Etiqueta de Broadband Facts de AT&T" : "AT&T Broadband Facts label"}
-          </a>
-        </p>
-      ) : null}
-    </>
+    <p className="bb-facts mt-2">
+      <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
+        {locale === "es" ? "Etiqueta de Broadband Facts de AT&T" : "AT&T Broadband Facts label"}
+      </a>
+    </p>
   );
 }
 
