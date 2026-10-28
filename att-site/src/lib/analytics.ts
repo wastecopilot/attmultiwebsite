@@ -23,6 +23,8 @@ export type TrackedEvent =
   | "cta_click"
   // Online order flow (/att/order). Plan id and value only: never any personal data.
   | "begin_order"
+  | "order_plans_shown"
+  | "order_options_chosen"
   | "order_quote_started"
   | "order_quote_shown"
   | "order_step_details"

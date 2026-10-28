@@ -1,6 +1,7 @@
 import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
+import type { Offer } from "@/data/offer-types";
 import { faqsFor } from "@/data/faq";
 import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
@@ -15,6 +16,9 @@ export const metadata = pageMetadata({
   description: "AT&T Fiber plans from $50/mo. with AutoPay: Internet 300, 500, 1000 and 5000, with lower pricing when combined with an eligible AT&T wireless plan.",
   path: "/internet/fiber",
 });
+
+/** True for the tiers whose price includes AT&T's 12-month "Up to $15 Off Fiber Offer" (qualifier starts "for 12 mos."). */
+const promo12 = (o: Offer) => Boolean(o.price?.qualifier?.startsWith("for 12 mos."));
 
 export default function FiberPage() {
   const tiers = offersBy("fiber");
@@ -44,7 +48,7 @@ export default function FiberPage() {
               <span className="font-semibold text-ink-muted">/mo.</span> <span className="text-sm font-semibold">{featured.price!.qualifier}</span>
             </p>
             <p className="mt-1 text-sm text-ink-muted">
-              {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo. · {formatMoney(featured.price!.thenAmount!)}/mo. after 12 months · Plus taxes &amp; fees
+              {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo.{promo12(featured) ? " for 12 mos. · After 12 mos., AT&T's prevailing rate applies" : ""} · Plus taxes &amp; fees
             </p>
             <BroadbandFacts offer={featured} />
             <FinePrint offer={featured} />
@@ -116,7 +120,7 @@ export default function FiberPage() {
                   <th scope="row">With AutoPay &amp; Paperless bill</th>
                   {tiers.map((t) => (
                     <td key={t.id}>
-                      {formatMoney(t.price!.amount)}/mo.{t.price!.thenAmount ? " for 12 mos." : ""}
+                      {formatMoney(t.price!.amount)}/mo.{promo12(t) ? " for 12 mos." : ""}
                     </td>
                   ))}
                 </tr>
@@ -124,14 +128,14 @@ export default function FiberPage() {
                   <th scope="row">With an eligible AT&amp;T wireless plan</th>
                   {tiers.map((t) => (
                     <td key={t.id}>
-                      {formatMoney(t.altPrice!.price.amount)}/mo.{t.price!.thenAmount ? " for 12 mos." : ""}
+                      {formatMoney(t.altPrice!.price.amount)}/mo.{promo12(t) ? " for 12 mos." : ""}
                     </td>
                   ))}
                 </tr>
                 <tr>
                   <th scope="row">After 12 months</th>
                   {tiers.map((t) => (
-                    <td key={t.id}>{t.price!.thenAmount ? `${formatMoney(t.price!.thenAmount)}/mo.` : "No change"}</td>
+                    <td key={t.id}>{promo12(t) ? "AT&T's prevailing rate" : "No change"}</td>
                   ))}
                 </tr>
                 <tr>

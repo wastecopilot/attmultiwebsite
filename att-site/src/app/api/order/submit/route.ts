@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   if (sensitivePaths(body).length) return reply({ error: "sensitive_data_rejected" }, 422);
   if (!hasExactKeys(body, ["requestId", "quoteJobId", "customer", "consent"]) || !isRequestId(body.requestId) || !isJobId(body.quoteJobId) || body.consent !== true)
     return reply({ error: "invalid_request" }, 400);
-  if (!hasExactKeys(body.customer, ["firstName", "lastName", "phone", "email", "billingLanguage", "contactByPhone"]))
+  if (!hasExactKeys(body.customer, ["firstName", "lastName", "phone", "email", "confirmEmail", "billingLanguage", "contactByPhone"]))
     return reply({ error: "invalid_request" }, 400);
   const { value: c, errors } = validateCustomer(body.customer as Partial<CustomerInput>);
   if (Object.keys(errors).length) return reply({ error: "invalid_request", fields: Object.keys(errors) }, 400);
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       phone: phoneDigits(c.phone),
       email: c.email,
       billing_language: c.billingLanguage,
-      contact_consent: c.contactByPhone === "yes",
+      contact_consent: c.contactByPhone,
     },
     customer_confirmed: true,
   });

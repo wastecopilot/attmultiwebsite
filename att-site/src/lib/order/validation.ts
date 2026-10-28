@@ -22,7 +22,7 @@ const SSN_VALUE_RE = /(?<!\d)\d{3}[- ]\d{2}[- ]\d{4}(?!\d)|(?<!\d)\d{9}(?!\d)/;
 const DATE_VALUE_RE = /(?<!\d)(0?[1-9]|1[0-2])[/.-](0?[1-9]|[12]\d|3[01])[/.-](19|20)?\d{2}(?!\d)/;
 const CARD_CANDIDATE_RE = /(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)/g;
 /** Strictly formatted fields that are validated on their own (and would trip the value patterns). */
-const VALUE_SCAN_SKIP = new Set(["phone", "zip", "email", "requestId", "quoteJobId", "jobId"]);
+const VALUE_SCAN_SKIP = new Set(["phone", "zip", "email", "confirmEmail", "requestId", "quoteJobId", "plansJobId", "jobId"]);
 
 function luhn(digits: string): boolean {
   let sum = 0;
@@ -70,9 +70,10 @@ export interface CustomerInput {
   lastName: string;
   phone: string;
   email: string;
+  confirmEmail: string;
   billingLanguage: "english" | "spanish" | "";
-  /** Answer to "may we reach you by phone or text about installation, billing and service?" */
-  contactByPhone: "yes" | "no" | "";
+  /** Separate, unchecked by default: "you may contact me by phone or text about installation, repair and billing". */
+  contactByPhone: boolean;
 }
 
 export type FieldErrors<T> = Partial<Record<keyof T, string>>;
@@ -109,8 +110,9 @@ export function validateCustomer(raw: Partial<CustomerInput>): { value: Customer
     lastName: clean(raw.lastName),
     phone: clean(raw.phone),
     email: clean(raw.email).toLowerCase(),
+    confirmEmail: clean(raw.confirmEmail).toLowerCase(),
     billingLanguage: raw.billingLanguage === "english" || raw.billingLanguage === "spanish" ? raw.billingLanguage : "",
-    contactByPhone: raw.contactByPhone === "yes" || raw.contactByPhone === "no" ? raw.contactByPhone : "",
+    contactByPhone: raw.contactByPhone === true,
   };
   const errors: FieldErrors<CustomerInput> = {};
   const name = /^[A-Za-zÀ-ÖØ-öø-ÿ' .-]{2,40}$/;
@@ -119,12 +121,12 @@ export function validateCustomer(raw: Partial<CustomerInput>): { value: Customer
   const digits = phoneDigits(value.phone);
   if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(digits)) errors.phone = "Enter a 10-digit US phone number.";
   if (value.email.length > 254 || !/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(value.email)) errors.email = "Enter a valid email address.";
+  if (!errors.email && value.confirmEmail !== value.email) errors.confirmEmail = "The email addresses do not match.";
   if (!value.billingLanguage) errors.billingLanguage = "Select a billing language.";
-  if (!value.contactByPhone) errors.contactByPhone = "Select your contact preference.";
   return { value, errors };
 }
 
-/** Option answers: group key → true / false / the title of a choice the portal offered. */
+/** Option answers: group key → the title of the choice the visitor picked (or true / false). */
 export type OptionAnswers = Record<string, boolean | string>;
 
 export function validOptionAnswers(raw: unknown): raw is OptionAnswers {
@@ -134,7 +136,7 @@ export function validOptionAnswers(raw: unknown): raw is OptionAnswers {
     entries.length <= 12 &&
     entries.every(
       ([k, v]) =>
-        /^[a-z][a-z0-9_]{1,40}$/.test(k) && (typeof v === "boolean" || (typeof v === "string" && v.length > 0 && v.length <= 160)),
+        /^[a-z][a-z0-9_]{1,40}$/.test(k) && (typeof v === "boolean" || (typeof v === "string" && v.length > 0 && v.length <= 200)),
     )
   );
 }

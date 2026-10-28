@@ -47,7 +47,7 @@ The phone number and tracking IDs are not written into the code. They are read f
 | `NEXT_PUBLIC_ORDER_URL` (optional) | Leave empty. Every "Order Now" button then opens the online order page `/att/order?plan=<offer id>&source=<page>`. Only set it to send the buttons to a different https address instead; `plan`, `source` and any `gclid`/`gbraid`/`wbraid`/`utm_*` are then added to that address. | full `https://` URL |
 | `ATTSPOC_SERVICE_URL` (optional, server only) | The https address of **order-service**, which runs the AT&T partner-portal order automation (section 11). Until it is set, the order page shows the plan and says "Online ordering is currently unavailable. Please call …". | `https://orders.example.com` format |
 | `ATTSPOC_SERVICE_KEY` (optional, server only) | The shared secret for order-service: the **same** random value (32+ characters) as on order-service. Never put it in a `NEXT_PUBLIC_` variable. | random letters/digits |
-| `ATTSPOC_QUOTE_TIMEOUT_S` / `ATTSPOC_HANDOFF_TIMEOUT_S` (optional) | How long the order page waits for a quote or for the order request before showing the "please call" message. | seconds, default `240` |
+| `ATTSPOC_QUOTE_TIMEOUT_S` / `ATTSPOC_HANDOFF_TIMEOUT_S` (optional) | How long the order page waits for each portal step (plans, options, quote) or for the order request before showing the "please call" message. | seconds, default `240` |
 | `NEXT_PUBLIC_SITE_INDEXABLE` (optional) | `1` lets search engines index the site, `0` blocks them. Leave it unset: indexing is then off on a `*.vercel.app` address and on once a custom domain is attached. Set `1` if the live domain reaches this project through a rewrite from another project. | `1` or `0` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` (optional) | Email address shown on the Contact page and in the footer | defaults to Backoffice@urbanwirelessusa.com |
 
@@ -173,30 +173,43 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
 | O-20 | Retention for the automation's screenshots and test files with customer data | Business owner |
 | O-21 | A permanent host for order-service (Cloud Run, Railway or a company server; single instance, HTTPS). Until then it runs on the demo laptop through a quick tunnel (section 11) | Business owner / IT |
 | O-25 | Before hosting: stop order-service from logging the automation's portal session ids | Developer |
+| O-26 | Give the extended automation module (plans call, kept-open sessions) to the automation team | Automation team |
+| O-27 | Decide on the portal vs att.com price differences (research/data-audit.md, items 10–15) | Business owner |
 | — | Offers not shown because they are unconfirmed, online-only or TV (YouTube TV): see OPEN_ITEMS X-03…X-13 | — |
 
 ## 11. Online ordering (Order Now)
 
-Every **Order Now** button opens `/att/order`. The page is not indexed, not in the sitemap and never cached. The
-visitor:
+Every **Order Now** button opens `/att/order?plan=<offer id>&source=<page>` (click IDs and `utm_*` kept). The
+page is not indexed, not in the sitemap and never cached. It works like the AT&T partner portal
+(research/portal-flow.md). The visitor:
 
-1. confirms the plan, answers every option (nothing is preselected), and enters the service address;
-2. waits about 45 seconds while the **SPOC order automation** checks the address in the AT&T partner portal and
-   returns the real monthly price;
-3. sees that quote with every line itemised;
-4. enters name, phone, email, billing language and contact preference;
-5. submits.
+1. enters the service address;
+2. sees the Internet plans the portal offers **at that address**, as the portal's plan cards show them
+   (about 30–60 seconds). The plan from the Order Now button is preselected when it is offered there;
+   otherwise the page says so ("AT&T Internet 1000 is not available at this address") and shows the plans
+   that are;
+3. chooses the options the portal lists for that plan: AutoPay is an explicit choice, paid add-ons such as
+   Extended Wi-Fi start on "Decline", and nothing else is preselected;
+4. sees the quote: the portal cart line for line (plan, promotions, AutoPay discount, equipment, total), plus
+   any one-time charge they chose;
+5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and
+   confirms;
+6. reviews and submits.
 
 The automation then prepares the order in the portal **without** running the credit check. A specialist
 receives it and completes the credit check, payment and submission with the customer. The visitor gets a
 reference number (for example `UW-7K3M9QX2`).
 
+Plans, prices, promotions and options on this page come only from the portal; `src/data/order-plans.ts` only
+links marketing offer ids to portal plan names. Marketing pages keep showing `offers.ts` (att.com). Price
+differences between the two are listed in `research/data-audit.md`.
+
 **What makes the page stop and show "please call":**
 
-- an unrequested product in the portal cart (for example a DIRECTV bundle);
-- a paid add-on the visitor declined;
+- no Internet plans at the address;
+- anything in the portal cart the visitor did not choose (a DIRECTV bundle, a paid add-on);
 - any portal error or timeout;
-- the service not configured.
+- the service not configured or not reachable.
 
 **What the website never does:**
 
@@ -216,13 +229,23 @@ small server, with HTTPS in front. The partner portal link (`ATTSPOC_URL`) is se
 3. In Vercel set `ATTSPOC_SERVICE_URL` (the service's https address) and the same `ATTSPOC_SERVICE_KEY`, then
    redeploy.
 
-**Which plans can be ordered online.** AT&T Internet 300, 500, 1000 and 5000 and AT&T Internet Air (the
-automation's Internet flow). Wireless, phone and bundles show the call message.
+**Which plans can be ordered online.** Every Internet plan the portal offers at the visitor's address: seen
+live on 28 Oct were Internet 300, 500, 1000, 5000, Internet 100 and AT&T Internet Air
+(research/portal-options.md). Wireless, phone, TV and bundles show the call message.
+
+**The automation module** (`att_order_automation.py`, private folder) was extended on 28 Oct with the plans
+call, one kept-open portal session per visitor and options read for any plan. The original is kept next to
+it as `att_order_automation.orig-20261028.py`. A hosted order-service needs the new version (OPEN_ITEMS O-26).
+
+**Live test, 28 Oct (rebuilt flow, through the tunnel):** Internet 300 $50.00, 500 $60.00, 1000 $70.00,
+5000 $110.00, Internet 100 $60.00 (+ $99 one-time install), Internet Air $55.00; each equal to the portal cart.
+One hand-off, UW-DZ3SY7XR, stopped before the credit check (OPEN_ITEMS O-28).
 
 **Tests:** `npm run build:audit && npm run test:order` (site, against a local mock) and
 `python -m unittest discover -s tests` in `order-service/`.
 
-**Background:** `research/spoc-analysis.md` and `research/spoc-integration-plan.md`.
+**Background:** `research/spoc-analysis.md`, `research/spoc-integration-plan.md`, `research/portal-flow.md`,
+`research/portal-options.md`, `research/portal-vs-site.md`.
 
 ### Demo setup: this laptop and a Cloudflare quick tunnel (since 2026-10-28)
 
@@ -270,13 +293,13 @@ demo keep it plugged in and set:
 - Control Panel → Hardware and Sound → Power Options → "Choose what closing the lid does" → "When I close
   the lid", Plugged in → **Do nothing**.
 
-**Where things are on the laptop.** None of these are in the repository.
+**Where things are on the laptop.** Only the scripts are in the repository; everything else stays on the laptop.
 
 | Path | Contents |
 |---|---|
 | `order-service/.env.local` | Service key, port and folders. Git-ignored. |
 | `attspoc AT&T/portal_url.txt` | The partner portal link with the partner key. The service reads it from this file. It is never copied, logged or committed, and the key exists only on this laptop. |
-| `order-service/local/` | The scripts behind the start and stop files (also `start-order-service.*`, `stop-order-service.*` in the project folder). Laptop only, not committed. |
+| `order-service/local/` | The scripts behind the start and stop files (also `start-order-service.*`, `stop-order-service.*` in the project folder). In the repository; they hold no settings or secrets. |
 | `order-service/.run/` | The service log, the tunnel log and the current tunnel address. The service log holds no personal data, portal addresses or session ids. |
 | `order-service/specialist_queue/` | One file per prepared order. A specialist must open each within 30 minutes; delete it afterwards. |
 | `order-service/order_artifacts/` | The automation's portal screenshots. Delete after the demo. |

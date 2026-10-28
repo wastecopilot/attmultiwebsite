@@ -5,7 +5,7 @@
  *
  *   ATTSPOC_SERVICE_URL        https base URL of order-service
  *   ATTSPOC_SERVICE_KEY        shared secret (same value as on order-service)
- *   ATTSPOC_QUOTE_TIMEOUT_S    how long the order page waits for a quote (default 240)
+ *   ATTSPOC_QUOTE_TIMEOUT_S    how long the order page waits for plans, options or a quote (default 240)
  *   ATTSPOC_HANDOFF_TIMEOUT_S  how long it waits for a submission (default 240)
  */
 
@@ -19,7 +19,7 @@ export interface AutomationResult {
 
 export interface JobView {
   job_id: string;
-  kind: "quote" | "handoff";
+  kind: "plans" | "quote" | "handoff";
   state: "running" | "done";
   result?: AutomationResult;
 }
@@ -74,7 +74,10 @@ async function call<T>(method: "GET" | "POST", path: string, body?: unknown): Pr
   }
 }
 
-export const startQuote = (body: { request_id: string; service_address: Record<string, unknown>; products: unknown[] }) =>
+export const startPlans = (body: { request_id: string; service_address: Record<string, unknown> }) =>
+  call<JobView>("POST", "/v1/plans", body);
+
+export const startQuote = (body: { request_id: string; plans_job_id: string; plan_name: string; options: Record<string, boolean | string> }) =>
   call<JobView>("POST", "/v1/quotes", body);
 
 export const startHandoff = (body: { request_id: string; quote_job_id: string; customer: Record<string, unknown>; customer_confirmed: true }) =>

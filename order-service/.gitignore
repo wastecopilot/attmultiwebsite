@@ -5,3 +5,8 @@ portal_url.txt
 specialist_queue/
 order_artifacts/
 __pycache__/
+
+# Local demo run (laptop + Cloudflare quick tunnel). Holds the service key: never commit.
+.env.local
+.env*.local
+.run/

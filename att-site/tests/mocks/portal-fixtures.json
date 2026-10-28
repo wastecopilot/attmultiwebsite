@@ -1,0 +1,718 @@
+{
+  "_note": "Copied exactly from the live AT&T partner portal (read-only exploration, documented test addresses), 28 Oct 2026. Tests only: never shown to visitors. See research/portal-options.md.",
+  "retrieved": "2026-10-28",
+  "addresses": {
+    "hicksville": {
+      "plans": [
+        {
+          "plan_id": "at-t-internet-air",
+          "name": "AT&T Internet Air",
+          "display_name": "AT&T Internet Air",
+          "speed": "Speeds up to 300 Mbps",
+          "price": "$60/mo.",
+          "price_note": "Price plus taxes and fees after $5/mo. AutoPay & Paperless Bill discount.",
+          "features": [],
+          "notes": [
+            "AT&T Internet Air is our new, fast home internet, delivered over the reliable AT&T wireless network."
+          ],
+          "offer_details": [
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/support/how-to/cancel/ or calling 800-288-2020",
+            "Broadband Facts Message: The FCC requires AT&T to offer you Broadband Facts about AT&T's plans to help you decide on a plan. Let me know if you would like me to e-mail that to you for any of the plans we discuss today."
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/227860ce-9be2-4a6f-80ff-150e4959dec1?taxationgeocode=330590000&acctype=I&accsubtype=R"
+        }
+      ],
+      "products": [
+        "internet",
+        "tv"
+      ]
+    },
+    "dallas": {
+      "plans": [
+        {
+          "plan_id": "internet-100",
+          "name": "Internet 100",
+          "display_name": "AT&T Internet 100",
+          "speed": "Speeds up to 100 Mbps",
+          "price": "$60/mo.",
+          "price_note": "Price plus taxes and fees after $10/mo. AutoPay & Paperless Bill discount.",
+          "features": [
+            "No annual contract",
+            "Fast, reliable internet",
+            "Stream on multiple devices",
+            "AT&T Wi-Fi Hot Spot access included"
+          ],
+          "notes": [],
+          "offer_details": [
+            "Geographic and service restrictions apply to AT&T Internet services. Not all speeds available in all areas.",
+            "INTERNET OFFER: Price for Internet 100 for residential customers is after AutoPay and paperless billing discount. After 12 mos., then-prevailing rate applies unless canceled before the end of 12 months. Autopay & Paperless Bill Discount: Discount off the monthly rate when account is active & enrolled in both. Pay full plan cost until discount starts w/in 2 bill cycles. Must maintain autopay/paperless bill and valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly cost recovery charge which are not government-required apply in TX, OH and NV. Taxes also apply. For one time AT&T transactional fees, see att.com/fees for details. Credit restrictions apply. Cancellation Policy: This service will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms.",
+            "†Data Allowance: $10 charge applies for each additional 50GB (up to $100/mo). Unlimited data allowance may also be purchased separately for an add’l $30/mo. For more info, go to att.com/internet-usage",
+            "††Internet speed claims represent maximum network service capability speeds and based on wired connection to gateway. Actual customer speeds are not guaranteed and may vary based on several factors. For more information, go to att.com/speed101.",
+            "Offers may not be combined with other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers.",
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/cancel or calling 800-288-2020"
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/HSIA100s/88541733/N/30?taxationgeocode=441130760&acctype=I&accsubtype=R"
+        },
+        {
+          "plan_id": "at-t-internet-air",
+          "name": "AT&T Internet Air",
+          "display_name": "AT&T Internet Air",
+          "speed": "Speeds up to 300 Mbps",
+          "price": "$60/mo.",
+          "price_note": "Price plus taxes and fees after $5/mo. AutoPay & Paperless Bill discount.",
+          "features": [],
+          "notes": [
+            "AT&T Internet Air is our new, fast home internet, delivered over the reliable AT&T wireless network."
+          ],
+          "offer_details": [
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/support/how-to/cancel/ or calling 800-288-2020",
+            "Broadband Facts Message: The FCC requires AT&T to offer you Broadband Facts about AT&T's plans to help you decide on a plan. Let me know if you would like me to e-mail that to you for any of the plans we discuss today."
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/227860ce-9be2-4a6f-80ff-150e4959dec1?taxationgeocode=441130760&acctype=I&accsubtype=R"
+        }
+      ],
+      "products": [
+        "internet",
+        "tv"
+      ]
+    },
+    "atlanta": {
+      "plans": [
+        {
+          "plan_id": "internet-5000-fiber-5-gig",
+          "name": "Internet 5000 (Fiber 5 GIG)",
+          "display_name": "AT&T Internet 5000 (Fiber 5 GIG)",
+          "speed": "Speeds up to 5 Gig",
+          "price": "$125/mo.",
+          "price_note": "Price plus taxes and fees after $10/mo. AutoPay & Paperless Bill discount.",
+          "features": [
+            "Extended Wi-Fi Coverage Service and Active Armor Internet Security Advanced Included in selected Rate Plan",
+            "5 GB connection — max speed and bandwidth",
+            "Fastest speed for smart homes and seamless collaboration",
+            "25x faster upload speeds than cable",
+            "Ultra-low lag for pro-level gaming",
+            "AT&T Internet Security included"
+          ],
+          "notes": [],
+          "offer_details": [
+            "Extended Wi-Fi Coverage Service and Active Armor Internet Security Advanced Included in selected Rate Plan",
+            "Geographic and service restrictions apply to AT&T Internet services. Not all speeds available in all areas.",
+            "Limited availability. May not be available in your area.",
+            "INTERNET OFFER: Price for Internet 2000 and Internet 5000 for residential customers is after AutoPay and paperless billing discount. Autopay & Paperless Bill Discount: Discount off the monthly rate when account is active & enrolled in both. Pay full plan cost until discount starts w/in 2 bill cycles. Must maintain autopay/paperless bill and valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly cost recovery charge which are not government-required apply in TX, OH and NV. Taxes also apply. For one time AT&T transactional fees, see att.com/fees for details. Credit restrictions apply. Cancellation Policy: This service will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms.",
+            "†Internet speed claims represent maximum network service capability speeds and based on wired connection to gateway. Actual customer speeds may vary based on a number of factors and are not guaranteed. For 5 GIG speed, single device wired speed maximum 4.7Gbps. For more information, go to att.com/speed101.",
+            "Offers may not be combined with other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers.",
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/cancel or calling 800-288-2020"
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/HSIA5000g/88541733/N/30?taxationgeocode=111210080&acctype=I&accsubtype=R"
+        },
+        {
+          "plan_id": "internet-1000-fiber-1-gig",
+          "name": "Internet 1000 (Fiber 1 GIG)",
+          "display_name": "AT&T Internet 1000 (Fiber 1 GIG)",
+          "speed": "Speeds up to 1 Gig",
+          "price": "$80/mo.",
+          "price_note": "Price plus taxes and fees after $10/mo. AutoPay & Paperless Bill discount.",
+          "features": [
+            "1 GB connection — max speed and bandwidth",
+            "Fastest speed for smart homes and seamless collaboration",
+            "25x faster upload speeds than cable",
+            "Ultra-low lag for pro-level gaming",
+            "AT&T Internet Security included"
+          ],
+          "notes": [],
+          "offer_details": [
+            "Geographic and service restrictions apply to AT&T Internet services. Not all speeds available in all areas.",
+            "Limited availability. May not be available in your area.",
+            "INTERNET OFFER: Price for Internet 300, Internet 500, and Internet 1000 for residential customers is after AutoPay and paperless billing discount. Autopay & Paperless Bill Discount: Discount off the monthly rate when account is active & enrolled in both. Pay full plan cost until discount starts w/in 2 bill cycles. Must maintain autopay/paperless bill and valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly cost recovery charge which are not government-required apply in TX, OH and NV. Taxes also apply. For one time AT&T transactional fees, see att.com/fees for details. Credit restrictions apply. Cancellation Policy: This service will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms.",
+            "†Internet speed claims represent maximum network service capability speeds and based on wired connection to gateway. 1 GIG+ speeds available to new customers with the latest router (\"BGW320\") and recommended setup. Actual customer speeds may vary based on a number of factors and are not guaranteed. For more information, go to att.com/speed101.",
+            "Offers may not be combined with other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers.",
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/cancel or calling 800-288-2020"
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/HSIA1000g/88541733/N/30?taxationgeocode=111210080&acctype=I&accsubtype=R"
+        },
+        {
+          "plan_id": "internet-500-fiber-500",
+          "name": "Internet 500 (Fiber 500)",
+          "display_name": "AT&T Internet 500 (Fiber 500)",
+          "speed": "Speeds up to 500 Mbps",
+          "price": "$65/mo.",
+          "price_note": "Price plus taxes and fees after $10/mo. AutoPay & Paperless Bill discount.",
+          "features": [
+            "500 Mbps equal upload and download speeds",
+            "Faster speed and more bandwidth for the always connected household",
+            "20x faster upload speeds than cable",
+            "Power even more devices so everyone can enjoy their own screen",
+            "AT&T Internet Security included"
+          ],
+          "notes": [],
+          "offer_details": [
+            "Geographic and service restrictions apply to AT&T Internet services. Not all speeds available in all areas.",
+            "Limited availability. May not be available in your area.",
+            "INTERNET OFFER: Price for Internet 300, Internet 500, and Internet 1000 for residential customers is after AutoPay and paperless billing discount. Autopay & Paperless Bill Discount: Discount off the monthly rate when account is active & enrolled in both. Pay full plan cost until discount starts w/in 2 bill cycles. Must maintain autopay/paperless bill and valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly cost recovery charge which are not government-required apply in TX, OH and NV. Taxes also apply. For one time AT&T transactional fees, see att.com/fees for details. Credit restrictions apply. Cancellation Policy: This service will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms.",
+            "†Internet speed claims represent maximum network service capability speeds and based on wired connection to gateway. 1 GIG+ speeds available to new customers with the latest router (\"BGW320\") and recommended setup. Actual customer speeds may vary based on a number of factors and are not guaranteed. For more information, go to att.com/speed101.",
+            "Offers may not be combined with other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers.",
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/cancel or calling 800-288-2020"
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/HSIA500g/88541733/N/30?taxationgeocode=111210080&acctype=I&accsubtype=R"
+        },
+        {
+          "plan_id": "internet-300-fiber-300",
+          "name": "Internet 300 (Fiber 300)",
+          "display_name": "AT&T Internet 300 (Fiber 300)",
+          "speed": "Speeds up to 300 Mbps",
+          "price": "$50/mo.",
+          "price_note": "Price plus taxes and fees after $10/mo. AutoPay & Paperless Bill discount.",
+          "features": [
+            "300 Mbps equal upload and download speeds",
+            "Fast online speeds for the whole family",
+            "15x faster upload speeds than cable",
+            "Connect 10+ devices at once throughout your whole home",
+            "AT&T Internet Security included"
+          ],
+          "notes": [],
+          "offer_details": [
+            "Geographic and service restrictions apply to AT&T Internet services. Not all speeds available in all areas.",
+            "Limited availability. May not be available in your area.",
+            "INTERNET OFFER: Price for Internet 300, Internet 500, and Internet 1000 for residential customers is after AutoPay and paperless billing discount. Autopay & Paperless Bill Discount: Discount off the monthly rate when account is active & enrolled in both. Pay full plan cost until discount starts w/in 2 bill cycles. Must maintain autopay/paperless bill and valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly cost recovery charge which are not government-required apply in TX, OH and NV. Taxes also apply. For one time AT&T transactional fees, see att.com/fees for details. Credit restrictions apply. Cancellation Policy: This service will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. Pricing subject to change. Subj. to Internet Terms of Service at att.com/internet-terms.",
+            "†Internet speed claims represent maximum network service capability speeds and based on wired connection to gateway. 1 GIG+ speeds available to new customers with the latest router (\"BGW320\") and recommended setup. Actual customer speeds may vary based on a number of factors and are not guaranteed. For more information, go to att.com/speed101.",
+            "Offers may not be combined with other promotional offers on the same services and may be modified or discontinued at any time without notice. Other conditions apply to all offers.",
+            "Service Disclosure and Easy Cancellation: You agree that the service(s) selected will automatically renew each month based on the rates in effect at the time of renewal (currently the rate shown on the screen), minus any discounts or promotions qualified for. This will continue until the service is cancelled. To avoid further charges, cancel before the end of the monthly bill cycle by visiting att.com/cancel or calling 800-288-2020"
+          ],
+          "broadband_facts_url": "https://www.att.com/labels/shared/nutrition/CONS/HSIA300g/88541733/N/30?taxationgeocode=111210080&acctype=I&accsubtype=R"
+        }
+      ],
+      "products": [
+        "internet",
+        "tv"
+      ]
+    }
+  },
+  "plans": {
+    "AT&T Internet Air": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "wifi_extender",
+          "heading": "Select your All-Fi Extender Option.",
+          "choices": [
+            {
+              "title": "Next-generation Wi-Fi experience, delivers more coverage to more corners of your home",
+              "price": "$12/mo.",
+              "selected": true,
+              "details": "Please ask the Customer the question below to determine AT&T All-Fi Extenders need.Is your home over 1500 sq ft?Do you have more than 1 floor in your home?Does your home have a basement, pool house, or any outside area you would like covered with wi-fi?If the customer answers yes to any one of the three questions then the Customer should select a extender for their home.DisclosureAT&T All-Fi Extenders are ideal for customers with:Homes 1,500 square feet or moreMulti story homesExtended Wi-Fi Coverage Service:$12/month plus tax for up to 5 Wi-Fi Extenders as the sole discretion of AT&TExpands home Wi-Fi coverage and reduces dead zonesLifetime xxtender replacement while your service is active"
+            },
+            {
+              "title": "Decline Extended Wi-Fi Coverage Service",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        }
+      ],
+      "included": [
+        "AT&T All-Fi Hub"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "AT&T Internet Air",
+          "detail": "Provided by AT&T",
+          "charge": "$65.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          },
+          "wifi_extender": {
+            "section": "internet",
+            "item": "AT&T Extended Wi-Fi",
+            "detail": "",
+            "charge": "$12.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "AT&T All-Fi Hub",
+            "detail": "",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "hicksville",
+        "dallas"
+      ]
+    },
+    "Internet 100": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "equip",
+          "heading": "Select your Internet equipment.",
+          "choices": [
+            {
+              "title": "AT&T Internet Equipment Fee",
+              "price": "$0",
+              "selected": true,
+              "details": "Your device lets you connect to your wired and wireless smart devices to the internet."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "heading": "How do you want your internet installed?",
+          "choices": [
+            {
+              "title": "AT&T Professional Install Fee",
+              "price": "$99",
+              "selected": true,
+              "details": "$99 AT&T Professional Installation fee applied on first bill for professionally assisted installation of Internet service."
+            }
+          ]
+        }
+      ],
+      "included": [
+        "Unlimited Data"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "Internet 100",
+          "detail": "Provided by AT&T",
+          "charge": "$70.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "AT&T Internet Equipment Fee",
+            "detail": "",
+            "charge": "Included"
+          },
+          {
+            "section": "internet",
+            "item": "Unlimited Data",
+            "detail": "Unlimited data included with package",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "dallas"
+      ]
+    },
+    "Internet 5000 (Fiber 5 GIG)": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "equip",
+          "heading": "Select your Internet equipment.",
+          "choices": [
+            {
+              "title": "AT&T Internet Equipment Fee",
+              "price": "$0",
+              "selected": true,
+              "details": "Your device lets you connect to your wired and wireless smart devices to the internet."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "heading": "How do you want your internet installed?",
+          "choices": [
+            {
+              "title": "AT&T Professional Install",
+              "price": "$0",
+              "selected": true,
+              "details": "AT&T professional installation fee waived with speeds of 300MB or more"
+            }
+          ]
+        }
+      ],
+      "included": [
+        "$15 off for 12 months",
+        "YouTube TV 3 months Free with Fiber 1G+",
+        "$100 Reward Card (Requires Redemption)",
+        "$100 Reward Card (Requires Redemption)",
+        "Unlimited Data"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "Internet 5000 (Fiber 5 GIG)",
+          "detail": "Provided by AT&T",
+          "charge": "$135.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "$15 off for 12 months",
+            "detail": "$15.00 off Internet 5000 (Fiber 5 GIG) for 12 months",
+            "charge": "-$15.00"
+          },
+          {
+            "section": "internet",
+            "item": "YouTube TV 3 months Free with Fiber 1G+",
+            "detail": "3 Months YouTube TV Trial with AT&T Fiber 1GB+",
+            "charge": ""
+          },
+          {
+            "section": "internet",
+            "item": "AT&T Internet Equipment Fee",
+            "detail": "",
+            "charge": "Included"
+          },
+          {
+            "section": "internet",
+            "item": "Unlimited Data",
+            "detail": "Unlimited data included with package",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "atlanta"
+      ]
+    },
+    "Internet 1000 (Fiber 1 GIG)": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "equip",
+          "heading": "Select your Internet equipment.",
+          "choices": [
+            {
+              "title": "AT&T Internet Equipment Fee",
+              "price": "$0",
+              "selected": true,
+              "details": "Your device lets you connect to your wired and wireless smart devices to the internet."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "heading": "How do you want your internet installed?",
+          "choices": [
+            {
+              "title": "AT&T Professional Install",
+              "price": "$0",
+              "selected": true,
+              "details": "AT&T professional installation fee waived with speeds of 300MB or more"
+            }
+          ]
+        }
+      ],
+      "included": [
+        "$10 off for 12 months",
+        "YouTube TV 3 months Free with Fiber 1G+",
+        "$100 Reward Card (Requires Redemption)",
+        "$100 Reward Card (Requires Redemption)",
+        "Unlimited Data"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "Internet 1000 (Fiber 1 GIG)",
+          "detail": "Provided by AT&T",
+          "charge": "$90.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "$10 off for 12 months",
+            "detail": "$10.00 off Internet 1000 (Fiber 1 GIG) for 12 months",
+            "charge": "-$10.00"
+          },
+          {
+            "section": "internet",
+            "item": "YouTube TV 3 months Free with Fiber 1G+",
+            "detail": "3 Months YouTube TV Trial with AT&T Fiber 1GB+",
+            "charge": ""
+          },
+          {
+            "section": "internet",
+            "item": "AT&T Internet Equipment Fee",
+            "detail": "",
+            "charge": "Included"
+          },
+          {
+            "section": "internet",
+            "item": "Unlimited Data",
+            "detail": "Unlimited data included with package",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "atlanta"
+      ]
+    },
+    "Internet 500 (Fiber 500)": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "equip",
+          "heading": "Select your Internet equipment.",
+          "choices": [
+            {
+              "title": "AT&T Internet Equipment Fee",
+              "price": "$0",
+              "selected": true,
+              "details": "Your device lets you connect to your wired and wireless smart devices to the internet."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "heading": "How do you want your internet installed?",
+          "choices": [
+            {
+              "title": "AT&T Professional Install",
+              "price": "$0",
+              "selected": true,
+              "details": "AT&T professional installation fee waived with speeds of 300MB or more"
+            }
+          ]
+        }
+      ],
+      "included": [
+        "$5 off for 12 months",
+        "Unlimited Data"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "Internet 500 (Fiber 500)",
+          "detail": "Provided by AT&T",
+          "charge": "$75.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "$5 off for 12 months",
+            "detail": "$5.00 off Internet 500 (Fiber 500) for 12 months",
+            "charge": "-$5.00"
+          },
+          {
+            "section": "internet",
+            "item": "AT&T Internet Equipment Fee",
+            "detail": "",
+            "charge": "Included"
+          },
+          {
+            "section": "internet",
+            "item": "Unlimited Data",
+            "detail": "Unlimited data included with package",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "atlanta"
+      ]
+    },
+    "Internet 300 (Fiber 300)": {
+      "groups": [
+        {
+          "key": "autopay",
+          "heading": "Select your Autopay option.",
+          "choices": [
+            {
+              "title": "AutoPay/Paperless Billing Discount",
+              "price": "-$10/mo.",
+              "selected": true,
+              "details": "$10/mo AutoPay and Paperless Billing discount with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card. If you decline AutoPay and Paperless Billing your price will increase."
+            },
+            {
+              "title": "Decline AutoPay/Paperless Billing",
+              "price": "$0",
+              "selected": false,
+              "details": ""
+            }
+          ]
+        },
+        {
+          "key": "equip",
+          "heading": "Select your Internet equipment.",
+          "choices": [
+            {
+              "title": "AT&T Internet Equipment Fee",
+              "price": "$0",
+              "selected": true,
+              "details": "Your device lets you connect to your wired and wireless smart devices to the internet."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "heading": "How do you want your internet installed?",
+          "choices": [
+            {
+              "title": "AT&T Professional Install",
+              "price": "$0",
+              "selected": true,
+              "details": "AT&T professional installation fee waived with speeds of 300MB or more"
+            }
+          ]
+        }
+      ],
+      "included": [
+        "Unlimited Data"
+      ],
+      "cart": {
+        "plan": {
+          "section": "internet",
+          "item": "Internet 300 (Fiber 300)",
+          "detail": "Provided by AT&T",
+          "charge": "$60.00"
+        },
+        "when_chosen": {
+          "autopay": {
+            "section": "internet",
+            "item": "AutoPay/Paperless Billing Discount",
+            "detail": "Taxes and fees extra. Plan price after $10/mo. discount (starts within 2 bills) when you sign up for paperless billing and AutoPay with bank account or AT&T Citi. Reduced to $5/mo with debit card and no discount with credit card.",
+            "charge": "-$10.00"
+          }
+        },
+        "always": [
+          {
+            "section": "internet",
+            "item": "AT&T Internet Equipment Fee",
+            "detail": "",
+            "charge": "Included"
+          },
+          {
+            "section": "internet",
+            "item": "Unlimited Data",
+            "detail": "Unlimited data included with package",
+            "charge": "Included"
+          }
+        ]
+      },
+      "seen_at": [
+        "atlanta"
+      ]
+    }
+  }
+}

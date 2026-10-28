@@ -1,34 +1,40 @@
 /**
- * Local stand-in for order-service + the SPOC order automation, for automated tests only.
+ * Local stand-in for order-service + the SPOC order automation, for automated tests only (never shown to
+ * visitors). It implements order-service's API (../../../order-service/server.py) and answers with results
+ * shaped exactly like the automation's after to_aria(): { status, order_ref, message, retryable, data }.
  *
- * Implements order-service's API (../../../order-service/server.py) and answers with results shaped exactly
- * like the automation's OrderResult after to_aria(): { status, order_ref, message, retryable, data }.
- * The street line picks the scenario (case-insensitive keywords):
+ * Plans, options and cart lines come from portal-fixtures.json: data copied exactly from the live partner
+ * portal for the documented test addresses (read-only exploration, research/portal-options.md).
+ *   street contains "courtenay"  -> Atlanta GA plans (Internet 5000 / 1000 / 500 / 300)
+ *   street contains "lakeforest" -> Dallas TX plans (Internet 100, AT&T Internet Air)
+ *   anything else                -> Hicksville NY plans (AT&T Internet Air)
  *
- *   (none)        quote_ready, then handoff_ready          options      options_required until "equip"/"install" are answered
- *   notfound      address_not_found                        needsunit    address_needs_unit (until a unit is given)
- *   ambiguous     address_ambiguous                        nooffers     no_offers
- *   planmissing   plan_not_found                           noproduct    product_not_available
- *   bundle        unexpected_cart_items (DIRECTV pushed)   extender     quote_ready but with the declined $12 extender in the cart
- *   expired       session_expired                          portalerror  portal_error
- *   timeoutstatus timeout (the automation's own status)    notconfigured not_configured
- *   slow          quote takes 3x longer                    hang         never finishes (the page's own limit applies)
- *   down          order-service answers 500
+ * Scenario keywords in the street line (case-insensitive):
+ *   plans call:  notfound, needsunit (until a unit is given), ambiguous, nooffers, noproduct (no Internet),
+ *                expired, portalerror, timeoutstatus, notconfigured, slow (3x slower), hang (never finishes),
+ *                down (order-service answers 500)
+ *   quote call:  planmissing (plan_not_found), bundle (DIRECTV pushed into the cart), extender (a declined
+ *                $12 Extended Wi-Fi line stays in the cart: the "$77" case)
  * Customer email:  rejected@...  invalid_customer_details (email) ;  handofffail@...  portal_error on the handoff
  *
  * GET /__mock/log returns every request body received (tests check nothing sensitive arrived).
- * Env: MOCK_PORT (4010), MOCK_KEY (must equal ATTSPOC_SERVICE_KEY), MOCK_QUOTE_MS (1500), MOCK_HANDOFF_MS (600).
+ * Env: MOCK_PORT (4010), MOCK_KEY (must equal ATTSPOC_SERVICE_KEY), MOCK_PLANS_MS (1200), MOCK_QUOTE_MS (900),
+ *      MOCK_HANDOFF_MS (600).
  */
 import http from "node:http";
 import crypto from "node:crypto";
+import fs from "node:fs";
 
 const PORT = Number(process.env.MOCK_PORT || 4010);
 const KEY = process.env.MOCK_KEY || "test-order-service-key-0123456789abcdef";
-const QUOTE_MS = Number(process.env.MOCK_QUOTE_MS || 1500);
+const PLANS_MS = Number(process.env.MOCK_PLANS_MS || 1200);
+const QUOTE_MS = Number(process.env.MOCK_QUOTE_MS || 900);
 const HANDOFF_MS = Number(process.env.MOCK_HANDOFF_MS || 600);
+const FIXTURES = JSON.parse(fs.readFileSync(new URL("./portal-fixtures.json", import.meta.url), "utf8"));
 
 // The automation's customer messages (att_order_automation.CUSTOMER_MESSAGES), kept for realistic payloads.
 const MESSAGES = {
+  plans_ready: "Here are the plans available at your address.",
   quote_ready: "Good news, that plan is available at your address. Your monthly total would be {total}, plus taxes and fees.",
   handoff_ready: "Your order is all set up. I'm connecting you with a specialist who will complete the credit check and payment details with you securely.",
   address_not_found: "I couldn't verify that service address. Could you confirm the street and ZIP code?",
@@ -55,88 +61,85 @@ const received = [];
 
 const ref = () => "UW-" + Array.from(crypto.randomBytes(8), (b) => "ABCDEFGHJKMNPQRSTVWXYZ23456789"[b % 30]).join("");
 const money = (n) => `${n < 0 ? "-" : ""}$${Math.abs(n).toFixed(2)}`;
+const amount = (s) => {
+  const m = /(-)?\$\s*([\d,]+(?:\.\d{1,2})?)/.exec(s || "");
+  return m ? (m[1] ? -1 : 1) * Number(m[2].replace(/,/g, "")) : 0;
+};
+const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const isDecline = (t) => norm(t).startsWith("decline");
 
 function result(status, orderRef, data = {}) {
   const total = data.cart_summary?.monthly_total ?? "shown by the specialist";
   return { status, order_ref: orderRef, message: MESSAGES[status].replace("{total}", total), retryable: RETRYABLE.has(status), data };
 }
 
-/** Cart, plan and option data the way the automation reports them (portal wording from the saved pages). */
-function priced(product, { sneakExtender = false } = {}) {
-  const o = product.options;
-  const air = product.plan_name === "AT&T Internet Air";
-  const base = air ? 65 : { "Internet 300 (Fiber 300)": 60, "Internet 500 (Fiber 500)": 65, "Internet 1000 (Fiber 1 GIG)": 80, "Internet 5000 (Fiber 5 GIG)": 125 }[product.plan_name] ?? 70;
-  const lines = [{ section: "internet", item: product.plan_name, charge: money(base) }];
-  const selected = [];
-  let total = base;
-  if (!air) {
-    lines.push({ section: "internet", item: "$15 off for 12 months", charge: money(-15) });
-    total -= 15;
-  }
-  if (o.autopay === true) {
-    lines.push({ section: "internet", item: "AutoPay/Paperless Billing Discount", charge: money(-10) });
-    total -= 10;
-  }
-  selected.push({ product_type: "internet", group: "autopay", choice: o.autopay === true ? "AutoPay/Paperless Billing Discount" : "Decline AutoPay/Paperless Billing", price: o.autopay === true ? "-$10/mo." : "$0" });
-  if (air) {
-    const extender = o.wifi_extender === true || sneakExtender;
-    if (extender) {
-      lines.push({ section: "internet", item: "AT&T Extended Wi-Fi", charge: money(12) });
-      total += 12;
-    }
-    selected.push({ product_type: "internet", group: "wifi_extender", choice: extender ? "Next-generation Wi-Fi experience, delivers more coverage to more corners of your home" : "Decline Extended Wi-Fi Coverage Service", price: extender ? "$12/mo." : "$0" });
-    lines.push({ section: "internet", item: "AT&T All-Fi Hub", charge: "Included" });
-  } else {
-    for (const [group, choice] of [["equip", "AT&T Internet Equipment Fee"], ["install", "AT&T Professional Install"]]) {
-      if (o[group] !== undefined) selected.push({ product_type: "internet", group, choice, price: "$0" });
-    }
-    lines.push({ section: "internet", item: "AT&T Internet Equipment Fee", charge: "Included" });
-  }
-  return {
-    cart_order_id: "DSIX000000001",
-    selected_plans: [{ product_type: "internet", name: product.plan_name, subtitle: "", price: `$${base}/mo.`, disclosure: "" }],
-    selected_options: selected,
-    cart_summary: { sections: ["internet"], monthly_lines: lines, monthly_total: money(total) },
-  };
-}
+const siteFor = (street) => (street.includes("courtenay") ? "atlanta" : street.includes("lakeforest") ? "dallas" : "hicksville");
 
-function quoteOutcome(job) {
+function plansOutcome(job) {
   const a = job.service_address;
   const street = a.street.toLowerCase();
-  const product = job.products[0];
   const has = (k) => street.includes(k);
   if (has("notfound")) return result("address_not_found", job.order_ref, { field_errors: [] });
   if (has("needsunit") && !a.unit_number) return result("address_needs_unit", job.order_ref);
-  if (has("ambiguous")) return result("address_ambiguous", job.order_ref, { address_options: ["1 AMBIGUOUS WAY APT A, ANYTOWN, NY 11801", "1 AMBIGUOUS WAY APT B, ANYTOWN, NY 11801"] });
+  if (has("ambiguous")) return result("address_ambiguous", job.order_ref);
   if (has("nooffers")) return result("no_offers", job.order_ref);
-  if (has("planmissing")) return result("plan_not_found", job.order_ref, { product_type: "internet", available_plans: [{ name: "AT&T Internet Air", subtitle: "", price: "$65/mo.", disclosure: "" }] });
   if (has("noproduct")) return result("product_not_available", job.order_ref, { available_products: ["tv"] });
-  if (has("bundle"))
-    return result("unexpected_cart_items", job.order_ref, {
-      unexpected_sections: ["video"],
-      cart_summary: { sections: ["video", "internet"], monthly_lines: [{ section: "video", item: "PREMIER Streaming App", charge: "$258.00" }], monthly_total: "$258.99" },
-    });
   if (has("expired")) return result("session_expired", job.order_ref);
   if (has("portalerror")) return result("portal_error", job.order_ref);
   if (has("timeoutstatus")) return result("timeout", job.order_ref);
   if (has("notconfigured")) return result("not_configured", job.order_ref);
-  if (has("options") && (product.options.equip === undefined || product.options.install === undefined)) {
+  const site = FIXTURES.addresses[siteFor(street)];
+  return result("plans_ready", job.order_ref, { available_plans: site.plans, available_products: site.products, cart_order_id: "DSIX000000001" });
+}
+
+/** The portal cart for a plan and the visitor's answers, built from the real cart lines in the fixtures. */
+function cartFor(planName, answers, { sneakExtender = false } = {}) {
+  const fx = FIXTURES.plans[planName];
+  const lines = [fx.cart.plan];
+  const selected = [];
+  for (const g of fx.groups) {
+    const choice = g.choices.find((c) => c.title === answers[g.key]) ?? (answers[g.key] === true ? g.choices.find((c) => !isDecline(c.title)) : g.choices.find((c) => isDecline(c.title)));
+    selected.push({ product_type: "internet", group: g.key, choice: choice.title, price: choice.price });
+    const extra = fx.cart.when_chosen[g.key];
+    if (extra && (!isDecline(choice.title) || (sneakExtender && g.key === "wifi_extender"))) lines.push(extra);
+  }
+  lines.push(...fx.cart.always);
+  const total = lines.reduce((sum, l) => sum + amount(l.charge), 0);
+  return {
+    cart_order_id: "DSIX000000001",
+    selected_plans: [{ product_type: "internet", name: planName, subtitle: "", price: "" }],
+    selected_options: selected,
+    included_items: fx.included,
+    cart_summary: { sections: ["internet"], monthly_lines: lines, monthly_total: money(total) },
+  };
+}
+
+function quoteOutcome(job, plansJob) {
+  const street = plansJob.service_address.street.toLowerCase();
+  const product = job.products[0];
+  const fx = FIXTURES.plans[product.plan_name];
+  if (street.includes("planmissing") && Object.keys(product.options).length) return result("plan_not_found", job.order_ref, { product_type: "internet" });
+  const unanswered = fx.groups.filter((g) => product.options[g.key] === undefined || !g.choices.some((c) => c.title === product.options[g.key] || typeof product.options[g.key] === "boolean"));
+  if (unanswered.length)
     return result("options_required", job.order_ref, {
       product_type: "internet",
-      option_groups: [
-        { key: "equip", heading: "Select your Internet equipment.", choices: [{ title: "AT&T Internet Equipment Fee", price: "$0", selected: true, details: "Agent script: ask the customer ..." }] },
-        { key: "install", heading: "How do you want your internet installed?", choices: [{ title: "AT&T Professional Install", price: "$0", selected: true, details: "Agent script: read the disclosure ..." }] },
-      ].filter((g) => product.options[g.key] === undefined),
+      option_groups: fx.groups,
+      unanswered: unanswered.map((g) => g.key),
+      included_items: fx.included,
     });
-  }
-  return result("quote_ready", job.order_ref, priced(product, { sneakExtender: has("extender") }));
+  if (street.includes("bundle"))
+    return result("unexpected_cart_items", job.order_ref, {
+      unexpected_sections: ["video"],
+      cart_summary: { sections: ["video", "internet"], monthly_lines: [{ section: "video", item: "PREMIER Streaming App", detail: "", charge: "$258.00" }], monthly_total: "$258.98" },
+    });
+  return result("quote_ready", job.order_ref, cartFor(product.plan_name, product.options, { sneakExtender: street.includes("extender") }));
 }
 
 function handoffOutcome(job, quote) {
   const email = job.customer.email.toLowerCase();
-  if (email.startsWith("rejected@")) return result("invalid_customer_details", job.order_ref, { fields: ["email"], field_errors: ["Email is invalid. Please fix."] });
+  if (email.startsWith("rejected@")) return result("invalid_customer_details", job.order_ref, { fields: ["email"], field_errors: ["We were unable to verify your email, please confirm your entry before continuing."] });
   if (email.startsWith("handofffail@")) return result("portal_error", job.order_ref);
-  return result("handoff_ready", job.order_ref, priced(quote.products[0]));
+  return result("handoff_ready", job.order_ref, cartFor(quote.products[0].plan_name, quote.products[0].options));
 }
 
 function send(res, status, body) {
@@ -148,6 +151,16 @@ function sensitive(value, path = "") {
   if (Array.isArray(value)) return value.flatMap((v, i) => sensitive(v, `${path}[${i}]`));
   if (!value || typeof value !== "object") return [];
   return Object.entries(value).flatMap(([k, v]) => (SENSITIVE_KEY_RE.test(k) ? [`${path}${k}`] : sensitive(v, `${path}${k}.`)));
+}
+
+function addJob(kind, requestId, job, ms, outcome) {
+  job.id = crypto.randomBytes(18).toString("base64url");
+  job.kind = kind;
+  job.readyAt = Date.now() + ms;
+  job.result = () => outcome;
+  jobs.set(job.id, job);
+  byRequest.set(`${kind}:${requestId}`, job);
+  return job;
 }
 
 const server = http.createServer(async (req, res) => {
@@ -177,18 +190,27 @@ const server = http.createServer(async (req, res) => {
     return send(res, 200, { job_id: job.id, kind: job.kind, state: done ? "done" : "running", ...(done ? { result: job.result() } : {}) });
   }
 
-  if (req.method === "POST" && url.pathname === "/v1/quotes") {
+  if (req.method === "POST" && url.pathname === "/v1/plans") {
     const street = String(body.service_address?.street ?? "").toLowerCase();
     if (street.includes("down")) return send(res, 500, { error: "internal" });
+    const existing = byRequest.get(`plans:${body.request_id}`);
+    if (existing) return send(res, 202, { job_id: existing.id, kind: "plans", state: "running" });
+    const job = { order_ref: ref(), service_address: body.service_address, hang: street.includes("hang") };
+    addJob("plans", body.request_id, job, PLANS_MS * (street.includes("slow") ? 3 : 1), plansOutcome(job));
+    return send(res, 202, { job_id: job.id, kind: "plans", state: "running" });
+  }
+
+  if (req.method === "POST" && url.pathname === "/v1/quotes") {
     const existing = byRequest.get(`quote:${body.request_id}`);
     if (existing) return send(res, 202, { job_id: existing.id, kind: "quote", state: "running" });
-    const job = { id: crypto.randomBytes(18).toString("base64url"), kind: "quote", order_ref: ref(), service_address: body.service_address, products: body.products };
-    job.readyAt = Date.now() + QUOTE_MS * (street.includes("slow") ? 3 : 1);
-    job.hang = street.includes("hang");
-    const outcome = quoteOutcome(job);
-    job.result = () => outcome;
-    jobs.set(job.id, job);
-    byRequest.set(`quote:${body.request_id}`, job);
+    const plansJob = jobs.get(body.plans_job_id);
+    if (!plansJob || plansJob.kind !== "plans") return send(res, 404, { error: "plans_not_found" });
+    const plans = plansJob.result();
+    if (plans.status !== "plans_ready") return send(res, 409, { error: "plans_not_ready" });
+    if (!plans.data.available_plans.some((p) => p.name === body.plan_name)) return send(res, 400, { error: "invalid_request", fields: ["plan_name"] });
+    const products = [{ product_type: "internet", plan_name: body.plan_name, options: body.options ?? {} }];
+    const job = { order_ref: plansJob.order_ref, service_address: plansJob.service_address, products };
+    addJob("quote", body.request_id, job, QUOTE_MS, quoteOutcome(job, plansJob));
     return send(res, 202, { job_id: job.id, kind: "quote", state: "running" });
   }
 
@@ -198,11 +220,8 @@ const server = http.createServer(async (req, res) => {
     const quote = jobs.get(body.quote_job_id);
     if (!quote || quote.kind !== "quote") return send(res, 404, { error: "quote_not_found" });
     if (quote.result().status !== "quote_ready") return send(res, 409, { error: "quote_not_ready" });
-    const job = { id: crypto.randomBytes(18).toString("base64url"), kind: "handoff", order_ref: quote.order_ref, customer: body.customer, readyAt: Date.now() + HANDOFF_MS };
-    const outcome = handoffOutcome(job, quote);
-    job.result = () => outcome;
-    jobs.set(job.id, job);
-    byRequest.set(`handoff:${body.request_id}`, job);
+    const job = { order_ref: quote.order_ref, customer: body.customer };
+    addJob("handoff", body.request_id, job, HANDOFF_MS, handoffOutcome(job, quote));
     return send(res, 202, { job_id: job.id, kind: "handoff", state: "running" });
   }
   return send(res, 404, { error: "not_found" });

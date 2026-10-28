@@ -17,7 +17,8 @@ Website (Vercel) ──HTTPS + Bearer key──► order-service ──► att_o
 | Endpoint | Purpose |
 |---|---|
 | `GET /healthz` | Liveness check, `{"ok": true}`. No key needed; reveals nothing else. |
-| `POST /v1/quotes` | Starts a quote job: `{request_id, service_address, products}` returns `202 {job_id, state}` |
+| `POST /v1/plans` | Starts a plans job: `{request_id, service_address}`. The result (`plans_ready`) lists the Internet plans the portal offers at the address, as its plan cards show them. Nothing is added to the cart. |
+| `POST /v1/quotes` | Starts a quote job for one of those plans: `{request_id, plans_job_id, plan_name, options}`. With `options: {}` the result is `options_required` with the portal's real option groups for that plan; with an answer for every group it is `quote_ready` with the portal cart. (The older `{request_id, service_address, products}` body still works.) |
 | `POST /v1/handoffs` | Starts the handoff for a finished quote: `{request_id, quote_job_id, customer, customer_confirmed: true}` |
 | `GET /v1/jobs/<job_id>` | Job state. When done, the automation's customer-safe result (`to_aria`) |
 
@@ -29,6 +30,12 @@ Website (Vercel) ──HTTPS + Bearer key──► order-service ──► att_o
   automation's `order_ref` and shown to the customer.
 - **Handoff reuse:** the handoff reuses the quote's exact address, products and options, so the automation
   resumes the quoted portal session. The browser cannot change the order between quote and handoff.
+- **One portal session per visitor:** a plans job keeps its portal page open (parked) on the Plans page; the
+  quotes made from it continue there, and after `options_required` on the Options page. Parked pages close
+  after 20 minutes unused (the portal's own limit is 30); a lost session restarts automatically with a fresh
+  address check. A quote must name a plan that its plans job returned.
+- **Public results** never contain the portal link, a session id or the portal's cart id (removed even if the
+  automation returned them). Option texts meant for sales staff are removed by the website.
 
 **What is refused (with `422`, values never logged)**
 
@@ -105,7 +112,7 @@ python -m unittest discover -s tests -v
 
 The tests use `tests/stub_automation.py`, so no browser runs. They cover:
 
-- the key check;
+- the plans job and quotes made from it (options first, then the quote);
 - refusal of sensitive data;
 - idempotency;
 - the job lifecycle;

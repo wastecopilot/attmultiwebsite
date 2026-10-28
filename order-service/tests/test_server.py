@@ -146,6 +146,58 @@ class ServiceTests(unittest.TestCase):
         status, again = self.call("POST", "/v1/handoffs", {**body, "request_id": "req-ok-000000000003"})
         self.assertEqual((status, again["job_id"]), (202, started["job_id"]))
 
+    def plans(self, request_id, address=ADDRESS):
+        status, body = self.call("POST", "/v1/plans", {"request_id": request_id, "service_address": address})
+        self.assertEqual(status, 202, body)
+        return body["job_id"]
+
+    def test_plans_job_lists_plans_and_drops_portal_internals(self):
+        result = self.wait(self.plans("req-plans-000000001"))
+        self.assertEqual(result["status"], "plans_ready")
+        self.assertEqual([p["name"] for p in result["data"]["available_plans"]], ["AT&T Internet Air"])
+        text = json.dumps(result)
+        for internal in ("attspoc", "(S(", "DSIX1", "session_id"):
+            self.assertNotIn(internal, text)
+        self.assertEqual(server.aoa.calls[-1]["product_type"], "internet")
+
+    def test_plans_requests_are_checked_like_quotes(self):
+        self.assertEqual(self.call("POST", "/v1/plans", {"request_id": "req-plans-000000002", "service_address": ADDRESS}, key=None)[0], 401)
+        status, body = self.call("POST", "/v1/plans", {"request_id": "req-plans-000000003", "service_address": {**ADDRESS, "dob": "1990-01-01"}})
+        self.assertEqual((status, body["error"]), (422, "sensitive_data_rejected"))
+        self.assertEqual(self.call("POST", "/v1/plans", {"request_id": "req-plans-000000004", "service_address": ADDRESS, "plan": "x"})[0], 400)
+        self.assertEqual(self.plans("req-plans-000000005"), self.plans("req-plans-000000005"))
+
+    def test_quote_from_plans_returns_options_then_the_quote(self):
+        plans_id = self.plans("req-pq-0000000000001")
+        plans = self.wait(plans_id)
+        first = {"request_id": "req-pq-0000000000002", "plans_job_id": plans_id, "plan_name": "AT&T Internet Air", "options": {}}
+        status, started = self.call("POST", "/v1/quotes", first)
+        self.assertEqual(status, 202, started)
+        options = self.wait(started["job_id"])
+        self.assertEqual(options["status"], "options_required")
+        self.assertEqual([g["key"] for g in options["data"]["option_groups"]], ["autopay", "wifi_extender"])
+        answers = {"autopay": "AutoPay/Paperless Billing Discount", "wifi_extender": "Decline Extended Wi-Fi Coverage Service"}
+        status, started = self.call("POST", "/v1/quotes", {**first, "request_id": "req-pq-0000000000003", "options": answers})
+        self.assertEqual(status, 202)
+        quote = self.wait(started["job_id"])
+        self.assertEqual((quote["status"], quote["order_ref"]), ("quote_ready", plans["order_ref"]))
+        sent = server.aoa.calls[-1]
+        self.assertEqual((sent["order_ref"], sent["service_address"]), (plans["order_ref"], ADDRESS))
+        self.assertEqual(sent["products"], [{"product_type": "internet", "plan_name": "AT&T Internet Air", "options": answers}])
+
+    def test_quote_from_plans_only_for_a_listed_plan_of_a_finished_plans_job(self):
+        body = {"request_id": "req-pq-0000000000010", "plans_job_id": "n" * 24, "plan_name": "AT&T Internet Air", "options": {}}
+        self.assertEqual(self.call("POST", "/v1/quotes", body)[0], 404)
+        failed = self.plans("req-pq-0000000000011", {**ADDRESS, "street": "1 Notfound Way"})
+        self.assertEqual(self.wait(failed)["status"], "address_not_found")
+        self.assertEqual(self.call("POST", "/v1/quotes", {**body, "plans_job_id": failed})[0], 409)
+        ok = self.plans("req-pq-0000000000012")
+        self.wait(ok)
+        status, resp = self.call("POST", "/v1/quotes", {**body, "plans_job_id": ok, "plan_name": "Internet 1000 (Fiber 1 GIG)"})
+        self.assertEqual((status, resp["fields"]), (400, ["plan_name"]))
+        status, resp = self.call("POST", "/v1/quotes", {**body, "plans_job_id": ok, "options": {"autopay": ["x"]}})
+        self.assertEqual((status, resp["fields"]), (400, ["options"]))
+
     def test_capacity_limit(self):
         old, server.MAX_QUEUED = server.MAX_QUEUED, 0
         try:
@@ -181,7 +233,14 @@ class RealAutomationTests(unittest.TestCase):
                             "customer": CUSTOMER, "products": PRODUCTS})
         self.assertEqual(r["status"], "not_confirmed")
 
+    def test_plans_request_refuses_sensitive_fields(self):
+        import asyncio
+        r = asyncio.run(self.aoa.list_plans({"order_ref": "test-ref-3", "service_address": {**ADDRESS, "ssn": "123-45-6789"}}))
+        self.assertEqual(r["status"], "sensitive_data_rejected")
+        self.assertNotIn("123-45-6789", json.dumps(r))
+
     def test_service_payload_shape_is_valid_for_the_automation(self):
+        self.aoa.PlansRequest.model_validate({"order_ref": "UW-ABCDEFGH", "service_address": ADDRESS, "product_type": "internet"})
         self.aoa.OrderRequest.model_validate({"order_ref": "UW-ABCDEFGH", "mode": "quote", "service_address": ADDRESS, "products": PRODUCTS})
         self.aoa.OrderRequest.model_validate({"order_ref": "UW-ABCDEFGH", "mode": "handoff", "customer_confirmed": True,
                                               "service_address": ADDRESS, "products": PRODUCTS, "customer": CUSTOMER})

@@ -3,11 +3,10 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode, type Ref } from "react";
 import Link from "@/components/ui/AppLink";
 import type { Offer } from "@/data/offer-types";
-import type { OrderablePlan, OrderQuestion } from "@/data/order-plans";
-import { Conditions, FinePrint, Price, BroadbandFacts } from "@/components/offers/OfferBits";
+import { offerIdForPortalName, portalNameForOffer, portalPlanSlug } from "@/data/order-plans";
 import { PhoneLink } from "@/components/PhoneLink";
 import { track } from "@/lib/analytics";
-import type { OrderOutcome } from "@/lib/order/outcome";
+import { amount, type ChosenOption, type Expected, type OptionGroup, type OrderOutcome, type PlanCard, type QuoteLine } from "@/lib/order/outcome";
 import {
   US_STATES,
   validateAddress,
@@ -19,57 +18,92 @@ import {
 } from "@/lib/order/validation";
 import { newRequestId, startJob, waitForJob } from "./order-api";
 
-type Step = "plan" | "address" | "quoting" | "options" | "quote" | "details" | "confirm" | "submitting" | "done" | "stop";
-type ExtraGroup = Extract<OrderOutcome, { screen: "options" }>["groups"][number];
-type Quote = { jobId: string; total: string; lines: { item: string; charge: string }[] };
+type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "working" | "done" | "stop" | "not_online";
+type Work = "plans" | "options" | "quote" | "submit";
+type Quote = { jobId: string; total: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[] };
 /** Screens that end the online flow: the visitor is asked to call. */
-type Stop =
-  | { kind: "failed"; retryable: boolean; retry?: "quote" | "submit" }
-  | { kind: "unrequested" }
-  | { kind: "plan_unavailable" }
-  | { kind: "no_service" };
+type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "no_service" };
 
 interface OrderFlowProps {
-  /** Offer named in the link (?plan=), orderable online or not; null when none or unknown. */
+  /** Marketing offer named in the link (?plan=), if any. */
   initialOffer: Offer | null;
-  /** The offers that can be ordered online, with their portal mapping. */
-  orderable: { offer: Offer; plan: OrderablePlan }[];
+  /** The raw ?plan= value (an offer id, or a portal plan id such as "internet-100"). */
+  planParam: string;
+  /** False when ?plan= names an offer that cannot be ordered online (wireless, phone, bundles). */
+  planOrderableOnline: boolean;
   /** Page the visitor came from (?source=), for analytics only. */
   source: string;
-  /** False when the order automation is not configured on the server. */
   onlineAvailable: boolean;
   timeouts: { quoteSeconds: number; handoffSeconds: number };
 }
 
-const STEPS = ["Plan", "Address", "Your quote", "Your details", "Confirm"] as const;
-const STEP_INDEX: Partial<Record<Step, number>> = { plan: 0, address: 1, quoting: 1, options: 1, quote: 2, details: 3, confirm: 4, submitting: 4 };
+const STEPS = ["Address", "Plans", "Options", "Your quote", "Your details", "Review"] as const;
+const STEP_INDEX: Partial<Record<Step, number>> = { address: 0, plans: 1, options: 2, quote: 3, details: 4, review: 5 };
+const WORK_STEP: Record<Work, number> = { plans: 0, options: 1, quote: 2, submit: 5 };
 const EMPTY_ADDRESS: AddressInput = { street: "", unit: "", city: "", state: "", zip: "" };
-const EMPTY_CUSTOMER: CustomerInput = { firstName: "", lastName: "", phone: "", email: "", billingLanguage: "", contactByPhone: "" };
+const EMPTY_CUSTOMER: CustomerInput = { firstName: "", lastName: "", phone: "", email: "", confirmEmail: "", billingLanguage: "", contactByPhone: false };
 
 const ADDRESS_NOTICE = {
   not_found: "We could not confirm this service address. Please check the street address and ZIP code.",
   needs_unit: "This address needs an apartment or unit number. Please add it below.",
   ambiguous: "More than one address matched. Please check the street address, apartment or unit number and ZIP code.",
 } as const;
+const EMAIL_REJECTED = "This email address was not accepted. Please enter a working email address that can receive mail.";
 
-const formatDate = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+const WORK_TEXT: Record<Work, { title: string; text: string; seconds: number }> = {
+  plans: { title: "Checking the Plans at Your Address", text: "This usually takes less than a minute. Please keep this page open.", seconds: 45 },
+  options: { title: "Getting the Options for Your Plan", text: "This usually takes less than a minute. Please keep this page open.", seconds: 30 },
+  quote: { title: "Preparing Your Quote", text: "This usually takes less than a minute. Please keep this page open.", seconds: 40 },
+  submit: { title: "Sending Your Order Request", text: "This usually takes less than a minute. Please keep this page open.", seconds: 25 },
+};
+
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const isFree = (price: string) => amount(price) <= 0;
+
+/** A paid add-on with a "Decline" choice starts on Decline, so nothing paid is ever added without a click. */
+function defaultAnswers(groups: OptionGroup[]): OptionAnswers {
+  const out: OptionAnswers = {};
+  for (const g of groups) {
+    const decline = g.choices.filter((c) => c.decline);
+    const others = g.choices.filter((c) => !c.decline);
+    if (g.key !== "autopay" && decline.length === 1 && others.length > 0 && others.every((c) => !isFree(c.price))) out[g.key] = decline[0].title;
+  }
+  return out;
+}
+
+/** Keeps ?plan= in the address bar equal to the plan highlighted on the page (other parameters untouched). */
+function showPlanInUrl(planName: string) {
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set("plan", offerIdForPortalName(planName) ?? portalPlanSlug(planName));
+    window.history.replaceState(window.history.state, "", url);
+  } catch {
+    // Older browsers: the page still works, only the address bar is not updated.
+  }
+}
 
 /**
- * The online order flow: Plan → Address → (quote runs) → Your quote → Your details → Confirm → reference.
- * A quote or confirmation is only ever shown when the order automation returned one; every failure ends on
- * an honest "please call" screen. No personal data is kept outside this component's state.
+ * The online order flow, mirroring the AT&T partner portal: Address → Plans at that address → Options →
+ * Your quote (the portal cart) → Your details → Review → reference. Plans, prices, options and the cart
+ * are only ever the portal's own answers; every failure ends on an honest "please call" screen. No
+ * personal data is kept outside this component's state.
  */
-export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, timeouts }: OrderFlowProps) {
-  const [offer, setOffer] = useState<Offer | null>(initialOffer);
-  const plan = orderable.find((o) => o.offer.id === offer?.id)?.plan;
-  const [choosingPlan, setChoosingPlan] = useState(!initialOffer);
-  const [step, setStep] = useState<Step>("plan");
-  const [answers, setAnswers] = useState<OptionAnswers>({});
-  const [extraGroups, setExtraGroups] = useState<ExtraGroup[]>([]);
-  const [planError, setPlanError] = useState("");
+export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source, onlineAvailable, timeouts }: OrderFlowProps) {
+  const [step, setStep] = useState<Step>(planOrderableOnline ? "address" : "not_online");
+  const [work, setWork] = useState<Work>("plans");
   const [address, setAddress] = useState<AddressInput>(EMPTY_ADDRESS);
   const [addressErrors, setAddressErrors] = useState<FieldErrors<AddressInput>>({});
   const [addressNotice, setAddressNotice] = useState("");
+  const [plansJobId, setPlansJobId] = useState("");
+  const [plans, setPlans] = useState<PlanCard[]>([]);
+  const [plansNotice, setPlansNotice] = useState("");
+  const [planName, setPlanName] = useState("");
+  const [planError, setPlanError] = useState("");
+  const [groups, setGroups] = useState<OptionGroup[]>([]);
+  const [included, setIncluded] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<OptionAnswers>({});
+  const [optionsError, setOptionsError] = useState("");
+  const [optionsNotice, setOptionsNotice] = useState("");
   const [quote, setQuote] = useState<Quote | null>(null);
   const [customer, setCustomer] = useState<CustomerInput>(EMPTY_CUSTOMER);
   const [customerErrors, setCustomerErrors] = useState<FieldErrors<CustomerInput>>({});
@@ -82,15 +116,17 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
   const abortRef = useRef<AbortController | null>(null);
   const begun = useRef(false);
 
-  const offerId = offer?.id ?? "none";
-  const value = offer?.price?.amount ?? 0;
-  const busy = step === "quoting" || step === "submitting";
+  const plan = plans.find((p) => p.name === planName);
+  // Analytics use the site's offer id when the portal plan has one (e.g. "fiber-300"), else the portal plan id.
+  const offerId = plan ? (offerIdForPortalName(plan.name) ?? plan.id) : (initialOffer?.id ?? "none");
+  const value = plan ? amount(plan.price) : (initialOffer?.price?.amount ?? 0);
+  const busy = step === "working";
 
   useEffect(() => {
     if (begun.current) return;
     begun.current = true;
-    track("begin_order", { offer_id: initialOffer?.id, value: initialOffer?.price?.amount ?? 0, source });
-  }, [initialOffer, source]);
+    track("begin_order", { offer_id: initialOffer?.id ?? (planParam || undefined), value: initialOffer?.price?.amount ?? 0, source });
+  }, [initialOffer, planParam, source]);
 
   // Move focus to the new step's heading so keyboard and screen-reader users follow along (not on page load).
   const shownStep = useRef(step);
@@ -116,67 +152,32 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
     setStep("stop");
   };
 
-  const choosePlan = (next: Offer) => {
-    setOffer(next);
-    setAnswers({});
-    setExtraGroups([]);
-    setQuote(null);
-    setPlanError("");
-    setChoosingPlan(false);
+  /** Starts a job and waits for its outcome; null when the page went away or the start already failed. */
+  const run = async (kind: Work, body: unknown, expected: Expected, seconds: number): Promise<{ jobId: string; outcome: OrderOutcome } | null> => {
+    setWork(kind);
+    setStep("working");
+    const started = await startJob(kind === "submit" ? "submit" : kind === "plans" ? "plans" : "quote", body);
+    if (started.kind !== "started") {
+      fail({ kind: "failed", retryable: started.kind === "unavailable", retry: kind }, started.kind === "rejected" ? "rejected" : "unavailable");
+      return null;
+    }
+    abortRef.current = new AbortController();
+    const outcome = await waitForJob(started.jobId, expected, seconds, abortRef.current.signal);
+    if (outcome === "aborted") return null;
+    if (outcome === "timeout") {
+      fail({ kind: "failed", retryable: kind !== "submit", retry: kind }, "page_timeout");
+      return null;
+    }
+    return { jobId: started.jobId, outcome };
   };
 
-  const submitPlan = (e: FormEvent) => {
-    e.preventDefault();
-    if (!plan) return;
-    // Groups the portal asked about later (extraGroups) are answered on their own step.
-    if (plan.questions.some((q) => answers[q.key] === undefined)) {
-      setPlanError("Please choose an option for each item.");
-      return;
-    }
-    setPlanError("");
+  const backToAddress = (reason: keyof typeof ADDRESS_NOTICE) => {
+    track("order_failed", { offer_id: offerId, value, reason: `address_${reason}` });
+    setAddressNotice(ADDRESS_NOTICE[reason]);
     setStep("address");
   };
 
-  const runQuote = async (currentAnswers: OptionAnswers) => {
-    if (!plan) return;
-    setQuote(null);
-    setStep("quoting");
-    track("order_quote_started", { offer_id: offerId, value });
-    const started = await startJob("quote", { requestId: newRequestId(), plan: plan.offerId, options: currentAnswers, address });
-    if (started.kind !== "started") return fail({ kind: "failed", retryable: started.kind === "unavailable", retry: "quote" }, started.kind === "rejected" ? "rejected" : "unavailable");
-    abortRef.current = new AbortController();
-    const outcome = await waitForJob(started.jobId, currentAnswers, timeouts.quoteSeconds, abortRef.current.signal);
-    if (outcome === "aborted") return;
-    if (outcome === "timeout") return fail({ kind: "failed", retryable: true, retry: "quote" }, "page_timeout");
-    switch (outcome.screen) {
-      case "quote":
-        setQuote({ jobId: started.jobId, total: outcome.total, lines: outcome.lines });
-        track("order_quote_shown", { offer_id: offerId, value });
-        setStep("quote");
-        return;
-      case "options":
-        setExtraGroups((prev) => [...prev.filter((g) => !outcome.groups.some((n) => n.key === g.key)), ...outcome.groups]);
-        setAnswers((prev) => Object.fromEntries(Object.entries(prev).filter(([k]) => !outcome.groups.some((g) => g.key === k))));
-        setStep("options");
-        return;
-      case "address":
-        track("order_failed", { offer_id: offerId, value, reason: `address_${outcome.reason}` });
-        setAddressNotice(ADDRESS_NOTICE[outcome.reason]);
-        setStep("address");
-        return;
-      case "plan_unavailable":
-        return fail({ kind: "plan_unavailable" }, "plan_unavailable");
-      case "no_service":
-        return fail({ kind: "no_service" }, "no_service");
-      case "call":
-        return fail({ kind: "unrequested" }, "unrequested_items");
-      case "failed":
-        return fail({ kind: "failed", retryable: outcome.retryable, retry: "quote" }, outcome.reason);
-      default:
-        return fail({ kind: "failed", retryable: false }, "unexpected_screen");
-    }
-  };
-
+  // ------------------------------------------------------------------ step 1 → 2: plans at the address
   const submitAddress = (e: FormEvent) => {
     e.preventDefault();
     const { value: clean, errors } = validateAddress(address);
@@ -184,21 +185,123 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
     if (Object.keys(errors).length) return;
     setAddress(clean);
     setAddressNotice("");
-    void runQuote(answers);
+    void findPlansFor(clean);
+  };
+
+  const findPlansFor = async (addr: AddressInput) => {
+    setPlans([]);
+    setPlanName("");
+    setPlansNotice("");
+    setQuote(null);
+    const res = await run("plans", { requestId: newRequestId(), address: addr }, {}, timeouts.quoteSeconds);
+    if (!res) return;
+    handlePlans(res.jobId, res.outcome);
+  };
+
+  const handlePlans = (jobId: string, outcome: OrderOutcome) => {
+    if (outcome.screen === "plans") {
+      setPlansJobId(jobId);
+      setPlans(outcome.plans);
+      const wanted = portalNameForOffer(planParam);
+      const match = outcome.plans.find((p) => (wanted && norm(p.name) === norm(wanted)) || p.id === planParam);
+      if (match) {
+        setPlanName(match.name);
+        showPlanInUrl(match.name);
+      } else if (planParam && (wanted || initialOffer)) {
+        setPlansNotice(`${initialOffer?.title ?? wanted} is not available at this address. These plans are available:`);
+      }
+      track("order_plans_shown", { offer_id: match ? (offerIdForPortalName(match.name) ?? match.id) : "none", value: match ? amount(match.price) : 0, plans_count: outcome.plans.length });
+      setStep("plans");
+      return;
+    }
+    if (outcome.screen === "address") return backToAddress(outcome.reason);
+    if (outcome.screen === "no_service") return fail({ kind: "no_service" }, "no_plans");
+    if (outcome.screen === "failed") return fail({ kind: "failed", retryable: outcome.retryable, retry: "plans" }, outcome.reason);
+    return fail({ kind: "failed", retryable: false }, "unexpected_screen");
+  };
+
+  // ------------------------------------------------------------------ step 2 → 3: the plan's real options
+  const choosePlan = (name: string) => {
+    setPlanName(name);
+    setPlanError("");
+    showPlanInUrl(name);
+  };
+
+  const handleQuoteOutcome = (jobId: string, outcome: OrderOutcome, sentAnswers: OptionAnswers) => {
+    switch (outcome.screen) {
+      case "options":
+        setGroups(outcome.groups);
+        setIncluded(outcome.included);
+        // Keep the visitor's earlier answers for groups that are still offered; fill only the safe defaults.
+        setAnswers({ ...defaultAnswers(outcome.groups), ...Object.fromEntries(Object.entries(sentAnswers).filter(([k, v]) => outcome.groups.some((g) => g.key === k && g.choices.some((c) => c.title === v)))) });
+        setOptionsNotice(Object.keys(sentAnswers).length ? "The plan asked for one more choice. Please check the options below." : "");
+        setStep("options");
+        return;
+      case "quote":
+        setQuote({ jobId, total: outcome.total, lines: outcome.lines, included: outcome.included, chosen: outcome.chosen });
+        track("order_quote_shown", { offer_id: offerId, value: amount(outcome.total) });
+        setStep("quote");
+        return;
+      case "plan_unavailable":
+        setPlansNotice("This plan is no longer offered at this address. Please choose another plan.");
+        setPlanName("");
+        setStep("plans");
+        return;
+      case "address":
+        return backToAddress(outcome.reason);
+      case "no_service":
+        return fail({ kind: "no_service" }, "no_service");
+      case "call":
+        return fail({ kind: "unrequested" }, "unrequested_items");
+      case "failed":
+        return fail({ kind: "failed", retryable: outcome.retryable, retry: Object.keys(sentAnswers).length ? "quote" : "options" }, outcome.reason);
+      default:
+        return fail({ kind: "failed", retryable: false }, "unexpected_screen");
+    }
+  };
+
+  const getOptions = async () => {
+    if (!plan) return;
+    setGroups([]);
+    setIncluded([]);
+    setAnswers({});
+    setOptionsNotice("");
+    const res = await run("options", { requestId: newRequestId(), plansJobId, planName: plan.name, options: {} }, { planName: plan.name, options: {} }, timeouts.quoteSeconds);
+    if (res) handleQuoteOutcome(res.jobId, res.outcome, {});
+  };
+
+  const submitPlan = (e: FormEvent) => {
+    e.preventDefault();
+    if (!plan) {
+      setPlanError("Please choose a plan.");
+      return;
+    }
+    void getOptions();
+  };
+
+  // ------------------------------------------------------------------ step 3 → 4: the portal cart
+  const getQuote = async (chosen: OptionAnswers) => {
+    if (!plan) return;
+    setQuote(null);
+    track("order_quote_started", { offer_id: offerId, value });
+    const res = await run("quote", { requestId: newRequestId(), plansJobId, planName: plan.name, options: chosen }, { planName: plan.name, options: chosen }, timeouts.quoteSeconds);
+    if (res) handleQuoteOutcome(res.jobId, res.outcome, chosen);
   };
 
   const submitOptions = (e: FormEvent) => {
     e.preventDefault();
-    if (extraGroups.some((g) => answers[g.key] === undefined)) {
-      setPlanError("Please choose an option for each item.");
+    if (groups.some((g) => answers[g.key] === undefined)) {
+      setOptionsError("Please choose an option for each item.");
       return;
     }
-    setPlanError("");
-    void runQuote(answers);
+    setOptionsError("");
+    track("order_options_chosen", { offer_id: offerId, value, options_count: groups.length });
+    void getQuote(answers);
   };
 
+  // ------------------------------------------------------------------ steps 5-6: details, review, submit
   const goToDetails = () => {
-    track("order_step_details", { offer_id: offerId, value });
+    track("order_step_details", { offer_id: offerId, value: quote ? amount(quote.total) : value });
     setStep("details");
   };
 
@@ -209,19 +312,15 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
     setConsentError(consent ? "" : "Please confirm to continue.");
     if (Object.keys(errors).length || !consent) return;
     setCustomer(clean);
-    setStep("confirm");
+    setStep("review");
   };
 
   const submitOrder = async () => {
     if (!quote) return;
-    setStep("submitting");
-    track("order_submit", { offer_id: offerId, value });
-    const started = await startJob("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, consent: true });
-    if (started.kind !== "started") return fail({ kind: "failed", retryable: started.kind === "unavailable", retry: "submit" }, started.kind === "rejected" ? "rejected" : "unavailable");
-    abortRef.current = new AbortController();
-    const outcome = await waitForJob(started.jobId, answers, timeouts.handoffSeconds, abortRef.current.signal);
-    if (outcome === "aborted") return;
-    if (outcome === "timeout") return fail({ kind: "failed", retryable: false }, "page_timeout");
+    track("order_submit", { offer_id: offerId, value: amount(quote.total) });
+    const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, consent: true }, { planName: plan?.name, options: answers }, timeouts.handoffSeconds);
+    if (!res) return;
+    const { outcome } = res;
     switch (outcome.screen) {
       case "done":
         setReference(outcome.reference);
@@ -229,11 +328,7 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
         return;
       case "details":
         track("order_failed", { offer_id: offerId, value, reason: "customer_details_rejected" });
-        setCustomerErrors(
-          Object.fromEntries(
-            outcome.fields.map((f) => [f, f === "email" ? "This email address was not accepted. Please check it and try again." : "Please check this detail and try again."]),
-          ),
-        );
+        setCustomerErrors(Object.fromEntries(outcome.fields.map((f) => [f, f === "email" ? EMAIL_REJECTED : "Please check this detail and try again."])));
         setStep("details");
         return;
       case "call":
@@ -249,138 +344,204 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
     if (!stop || stop.kind !== "failed" || !stop.retry) return;
     setRetried(true);
     setStop(null);
-    if (stop.retry === "quote") void runQuote(answers);
+    if (stop.retry === "plans") void findPlansFor(address);
+    else if (stop.retry === "options") void getOptions();
+    else if (stop.retry === "quote") void getQuote(answers);
     else void submitOrder();
   };
 
-  const currentIndex = STEP_INDEX[step];
+  const currentIndex = step === "working" ? WORK_STEP[work] : STEP_INDEX[step];
+  const addressText = `${address.street}${address.unit ? `, ${address.unit}` : ""}, ${address.city}, ${address.state} ${address.zip}`;
+
+  if (!onlineAvailable && step !== "not_online") {
+    return (
+      <div className="mx-auto max-w-3xl">
+        <CallNotice offerId={offerId} value={value} placement="order-offline">
+          Online ordering is currently unavailable. Please call <PhoneLink placement="order-offline-text" offerId={offerId} value={value} className="link font-semibold" /> to
+          complete your order.
+        </CallNotice>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-3xl">
       {currentIndex !== undefined ? <StepIndicator current={currentIndex} /> : null}
 
       <div className="card mt-6 p-5 md:p-8">
-        {step === "plan" ? (
-          <form onSubmit={submitPlan} noValidate>
-            <StepHeading ref={headingRef}>{choosingPlan ? "Choose Your Plan" : "Your Plan"}</StepHeading>
-            {choosingPlan || !offer ? (
-              <PlanPicker orderable={orderable} selected={plan ? offer?.id : undefined} onChoose={choosePlan} onCancel={offer ? () => setChoosingPlan(false) : undefined} />
-            ) : (
-              <>
-                <SelectedPlan offer={offer} />
-                <button type="button" className="link mt-4 font-semibold" onClick={() => setChoosingPlan(true)}>
-                  Change plan
+        {step === "not_online" ? (
+          <div>
+            <StepHeading ref={headingRef}>{initialOffer ? `${initialOffer.title} Cannot Be Ordered Online` : "Please Call to Order"}</StepHeading>
+            <p className="mt-3 text-ink">
+              This plan is not available to order online. Please call <PhoneLink placement="order-not-online-text" offerId={offerId} value={value} className="link font-semibold" /> to
+              complete your order.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <PhoneLink placement="order-not-online" offerId={offerId} value={value} className="btn btn-primary" label="Call Now" />
+              {onlineAvailable ? (
+                <button type="button" className="btn btn-secondary" onClick={() => setStep("address")}>
+                  Order AT&amp;T Internet Online
                 </button>
-                {!plan ? (
-                  <CallNotice offerId={offerId} value={value} placement="order-not-online">
-                    This plan is not available to order online. Please call <PhoneLink placement="order-not-online-text" offerId={offerId} value={value} className="link font-semibold" /> to complete your order, or choose an internet plan above.
-                  </CallNotice>
-                ) : !onlineAvailable ? (
-                  <CallNotice offerId={offerId} value={value} placement="order-offline">
-                    Online ordering is currently unavailable. Please call <PhoneLink placement="order-offline-text" offerId={offerId} value={value} className="link font-semibold" /> to complete your order.
-                  </CallNotice>
-                ) : (
-                  <>
-                    <Questions questions={plan.questions} answers={answers} onAnswer={(k, v) => setAnswers((a) => ({ ...a, [k]: v }))} showErrors={Boolean(planError)} />
-                    {planError ? (
-                      <p className="field-error" role="alert">
-                        {planError}
-                      </p>
-                    ) : null}
-                    <div className="mt-6">
-                      <button type="submit" className="btn btn-primary w-full sm:w-auto">
-                        Continue
-                      </button>
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </form>
+              ) : null}
+            </div>
+          </div>
         ) : null}
 
         {step === "address" ? (
           <form onSubmit={submitAddress} noValidate>
-            <StepHeading ref={headingRef}>Service Address</StepHeading>
-            <p className="mt-2 text-ink-muted">Enter the address where you would like service. We then check availability and the monthly price for your address.</p>
+            <StepHeading ref={headingRef}>Your Service Address</StepHeading>
+            <p className="mt-2 text-ink-muted">We check the AT&amp;T Internet plans and prices available at this address.</p>
             {addressNotice ? (
-              <p className="form-error-summary mt-4" role="alert">
+              <p className="mt-4 rounded-xl bg-surface-alt p-4 text-ink" role="alert">
                 {addressNotice}
               </p>
             ) : null}
             <div className="mt-5 grid gap-4 sm:grid-cols-6">
-              <Field className="sm:col-span-4" label="Street address" error={addressErrors.street}>
+              <Field label="Street address" error={addressErrors.street} className="sm:col-span-4">
                 {(p) => <input {...p} autoComplete="address-line1" value={address.street} onChange={(e) => setAddress({ ...address, street: e.target.value })} maxLength={80} />}
               </Field>
-              <Field className="sm:col-span-2" label="Apt or unit (optional)" error={addressErrors.unit}>
+              <Field label="Apartment or unit (optional)" error={addressErrors.unit} className="sm:col-span-2">
                 {(p) => <input {...p} autoComplete="address-line2" value={address.unit} onChange={(e) => setAddress({ ...address, unit: e.target.value })} maxLength={20} />}
               </Field>
-              <Field className="sm:col-span-3" label="City" error={addressErrors.city}>
+              <Field label="City" error={addressErrors.city} className="sm:col-span-3">
                 {(p) => <input {...p} autoComplete="address-level2" value={address.city} onChange={(e) => setAddress({ ...address, city: e.target.value })} maxLength={40} />}
               </Field>
-              <Field className="sm:col-span-2" label="State" error={addressErrors.state}>
+              <Field label="State" error={addressErrors.state} className="sm:col-span-1">
                 {(p) => (
                   <select {...p} autoComplete="address-level1" value={address.state} onChange={(e) => setAddress({ ...address, state: e.target.value })}>
                     <option value="">Select</option>
-                    {Object.entries(US_STATES).map(([code, name]) => (
+                    {Object.keys(US_STATES).map((code) => (
                       <option key={code} value={code}>
-                        {name}
+                        {code}
                       </option>
                     ))}
                   </select>
                 )}
               </Field>
-              <Field className="sm:col-span-1" label="ZIP code" error={addressErrors.zip}>
+              <Field label="ZIP code" error={addressErrors.zip} className="sm:col-span-2">
                 {(p) => (
                   <input {...p} autoComplete="postal-code" inputMode="numeric" maxLength={5} value={address.zip} onChange={(e) => setAddress({ ...address, zip: e.target.value.replace(/\D/g, "").slice(0, 5) })} />
                 )}
               </Field>
             </div>
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-              <button type="button" className="btn btn-ghost" onClick={() => setStep("plan")}>
-                Back
-              </button>
-              <button type="submit" className="btn btn-primary">
-                Check Availability and Price
+            <div className="mt-6">
+              <button type="submit" className="btn btn-primary w-full sm:w-auto">
+                Show Plans at This Address
               </button>
             </div>
           </form>
         ) : null}
 
-        {step === "quoting" ? (
-          <Progress headingRef={headingRef} title="Checking Your Address and Price" seconds={45}>
-            This usually takes about 45 seconds. Please keep this page open.
+        {step === "working" ? (
+          <Progress headingRef={headingRef} title={WORK_TEXT[work].title} seconds={WORK_TEXT[work].seconds}>
+            {WORK_TEXT[work].text}
           </Progress>
         ) : null}
 
-        {step === "options" ? (
-          <form onSubmit={submitOptions} noValidate>
-            <StepHeading ref={headingRef}>A Few More Choices</StepHeading>
-            <p className="mt-2 text-ink-muted">Please choose an option for each item below. Nothing has been selected for you.</p>
-            <Questions questions={extraGroups} answers={answers} onAnswer={(k, v) => setAnswers((a) => ({ ...a, [k]: v }))} showErrors={Boolean(planError)} />
+        {step === "plans" ? (
+          <form onSubmit={submitPlan} noValidate>
+            <StepHeading ref={headingRef}>Plans Available at Your Address</StepHeading>
+            <p className="mt-2 text-ink-muted">
+              {addressText}{" "}
+              <button type="button" className="link font-semibold" onClick={() => setStep("address")}>
+                Change address
+              </button>
+            </p>
+            {plansNotice ? (
+              <p className="mt-4 rounded-xl bg-surface-alt p-4 font-semibold text-ink" role="status" data-plan-unavailable>
+                {plansNotice}
+              </p>
+            ) : null}
+            <p className="mt-4 text-sm text-ink-muted">Plans and prices shown for your address.</p>
+            <PlanList plans={plans} selected={planName} onChoose={choosePlan} />
             {planError ? (
               <p className="field-error" role="alert">
                 {planError}
               </p>
             ) : null}
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-              <button type="button" className="btn btn-ghost" onClick={() => setStep("plan")}>
-                Back
-              </button>
-              <button type="submit" className="btn btn-primary">
-                Update My Quote
+            <div className="mt-6">
+              <button type="submit" className="btn btn-primary w-full sm:w-auto">
+                Continue
               </button>
             </div>
           </form>
         ) : null}
 
-        {step === "quote" && quote ? (
+        {step === "options" && plan ? (
+          <form onSubmit={submitOptions} noValidate>
+            <StepHeading ref={headingRef}>Choose Your Options</StepHeading>
+            <p className="mt-2 text-ink-muted">
+              {plan.displayName}, {plan.price}.{" "}
+              <button type="button" className="link font-semibold" onClick={() => setStep("plans")}>
+                Change plan
+              </button>
+            </p>
+            {optionsNotice ? (
+              <p className="mt-4 rounded-xl bg-surface-alt p-4 text-ink" role="status">
+                {optionsNotice}
+              </p>
+            ) : null}
+            <p className="mt-4 text-ink">Choose one option in each section. Paid add-ons are only added if you choose them.</p>
+            <div className="mt-2 space-y-2">
+              {groups.map((g) => (
+                <RadioGroup
+                  key={g.key}
+                  legend={g.heading || "Please choose an option"}
+                  name={`option-${g.key}`}
+                  value={typeof answers[g.key] === "string" ? (answers[g.key] as string) : ""}
+                  error={optionsError && answers[g.key] === undefined ? "Please choose an option." : undefined}
+                  options={g.choices.map((c) => ({ value: c.title, label: c.title, price: c.price, hint: c.details }))}
+                  onChange={(v) => setAnswers((a) => ({ ...a, [g.key]: v }))}
+                />
+              ))}
+            </div>
+            {included.length ? (
+              <div className="mt-6">
+                <p className="field-label">Included with this offer</p>
+                <ul className="mt-1 list-disc pl-5 text-ink">
+                  {included.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            {optionsError ? (
+              <p className="field-error" role="alert">
+                {optionsError}
+              </p>
+            ) : null}
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
+              <button type="button" className="btn btn-ghost" onClick={() => setStep("plans")}>
+                Back
+              </button>
+              <button type="submit" className="btn btn-primary">
+                See My Quote
+              </button>
+            </div>
+          </form>
+        ) : null}
+
+        {step === "quote" && quote && plan ? (
           <div>
             <StepHeading ref={headingRef}>Your Quote</StepHeading>
-            <p className="mt-2 text-ink-muted">Monthly price for {offer?.title} at your address.</p>
+            <p className="mt-2 text-ink-muted">
+              {plan.displayName} at {addressText}, priced by AT&amp;T for the options you chose.
+            </p>
             <QuoteTable quote={quote} />
+            {quote.included.length ? (
+              <div className="mt-5">
+                <p className="field-label">Included with this offer</p>
+                <ul className="mt-1 list-disc pl-5 text-ink">
+                  {quote.included.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            <OneTimeCharges chosen={quote.chosen} groups={groups} />
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-              <button type="button" className="btn btn-ghost" onClick={() => setStep("plan")}>
-                Change Plan or Options
+              <button type="button" className="btn btn-ghost" onClick={() => (groups.length ? setStep("options") : setStep("plans"))}>
+                Change Options
               </button>
               <button type="button" className="btn btn-primary" onClick={goToDetails}>
                 Continue
@@ -400,11 +561,24 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
               <Field label="Last name" error={customerErrors.lastName}>
                 {(p) => <input {...p} autoComplete="family-name" maxLength={40} value={customer.lastName} onChange={(e) => setCustomer({ ...customer, lastName: e.target.value })} />}
               </Field>
-              <Field label="Phone number" error={customerErrors.phone}>
+              <Field label="Phone number" error={customerErrors.phone} className="sm:col-span-2">
                 {(p) => <input {...p} type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} value={customer.phone} onChange={(e) => setCustomer({ ...customer, phone: e.target.value })} />}
               </Field>
               <Field label="Email address" error={customerErrors.email}>
                 {(p) => <input {...p} type="email" autoComplete="email" maxLength={254} value={customer.email} onChange={(e) => setCustomer({ ...customer, email: e.target.value })} />}
+              </Field>
+              <Field label="Confirm email address" error={customerErrors.confirmEmail}>
+                {(p) => (
+                  <input
+                    {...p}
+                    type="email"
+                    autoComplete="email"
+                    maxLength={254}
+                    value={customer.confirmEmail}
+                    onChange={(e) => setCustomer({ ...customer, confirmEmail: e.target.value })}
+                    onPaste={(e) => e.preventDefault()}
+                  />
+                )}
               </Field>
             </div>
             <RadioGroup
@@ -418,19 +592,14 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
               ]}
               onChange={(v) => setCustomer({ ...customer, billingLanguage: v as CustomerInput["billingLanguage"] })}
             />
-            <RadioGroup
-              legend="Contact preference"
-              hint="May we contact you by phone or text with information about your services, such as installation and repair appointments, billing and account information, and customer satisfaction inquiries?"
-              name="contactByPhone"
-              value={customer.contactByPhone}
-              error={customerErrors.contactByPhone}
-              options={[
-                { value: "yes", label: "Yes, you may contact me by phone or text" },
-                { value: "no", label: "No, please do not" },
-              ]}
-              onChange={(v) => setCustomer({ ...customer, contactByPhone: v as CustomerInput["contactByPhone"] })}
-            />
             <div className="mt-6 flex gap-3">
+              <input id="order-contact" type="checkbox" className="field-check mt-0.5" checked={customer.contactByPhone} onChange={(e) => setCustomer({ ...customer, contactByPhone: e.target.checked })} />
+              <label htmlFor="order-contact" className="text-sm text-ink">
+                Optional: you may contact me by phone or text with information about my services, such as installation and repair appointments, billing and account
+                information, and customer satisfaction inquiries.
+              </label>
+            </div>
+            <div className="mt-4 flex gap-3">
               <input id="order-consent" type="checkbox" className="field-check mt-0.5" checked={consent} onChange={(e) => setConsent(e.target.checked)} aria-invalid={Boolean(consentError)} aria-describedby={consentError ? "order-consent-error" : undefined} />
               <label htmlFor="order-consent" className="text-sm text-ink">
                 I confirm that the details above are correct and agree to be contacted by phone or email about this order request. I have read the{" "}
@@ -461,19 +630,30 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
           </form>
         ) : null}
 
-        {step === "confirm" && quote && offer ? (
+        {step === "review" && quote && plan ? (
           <div>
-            <StepHeading ref={headingRef}>Confirm Your Order Request</StepHeading>
+            <StepHeading ref={headingRef}>Review and Submit</StepHeading>
             <dl className="mt-5 divide-y divide-border">
-              <Summary label="Plan" onEdit={() => setStep("plan")}>
-                {offer.title}
+              <Summary label="Service address" onEdit={() => setStep("address")}>
+                {addressText}
               </Summary>
+              <Summary label="Plan" onEdit={() => setStep("plans")}>
+                {plan.displayName}
+              </Summary>
+              {quote.chosen.length ? (
+                <Summary label="Options" onEdit={groups.length ? () => setStep("options") : undefined}>
+                  <ul className="space-y-1">
+                    {quote.chosen.map((c) => (
+                      <li key={c.group}>
+                        {c.choice}
+                        {c.price && !isFree(c.price) ? ` (${c.price}${c.monthly ? "" : " one-time"})` : ""}
+                      </li>
+                    ))}
+                  </ul>
+                </Summary>
+              ) : null}
               <Summary label="Monthly total">
                 {quote.total} <span className="text-ink-muted">plus taxes and fees</span>
-              </Summary>
-              <Summary label="Service address" onEdit={() => setStep("address")}>
-                {address.street}
-                {address.unit ? `, ${address.unit}` : ""}, {address.city}, {address.state} {address.zip}
               </Summary>
               <Summary label="Contact details" onEdit={() => setStep("details")}>
                 {customer.firstName} {customer.lastName}
@@ -484,6 +664,7 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
               </Summary>
             </dl>
             <QuoteTable quote={quote} compact />
+            <p className="mt-4 text-sm text-ink-muted">A specialist completes the credit check and payment with you before your order is placed.</p>
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
               <button type="button" className="btn btn-ghost" onClick={() => setStep("details")}>
                 Back
@@ -493,12 +674,6 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
               </button>
             </div>
           </div>
-        ) : null}
-
-        {step === "submitting" ? (
-          <Progress headingRef={headingRef} title="Sending Your Order Request" seconds={20}>
-            This usually takes less than a minute. Please keep this page open.
-          </Progress>
         ) : null}
 
         {step === "done" ? (
@@ -520,23 +695,25 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
             {stop.kind === "unrequested" ? (
               <>
                 <StepHeading ref={headingRef}>Please Call Us to Complete Your Order</StepHeading>
-                <p className="mt-3 text-ink">We could not prepare this order online exactly as you requested. Please call <PhoneLink placement="order-unrequested-text" offerId={offerId} value={value} className="link font-semibold" /> to complete your order.</p>
-              </>
-            ) : stop.kind === "plan_unavailable" ? (
-              <>
-                <StepHeading ref={headingRef}>This Plan Is Not Available Online at Your Address</StepHeading>
-                <p className="mt-3 text-ink">Please choose another plan, or call <PhoneLink placement="order-plan-unavailable-text" offerId={offerId} value={value} className="link font-semibold" /> to hear the plans available at your address.</p>
+                <p className="mt-3 text-ink">
+                  We could not prepare this order online exactly as you requested. Please call <PhoneLink placement="order-unrequested-text" offerId={offerId} value={value} className="link font-semibold" /> to
+                  complete your order.
+                </p>
               </>
             ) : stop.kind === "no_service" ? (
               <>
-                <StepHeading ref={headingRef}>We Could Not Find Online Offers for This Address</StepHeading>
-                <p className="mt-3 text-ink">Please check the address, or call <PhoneLink placement="order-no-service-text" offerId={offerId} value={value} className="link font-semibold" /> to confirm the services available at your address.</p>
+                <StepHeading ref={headingRef}>No Plans Available Online for This Address</StepHeading>
+                <p className="mt-3 text-ink">
+                  We could not find AT&amp;T Internet plans to order online at this address. Please check the address, or call{" "}
+                  <PhoneLink placement="order-no-service-text" offerId={offerId} value={value} className="link font-semibold" /> to confirm the services available there.
+                </p>
               </>
             ) : (
               <>
                 <StepHeading ref={headingRef}>We Could Not Complete Your Request Online</StepHeading>
                 <p className="mt-3 text-ink">
-                  We could not complete your request online. Please call <PhoneLink placement="order-failed-text" offerId={offerId} value={value} className="link font-semibold" /> to complete your order.
+                  We could not complete your request online. Please call <PhoneLink placement="order-failed-text" offerId={offerId} value={value} className="link font-semibold" /> to
+                  complete your order.
                 </p>
               </>
             )}
@@ -545,11 +722,6 @@ export function OrderFlow({ initialOffer, orderable, source, onlineAvailable, ti
               {stop.kind === "failed" && stop.retryable && stop.retry && !retried ? (
                 <button type="button" className="btn btn-secondary" onClick={retry}>
                   Try Again
-                </button>
-              ) : null}
-              {stop.kind === "plan_unavailable" ? (
-                <button type="button" className="btn btn-secondary" onClick={() => (setChoosingPlan(true), setStop(null), setStep("plan"))}>
-                  Choose Another Plan
                 </button>
               ) : null}
               {stop.kind === "no_service" ? (
@@ -595,92 +767,61 @@ function StepHeading({ ref, children }: { ref: Ref<HTMLHeadingElement>; children
   );
 }
 
-function SelectedPlan({ offer }: { offer: Offer }) {
+/** The portal's plan cards for this address. Selecting a card only marks it; Continue fetches its options. */
+function PlanList({ plans, selected, onChoose }: { plans: PlanCard[]; selected: string; onChoose: (name: string) => void }) {
   return (
-    <div className="mt-4 rounded-xl border border-border p-5">
-      <p className="text-lg font-bold text-ink">{offer.title}</p>
-      {offer.speed ? <p className="text-sm text-ink-muted">{offer.speed}</p> : null}
-      {offer.price ? (
-        <div className="mt-3">
-          <Price price={offer.price} size="md" />
-        </div>
-      ) : null}
-      <Conditions items={offer.conditions} />
-      <BroadbandFacts offer={offer} />
-      <p className="as-of">Offer details as of {formatDate(offer.retrievedAt)}.</p>
-      <FinePrint offer={offer} />
-    </div>
-  );
-}
-
-function PlanPicker({ orderable, selected, onChoose, onCancel }: { orderable: { offer: Offer }[]; selected?: string; onChoose: (o: Offer) => void; onCancel?: () => void }) {
-  return (
-    <fieldset className="mt-4">
-      <legend className="text-ink-muted">Select the internet plan you would like to order.</legend>
-      <div className="mt-3 grid gap-3">
-        {orderable.map(({ offer }) => (
-          <button
-            key={offer.id}
-            type="button"
-            onClick={() => onChoose(offer)}
-            aria-pressed={selected === offer.id}
-            className={`flex items-center justify-between gap-4 rounded-xl border p-4 text-left ${selected === offer.id ? "border-brand bg-brand-tint" : "border-border hover:border-brand"}`}
-          >
-            <span>
-              <span className="block font-bold text-ink">{offer.title}</span>
-              {offer.speed ? <span className="block text-sm text-ink-muted">{offer.speed}</span> : null}
-            </span>
-            {offer.price ? (
-              <span className="shrink-0 text-right font-bold text-ink">
-                ${offer.price.amount}
-                {offer.price.unit}
-              </span>
-            ) : null}
-          </button>
-        ))}
+    <fieldset className="mt-3">
+      <legend className="sr-only">Choose a plan</legend>
+      <div className="grid gap-4 md:grid-cols-2">
+        {plans.map((p) => {
+          const on = p.name === selected;
+          return (
+            <div key={p.id} data-plan-card={p.id} data-selected={on ? "true" : "false"} className={`flex flex-col rounded-xl border-2 p-4 ${on ? "border-brand bg-brand-tint" : "border-border"}`}>
+              <label className="flex cursor-pointer items-start gap-3">
+                <input type="radio" className="field-check mt-1" name="order-plan" value={p.name} checked={on} onChange={() => onChoose(p.name)} />
+                <span className="min-w-0">
+                  <span className="block text-lg font-bold text-ink">{p.displayName}</span>
+                  {p.speed ? <span className="block text-sm text-ink-muted">{p.speed}</span> : null}
+                  <span className="mt-2 block text-3xl font-bold text-ink" data-plan-price>
+                    {p.price}
+                  </span>
+                  {p.priceNote ? <span className="mt-1 block text-sm text-ink-muted">{p.priceNote}</span> : null}
+                </span>
+              </label>
+              {p.features.length ? (
+                <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-ink">
+                  {p.features.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {p.notes.map((n) => (
+                <p key={n} className="mt-3 text-sm text-ink">
+                  {n}
+                </p>
+              ))}
+              <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-3 text-sm">
+                {p.offerDetails.length ? (
+                  <details className="w-full">
+                    <summary className="link cursor-pointer font-semibold">Offer Details</summary>
+                    <div className="mt-2 space-y-2 text-xs text-ink-muted" lang="en">
+                      {p.offerDetails.map((t, i) => (
+                        <p key={i}>{t}</p>
+                      ))}
+                    </div>
+                  </details>
+                ) : null}
+                {p.broadbandFactsUrl ? (
+                  <a href={p.broadbandFactsUrl} className="link font-semibold" target="_blank" rel="noopener noreferrer">
+                    Broadband Facts<span className="sr-only"> for {p.displayName} (opens in a new tab)</span>
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          );
+        })}
       </div>
-      {onCancel ? (
-        <button type="button" className="link mt-4 font-semibold" onClick={onCancel}>
-          Keep my current plan
-        </button>
-      ) : null}
     </fieldset>
-  );
-}
-
-function Questions({
-  questions,
-  answers,
-  onAnswer,
-  showErrors,
-}: {
-  questions: (OrderQuestion | ExtraGroup)[];
-  answers: OptionAnswers;
-  onAnswer: (key: string, value: boolean | string) => void;
-  showErrors: boolean;
-}) {
-  if (!questions.length) return null;
-  return (
-    <div className="mt-6 space-y-5">
-      {questions.map((q) => {
-        const isPlanQuestion = "legend" in q;
-        const options = isPlanQuestion
-          ? q.choices.map((c) => ({ value: c.value, label: c.label }))
-          : q.choices.map((c) => ({ value: c.title as boolean | string, label: c.price ? `${c.title} (${c.price})` : c.title }));
-        return (
-          <RadioGroup
-            key={q.key}
-            legend={isPlanQuestion ? q.legend : q.heading || "Please choose an option"}
-            hint={isPlanQuestion ? q.hint : undefined}
-            name={`option-${q.key}`}
-            value={answers[q.key] === undefined ? "" : String(answers[q.key])}
-            error={showErrors && answers[q.key] === undefined ? "Please choose an option." : undefined}
-            options={options.map((o) => ({ value: String(o.value), label: o.label }))}
-            onChange={(v) => onAnswer(q.key, options.find((o) => String(o.value) === v)!.value)}
-          />
-        );
-      })}
-    </div>
   );
 }
 
@@ -698,7 +839,7 @@ function RadioGroup({
   name: string;
   value: string;
   error?: string;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; price?: string; hint?: string }[];
   onChange: (value: string) => void;
 }) {
   const id = useId();
@@ -713,8 +854,14 @@ function RadioGroup({
       <div className="grid gap-2">
         {options.map((o) => (
           <label key={o.value} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 ${value === o.value ? "border-brand bg-brand-tint" : "border-border"}`}>
-            <input type="radio" className="field-check" name={name} value={o.value} checked={value === o.value} onChange={() => onChange(o.value)} />
-            <span className="text-ink">{o.label}</span>
+            <input type="radio" className="field-check mt-0.5" name={name} value={o.value} checked={value === o.value} onChange={() => onChange(o.value)} />
+            <span className="min-w-0 flex-1">
+              <span className="flex flex-wrap items-baseline justify-between gap-x-3">
+                <span className="text-ink">{o.label}</span>
+                {o.price ? <span className="whitespace-nowrap font-semibold text-ink">{o.price}</span> : null}
+              </span>
+              {o.hint ? <span className="mt-1 block text-sm text-ink-muted">{o.hint}</span> : null}
+            </span>
           </label>
         ))}
       </div>
@@ -758,6 +905,7 @@ function Progress({ headingRef, title, seconds, children }: { headingRef: Ref<HT
   );
 }
 
+/** The portal cart, line for line. */
 function QuoteTable({ quote, compact = false }: { quote: Quote; compact?: boolean }) {
   return (
     <table className={`data-table ${compact ? "mt-6" : "mt-5"}`}>
@@ -772,9 +920,12 @@ function QuoteTable({ quote, compact = false }: { quote: Quote; compact?: boolea
       </thead>
       <tbody>
         {quote.lines.map((l, i) => (
-          <tr key={`${l.item}-${i}`}>
-            <td>{l.item}</td>
-            <td className="whitespace-nowrap text-right">{l.charge}</td>
+          <tr key={`${l.item}-${i}`} data-quote-line>
+            <td>
+              {l.item}
+              {!compact && l.detail ? <span className="mt-1 block text-xs text-ink-muted">{l.detail}</span> : null}
+            </td>
+            <td className="whitespace-nowrap text-right align-top">{l.charge}</td>
           </tr>
         ))}
         <tr>
@@ -794,6 +945,31 @@ function QuoteTable({ quote, compact = false }: { quote: Quote; compact?: boolea
         </tr>
       </tfoot>
     </table>
+  );
+}
+
+/** Chosen options with a one-time price (e.g. a professional installation fee), which the monthly cart does not list. */
+function OneTimeCharges({ chosen, groups }: { chosen: ChosenOption[]; groups: OptionGroup[] }) {
+  const oneTime = chosen.filter((c) => !c.monthly && !isFree(c.price));
+  if (!oneTime.length) return null;
+  return (
+    <div className="mt-5 rounded-xl bg-surface-alt p-4" data-one-time-charges>
+      <p className="field-label">One-time charges you chose</p>
+      <ul className="mt-1 space-y-2 text-ink">
+        {oneTime.map((c) => {
+          const details = groups.find((g) => g.key === c.group)?.choices.find((x) => x.title === c.choice)?.details;
+          return (
+            <li key={c.group}>
+              <span className="flex justify-between gap-3">
+                <span>{c.choice}</span>
+                <span className="whitespace-nowrap font-semibold">{c.price}</span>
+              </span>
+              {details ? <span className="mt-1 block text-sm text-ink-muted">{details}</span> : null}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

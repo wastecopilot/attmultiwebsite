@@ -2,8 +2,7 @@
  * Browser-side calls to the site's own /api/order routes (never to the order automation itself).
  * Personal data travels only in POST bodies, never in URLs.
  */
-import type { OrderOutcome } from "@/lib/order/outcome";
-import type { OptionAnswers } from "@/lib/order/validation";
+import type { Expected, OrderOutcome } from "@/lib/order/outcome";
 
 // fetch() does not add next.config's basePath, so it is spelled out here.
 const API = "/att/api/order";
@@ -11,7 +10,7 @@ const POLL_MS = 2500;
 
 export type StartResult = { kind: "started"; jobId: string } | { kind: "unavailable" } | { kind: "rejected" };
 
-export async function startJob(path: "quote" | "submit", body: unknown): Promise<StartResult> {
+export async function startJob(path: "plans" | "quote" | "submit", body: unknown): Promise<StartResult> {
   try {
     const res = await fetch(`${API}/${path}`, {
       method: "POST",
@@ -33,8 +32,11 @@ const sleep = (ms: number, signal: AbortSignal) =>
     signal.addEventListener("abort", () => (clearTimeout(t), resolve()), { once: true });
   });
 
-/** Polls a job until it finishes, the deadline passes ("timeout") or the page goes away ("aborted"). */
-export async function waitForJob(jobId: string, options: OptionAnswers, timeoutSeconds: number, signal: AbortSignal): Promise<OrderOutcome | "timeout" | "aborted"> {
+/**
+ * Polls a job until it finishes, the deadline passes ("timeout") or the page goes away ("aborted").
+ * `expected` is what the visitor chose; the server checks the portal's answer against it.
+ */
+export async function waitForJob(jobId: string, expected: Expected, timeoutSeconds: number, signal: AbortSignal): Promise<OrderOutcome | "timeout" | "aborted"> {
   const deadline = Date.now() + timeoutSeconds * 1000;
   while (Date.now() < deadline) {
     await sleep(POLL_MS, signal);
@@ -43,7 +45,7 @@ export async function waitForJob(jobId: string, options: OptionAnswers, timeoutS
       const res = await fetch(`${API}/status`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jobId, options }),
+        body: JSON.stringify({ jobId, planName: expected.planName ?? "", options: expected.options ?? {} }),
         cache: "no-store",
         signal,
       });
