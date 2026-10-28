@@ -5,7 +5,7 @@ import { faqs } from "@/data/faq";
 import { company } from "@/data/site";
 import type { ImageKey } from "@/data/images";
 import { PhoneLink } from "@/components/PhoneLink";
-import { CtaLink } from "@/components/ui/CtaLink";
+import { OrderButton } from "@/components/OrderButton";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { PromoCard } from "@/components/offers/OfferCard";
 import { BroadbandFacts, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
@@ -56,9 +56,7 @@ export default function HomePage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <PhoneLink placement="hero" offerId={hero.id} value={hero.price?.amount} className="btn btn-primary btn-lg" label="Call Now" />
-              <CtaLink href="/check-availability" cta="hero-check-availability" offerId={hero.id} value={hero.price?.amount} variant="secondary" size="lg">
-                Check Availability
-              </CtaLink>
+              <OrderButton placement="hero" offerId={hero.id} value={hero.price?.amount} planName={hero.title} className="btn btn-secondary btn-lg" />
             </div>
             <p className="mt-4 flex items-center gap-2 text-sm text-ink-muted">
               <ClockIcon className="h-4 w-4" /> {company.hoursShort}

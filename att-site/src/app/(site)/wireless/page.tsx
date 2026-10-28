@@ -6,6 +6,7 @@ import { PromoCard } from "@/components/offers/OfferCard";
 import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { SwapIcon, TagIcon, WirelessIcon } from "@/components/ui/Icons";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
@@ -39,7 +40,10 @@ export default function WirelessPage() {
             <p className="mt-1 text-sm text-ink-muted">{value.conditions.join(" · ")}</p>
             <BroadbandFacts offer={value} />
             <FinePrint offer={value} />
-            <PhoneLink placement="wireless-header" offerId={value.id} value={value.price!.amount} className="btn btn-primary mt-4 w-full" label="Call Now" />
+            <div className="cta-pair mt-4">
+              <PhoneLink placement="wireless-header" offerId={value.id} value={value.price!.amount} className="btn btn-primary" label="Call Now" />
+              <OrderButton placement="wireless-header" offerId={value.id} value={value.price!.amount} planName={value.title} className="btn btn-secondary" />
+            </div>
           </div>
         }
       />

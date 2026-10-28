@@ -6,6 +6,7 @@ import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { CallBand, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { AirIcon, FiberIcon, HomePhoneIcon, MapPinIcon, ShieldIcon, WirelessIcon } from "@/components/ui/Icons";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -37,9 +38,7 @@ export default function SpanishHomePage() {
       >
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <PhoneLink placement="es-hero" offerId={featured.id} value={featured.price?.amount} className="btn btn-primary btn-lg" label="Llamar ahora" />
-          <Link href="/es/check-availability" className="btn btn-secondary btn-lg">
-            Verificar disponibilidad
-          </Link>
+          <OrderButton placement="es-hero" offerId={featured.id} value={featured.price?.amount} planName={featured.title} className="btn btn-secondary btn-lg" locale="es" />
         </div>
       </PageHeader>
 

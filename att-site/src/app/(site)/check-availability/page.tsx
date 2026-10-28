@@ -2,7 +2,8 @@ import Link from "@/components/ui/AppLink";
 import { pageMetadata } from "@/lib/seo";
 import { getOffer } from "@/data/offers";
 import { PageHeader, SectionHeading, CheckList, CallPanel } from "@/components/ui/Sections";
-import { ZipCheck } from "@/components/forms/ZipCheck";
+import { AvailabilityZip } from "@/components/forms/AvailabilityZip";
+import { planSummaries } from "@/data/plan-summaries";
 
 export const metadata = pageMetadata({
   title: "Check AT&T Availability at Your Address",
@@ -45,7 +46,7 @@ export default function CheckAvailabilityPage() {
           <div className="card p-6 md:p-8">
             <h2 className="text-2xl font-bold text-ink">Enter Your ZIP Code</h2>
             <div className="mt-4">
-              <ZipCheck placement="availability" offerId={fiber.id} value={fiber.price!.amount} />
+              <AvailabilityZip placement="availability" plans={planSummaries()} />
             </div>
           </div>
         </div>

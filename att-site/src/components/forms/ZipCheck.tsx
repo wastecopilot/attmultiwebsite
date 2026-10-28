@@ -1,8 +1,11 @@
 "use client";
 
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { usePathname } from "next/navigation";
+import { env } from "@/lib/env";
 import { track } from "@/lib/analytics";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import type { Locale } from "@/data/i18n";
 
 const COPY = {
@@ -19,19 +22,28 @@ interface ZipCheckProps {
   onChecked?: (zip: string) => void;
   tone?: "light" | "dark";
   locale?: Locale;
+  /** Focus the ZIP field on load (visitors arriving from an Order Now button). */
+  autoFocus?: boolean;
 }
 
 /**
  * ZIP entry that leads to the Call Now button. It never displays an availability result: AT&T confirms
  * service per street address, so the next step is always a call.
  */
-export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "light", locale = "en" }: ZipCheckProps) {
+export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "light", locale = "en", autoFocus = false }: ZipCheckProps) {
   const t = COPY[locale];
+  // Without NEXT_PUBLIC_ORDER_URL, Order Now leads to the availability page, so it is not repeated there.
+  const pathname = usePathname();
+  const showOrder = Boolean(env.orderUrl) || !pathname.endsWith("/check-availability");
   const uid = useId();
   const [zip, setZip] = useState("");
   const [error, setError] = useState("");
   const [checkedZip, setCheckedZip] = useState("");
   const resultRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (autoFocus) inputRef.current?.focus();
+  }, [autoFocus]);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,6 +69,7 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "lig
           </label>
           <input
             id={`${uid}-zip`}
+            ref={inputRef}
             type="text"
             inputMode="numeric"
             autoComplete="postal-code"
@@ -89,6 +102,7 @@ export function ZipCheck({ offerId, value = 0, placement, onChecked, tone = "lig
             </p>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row">
               <PhoneLink placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-inverse" : "btn-primary"} btn-sm`} label={t.call} />
+              {showOrder ? <OrderButton placement={`${placement}-zip-next`} offerId={offerId} value={value} className={`btn ${dark ? "btn-ghost-inverse" : "btn-secondary"} btn-sm`} locale={locale} /> : null}
             </div>
           </div>
         ) : null}

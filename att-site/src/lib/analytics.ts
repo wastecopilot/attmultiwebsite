@@ -16,7 +16,7 @@ declare global {
   }
 }
 
-export type TrackedEvent = "phone_click" | "zip_check" | "cta_click";
+export type TrackedEvent = "phone_click" | "order_click" | "zip_check" | "cta_click";
 
 export interface EventParams {
   offer_id?: string;

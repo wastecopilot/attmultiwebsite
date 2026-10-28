@@ -6,6 +6,7 @@ import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
 import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -47,12 +48,13 @@ export default function FiberPage() {
             </p>
             <BroadbandFacts offer={featured} />
             <FinePrint offer={featured} />
-            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+            <div className="cta-pair mt-4">
               <PhoneLink placement="fiber-header" offerId={featured.id} value={featured.price!.amount} className="btn btn-primary" label="Call Now" />
-              <a href="#plans" className="btn btn-secondary">
-                Compare Speeds
-              </a>
+              <OrderButton placement="fiber-header" offerId={featured.id} value={featured.price!.amount} planName={featured.title} className="btn btn-secondary" />
             </div>
+            <a href="#plans" className="link mt-3 inline-block min-h-6 py-0.5 font-semibold">
+              Compare Speeds
+            </a>
           </div>
         }
       >

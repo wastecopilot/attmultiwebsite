@@ -4,6 +4,7 @@ import { getOffer } from "@/data/offers";
 import { PromoCard } from "@/components/offers/OfferCard";
 import { CallBand, CheckList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 
 export const metadata = pageMetadata({
   title: "Switch to AT&T: Up to $800 per Line, Keep Your Number",
@@ -29,7 +30,8 @@ export default function SwitchPage() {
       >
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <PhoneLink placement="switch-header" offerId={reward.id} className="btn btn-primary btn-lg" label="Call Now" />
-          <a href="#switch-offers" className="btn btn-secondary btn-lg">
+          <OrderButton placement="switch-header" offerId={reward.id} planName={reward.title} className="btn btn-secondary btn-lg" />
+          <a href="#switch-offers" className="btn btn-ghost btn-lg">
             View Switching Offers
           </a>
         </div>

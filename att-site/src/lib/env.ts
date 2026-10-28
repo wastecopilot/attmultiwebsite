@@ -15,6 +15,8 @@ export const env = {
   adsCallLabel: process.env.NEXT_PUBLIC_GADS_CALL_LABEL ?? "",
   /** Optional separate label for "Calls from website" (number swap); falls back to the call label. */
   adsSwapLabel: process.env.NEXT_PUBLIC_GADS_SWAP_LABEL || process.env.NEXT_PUBLIC_GADS_CALL_LABEL || "",
+  /** Optional order destination (https URL). When empty, Order Now goes to /check-availability. */
+  orderUrl: process.env.NEXT_PUBLIC_ORDER_URL ?? "",
   /** "AUDIT" for local audit builds (npm run build:audit); empty in production. */
   buildLabel: process.env.NEXT_PUBLIC_BUILD_LABEL ?? "",
   isDev: process.env.NODE_ENV === "development",

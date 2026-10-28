@@ -3,6 +3,7 @@ import type { Offer } from "@/data/offer-types";
 import type { ImageKey } from "@/data/images";
 import { company } from "@/data/site";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { BroadbandFacts, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
 import { CallPanel, CheckList } from "@/components/ui/Sections";
@@ -45,7 +46,10 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
             </h1>
             <p className="mt-4 max-w-xl text-lg text-ink-muted">{intro}</p>
             <div className="mt-6 hidden lg:block">
-              <PhoneLink placement="lp-hero" offerId={offer.id} value={value} className="btn btn-primary btn-lg" label="Call Now" />
+              <div className="flex flex-wrap gap-3">
+                <PhoneLink placement="lp-hero" offerId={offer.id} value={value} className="btn btn-primary btn-lg" label="Call Now" />
+                <OrderButton placement="lp-hero" offerId={offer.id} value={value} planName={offer.title} className="btn btn-secondary btn-lg" />
+              </div>
               <p className="mt-3 flex items-center gap-2 text-sm text-ink-muted">
                 <ClockIcon className="h-4 w-4" /> {company.hoursShort}
               </p>
@@ -69,7 +73,12 @@ export function LandingTemplate({ offer, path, eyebrow, title, intro, benefits, 
               </p>
             ) : null}
             <BroadbandFacts offer={offer} />
-            <PhoneLink placement="lp-offer" offerId={offer.id} value={value} className="btn btn-primary mt-4 w-full lg:hidden" label="Call Now" />
+            <div className="mt-4 lg:hidden">
+              <div className="cta-pair">
+                <PhoneLink placement="lp-offer" offerId={offer.id} value={value} className="btn btn-primary" label="Call Now" />
+                <OrderButton placement="lp-offer" offerId={offer.id} value={value} planName={offer.title} className="btn btn-secondary" />
+              </div>
+            </div>
             <FinePrint offer={offer} />
           </div>
         </div>

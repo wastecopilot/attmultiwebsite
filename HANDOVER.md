@@ -44,6 +44,7 @@ The phone number and tracking IDs are not written into the code. They are read f
 | `NEXT_PUBLIC_GADS_ID` (optional until available) | Google Ads account tag ID | `AW-` + digits |
 | `NEXT_PUBLIC_GADS_CALL_LABEL` (optional until available) | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
 | `NEXT_PUBLIC_GADS_SWAP_LABEL` (optional) | Conversion label for "calls from website" (number swap); if empty, the call label is used | |
+| `NEXT_PUBLIC_ORDER_URL` (optional) | Where every "Order Now" button goes. Leave empty to use `/att/check-availability?intent=order&plan=<offer id>&source=<page>`, which focuses the ZIP field and shows the selected plan. When set, the same `intent`, `plan` and `source` values plus any `gclid`/`gbraid`/`wbraid`/`utm_*` are added to it. | full `https://` URL |
 | `NEXT_PUBLIC_SITE_INDEXABLE` (optional) | `1` lets search engines index the site, `0` blocks them. Leave it unset: indexing is then off on a `*.vercel.app` address and on once a custom domain is attached. Set `1` if the live domain reaches this project through a rewrite from another project. | `1` or `0` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` (optional) | Email address shown on the Contact page and in the footer | defaults to Backoffice@urbanwirelessusa.com |
 
@@ -141,7 +142,7 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
 - **Phone calls:** every phone number on the site is rendered by one component (`PhoneLink`). Each tap sends the
   Google Ads call conversion (label from `NEXT_PUBLIC_GADS_CALL_LABEL`) and a `phone_click` event. "Calls from
   website" number swapping is configured with the displayed number.
-- **Events** for GA4/GTM: `phone_click`, `zip_check`, `cta_click` — each with the page, offer id and
+- **Events** for GA4/GTM: `phone_click`, `order_click`, `zip_check`, `cta_click` — each with the page, offer id and
   value (the offer's monthly price, or 0).
 - **Click IDs:** `gclid`, `gbraid`, `wbraid` and `utm_*` values are kept on the address bar as visitors move around the
   site, and stored in a first-party cookie for 90 days when advertising consent allows it.

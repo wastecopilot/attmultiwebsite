@@ -1,7 +1,7 @@
-import Link from "@/components/ui/AppLink";
 import type { ReactNode } from "react";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { CheckIcon, ClockIcon } from "@/components/ui/Icons";
 import { SiteImage, imageSrc } from "@/components/ui/SiteImage";
 import type { ImageKey } from "@/data/images";
@@ -118,9 +118,7 @@ export function CallBand({ title, text, offerId, value = 0, placement, locale = 
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg" label={t.callNow} />
-            <Link href={t.checkAvailabilityHref} className="btn btn-secondary btn-lg">
-              {t.checkAvailability}
-            </Link>
+            <OrderButton placement={placement} offerId={offerId} value={value} className="btn btn-secondary btn-lg" locale={locale} />
           </div>
         </div>
       </div>
@@ -160,7 +158,10 @@ export function CallPanel({
           <ClockIcon className="h-4 w-4 shrink-0" /> {ui[locale].hours}
         </p>
       </div>
-      <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg shrink-0" label={ui[locale].callNow} />
+      <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+        <PhoneLink placement={placement} offerId={offerId} value={value} className="btn btn-primary btn-lg" label={ui[locale].callNow} />
+        <OrderButton placement={placement} offerId={offerId} value={value} className="btn btn-secondary btn-lg" locale={locale} />
+      </div>
     </div>
   );
 }

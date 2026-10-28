@@ -3,6 +3,7 @@ import { footerNav, legalNav } from "@/data/nav";
 import { company, disclosure } from "@/data/site";
 import { disclosureEs, footerNavEs, legalNavEs, ui, type Locale } from "@/data/i18n";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { CookieSettingsLink } from "@/components/consent/CookieBanner";
 import { Wordmark } from "./SiteHeader";
 
@@ -39,6 +40,7 @@ export function SiteFooter({ minimal = false, locale = "en" }: { minimal?: boole
                   {company.email}
                 </a>
               </address>
+              <OrderButton placement="footer" className="btn btn-inverse btn-sm mt-5" locale={locale} />
             </div>
             {(locale === "es" ? footerNavEs : footerNav).map((col) => (
               <nav key={col.heading} aria-label={col.heading}>
@@ -58,7 +60,8 @@ export function SiteFooter({ minimal = false, locale = "en" }: { minimal?: boole
         ) : (
           <p className="mt-8 text-sm text-night-muted">
             {company.legalName} · {company.streetAddress}, {company.locality}, {company.region} {company.postalCode} ·{" "}
-            <PhoneLink placement="footer" className="link-inverse font-semibold underline underline-offset-2" /> · {t.hours}
+            <PhoneLink placement="footer" className="link-inverse font-semibold underline underline-offset-2" /> · {t.hours} ·{" "}
+            <OrderButton placement="footer" className="link-inverse inline-block min-h-6 py-0.5 font-semibold underline underline-offset-2" locale={locale} />
           </p>
         )}
 

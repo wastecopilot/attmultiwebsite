@@ -4,6 +4,7 @@ import { disclosure } from "@/data/site";
 import { disclosureEs, primaryNavEs, ui, type Locale } from "@/data/i18n";
 import { env } from "@/lib/env";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { PhoneIcon } from "@/components/ui/Icons";
 import { MobileNav } from "./MobileNav";
 import { NavLinks } from "./NavLinks";
@@ -58,6 +59,10 @@ export function SiteHeader({ minimal = false, locale = "en" }: { minimal?: boole
               <span className="header-call-label">{ui[locale].callShort}</span>
               <PhoneNumberText />
             </PhoneLink>
+            {/* Wrapper carries the breakpoint: .btn sets its own display, which would override a hidden utility. */}
+            <span className="hidden shrink-0 lg:inline-flex">
+              <OrderButton placement="header" className="btn btn-secondary btn-sm whitespace-nowrap" locale={locale} />
+            </span>
             {!minimal ? <MobileNav locale={locale} /> : null}
           </div>
         </div>

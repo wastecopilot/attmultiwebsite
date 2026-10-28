@@ -62,6 +62,21 @@ for (const name of [...REQUIRED, ...TAG_IDS]) {
   }
 }
 
+// Optional order destination: when set it must be a real https URL (never a placeholder in production).
+const orderUrl = (process.env.NEXT_PUBLIC_ORDER_URL ?? "").trim();
+if (orderUrl) {
+  let valid = false;
+  try {
+    valid = new URL(orderUrl).protocol === "https:";
+  } catch {
+    valid = false;
+  }
+  if (!valid) errors.push(`NEXT_PUBLIC_ORDER_URL="${orderUrl}" must be a full https:// URL.`);
+  else if (PLACEHOLDER.some((re) => re.test(orderUrl)) && !auditMode) errors.push(`NEXT_PUBLIC_ORDER_URL="${orderUrl}" looks like a placeholder. Leave it empty to use the check-availability page.`);
+} else {
+  notes.push("NEXT_PUBLIC_ORDER_URL is not set; Order Now buttons go to /att/check-availability.");
+}
+
 const tel = (process.env.NEXT_PUBLIC_PHONE_TEL ?? "").replace(/\D/g, "");
 const display = (process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "").replace(/\D/g, "");
 if (tel && display && tel !== display && tel !== `1${display}`) {

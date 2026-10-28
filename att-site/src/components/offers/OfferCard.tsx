@@ -1,5 +1,6 @@
 import type { Offer } from "@/data/offer-types";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { CheckList } from "@/components/ui/Sections";
 import { BroadbandFacts, Conditions, FinePrint, Price } from "./OfferBits";
 import { headlineEs, tr, ui, type Locale } from "@/data/i18n";
@@ -54,7 +55,10 @@ export function PlanCard({
       {/* AT&T lists plan features in English; Spanish cards keep the price, conditions and offer details. */}
       {!es && offer.features?.length ? <CheckList className="mt-5 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
-        <PhoneLink placement="plan-card" offerId={offer.id} value={value} className="btn btn-primary w-full" label={ctaLabel ?? ui[locale].callNow} />
+        <div className="cta-pair">
+          <PhoneLink placement="plan-card" offerId={offer.id} value={value} className="btn btn-primary" label={ctaLabel ?? ui[locale].callNow} />
+          <OrderButton placement="plan-card" offerId={offer.id} value={value} planName={offer.title} className="btn btn-secondary" locale={locale} />
+        </div>
         <FinePrint offer={offer} locale={locale} />
       </div>
     </article>
@@ -81,7 +85,10 @@ export function PromoCard({ offer, headingLevel = "h3", locale = "en" }: { offer
       <BroadbandFacts offer={offer} locale={locale} />
       {!es && offer.features?.length ? <CheckList className="mt-4 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
-        <PhoneLink placement="promo-card" offerId={offer.id} value={offer.price?.amount ?? 0} className="btn btn-primary w-full" label={ui[locale].callNow} />
+        <div className="cta-pair">
+          <PhoneLink placement="promo-card" offerId={offer.id} value={offer.price?.amount ?? 0} className="btn btn-primary" label={ui[locale].callNow} />
+          <OrderButton placement="promo-card" offerId={offer.id} value={offer.price?.amount ?? 0} planName={offer.title} className="btn btn-secondary" locale={locale} />
+        </div>
         <FinePrint offer={offer} locale={locale} />
       </div>
     </article>

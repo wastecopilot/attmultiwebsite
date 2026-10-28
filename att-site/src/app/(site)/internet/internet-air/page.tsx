@@ -5,6 +5,7 @@ import { faqsFor } from "@/data/faq";
 import { PlanCard } from "@/components/offers/OfferCard";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { GuaranteeSection } from "@/components/ui/GuaranteeSection";
 import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { AirIcon, ShieldIcon, WifiIcon } from "@/components/ui/Icons";
@@ -40,7 +41,10 @@ export default function InternetAirPage() {
             <p className="mt-1 text-sm text-ink-muted">{air.conditions.join(" · ")}</p>
             <BroadbandFacts offer={air} />
             <FinePrint offer={air} />
-            <PhoneLink placement="air-header" offerId={air.id} value={air.price!.amount} className="btn btn-primary mt-4 w-full" label="Call Now" />
+            <div className="cta-pair mt-4">
+              <PhoneLink placement="air-header" offerId={air.id} value={air.price!.amount} className="btn btn-primary" label="Call Now" />
+              <OrderButton placement="air-header" offerId={air.id} value={air.price!.amount} planName={air.title} className="btn btn-secondary" />
+            </div>
           </div>
         }
       />
