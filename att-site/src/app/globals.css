@@ -34,12 +34,6 @@ body {
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
 }
-@media (max-width: 1023.98px) {
-  /* room for the fixed mobile call bar */
-  body {
-    padding-bottom: 4.5rem;
-  }
-}
 ::selection {
   background: var(--att-brand-tint-2);
   color: var(--att-ink);
@@ -216,11 +210,13 @@ p {
   right: 0;
   top: 100%;
   max-height: calc(100vh - 7rem);
+  max-height: calc(100dvh - 7rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--att-surface);
   border-bottom: 1px solid var(--att-border);
   box-shadow: 0 16px 32px rgb(0 0 0 / 0.08);
-  padding: 0.5rem 1rem 1.5rem;
+  padding: 0.5rem 1rem calc(2rem + env(safe-area-inset-bottom));
 }
 .mobile-menu-heading {
   font-size: 0.75rem;
@@ -551,7 +547,7 @@ p {
   z-index: 60;
   left: 0.75rem;
   right: 0.75rem;
-  bottom: calc(4.5rem + 0.5rem);
+  bottom: calc(0.75rem + env(safe-area-inset-bottom));
   padding: 1rem;
   background: var(--att-surface);
   border: 1px solid var(--att-border);
@@ -594,29 +590,6 @@ html[data-consent="unset"] .cookie-banner {
   margin-top: 0.15rem;
   accent-color: var(--att-brand-strong);
   flex-shrink: 0;
-}
-
-/* ------------------------------------------------------------------ mobile call bar */
-.mobile-call-bar {
-  position: fixed;
-  z-index: 50;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom));
-  background: var(--att-surface);
-  border-top: 1px solid var(--att-border);
-  box-shadow: 0 -8px 24px rgb(0 0 0 / 0.08);
-}
-.mobile-call-bar > * {
-  flex: 1;
-}
-@media (min-width: 1024px) {
-  .mobile-call-bar {
-    display: none;
-  }
 }
 
 /* ------------------------------------------------------------------ badges for non-production builds */
@@ -806,18 +779,6 @@ html.js [data-reveal].is-visible {
     gap: 0.3rem;
   }
 }
-.mobile-call-bar .btn {
-  min-height: 3rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9375rem;
-  white-space: nowrap;
-}
-/* Call Now and Order Now share the bar 50/50. */
-.mobile-call-bar > * {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
 /* Call Now + Order Now pair: side by side with equal height when both fit, otherwise stacked full width. */
 .cta-pair {
   display: flex;
@@ -829,11 +790,6 @@ html.js [data-reveal].is-visible {
   min-width: max-content;
   padding-inline: 1rem;
   white-space: nowrap;
-}
-@media (max-width: 379.98px) {
-  .mobile-call-bar .btn {
-    font-size: 0.875rem;
-  }
 }
 details[open] > summary .faq-icon {
   transform: rotate(45deg);

@@ -32,8 +32,18 @@ export function MobileNav({ locale = "en" }: { locale?: Locale }) {
       }
     };
     document.addEventListener("keydown", onKey);
-    panelRef.current?.querySelector<HTMLElement>("a")?.focus();
-    return () => document.removeEventListener("keydown", onKey);
+    // The panel scrolls inside the space below its top edge (so the last link is always reachable),
+    // and the page behind it does not scroll while it is open.
+    const panel = panelRef.current;
+    if (panel) panel.style.maxHeight = `calc(100dvh - ${Math.max(0, Math.round(panel.getBoundingClientRect().top))}px)`;
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+    panel?.querySelector<HTMLElement>("a")?.focus();
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      root.style.overflow = previousOverflow;
+    };
   }, [open]);
 
   return (

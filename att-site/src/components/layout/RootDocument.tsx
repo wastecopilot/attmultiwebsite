@@ -11,7 +11,6 @@ import { ui, type Locale } from "@/data/i18n";
 import { CookieBanner } from "@/components/consent/CookieBanner";
 import { AttributionKeeper } from "@/components/AttributionKeeper";
 import { RevealObserver } from "@/components/RevealObserver";
-import { MobileCallBar } from "@/components/layout/MobileCallBar";
 import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/components/seo/JsonLd";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -56,7 +55,6 @@ export function RootDocument({ locale = "en", children }: { locale?: Locale; chi
           {ui[locale].skip}
         </a>
         {children}
-        <MobileCallBar locale={locale} />
         <CookieBanner locale={locale} />
         <AttributionKeeper />
         <RevealObserver />

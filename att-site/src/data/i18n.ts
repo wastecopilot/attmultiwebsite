@@ -113,7 +113,6 @@ export const ui = {
     wordmarkSub: "Independent retailer of AT&T services",
     switchLabel: "Español",
     switchLang: "es",
-    callBarLabel: "Call or check availability",
     menuOpen: "Open menu",
     menuClose: "Close menu",
     pricingNote: "Prices and offers are set by AT&T, exclude taxes and fees unless otherwise stated, and are subject to change without notice. Service availability varies by address.",
@@ -132,7 +131,6 @@ export const ui = {
     wordmarkSub: "Distribuidor independiente de servicios de AT&T",
     switchLabel: "English",
     switchLang: "en",
-    callBarLabel: "Llamar o verificar disponibilidad",
     menuOpen: "Abrir menú",
     menuClose: "Cerrar menú",
     pricingNote:
