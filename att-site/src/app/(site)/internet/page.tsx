@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
 import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
-import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
+import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { ZipCheck } from "@/components/forms/ZipCheck";
 import { AirIcon, FiberIcon } from "@/components/ui/Icons";
@@ -55,7 +55,7 @@ export default function InternetPage() {
                 From <span className="text-3xl font-extrabold">{formatMoney(fiber300.price!.amount)}</span>
                 <span className="font-semibold text-ink-muted">/mo.</span> with AutoPay &amp; Paperless bill, plus taxes &amp; fees
               </p>
-              <BroadbandFacts offer={fiber300} />
+              <AsOf offer={fiber300} />
               <FinePrint offer={fiber300} />
               <Link href="/internet/fiber" className="btn btn-primary mt-6">
                 View AT&amp;T Fiber Plans
@@ -71,7 +71,7 @@ export default function InternetPage() {
                 <span className="text-3xl font-extrabold">{formatMoney(air.price!.amount)}</span>
                 <span className="font-semibold text-ink-muted">/mo.</span> with AutoPay &amp; Paperless bill, plus taxes &amp; fees
               </p>
-              <BroadbandFacts offer={air} />
+              <AsOf offer={air} />
               <FinePrint offer={air} />
               <Link href="/internet/internet-air" className="btn btn-primary mt-6">
                 View AT&amp;T Internet Air

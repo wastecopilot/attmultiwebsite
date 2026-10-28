@@ -2,11 +2,11 @@ import type { Offer } from "@/data/offer-types";
 import { PhoneLink } from "@/components/PhoneLink";
 import { OrderButton } from "@/components/OrderButton";
 import { CheckList } from "@/components/ui/Sections";
-import { BroadbandFacts, Conditions, FinePrint, Price } from "./OfferBits";
+import { AsOf, Conditions, FinePrint, Price } from "./OfferBits";
 import { headlineEs, tr, ui, type Locale } from "@/data/i18n";
 
 /**
- * Plan card used for every priced plan. Always shows: price, conditions, the Broadband Facts link (broadband plans) and the
+ * Plan card used for every priced plan. Always shows: price, conditions, the "as of" date, the Broadband Facts link (broadband plans) and the
  * full att.com fine print (in a disclosure that is present in the HTML).
  */
 export function PlanCard({
@@ -51,7 +51,7 @@ export function PlanCard({
           <Price price={offer.altPrice.price} size="md" locale={locale} />
         </div>
       ) : null}
-      <BroadbandFacts offer={offer} locale={locale} />
+      <AsOf offer={offer} locale={locale} />
       {/* AT&T lists plan features in English; Spanish cards keep the price, conditions and offer details. */}
       {!es && offer.features?.length ? <CheckList className="mt-5 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
@@ -82,7 +82,7 @@ export function PromoCard({ offer, headingLevel = "h3", locale = "en" }: { offer
         </div>
       ) : null}
       <Conditions items={offer.conditions} />
-      <BroadbandFacts offer={offer} locale={locale} />
+      <AsOf offer={offer} locale={locale} />
       {!es && offer.features?.length ? <CheckList className="mt-4 text-sm text-ink" items={offer.features} /> : null}
       <div className="mt-auto pt-6">
         <div className="cta-pair">

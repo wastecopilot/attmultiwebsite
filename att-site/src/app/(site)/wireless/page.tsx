@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
 import { PromoCard } from "@/components/offers/OfferCard";
-import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
+import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
 import { OrderButton } from "@/components/OrderButton";
@@ -38,7 +38,7 @@ export default function WirelessPage() {
             </p>
             <p className="text-sm font-semibold text-ink">{value.title} {value.price!.qualifier}</p>
             <p className="mt-1 text-sm text-ink-muted">{value.conditions.join(" · ")}</p>
-            <BroadbandFacts offer={value} />
+            <AsOf offer={value} />
             <FinePrint offer={value} />
             <div className="cta-pair mt-4">
               <PhoneLink placement="wireless-header" offerId={value.id} value={value.price!.amount} className="btn btn-primary" label="Call Now" />
@@ -67,7 +67,7 @@ export default function WirelessPage() {
                   <span className="text-sm font-semibold text-ink-muted">/mo. per line</span>
                 </p>
                 <p className="text-sm text-ink-muted">{p.price!.qualifier}</p>
-                <BroadbandFacts offer={p} />
+                <AsOf offer={p} />
                 <FinePrint offer={p} />
                 <Link href="/wireless/plans" className="link mt-auto pt-4 text-sm font-semibold">
                   {p.title.replace("℠", "")} plan details

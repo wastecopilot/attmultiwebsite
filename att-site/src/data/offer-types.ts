@@ -26,6 +26,11 @@ export interface Offer {
   altPrice?: { label: string; price: OfferPrice; conditions: string[] };
   /** Short conditions shown with the price (AutoPay, availability, taxes…). */
   conditions: string[];
+  /**
+   * The monthly AutoPay & paperless bill discount att.com states for this plan (already taken off `price`).
+   * The order page uses it to check a quote when the visitor declines AutoPay: att.com price + this amount.
+   */
+  autopayDiscount?: number;
   /** Full fine print, verbatim from the att.com page or its "See offer details" dialog. */
   finePrint: string;
   /** Plan features, as listed on att.com. */

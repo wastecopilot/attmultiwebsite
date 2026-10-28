@@ -2,8 +2,8 @@
  * Online order flow tests: run with `npm run build:audit && npm run test:order` (both 1440 px and 390 px).
  *
  * The site runs from the local audit build and talks to tests/mocks/spoc-mock.mjs, which answers like
- * order-service + the SPOC automation with plans, options and cart lines copied exactly from the live
- * partner portal (tests/mocks/portal-fixtures.json). Covered:
+ * order-service + the SPOC automation (tests/mocks/portal-fixtures.json). Plan names and prices on the page
+ * must come from att.com (src/data/offers.ts); the portal only says which plans are available. Covered:
  *   1. Every Order Now button on every page lands on /att/order with the right plan, source page and click IDs.
  *   2. Address → plans at the address → options → quote → details → review → reference, for every plan
  *      (Internet 300 / 500 / 1000 / 5000 / 100 and AT&T Internet Air).
@@ -12,6 +12,7 @@
  *   4. SSN / date of birth / card / bank fields cannot be sent; no personal data in URLs, analytics or logs.
  */
 import { test, expect, type Page, type TestInfo } from "@playwright/test";
+import { offers } from "../src/data/offers";
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -30,6 +31,7 @@ const ORDER_EVENTS = [
   "order_submit",
   "order_failed",
 ];
+const attComPrice = (id: string) => offers.find((o) => o.id === id)!.price!.amount;
 const PERSON = { first: "Flowtester", last: "Ordercheck", phone: "(214) 555-0147", email: "flow.tester@example.com" };
 const PII_MARKERS = [PERSON.first, PERSON.last, "2145550147", "555-0147", PERSON.email, "flow.tester", "Plainview", "Courtenay", "Lakeforest"];
 
@@ -47,7 +49,6 @@ const EXTENDER_YES = /^Next-generation Wi-Fi experience/;
 const EXTENDER_NO = /^Decline Extended Wi-Fi Coverage Service/;
 const EQUIPMENT = /^AT&T Internet Equipment Fee/;
 const FIBER_INSTALL = /^AT&T Professional Install\b/;
-const COPPER_INSTALL = /^AT&T Professional Install Fee/;
 
 // Every page in the build, plus the dynamic order page.
 const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../.next-audit/prerender-manifest.json"), "utf8")) as { routes: Record<string, unknown> };
@@ -229,19 +230,21 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
   await arrive(page, "/internet/internet-air", "internet-air");
   await address(page, "hicksville");
   await expect(page.getByRole("heading", { name: "Checking the Plans at Your Address" })).toBeVisible();
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   // The plan from the button is preselected, and the address bar names the same plan.
-  await expect(page.locator('[data-plan-card="at-t-internet-air"]')).toHaveAttribute("data-selected", "true");
+  await expect(page.locator('[data-plan-card="internet-air"]')).toHaveAttribute("data-selected", "true");
   expect(new URL(page.url()).searchParams.get("plan")).toBe("internet-air");
-  await expect(page.locator('[data-plan-card="at-t-internet-air"] [data-plan-price]')).toHaveText("$60/mo.");
+  // att.com's price, never the portal card's ($60).
+  await expect(page.locator('[data-plan-card="internet-air"] [data-plan-price]')).toHaveAttribute("data-plan-price", String(attComPrice("internet-air")));
+  await expect(page.locator('[data-plan-card="internet-air"]')).toContainText("Pricing as of");
   await toOptions(page);
-  // Extended Wi-Fi starts on "Decline"; AutoPay is an explicit choice; nothing else is preselected.
-  await expect(page.getByRole("radio", { name: EXTENDER_NO })).toBeChecked();
-  await expect(page.getByRole("radio", { name: EXTENDER_YES })).not.toBeChecked();
+  // Extended Wi-Fi has no att.com price, so it is not offered; AutoPay is an explicit choice with att.com's text.
+  await expect(page.getByRole("radio", { name: EXTENDER_YES })).toHaveCount(0);
+  await expect(page.locator("[data-hidden-addons]")).toBeVisible();
   await expect(page.getByRole("radio", { name: AUTOPAY_YES })).not.toBeChecked();
   await expect(page.getByRole("radio", { name: AUTOPAY_NO })).not.toBeChecked();
   await expect(page.getByText(/ask the Customer/i)).toHaveCount(0);
-  await expect(page.getByText(/\$10\/mo AutoPay and Paperless Billing discount with bank account/).first()).toBeVisible();
+  await expect(page.getByText(/\$10\/mo if enrolled in Autopay w\/ your bank account/).first()).toBeVisible();
   await page.getByRole("button", { name: "See My Quote" }).click();
   await expect(page.getByText("Please choose an option for each item.")).toBeVisible();
   await pick(page, [AUTOPAY_YES]);
@@ -249,6 +252,7 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
   await expect(page.getByRole("cell", { name: /^AT&T Internet Air/ })).toBeVisible();
   await expect(page.getByRole("cell", { name: /^AutoPay\/Paperless Billing Discount/ })).toBeVisible();
   await expect(page.getByText("AT&T Extended Wi-Fi")).toHaveCount(0);
+  await expect(page.locator("[data-att-price-match]")).toContainText("$55.00/mo.");
   await details(page);
   await submit(page);
   await expectDone(page);
@@ -271,12 +275,12 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
   expect(errors).toEqual([]);
 });
 
-// Totals are the portal's own carts for these choices (portal-fixtures.json): AutoPay taken, $0 items chosen.
+// Cards show att.com prices; the portal carts for AutoPay taken and $0 items chosen equal them.
 const FIBER: [string, string, string, string][] = [
-  ["fiber-300", "internet-300-fiber-300", "$50/mo.", "$50.00"],
-  ["fiber-500", "internet-500-fiber-500", "$65/mo.", "$60.00"],
-  ["fiber-1000", "internet-1000-fiber-1-gig", "$80/mo.", "$70.00"],
-  ["fiber-5000", "internet-5000-fiber-5-gig", "$125/mo.", "$110.00"],
+  ["fiber-300", "fiber-300", "50", "$50.00"],
+  ["fiber-500", "fiber-500", "60", "$60.00"],
+  ["fiber-1000", "fiber-1000", "70", "$70.00"],
+  ["fiber-5000", "fiber-5000", "110", "$110.00"],
 ];
 for (const [offer, card, price, total] of FIBER) {
   test(`Success: ${card} at the Atlanta test address, every step to the reference`, async ({ page }) => {
@@ -286,8 +290,8 @@ for (const [offer, card, price, total] of FIBER) {
     await expectPlans(page, FIBER.map((f) => f[1]));
     await expect(selectedCards(page)).toHaveCount(1);
     await expect(page.locator(`[data-plan-card="${card}"]`)).toHaveAttribute("data-selected", "true");
-    await expect(page.locator(`[data-plan-card="${card}"] [data-plan-price]`)).toHaveText(price);
-    await expect(page.locator(`[data-plan-card="${card}"] a`, { hasText: "Broadband Facts" })).toHaveAttribute("href", /^https:\/\/www\.att\.com\/labels\//);
+    await expect(page.locator(`[data-plan-card="${card}"] [data-plan-price]`)).toHaveAttribute("data-plan-price", price);
+    await expect(page.locator(`[data-plan-card="${card}"] a`, { hasText: "Broadband Facts" })).toHaveAttribute("href", /^https:\/\/www\.att\.com\//);
     await toOptions(page);
     await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
     await pick(page, [AUTOPAY_YES, EQUIPMENT, FIBER_INSTALL]);
@@ -299,24 +303,29 @@ for (const [offer, card, price, total] of FIBER) {
   });
 }
 
-test("Success: Internet 100 in Dallas, with its $99 installation shown as a one-time charge", async ({ page }) => {
+test("Portal plans that att.com does not list (Internet 100) are hidden", async ({ page }) => {
   await prepare(page);
   await open(page);
   await address(page, "dallas");
-  await expectPlans(page, ["internet-100", "at-t-internet-air"]);
-  await expect(selectedCards(page)).toHaveCount(0);
-  await choosePlan(page, "internet-100");
-  expect(new URL(page.url()).searchParams.get("plan")).toBe("internet-100");
+  await expectPlans(page, ["internet-air"]);
+  await expect(page.getByText("Internet 100")).toHaveCount(0);
+});
+
+test("Every price shown comes from att.com: plan cards and the quote total", async ({ page }) => {
+  await prepare(page);
+  await open(page);
+  await address(page, "atlanta");
+  await expectPlans(page, FIBER.map((f) => f[1]));
+  for (const card of await page.locator("[data-plan-card]").all()) {
+    const id = (await card.getAttribute("data-plan-card"))!;
+    await expect(card.locator("[data-plan-price]")).toHaveAttribute("data-plan-price", String(attComPrice(id)));
+    // The portal card prices ($65, $80, $125 for 500/1000/5000) never appear.
+    for (const portal of ["$65", "$80", "$125"]) await expect(card.locator(".price")).not.toContainText(portal);
+  }
+  await choosePlan(page, "fiber-500");
   await toOptions(page);
-  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
-  await pick(page, [AUTOPAY_YES, EQUIPMENT, COPPER_INSTALL]);
-  await toQuote(page, "$60.00");
-  await expect(page.locator("[data-one-time-charges]")).toContainText("AT&T Professional Install Fee");
-  await expect(page.locator("[data-one-time-charges]")).toContainText("$99");
-  await details(page);
-  await expect(page.getByText(/AT&T Professional Install Fee \(\$99 one-time\)/)).toBeVisible();
-  await submit(page);
-  await expectDone(page);
+  await pick(page, [AUTOPAY_YES, EQUIPMENT, FIBER_INSTALL]);
+  await toQuote(page, `$${attComPrice("fiber-500")}.00`);
 });
 
 // ---------------------------------------------------------------------------------------------------------
@@ -327,12 +336,12 @@ test("A plan not offered at the address: said plainly, the available plans shown
   await prepare(page);
   await open(page, "fiber-1000");
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await expect(page.locator("[data-plan-unavailable]")).toHaveText("AT&T Internet 1000 is not available at this address. These plans are available:");
   await expect(selectedCards(page)).toHaveCount(0);
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByText("Please choose a plan.")).toBeVisible();
-  await choosePlan(page, "at-t-internet-air");
+  await choosePlan(page, "internet-air");
   expect(new URL(page.url()).searchParams.get("plan")).toBe("internet-air");
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
@@ -344,7 +353,7 @@ test("The highlighted plan always matches the plan in the address bar", async ({
   await open(page, "fiber-300");
   await address(page, "atlanta");
   await expectPlans(page, FIBER.map((f) => f[1]));
-  for (const [offer, card] of [["fiber-300", "internet-300-fiber-300"], ["fiber-1000", "internet-1000-fiber-1-gig"], ["fiber-500", "internet-500-fiber-500"]]) {
+  for (const [offer, card] of [["fiber-300", "fiber-300"], ["fiber-1000", "fiber-1000"], ["fiber-500", "fiber-500"]]) {
     if (offer !== "fiber-300") await choosePlan(page, card);
     await expect(selectedCards(page)).toHaveCount(1);
     await expect(page.locator(`[data-plan-card="${card}"]`)).toHaveAttribute("data-selected", "true");
@@ -362,29 +371,36 @@ test("No plans at the address: the honest call screen", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Check the Address" })).toBeVisible();
 });
 
-test("Extended Wi-Fi declined vs chosen: the add-on and its $12.00 appear only when chosen", async ({ page }) => {
+test("Extended Wi-Fi has no att.com price, so it is never offered or added", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
-  await pick(page, [AUTOPAY_YES, EXTENDER_NO]);
+  await expect(page.getByRole("radio", { name: EXTENDER_YES })).toHaveCount(0);
+  await expect(page.getByRole("radio", { name: EXTENDER_NO })).toHaveCount(0);
+  await pick(page, [AUTOPAY_YES]);
   await toQuote(page, "$55.00");
   expect(await lineAmounts(page)).not.toContain("$12.00");
-  await page.getByRole("button", { name: "Change Options" }).click();
-  await pick(page, [EXTENDER_YES]);
-  await toQuote(page, "$67.00");
-  await expect(page.getByRole("cell", { name: /^AT&T Extended Wi-Fi/ })).toBeVisible();
-  expect(await lineAmounts(page)).toContain("$12.00");
 });
 
-test("The $77 case: a paid add-on in the cart that the visitor did not choose stops the order", async ({ page }) => {
+test("Declining AutoPay: the quote must equal the att.com price plus the $10 discount att.com states", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_NO]);
+  await toQuote(page, "$65.00");
+});
+
+test("The $77 case: a cart total that differs from att.com (an unchosen paid add-on) shows no price", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "8 Extender Road");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
-  await pick(page, [AUTOPAY_NO]); // Extended Wi-Fi stays on Decline
+  await pick(page, [AUTOPAY_NO]); // Extended Wi-Fi is not offered and stays on Decline
   await page.getByRole("button", { name: "See My Quote" }).click();
   await expectStop(page, CALL);
   await expect(page.getByText("$77.00")).toHaveCount(0);
@@ -397,7 +413,7 @@ test("Rejected email: the portal's refusal is explained on the same screen, then
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
   await toQuote(page, "$55.00");
@@ -417,7 +433,7 @@ test("Confirm email must match before the review", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
   await toQuote(page, "$55.00");
@@ -435,7 +451,7 @@ test("Address needs a unit: asked on the address step, then the plans", async ({
   await address(page, "40 Needsunit Court");
   await expect(page.getByText("This address needs an apartment or unit number.")).toBeVisible({ timeout: 20_000 });
   await address(page, "40 Needsunit Court", { unit: "4B" });
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
 });
 
 for (const [street, message] of [
@@ -485,7 +501,7 @@ test("Stops honestly: unrequested bundle (DIRECTV) in the cart", async ({ page }
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "7 Bundle Road");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
   await page.getByRole("button", { name: "See My Quote" }).click();
@@ -496,7 +512,7 @@ test("Plan no longer offered when priced: back to the plans with a plain message
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "10 Planmissing Road");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
   await page.getByRole("button", { name: "See My Quote" }).click();
@@ -510,14 +526,14 @@ test("Slow lookup: the progress screen stays until the real plans arrive", async
   await address(page, "18 Slow Road");
   await expect(page.getByRole("heading", { name: "Checking the Plans at Your Address" })).toBeVisible();
   await expect(page.getByText("This usually takes less than a minute. Please keep this page open.")).toBeVisible();
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
 });
 
 test("Submission failure: honest message, no confirmation", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await toOptions(page);
   await pick(page, [AUTOPAY_YES]);
   await toQuote(page, "$55.00");
@@ -594,7 +610,7 @@ test("The order form never asks for SSN, date of birth, card or bank details", a
   await open(page, "internet-air");
   await scan();
   await address(page, "hicksville");
-  await expectPlans(page, ["at-t-internet-air"]);
+  await expectPlans(page, ["internet-air"]);
   await scan();
   await toOptions(page);
   await scan();

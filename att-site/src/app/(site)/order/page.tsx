@@ -1,6 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import { offers } from "@/data/offers";
-import { ONLINE_ORDER_CATEGORIES } from "@/data/order-plans";
+import { ONLINE_ORDER_CATEGORIES, portalNameForOffer } from "@/data/order-plans";
 import { orderTimeouts, serviceConfigured } from "@/lib/order/service";
 import { PageHeader } from "@/components/ui/Sections";
 import { OrderFlow } from "@/components/order/OrderFlow";
@@ -24,6 +24,8 @@ export default async function OrderPage({ searchParams }: { searchParams: Search
   // Only an offer id or a portal plan id (letters, digits, dashes) is used; anything else is ignored.
   const planId = /^[a-z0-9-]{2,80}$/.test(rawPlan) ? rawPlan : "";
   const initialOffer = offers.find((o) => o.id === planId) ?? null;
+  // The att.com plans (offers.ts) that can be ordered online: the portal only says which are available.
+  const onlinePlans = offers.filter((o) => o.price && portalNameForOffer(o.id));
   const rawSource = typeof sp.source === "string" ? sp.source : "";
   // Only a site path is passed on to analytics; anything else is reported as "other".
   const source = /^\/[A-Za-z0-9/_-]{0,100}$/.test(rawSource) ? rawSource : rawSource ? "other" : "direct";
@@ -33,12 +35,13 @@ export default async function OrderPage({ searchParams }: { searchParams: Search
         trail={[{ name: "Order", path: "/order" }]}
         eyebrow="Order Online"
         title="Order AT&T Internet"
-        intro="Enter your service address to see the AT&T Internet plans and prices available there, choose your options and send your order request. A specialist completes the credit check and payment with you."
+        intro="Enter your service address to see which AT&T Internet plans are available there, choose your options and send your order request. A specialist completes the credit check and payment with you."
       />
       <section className="section" aria-label="Order steps">
         <div className="container-x">
           <OrderFlow
             initialOffer={initialOffer}
+            plans={onlinePlans}
             planParam={planId}
             planOrderableOnline={!initialOffer || ONLINE_ORDER_CATEGORIES.has(initialOffer.category)}
             source={source}

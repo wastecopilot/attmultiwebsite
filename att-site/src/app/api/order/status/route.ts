@@ -4,19 +4,22 @@ import { toOutcome } from "@/lib/order/outcome";
 import { hasExactKeys, isJobId, validOptionAnswers } from "@/lib/order/validation";
 
 /**
- * Progress of a plans lookup, quote or submission: { jobId, planName, options } ->
- * { state: "running" } | { state: "done", outcome }. `planName` and `options` are what the visitor chose,
- * used to confirm the portal cart holds exactly that and nothing else ("" and {} for a plans lookup).
+ * Progress of a plans lookup, quote or submission: { jobId, offerId, zip, options } ->
+ * { state: "running" } | { state: "done", outcome }. `offerId` (offers.ts) and `options` are what the visitor
+ * chose: the portal cart must hold exactly that, at the att.com price ("" and {} for a plans lookup). `zip`
+ * (5 digits) only labels a price-mismatch log line.
  */
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return reply({ error: "forbidden" }, 403);
   const body = await readJson(request);
   if (
     !body ||
-    !hasExactKeys(body, ["jobId", "planName", "options"]) ||
+    !hasExactKeys(body, ["jobId", "offerId", "zip", "options"]) ||
     !isJobId(body.jobId) ||
-    typeof body.planName !== "string" ||
-    body.planName.length > 120 ||
+    typeof body.offerId !== "string" ||
+    !/^[a-z0-9-]{0,80}$/.test(body.offerId) ||
+    typeof body.zip !== "string" ||
+    !/^(\d{5})?$/.test(body.zip) ||
     !validOptionAnswers(body.options)
   )
     return reply({ error: "invalid_request" }, 400);
@@ -29,5 +32,5 @@ export async function POST(request: Request) {
     return reply({ state: "unreachable" }, 503);
   }
   if (res.body.state !== "done") return reply({ state: "running" });
-  return reply({ state: "done", outcome: toOutcome(res.body.result, { planName: body.planName, options: body.options }) });
+  return reply({ state: "done", outcome: toOutcome(res.body.result, { offerId: body.offerId, zip: body.zip, options: body.options }) });
 }

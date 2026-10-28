@@ -1,7 +1,7 @@
 import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
-import { BroadbandFacts } from "@/components/offers/OfferBits";
+import { AsOf } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { JsonLd, offersJsonLd } from "@/components/seo/JsonLd";
 
@@ -93,7 +93,7 @@ export default function WirelessPlansPage() {
             Single-line prices are AT&amp;T&rsquo;s published rates before the AutoPay &amp; paperless bill discount. AT&amp;T may temporarily slow data speeds if the network is busy. Taxes and fees extra; monthly AT&amp;T fees apply per line, including an Administrative/Regulatory Cost Recovery Fee of up to $4.99. Complete offer details appear
             with each plan above.
           </p>
-          <BroadbandFacts offer={plans[0]} />
+          <AsOf offer={plans[0]} />
         </div>
       </section>
 

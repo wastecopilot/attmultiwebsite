@@ -45,7 +45,7 @@ export async function waitForJob(jobId: string, expected: Expected, timeoutSecon
       const res = await fetch(`${API}/status`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jobId, planName: expected.planName ?? "", options: expected.options ?? {} }),
+        body: JSON.stringify({ jobId, offerId: expected.offerId ?? "", zip: expected.zip ?? "", options: expected.options ?? {} }),
         cache: "no-store",
         signal,
       });

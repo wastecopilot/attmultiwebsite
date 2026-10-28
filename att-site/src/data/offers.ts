@@ -4,7 +4,8 @@
  * Generated on 2026-10-21T06:33:22.971Z by scripts/research/build-offers.mjs from the att.com evidence
  * saved in research/raw/ (fine print is copied verbatim, never retyped). Maintain this file by hand from
  * now on: re-check the sourceUrl, update price / finePrint / retrievedAt, and run `npm run build`.
- * Re-verified against att.com on 2026-10-28 (research/data-audit.md); captures kept outside git.
+ * Re-verified against att.com on 2026-10-28 (research/data-audit.md); AT&T Fiber and Internet Air re-checked at
+ * 17:53-17:56 UTC the same day (research/att-com-verified.md). Captures kept outside git.
  * The production build fails if any offer lacks a sourceUrl or was verified more than
  * OFFER_MAX_AGE_DAYS days ago (scripts/prebuild-check.ts).
  */
@@ -37,10 +38,9 @@ export const offers: Offer[] = [
       ]
     },
     "conditions": [
-      "Plus taxes & fees",
-      "After $10/mo. AutoPay & Paperless bill discount (within 2 bills)",
-      "Limited availability/areas"
+      "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas."
     ],
+    "autopayDiscount": 10,
     "finePrint": "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas.\n\nWith wireless plan: Price + taxes & fees after discounts w/elig wireless svc, AutoPay & Paperless bill. Ltd avail/areas.\n\nUp to $15 Off Fiber Offer: Subj to change. New AT&T Fiber customers will receive a discount for 12 months off the monthly recurring charge for an AT&T Fiber plan ($5/mo w/500M; $10/mo w/1 Gig; $15/mo w/5 Gig). Pay full plan cost until discount starts w/in 3 bills. After 12 mos, prevailing rate for fiber plan applies. Must maintain qualifying speed tier for continued receipt of monthly discount. Access and Bulk accounts not eligible.\n\nAutopay & Paperless Bill Discount: $10/mo if enrolled in Autopay & Paperless billing w/ your bank account or the AT&T Points Plus® Card from Citi. Discount reduced to $5/mo when enrolled with a debit card. No discount if enrolled with any other credit card. Discount starts w/in 2 bills. Must maintain valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly State Cost Recovery charge, which is not gov’t req’d applies in NV, OH, TX. Taxes also apply. For one time AT&T transactional fees, see www.att.com/fees for details. Pricing subject to change. Subj. to Internet Terms of Service at www.att.com/internet-terms.\n\nINTERNET W/ WIRELESS DISCOUNT: Subj. to change. Eligible customers receive a monthly discount off the monthly recurring charge for an AT&T Fiber plan: $15/mo. with 300M/500M; $20/mo. with 1-Gig; or $25/mo. with 5-Gig. Eligible customers are: New customers who purchase an AT&T Fiber plan and an eligible unlimited wireless plan; Existing fiber customers who add an eligible unlimited wireless plan; Existing AT&T wireless customers with an eligible postpaid wireless plan who add AT&T Fiber. The discount will apply to customer’s bill within 1 3 bills and applied before any Autopay discount. Wireless and internet accounts must match names and addresses; services are billed separately. Eligible wireless service must be maintained to continue receiving discount. Customers already receiving 25% off eligible unlimited plans, Req’d Wireless: Postpaid unlimited voice and data plan for smartphones (minimum $60/mo. before discounts for new customers). Eligible plans: AT&T Value 2.0, AT&T Extra 2.0, AT&T Premium 2.0, or AT&T Elite 2.0. Speed, usage, & other restr’s apply. See att.com/unlimited for current unlimited plans.\n\nSpeeds based on wired connection. Actual customer speeds may vary. For 5 GIG, single-device wired speed maximum 4.7 Gbps. For more information, go to www.att.com/speed101.\n\nOffers may be modified or discontinued at any time without notice and may not be combined with other promotional offers on the same service(s).",
     "features": [
       "Game, stream, and video chat with confidence.",
@@ -49,7 +49,7 @@ export const offers: Offer[] = [
     ],
     "speed": "300Mbps speed",
     "sourceUrl": "https://www.att.com/internet/fiber/",
-    "retrievedAt": "2026-10-28T15:46:03.437Z",
+    "retrievedAt": "2026-10-28T17:53:35.354Z",
     "expiresAt": null,
     "videoRef": "0:49 (hero card), 0:52 (tier card), 0:86 (terms table)"
   },
@@ -57,11 +57,11 @@ export const offers: Offer[] = [
     "id": "fiber-500",
     "category": "fiber",
     "title": "AT&T Internet 500",
-    "headline": "AT&T Internet 500: 500Mbps speed, $60/mo. for 12 mos.",
+    "headline": "AT&T Internet 500: 500Mbps speed, $60/mo.",
     "price": {
       "amount": 60,
       "unit": "/mo.",
-      "qualifier": "for 12 mos. with AutoPay & Paperless bill",
+      "qualifier": "with AutoPay & Paperless bill",
       "was": 75
     },
     "altPrice": {
@@ -69,7 +69,7 @@ export const offers: Offer[] = [
       "price": {
         "amount": 45,
         "unit": "/mo.",
-        "qualifier": "for 12 mos. with eligible wireless, AutoPay & Paperless bill",
+        "qualifier": "with eligible wireless, AutoPay & Paperless bill",
         "was": 75
       },
       "conditions": [
@@ -77,10 +77,9 @@ export const offers: Offer[] = [
       ]
     },
     "conditions": [
-      "Plus taxes & fees",
-      "After $10/mo. AutoPay & Paperless bill discount (within 2 bills)",
-      "Limited availability/areas"
+      "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas."
     ],
+    "autopayDiscount": 10,
     "finePrint": "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas.\n\nWith wireless plan: Price + taxes & fees after discounts w/elig wireless svc, AutoPay & Paperless bill. Ltd avail/areas.\n\nUp to $15 Off Fiber Offer: Subj to change. New AT&T Fiber customers will receive a discount for 12 months off the monthly recurring charge for an AT&T Fiber plan ($5/mo w/500M; $10/mo w/1 Gig; $15/mo w/5 Gig). Pay full plan cost until discount starts w/in 3 bills. After 12 mos, prevailing rate for fiber plan applies. Must maintain qualifying speed tier for continued receipt of monthly discount. Access and Bulk accounts not eligible.\n\nAutopay & Paperless Bill Discount: $10/mo if enrolled in Autopay & Paperless billing w/ your bank account or the AT&T Points Plus® Card from Citi. Discount reduced to $5/mo when enrolled with a debit card. No discount if enrolled with any other credit card. Discount starts w/in 2 bills. Must maintain valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly State Cost Recovery charge, which is not gov’t req’d applies in NV, OH, TX. Taxes also apply. For one time AT&T transactional fees, see www.att.com/fees for details. Pricing subject to change. Subj. to Internet Terms of Service at www.att.com/internet-terms.\n\nINTERNET W/ WIRELESS DISCOUNT: Subj. to change. Eligible customers receive a monthly discount off the monthly recurring charge for an AT&T Fiber plan: $15/mo. with 300M/500M; $20/mo. with 1-Gig; or $25/mo. with 5-Gig. Eligible customers are: New customers who purchase an AT&T Fiber plan and an eligible unlimited wireless plan; Existing fiber customers who add an eligible unlimited wireless plan; Existing AT&T wireless customers with an eligible postpaid wireless plan who add AT&T Fiber. The discount will apply to customer’s bill within 1 3 bills and applied before any Autopay discount. Wireless and internet accounts must match names and addresses; services are billed separately. Eligible wireless service must be maintained to continue receiving discount. Customers already receiving 25% off eligible unlimited plans, Req’d Wireless: Postpaid unlimited voice and data plan for smartphones (minimum $60/mo. before discounts for new customers). Eligible plans: AT&T Value 2.0, AT&T Extra 2.0, AT&T Premium 2.0, or AT&T Elite 2.0. Speed, usage, & other restr’s apply. See att.com/unlimited for current unlimited plans.\n\nSpeeds based on wired connection. Actual customer speeds may vary. For 5 GIG, single-device wired speed maximum 4.7 Gbps. For more information, go to www.att.com/speed101.\n\nOffers may be modified or discontinued at any time without notice and may not be combined with other promotional offers on the same service(s).",
     "features": [
       "Level up your gaming with low lag.",
@@ -89,7 +88,7 @@ export const offers: Offer[] = [
     ],
     "speed": "500Mbps speed",
     "sourceUrl": "https://www.att.com/internet/fiber/",
-    "retrievedAt": "2026-10-28T15:46:03.437Z",
+    "retrievedAt": "2026-10-28T17:53:35.354Z",
     "expiresAt": null,
     "videoRef": "0:52 (tier card), 0:86 (terms table)"
   },
@@ -97,11 +96,11 @@ export const offers: Offer[] = [
     "id": "fiber-1000",
     "category": "fiber",
     "title": "AT&T Internet 1000",
-    "headline": "AT&T Internet 1000: Up to 1 GIG speed, $70/mo. for 12 mos.",
+    "headline": "AT&T Internet 1000: Up to 1 GIG speed, $70/mo.",
     "price": {
       "amount": 70,
       "unit": "/mo.",
-      "qualifier": "for 12 mos. with AutoPay & Paperless bill",
+      "qualifier": "with AutoPay & Paperless bill",
       "was": 90
     },
     "altPrice": {
@@ -109,7 +108,7 @@ export const offers: Offer[] = [
       "price": {
         "amount": 50,
         "unit": "/mo.",
-        "qualifier": "for 12 mos. with eligible wireless, AutoPay & Paperless bill",
+        "qualifier": "with eligible wireless, AutoPay & Paperless bill",
         "was": 90
       },
       "conditions": [
@@ -117,10 +116,9 @@ export const offers: Offer[] = [
       ]
     },
     "conditions": [
-      "Plus taxes & fees",
-      "After $10/mo. AutoPay & Paperless bill discount (within 2 bills)",
-      "Limited availability/areas"
+      "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas."
     ],
+    "autopayDiscount": 10,
     "finePrint": "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas.\n\nWith wireless plan: Price + taxes & fees after discounts w/elig wireless svc, AutoPay & Paperless bill. Ltd avail/areas.\n\nUp to $15 Off Fiber Offer: Subj to change. New AT&T Fiber customers will receive a discount for 12 months off the monthly recurring charge for an AT&T Fiber plan ($5/mo w/500M; $10/mo w/1 Gig; $15/mo w/5 Gig). Pay full plan cost until discount starts w/in 3 bills. After 12 mos, prevailing rate for fiber plan applies. Must maintain qualifying speed tier for continued receipt of monthly discount. Access and Bulk accounts not eligible.\n\nAutopay & Paperless Bill Discount: $10/mo if enrolled in Autopay & Paperless billing w/ your bank account or the AT&T Points Plus® Card from Citi. Discount reduced to $5/mo when enrolled with a debit card. No discount if enrolled with any other credit card. Discount starts w/in 2 bills. Must maintain valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly State Cost Recovery charge, which is not gov’t req’d applies in NV, OH, TX. Taxes also apply. For one time AT&T transactional fees, see www.att.com/fees for details. Pricing subject to change. Subj. to Internet Terms of Service at www.att.com/internet-terms.\n\nINTERNET W/ WIRELESS DISCOUNT: Subj. to change. Eligible customers receive a monthly discount off the monthly recurring charge for an AT&T Fiber plan: $15/mo. with 300M/500M; $20/mo. with 1-Gig; or $25/mo. with 5-Gig. Eligible customers are: New customers who purchase an AT&T Fiber plan and an eligible unlimited wireless plan; Existing fiber customers who add an eligible unlimited wireless plan; Existing AT&T wireless customers with an eligible postpaid wireless plan who add AT&T Fiber. The discount will apply to customer’s bill within 1 3 bills and applied before any Autopay discount. Wireless and internet accounts must match names and addresses; services are billed separately. Eligible wireless service must be maintained to continue receiving discount. Customers already receiving 25% off eligible unlimited plans, Req’d Wireless: Postpaid unlimited voice and data plan for smartphones (minimum $60/mo. before discounts for new customers). Eligible plans: AT&T Value 2.0, AT&T Extra 2.0, AT&T Premium 2.0, or AT&T Elite 2.0. Speed, usage, & other restr’s apply. See att.com/unlimited for current unlimited plans.\n\nSpeeds based on wired connection. Actual customer speeds may vary. For 5 GIG, single-device wired speed maximum 4.7 Gbps. For more information, go to www.att.com/speed101.\n\nOffers may be modified or discontinued at any time without notice and may not be combined with other promotional offers on the same service(s).",
     "features": [
       "The speed to succeed for work and pro-level gaming.",
@@ -129,7 +127,7 @@ export const offers: Offer[] = [
     ],
     "speed": "Up to 1 GIG speed",
     "sourceUrl": "https://www.att.com/internet/fiber/",
-    "retrievedAt": "2026-10-28T15:46:03.437Z",
+    "retrievedAt": "2026-10-28T17:53:35.354Z",
     "expiresAt": null,
     "videoRef": "0:52 (tier card, POPULAR), 0:86 (terms table)"
   },
@@ -137,11 +135,11 @@ export const offers: Offer[] = [
     "id": "fiber-5000",
     "category": "fiber",
     "title": "AT&T Internet 5000",
-    "headline": "AT&T Internet 5000: Up to 5 GIG speed, $110/mo. for 12 mos.",
+    "headline": "AT&T Internet 5000: Up to 5 GIG speed, $110/mo.",
     "price": {
       "amount": 110,
       "unit": "/mo.",
-      "qualifier": "for 12 mos. with AutoPay & Paperless bill",
+      "qualifier": "with AutoPay & Paperless bill",
       "was": 135
     },
     "altPrice": {
@@ -149,7 +147,7 @@ export const offers: Offer[] = [
       "price": {
         "amount": 85,
         "unit": "/mo.",
-        "qualifier": "for 12 mos. with eligible wireless, AutoPay & Paperless bill",
+        "qualifier": "with eligible wireless, AutoPay & Paperless bill",
         "was": 135
       },
       "conditions": [
@@ -157,10 +155,9 @@ export const offers: Offer[] = [
       ]
     },
     "conditions": [
-      "Plus taxes & fees",
-      "After $10/mo. AutoPay & Paperless bill discount (within 2 bills)",
-      "Limited availability/areas"
+      "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas."
     ],
+    "autopayDiscount": 10,
     "finePrint": "Price plus taxes and fees after $10/mo. discount w/ elig. Autopay & Paperless bill (w/in 2 bills). Ltd. avail/areas.\n\nWith wireless plan: Price + taxes & fees after discounts w/elig wireless svc, AutoPay & Paperless bill. Ltd avail/areas.\n\nUp to $15 Off Fiber Offer: Subj to change. New AT&T Fiber customers will receive a discount for 12 months off the monthly recurring charge for an AT&T Fiber plan ($5/mo w/500M; $10/mo w/1 Gig; $15/mo w/5 Gig). Pay full plan cost until discount starts w/in 3 bills. After 12 mos, prevailing rate for fiber plan applies. Must maintain qualifying speed tier for continued receipt of monthly discount. Access and Bulk accounts not eligible.\n\nAutopay & Paperless Bill Discount: $10/mo if enrolled in Autopay & Paperless billing w/ your bank account or the AT&T Points Plus® Card from Citi. Discount reduced to $5/mo when enrolled with a debit card. No discount if enrolled with any other credit card. Discount starts w/in 2 bills. Must maintain valid email address to continue discount. Taxes & Fees: Up to $99 installation fee may apply, plus tax where applicable. Monthly State Cost Recovery charge, which is not gov’t req’d applies in NV, OH, TX. Taxes also apply. For one time AT&T transactional fees, see www.att.com/fees for details. Pricing subject to change. Subj. to Internet Terms of Service at www.att.com/internet-terms.\n\nINTERNET W/ WIRELESS DISCOUNT: Subj. to change. Eligible customers receive a monthly discount off the monthly recurring charge for an AT&T Fiber plan: $15/mo. with 300M/500M; $20/mo. with 1-Gig; or $25/mo. with 5-Gig. Eligible customers are: New customers who purchase an AT&T Fiber plan and an eligible unlimited wireless plan; Existing fiber customers who add an eligible unlimited wireless plan; Existing AT&T wireless customers with an eligible postpaid wireless plan who add AT&T Fiber. The discount will apply to customer’s bill within 1 3 bills and applied before any Autopay discount. Wireless and internet accounts must match names and addresses; services are billed separately. Eligible wireless service must be maintained to continue receiving discount. Customers already receiving 25% off eligible unlimited plans, Req’d Wireless: Postpaid unlimited voice and data plan for smartphones (minimum $60/mo. before discounts for new customers). Eligible plans: AT&T Value 2.0, AT&T Extra 2.0, AT&T Premium 2.0, or AT&T Elite 2.0. Speed, usage, & other restr’s apply. See att.com/unlimited for current unlimited plans.\n\nSpeeds based on wired connection. Actual customer speeds may vary. For 5 GIG, single-device wired speed maximum 4.7 Gbps. For more information, go to www.att.com/speed101.\n\nOffers may be modified or discontinued at any time without notice and may not be combined with other promotional offers on the same service(s).",
     "features": [
       "Experience cutting-edge technologies beyond the internet.",
@@ -170,7 +167,7 @@ export const offers: Offer[] = [
     ],
     "speed": "Up to 5 GIG speed",
     "sourceUrl": "https://www.att.com/internet/fiber/",
-    "retrievedAt": "2026-10-28T15:46:03.437Z",
+    "retrievedAt": "2026-10-28T17:53:35.354Z",
     "expiresAt": null,
     "videoRef": "0:52 (tier card), 0:86 (terms table)"
   },
@@ -185,10 +182,9 @@ export const offers: Offer[] = [
       "qualifier": "with AutoPay & Paperless bill"
     },
     "conditions": [
-      "Plus taxes & fees",
-      "AutoPay & Paperless bill required",
-      "Not available in all areas"
+      "Price plus taxes and fees. AutoPay & Paperless bill req’d. Not available in all areas."
     ],
+    "autopayDiscount": 10,
     "finePrint": "Price plus taxes and fees. AutoPay & Paperless bill req’d. Not available in all areas. In rare cases, if your usage is contributing to congestion on the network, AT&T will greatly reduce your speed for a min. of 30 min. 5G coverage not available in all areas.\n\nAutoPay & Paperless bill discount: $10/mo if enrolled in Autopay w/ your bank account.  Discount reduced to $5/mo when enrolled with a debit or credit card.  Paperless billing required. Pay full plan cost until discounts start w/in 2 bills. Taxes & Fees: Monthly State Cost Recovery Charge which is not government-required applies in NV, OH, TX. Taxes also apply.  For one time AT&T transactional fees, see www.att.com/fees for details. If service is canceled, you must return AT&T All-Fi Hub to AT&T or be subject to a non-return equipment fee. Pricing subj to change.  Service subj. to Internet Terms of Service at att.com/internet-terms.\n\nAT&T Internet Air limitations: AT&T may temporarily slow data speeds if the network is busy.  In addition, in very rare cases, if your data usage is contributing significantly to congestion on the wireless network, AT&T will slow your speed to as low as 512Kbps for a minimum of 30 minutes.  For details visit www.att.com/broadbandinfo. Other restrictions apply and may result in service termination.\n\nOffers may be modified or discontinued at any time without notice and may not be combined with other promotional offers on the same service(s).",
     "features": [
       "No overage fees, and no annual contract",
@@ -196,7 +192,7 @@ export const offers: Offer[] = [
       "$0 self-startup—plug in your AT&T All-Fi™ Hub and connect in minutes"
     ],
     "sourceUrl": "https://www.att.com/internet/internet-service-plans/",
-    "retrievedAt": "2026-10-28T16:04:09.606Z",
+    "retrievedAt": "2026-10-28T17:55:55.845Z",
     "expiresAt": null,
     "videoRef": "0:64–0:67 (standalone card)"
   },

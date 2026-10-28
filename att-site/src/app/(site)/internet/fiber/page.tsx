@@ -4,7 +4,7 @@ import { getOffer, offersBy } from "@/data/offers";
 import type { Offer } from "@/data/offer-types";
 import { faqsFor } from "@/data/faq";
 import { PlanCard, PromoCard } from "@/components/offers/OfferCard";
-import { BroadbandFacts, FinePrint, formatMoney } from "@/components/offers/OfferBits";
+import { AsOf, FinePrint, formatMoney } from "@/components/offers/OfferBits";
 import { CallBand, CheckList, FaqList, PageHeader, SectionHeading } from "@/components/ui/Sections";
 import { PhoneLink } from "@/components/PhoneLink";
 import { OrderButton } from "@/components/OrderButton";
@@ -50,7 +50,7 @@ export default function FiberPage() {
             <p className="mt-1 text-sm text-ink-muted">
               {featured.altPrice!.label}: {formatMoney(featured.altPrice!.price.amount)}/mo.{promo12(featured) ? " for 12 mos. · After 12 mos., AT&T's prevailing rate applies" : ""} · Plus taxes &amp; fees
             </p>
-            <BroadbandFacts offer={featured} />
+            <AsOf offer={featured} />
             <FinePrint offer={featured} />
             <div className="cta-pair mt-4">
               <PhoneLink placement="fiber-header" offerId={featured.id} value={featured.price!.amount} className="btn btn-primary" label="Call Now" />
@@ -151,7 +151,7 @@ export default function FiberPage() {
             Speeds are based on a wired connection; actual speeds may vary. For 5 GIG, the single-device wired speed maximum is 4.7 Gbps. An installation fee of up to $99 may apply. Complete offer
             details appear with each plan above.
           </p>
-          <BroadbandFacts offer={featured} />
+          <AsOf offer={featured} />
         </div>
       </section>
 

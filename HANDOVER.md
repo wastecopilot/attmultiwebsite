@@ -184,14 +184,13 @@ page is not indexed, not in the sitemap and never cached. It works like the AT&T
 (research/portal-flow.md). The visitor:
 
 1. enters the service address;
-2. sees the Internet plans the portal offers **at that address**, as the portal's plan cards show them
-   (about 30–60 seconds). The plan from the Order Now button is preselected when it is offered there;
+2. sees which att.com plans the portal offers **at that address**, with att.com's names, speeds, prices and fine
+   print (about 30–60 seconds). The plan from the Order Now button is preselected when it is offered there;
    otherwise the page says so ("AT&T Internet 1000 is not available at this address") and shows the plans
    that are;
-3. chooses the options the portal lists for that plan: AutoPay is an explicit choice, paid add-ons such as
-   Extended Wi-Fi start on "Decline", and nothing else is preselected;
-4. sees the quote: the portal cart line for line (plan, promotions, AutoPay discount, equipment, total), plus
-   any one-time charge they chose;
+3. chooses the options the portal lists for that plan: AutoPay is an explicit choice (with att.com's $10/mo.
+   discount text), and nothing is preselected;
+4. sees the quote: the portal cart line for line, shown only when its total equals the att.com price;
 5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and
    confirms;
 6. reviews and submits.
@@ -200,9 +199,13 @@ The automation then prepares the order in the portal **without** running the cre
 receives it and completes the credit check, payment and submission with the customer. The visitor gets a
 reference number (for example `UW-7K3M9QX2`).
 
-Plans, prices, promotions and options on this page come only from the portal; `src/data/order-plans.ts` only
-links marketing offer ids to portal plan names. Marketing pages keep showing `offers.ts` (att.com). Price
-differences between the two are listed in `research/data-audit.md`.
+**Plan names and prices come only from att.com** (`src/data/offers.ts`, re-checked 28 Oct, see
+`research/att-com-verified.md`), on the marketing pages and the order page alike, each with its "Pricing as of"
+date. The portal only says which of those plans are available at the address (`src/data/order-plans.ts` links
+offer ids to portal plan names), lists a plan's options and produces the cart. Portal plans att.com does not list
+(Internet 100) are hidden; paid add-ons att.com does not price (Extended Wi-Fi) are not offered online. A quote
+is shown only when the portal cart total equals the att.com price for the chosen plan and options; otherwise the
+visitor is asked to call and the server logs `order_price_mismatch` (OPEN_ITEMS O-30 to O-32).
 
 **What makes the page stop and show "please call":**
 

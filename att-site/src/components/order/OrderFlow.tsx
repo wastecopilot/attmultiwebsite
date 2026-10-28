@@ -3,10 +3,11 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode, type Ref } from "react";
 import Link from "@/components/ui/AppLink";
 import type { Offer } from "@/data/offer-types";
-import { offerIdForPortalName, portalNameForOffer, portalPlanSlug } from "@/data/order-plans";
+import { AsOf, Conditions, FinePrint, formatAsOf, Price } from "@/components/offers/OfferBits";
 import { PhoneLink } from "@/components/PhoneLink";
 import { track } from "@/lib/analytics";
-import { amount, type ChosenOption, type Expected, type OptionGroup, type OrderOutcome, type PlanCard, type QuoteLine } from "@/lib/order/outcome";
+import type { ChosenOption, Expected, OptionGroup, OrderOutcome, QuoteLine } from "@/lib/order/outcome";
+import { amount } from "@/lib/order/price";
 import {
   US_STATES,
   validateAddress,
@@ -20,13 +21,15 @@ import { newRequestId, startJob, waitForJob } from "./order-api";
 
 type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "working" | "done" | "stop" | "not_online";
 type Work = "plans" | "options" | "quote" | "submit";
-type Quote = { jobId: string; total: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[] };
+type Quote = { jobId: string; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[] };
 /** Screens that end the online flow: the visitor is asked to call. */
-type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "no_service" };
+type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "mismatch" } | { kind: "no_service" };
 
 interface OrderFlowProps {
   /** Marketing offer named in the link (?plan=), if any. */
   initialOffer: Offer | null;
+  /** The att.com plans (offers.ts) that can be ordered online; the portal says which are available at the address. */
+  plans: Offer[];
   /** The raw ?plan= value (an offer id, or a portal plan id such as "internet-100"). */
   planParam: string;
   /** False when ?plan= names an offer that cannot be ordered online (wireless, phone, bundles). */
@@ -57,25 +60,14 @@ const WORK_TEXT: Record<Work, { title: string; text: string; seconds: number }> 
   submit: { title: "Sending Your Order Request", text: "This usually takes less than a minute. Please keep this page open.", seconds: 25 },
 };
 
-const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-const isFree = (price: string) => amount(price) <= 0;
-
-/** A paid add-on with a "Decline" choice starts on Decline, so nothing paid is ever added without a click. */
-function defaultAnswers(groups: OptionGroup[]): OptionAnswers {
-  const out: OptionAnswers = {};
-  for (const g of groups) {
-    const decline = g.choices.filter((c) => c.decline);
-    const others = g.choices.filter((c) => !c.decline);
-    if (g.key !== "autopay" && decline.length === 1 && others.length > 0 && others.every((c) => !isFree(c.price))) out[g.key] = decline[0].title;
-  }
-  return out;
-}
+/** att.com's own AutoPay & paperless discount paragraph from the plan's fine print, shown with the AutoPay choice. */
+const autopayText = (offer: Offer) => offer.finePrint.split(/\n\n/).find((p) => /^auto ?pay & paperless bill discount/i.test(p.trim())) ?? "";
 
 /** Keeps ?plan= in the address bar equal to the plan highlighted on the page (other parameters untouched). */
-function showPlanInUrl(planName: string) {
+function showPlanInUrl(offerId: string) {
   try {
     const url = new URL(window.location.href);
-    url.searchParams.set("plan", offerIdForPortalName(planName) ?? portalPlanSlug(planName));
+    url.searchParams.set("plan", offerId);
     window.history.replaceState(window.history.state, "", url);
   } catch {
     // Older browsers: the page still works, only the address bar is not updated.
@@ -88,20 +80,22 @@ function showPlanInUrl(planName: string) {
  * are only ever the portal's own answers; every failure ends on an honest "please call" screen. No
  * personal data is kept outside this component's state.
  */
-export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source, onlineAvailable, timeouts }: OrderFlowProps) {
+export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline, source, onlineAvailable, timeouts }: OrderFlowProps) {
   const [step, setStep] = useState<Step>(planOrderableOnline ? "address" : "not_online");
   const [work, setWork] = useState<Work>("plans");
   const [address, setAddress] = useState<AddressInput>(EMPTY_ADDRESS);
   const [addressErrors, setAddressErrors] = useState<FieldErrors<AddressInput>>({});
   const [addressNotice, setAddressNotice] = useState("");
   const [plansJobId, setPlansJobId] = useState("");
-  const [plans, setPlans] = useState<PlanCard[]>([]);
+  const [available, setAvailable] = useState<string[]>([]);
   const [plansNotice, setPlansNotice] = useState("");
-  const [planName, setPlanName] = useState("");
+  const [planId, setPlanId] = useState("");
   const [planError, setPlanError] = useState("");
   const [groups, setGroups] = useState<OptionGroup[]>([]);
   const [included, setIncluded] = useState<string[]>([]);
   const [answers, setAnswers] = useState<OptionAnswers>({});
+  const [autoAnswers, setAutoAnswers] = useState<OptionAnswers>({});
+  const [hiddenAddOns, setHiddenAddOns] = useState<string[]>([]);
   const [optionsError, setOptionsError] = useState("");
   const [optionsNotice, setOptionsNotice] = useState("");
   const [quote, setQuote] = useState<Quote | null>(null);
@@ -116,10 +110,9 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
   const abortRef = useRef<AbortController | null>(null);
   const begun = useRef(false);
 
-  const plan = plans.find((p) => p.name === planName);
-  // Analytics use the site's offer id when the portal plan has one (e.g. "fiber-300"), else the portal plan id.
-  const offerId = plan ? (offerIdForPortalName(plan.name) ?? plan.id) : (initialOffer?.id ?? "none");
-  const value = plan ? amount(plan.price) : (initialOffer?.price?.amount ?? 0);
+  const plan = plans.find((p) => p.id === planId);
+  const offerId = plan?.id ?? initialOffer?.id ?? "none";
+  const value = plan?.price?.amount ?? initialOffer?.price?.amount ?? 0;
   const busy = step === "working";
 
   useEffect(() => {
@@ -189,8 +182,8 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
   };
 
   const findPlansFor = async (addr: AddressInput) => {
-    setPlans([]);
-    setPlanName("");
+    setAvailable([]);
+    setPlanId("");
     setPlansNotice("");
     setQuote(null);
     const res = await run("plans", { requestId: newRequestId(), address: addr }, {}, timeouts.quoteSeconds);
@@ -201,16 +194,17 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
   const handlePlans = (jobId: string, outcome: OrderOutcome) => {
     if (outcome.screen === "plans") {
       setPlansJobId(jobId);
-      setPlans(outcome.plans);
-      const wanted = portalNameForOffer(planParam);
-      const match = outcome.plans.find((p) => (wanted && norm(p.name) === norm(wanted)) || p.id === planParam);
+      const ids = outcome.offerIds.filter((id) => plans.some((p) => p.id === id));
+      if (!ids.length) return fail({ kind: "no_service" }, "no_plans");
+      setAvailable(ids);
+      const match = ids.includes(planParam) ? plans.find((p) => p.id === planParam) : undefined;
       if (match) {
-        setPlanName(match.name);
-        showPlanInUrl(match.name);
-      } else if (planParam && (wanted || initialOffer)) {
-        setPlansNotice(`${initialOffer?.title ?? wanted} is not available at this address. These plans are available:`);
+        setPlanId(match.id);
+        showPlanInUrl(match.id);
+      } else if (initialOffer && plans.some((p) => p.id === initialOffer.id)) {
+        setPlansNotice(`${initialOffer.title} is not available at this address. These plans are available:`);
       }
-      track("order_plans_shown", { offer_id: match ? (offerIdForPortalName(match.name) ?? match.id) : "none", value: match ? amount(match.price) : 0, plans_count: outcome.plans.length });
+      track("order_plans_shown", { offer_id: match?.id ?? "none", value: match?.price?.amount ?? 0, plans_count: ids.length });
       setStep("plans");
       return;
     }
@@ -221,10 +215,10 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
   };
 
   // ------------------------------------------------------------------ step 2 → 3: the plan's real options
-  const choosePlan = (name: string) => {
-    setPlanName(name);
+  const choosePlan = (id: string) => {
+    setPlanId(id);
     setPlanError("");
-    showPlanInUrl(name);
+    showPlanInUrl(id);
   };
 
   const handleQuoteOutcome = (jobId: string, outcome: OrderOutcome, sentAnswers: OptionAnswers) => {
@@ -232,19 +226,21 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
       case "options":
         setGroups(outcome.groups);
         setIncluded(outcome.included);
-        // Keep the visitor's earlier answers for groups that are still offered; fill only the safe defaults.
-        setAnswers({ ...defaultAnswers(outcome.groups), ...Object.fromEntries(Object.entries(sentAnswers).filter(([k, v]) => outcome.groups.some((g) => g.key === k && g.choices.some((c) => c.title === v)))) });
+        setAutoAnswers(outcome.autoAnswers);
+        setHiddenAddOns(outcome.hiddenAddOns);
+        // Keep the visitor's earlier answers for groups that are still offered; nothing else is preselected.
+        setAnswers(Object.fromEntries(Object.entries(sentAnswers).filter(([k, v]) => outcome.groups.some((g) => g.key === k && g.choices.some((c) => c.title === v)))));
         setOptionsNotice(Object.keys(sentAnswers).length ? "The plan asked for one more choice. Please check the options below." : "");
         setStep("options");
         return;
       case "quote":
-        setQuote({ jobId, total: outcome.total, lines: outcome.lines, included: outcome.included, chosen: outcome.chosen });
+        setQuote({ jobId, total: outcome.total, attComPrice: outcome.attComPrice, lines: outcome.lines, included: outcome.included, chosen: outcome.chosen });
         track("order_quote_shown", { offer_id: offerId, value: amount(outcome.total) });
         setStep("quote");
         return;
       case "plan_unavailable":
         setPlansNotice("This plan is no longer offered at this address. Please choose another plan.");
-        setPlanName("");
+        setPlanId("");
         setStep("plans");
         return;
       case "address":
@@ -252,7 +248,8 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
       case "no_service":
         return fail({ kind: "no_service" }, "no_service");
       case "call":
-        return fail({ kind: "unrequested" }, "unrequested_items");
+        if (outcome.reason === "price_mismatch") return fail({ kind: "mismatch" }, "price_mismatch");
+        return fail({ kind: "unrequested" }, outcome.reason === "not_online" ? "not_online" : "unrequested_items");
       case "failed":
         return fail({ kind: "failed", retryable: outcome.retryable, retry: Object.keys(sentAnswers).length ? "quote" : "options" }, outcome.reason);
       default:
@@ -265,8 +262,10 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
     setGroups([]);
     setIncluded([]);
     setAnswers({});
+    setAutoAnswers({});
+    setHiddenAddOns([]);
     setOptionsNotice("");
-    const res = await run("options", { requestId: newRequestId(), plansJobId, planName: plan.name, options: {} }, { planName: plan.name, options: {} }, timeouts.quoteSeconds);
+    const res = await run("options", { requestId: newRequestId(), plansJobId, offerId: plan.id, options: {} }, { offerId: plan.id, zip: address.zip, options: {} }, timeouts.quoteSeconds);
     if (res) handleQuoteOutcome(res.jobId, res.outcome, {});
   };
 
@@ -284,7 +283,9 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
     if (!plan) return;
     setQuote(null);
     track("order_quote_started", { offer_id: offerId, value });
-    const res = await run("quote", { requestId: newRequestId(), plansJobId, planName: plan.name, options: chosen }, { planName: plan.name, options: chosen }, timeouts.quoteSeconds);
+    // Add-ons att.com does not price were not shown and stay on their Decline choice.
+    const sent = { ...autoAnswers, ...chosen };
+    const res = await run("quote", { requestId: newRequestId(), plansJobId, offerId: plan.id, options: sent }, { offerId: plan.id, zip: address.zip, options: sent }, timeouts.quoteSeconds);
     if (res) handleQuoteOutcome(res.jobId, res.outcome, chosen);
   };
 
@@ -318,7 +319,7 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
   const submitOrder = async () => {
     if (!quote) return;
     track("order_submit", { offer_id: offerId, value: amount(quote.total) });
-    const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, consent: true }, { planName: plan?.name, options: answers }, timeouts.handoffSeconds);
+    const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, consent: true }, { offerId: plan?.id, zip: address.zip, options: { ...autoAnswers, ...answers } }, timeouts.handoffSeconds);
     if (!res) return;
     const { outcome } = res;
     switch (outcome.screen) {
@@ -452,8 +453,8 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
                 {plansNotice}
               </p>
             ) : null}
-            <p className="mt-4 text-sm text-ink-muted">Plans and prices shown for your address.</p>
-            <PlanList plans={plans} selected={planName} onChoose={choosePlan} />
+            <p className="mt-4 text-sm text-ink-muted">These AT&amp;T plans are available at your address. Plan names and prices are as published on att.com.</p>
+            <PlanList plans={available.map((id) => plans.find((p) => p.id === id)!).filter(Boolean)} selected={planId} onChoose={choosePlan} />
             {planError ? (
               <p className="field-error" role="alert">
                 {planError}
@@ -471,7 +472,7 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
           <form onSubmit={submitOptions} noValidate>
             <StepHeading ref={headingRef}>Choose Your Options</StepHeading>
             <p className="mt-2 text-ink-muted">
-              {plan.displayName}, {plan.price}.{" "}
+              {plan.title}, ${plan.price?.amount}/mo. with AutoPay &amp; paperless bill.{" "}
               <button type="button" className="link font-semibold" onClick={() => setStep("plans")}>
                 Change plan
               </button>
@@ -490,11 +491,21 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
                   name={`option-${g.key}`}
                   value={typeof answers[g.key] === "string" ? (answers[g.key] as string) : ""}
                   error={optionsError && answers[g.key] === undefined ? "Please choose an option." : undefined}
-                  options={g.choices.map((c) => ({ value: c.title, label: c.title, price: c.price, hint: c.details }))}
+                  options={g.choices.map((c) => ({
+                    value: c.title,
+                    label: c.title,
+                    price: c.kind === "autopay" && plan.autopayDiscount ? `-$${plan.autopayDiscount}/mo.` : undefined,
+                    hint: c.kind === "autopay" ? autopayText(plan) : c.details,
+                  }))}
                   onChange={(v) => setAnswers((a) => ({ ...a, [g.key]: v }))}
                 />
               ))}
             </div>
+            {hiddenAddOns.length ? (
+              <p className="mt-6 text-sm text-ink-muted" data-hidden-addons>
+                Paid add-ons without a price published on att.com are not added online. Please call us if you would like to add one.
+              </p>
+            ) : null}
             {included.length ? (
               <div className="mt-6">
                 <p className="field-label">Included with this offer</p>
@@ -525,9 +536,13 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
           <div>
             <StepHeading ref={headingRef}>Your Quote</StepHeading>
             <p className="mt-2 text-ink-muted">
-              {plan.displayName} at {addressText}, priced by AT&amp;T for the options you chose.
+              {plan.title} at {addressText}, with the options you chose.
             </p>
             <QuoteTable quote={quote} />
+            <p className="mt-3 text-sm text-ink" data-att-price-match>
+              This total matches the att.com price for {plan.title} with your options ({quote.attComPrice}/mo., pricing as of{" "}
+              <time dateTime={plan.retrievedAt}>{formatAsOf(plan.retrievedAt)}</time>).
+            </p>
             {quote.included.length ? (
               <div className="mt-5">
                 <p className="field-label">Included with this offer</p>
@@ -538,7 +553,6 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
                 </ul>
               </div>
             ) : null}
-            <OneTimeCharges chosen={quote.chosen} groups={groups} />
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
               <button type="button" className="btn btn-ghost" onClick={() => (groups.length ? setStep("options") : setStep("plans"))}>
                 Change Options
@@ -638,16 +652,13 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
                 {addressText}
               </Summary>
               <Summary label="Plan" onEdit={() => setStep("plans")}>
-                {plan.displayName}
+                {plan.title}
               </Summary>
               {quote.chosen.length ? (
                 <Summary label="Options" onEdit={groups.length ? () => setStep("options") : undefined}>
                   <ul className="space-y-1">
                     {quote.chosen.map((c) => (
-                      <li key={c.group}>
-                        {c.choice}
-                        {c.price && !isFree(c.price) ? ` (${c.price}${c.monthly ? "" : " one-time"})` : ""}
-                      </li>
+                      <li key={c.group}>{c.choice}</li>
                     ))}
                   </ul>
                 </Summary>
@@ -692,7 +703,15 @@ export function OrderFlow({ initialOffer, planParam, planOrderableOnline, source
 
         {step === "stop" && stop ? (
           <div role="alert">
-            {stop.kind === "unrequested" ? (
+            {stop.kind === "mismatch" ? (
+              <>
+                <StepHeading ref={headingRef}>Please Call Us to Complete Your Order</StepHeading>
+                <p className="mt-3 text-ink">
+                  We could not confirm the price for this plan and these options online. Please call{" "}
+                  <PhoneLink placement="order-mismatch-text" offerId={offerId} value={value} className="link font-semibold" /> to complete your order.
+                </p>
+              </>
+            ) : stop.kind === "unrequested" ? (
               <>
                 <StepHeading ref={headingRef}>Please Call Us to Complete Your Order</StepHeading>
                 <p className="mt-3 text-ink">
@@ -767,55 +786,39 @@ function StepHeading({ ref, children }: { ref: Ref<HTMLHeadingElement>; children
   );
 }
 
-/** The portal's plan cards for this address. Selecting a card only marks it; Continue fetches its options. */
-function PlanList({ plans, selected, onChoose }: { plans: PlanCard[]; selected: string; onChoose: (name: string) => void }) {
+/** The att.com plans the portal offers at this address, shown with att.com's own name, speed, price and fine print. */
+function PlanList({ plans, selected, onChoose }: { plans: Offer[]; selected: string; onChoose: (id: string) => void }) {
   return (
     <fieldset className="mt-3">
       <legend className="sr-only">Choose a plan</legend>
       <div className="grid gap-4 md:grid-cols-2">
         {plans.map((p) => {
-          const on = p.name === selected;
+          const on = p.id === selected;
           return (
             <div key={p.id} data-plan-card={p.id} data-selected={on ? "true" : "false"} className={`flex flex-col rounded-xl border-2 p-4 ${on ? "border-brand bg-brand-tint" : "border-border"}`}>
               <label className="flex cursor-pointer items-start gap-3">
-                <input type="radio" className="field-check mt-1" name="order-plan" value={p.name} checked={on} onChange={() => onChoose(p.name)} />
+                <input type="radio" className="field-check mt-1" name="order-plan" value={p.id} checked={on} onChange={() => onChoose(p.id)} />
                 <span className="min-w-0">
-                  <span className="block text-lg font-bold text-ink">{p.displayName}</span>
+                  <span className="block text-lg font-bold text-ink">{p.title}</span>
                   {p.speed ? <span className="block text-sm text-ink-muted">{p.speed}</span> : null}
-                  <span className="mt-2 block text-3xl font-bold text-ink" data-plan-price>
-                    {p.price}
-                  </span>
-                  {p.priceNote ? <span className="mt-1 block text-sm text-ink-muted">{p.priceNote}</span> : null}
                 </span>
               </label>
-              {p.features.length ? (
+              {p.price ? (
+                <div className="mt-2" data-plan-price={p.price.amount}>
+                  <Price price={p.price} size="md" />
+                </div>
+              ) : null}
+              <Conditions items={p.conditions} />
+              {p.features?.length ? (
                 <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-ink">
                   {p.features.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
                 </ul>
               ) : null}
-              {p.notes.map((n) => (
-                <p key={n} className="mt-3 text-sm text-ink">
-                  {n}
-                </p>
-              ))}
-              <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-3 text-sm">
-                {p.offerDetails.length ? (
-                  <details className="w-full">
-                    <summary className="link cursor-pointer font-semibold">Offer Details</summary>
-                    <div className="mt-2 space-y-2 text-xs text-ink-muted" lang="en">
-                      {p.offerDetails.map((t, i) => (
-                        <p key={i}>{t}</p>
-                      ))}
-                    </div>
-                  </details>
-                ) : null}
-                {p.broadbandFactsUrl ? (
-                  <a href={p.broadbandFactsUrl} className="link font-semibold" target="_blank" rel="noopener noreferrer">
-                    Broadband Facts<span className="sr-only"> for {p.displayName} (opens in a new tab)</span>
-                  </a>
-                ) : null}
+              <div className="mt-auto pt-3">
+                <AsOf offer={p} />
+                <FinePrint offer={p} />
               </div>
             </div>
           );
@@ -945,31 +948,6 @@ function QuoteTable({ quote, compact = false }: { quote: Quote; compact?: boolea
         </tr>
       </tfoot>
     </table>
-  );
-}
-
-/** Chosen options with a one-time price (e.g. a professional installation fee), which the monthly cart does not list. */
-function OneTimeCharges({ chosen, groups }: { chosen: ChosenOption[]; groups: OptionGroup[] }) {
-  const oneTime = chosen.filter((c) => !c.monthly && !isFree(c.price));
-  if (!oneTime.length) return null;
-  return (
-    <div className="mt-5 rounded-xl bg-surface-alt p-4" data-one-time-charges>
-      <p className="field-label">One-time charges you chose</p>
-      <ul className="mt-1 space-y-2 text-ink">
-        {oneTime.map((c) => {
-          const details = groups.find((g) => g.key === c.group)?.choices.find((x) => x.title === c.choice)?.details;
-          return (
-            <li key={c.group}>
-              <span className="flex justify-between gap-3">
-                <span>{c.choice}</span>
-                <span className="whitespace-nowrap font-semibold">{c.price}</span>
-              </span>
-              {details ? <span className="mt-1 block text-sm text-ink-muted">{details}</span> : null}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
   );
 }
 

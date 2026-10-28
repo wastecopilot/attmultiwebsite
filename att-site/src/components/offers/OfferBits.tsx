@@ -9,15 +9,33 @@ export function formatMoney(n: number): string {
 /** Plan categories that are broadband services under the FCC label rules (fixed and mobile). */
 const BROADBAND_CATEGORIES: Offer["category"][] = ["fiber", "internet-air", "wireless-plan", "bundle"];
 
-/** Link to AT&T's Broadband Facts labels, placed next to every internet, wireless and bundle price (FCC label rules). */
-export function BroadbandFacts({ offer, locale = "en" }: { offer: Pick<Offer, "category">; locale?: Locale }) {
-  if (!BROADBAND_CATEGORIES.includes(offer.category)) return null;
+const dateFmt = {
+  en: new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
+  es: new Intl.DateTimeFormat("es-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" }),
+};
+
+export function formatAsOf(iso: string, locale: Locale = "en"): string {
+  return dateFmt[locale].format(new Date(iso));
+}
+
+/**
+ * "Pricing as of Oct 28, 2026" (the date the price was verified on att.com), shown with every price and
+ * promotion. For internet, wireless and bundle plans it also links AT&T's Broadband Facts labels (FCC rules).
+ */
+export function AsOf({ offer, locale = "en" }: { offer: Pick<Offer, "category" | "retrievedAt">; locale?: Locale }) {
   return (
-    <p className="bb-facts mt-2">
-      <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
-        {locale === "es" ? "Etiqueta de Broadband Facts de AT&T" : "AT&T Broadband Facts label"}
-      </a>
-    </p>
+    <>
+      <p className="as-of mt-2">
+        {locale === "es" ? "Precios vigentes al" : "Pricing as of"} <time dateTime={offer.retrievedAt}>{formatAsOf(offer.retrievedAt, locale)}</time>
+      </p>
+      {BROADBAND_CATEGORIES.includes(offer.category) ? (
+        <p className="bb-facts mt-1">
+          <a href={BROADBAND_FACTS_URL} target="_blank" rel="noopener" className="link">
+            {locale === "es" ? "Etiqueta de Broadband Facts de AT&T" : "AT&T Broadband Facts label"}
+          </a>
+        </p>
+      ) : null}
+    </>
   );
 }
 
