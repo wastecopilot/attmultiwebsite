@@ -1,0 +1,191 @@
+"""order-service tests:  python -m unittest discover -s tests -v   (run from order-service/)
+
+Uses tests/stub_automation.py (no browser). With ATTSPOC_MODULE_DIR pointing at the folder that holds the
+real att_order_automation.py, RealAutomationTests also checks the automation's own refusals (still no browser:
+those paths return before Chromium starts).
+"""
+
+import json
+import os
+import sys
+import tempfile
+import threading
+import time
+import unittest
+from http.server import ThreadingHTTPServer
+from pathlib import Path
+from urllib import error, request
+
+HERE = Path(__file__).resolve().parent
+REAL_MODULE_DIR = os.environ.get("ATTSPOC_MODULE_DIR", "")
+QUEUE = tempfile.mkdtemp(prefix="spoc-queue-")
+KEY = "test-key-" + "x" * 40
+
+os.environ.update({"ATTSPOC_MODULE": "stub_automation", "ATTSPOC_SERVICE_KEY": KEY, "ATTSPOC_SPECIALIST_QUEUE_DIR": QUEUE,
+                   "ATTSPOC_MODULE_DIR": str(HERE)})
+sys.path.insert(0, str(HERE.parent))
+import server  # noqa: E402
+
+ADDRESS = {"street": "300 Plainview Road", "unit_type": None, "unit_number": None, "city": "Hicksville", "state": "NY", "zip_code": "11801"}
+PRODUCTS = [{"product_type": "internet", "plan_name": "AT&T Internet Air", "options": {"autopay": True, "wifi_extender": False}}]
+CUSTOMER = {"first_name": "Test", "last_name": "Customer", "phone": "(214) 555-0100", "email": "test@example.com",
+            "billing_language": "english", "contact_consent": False}
+
+
+class ServiceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        server.runner = server.Runner()
+        cls.httpd = ThreadingHTTPServer(("127.0.0.1", 0), server.Handler)
+        cls.base = f"http://127.0.0.1:{cls.httpd.server_address[1]}"
+        threading.Thread(target=cls.httpd.serve_forever, daemon=True).start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.httpd.shutdown()
+        server.runner.stop()
+
+    def call(self, method, path, body=None, key=KEY, raw=None, ctype="application/json"):
+        data = raw if raw is not None else (json.dumps(body).encode() if body is not None else None)
+        req = request.Request(self.base + path, data=data, method=method)
+        if key:
+            req.add_header("Authorization", f"Bearer {key}")
+        if data is not None:
+            req.add_header("Content-Type", ctype)
+        try:
+            with request.urlopen(req, timeout=10) as r:
+                return r.status, json.loads(r.read())
+        except error.HTTPError as e:
+            return e.code, json.loads(e.read())
+
+    def wait(self, job_id):
+        for _ in range(100):
+            status, body = self.call("GET", f"/v1/jobs/{job_id}")
+            self.assertEqual(status, 200)
+            if body["state"] == "done":
+                return body["result"]
+            time.sleep(0.05)
+        self.fail("job did not finish")
+
+    def quote(self, request_id, address=ADDRESS):
+        status, body = self.call("POST", "/v1/quotes", {"request_id": request_id, "service_address": address, "products": PRODUCTS})
+        self.assertEqual(status, 202, body)
+        return body["job_id"]
+
+    def test_health_needs_no_key_and_says_nothing_else(self):
+        self.assertEqual(self.call("GET", "/healthz", key=None), (200, {"ok": True}))
+
+    def test_v1_requires_the_key(self):
+        self.assertEqual(self.call("GET", "/v1/jobs/" + "a" * 24, key=None)[0], 401)
+        self.assertEqual(self.call("POST", "/v1/quotes", {"x": 1}, key="wrong" * 10)[0], 401)
+
+    def test_quote_runs_as_a_job_and_hides_internal_keys(self):
+        result = self.wait(self.quote("req-quote-0000000001"))
+        self.assertEqual(result["status"], "quote_ready")
+        self.assertTrue(result["order_ref"].startswith("UW-"))
+        for k in ("handoff", "detail", "session_id", "artifacts_dir", "failed_step", "duration_s"):
+            self.assertNotIn(k, result)
+
+    def test_same_request_id_returns_the_same_job(self):
+        self.assertEqual(self.quote("req-dup-000000000001"), self.quote("req-dup-000000000001"))
+
+    def test_sensitive_keys_and_values_are_refused_without_echo(self):
+        cases = [
+            {"request_id": "req-s-0000000000001", "service_address": ADDRESS, "products": PRODUCTS, "ssn": "123-45-6789"},
+            {"request_id": "req-s-0000000000002", "service_address": {**ADDRESS, "date_of_birth": "1990-01-01"}, "products": PRODUCTS},
+            {"request_id": "req-s-0000000000003", "service_address": {**ADDRESS, "street": "123-45-6789"}, "products": PRODUCTS},
+            {"request_id": "req-s-0000000000004", "service_address": {**ADDRESS, "street": "4111 1111 1111 1111"}, "products": PRODUCTS},
+            {"request_id": "req-s-0000000000005", "service_address": {**ADDRESS, "city": "01/02/1990"}, "products": PRODUCTS},
+        ]
+        before = len(server.aoa.calls)
+        for body in cases:
+            status, resp = self.call("POST", "/v1/quotes", body)
+            self.assertEqual(status, 422, body)
+            self.assertEqual(resp["error"], "sensitive_data_rejected")
+            text = json.dumps(resp)
+            for secret in ("123-45-6789", "4111", "1990"):
+                self.assertNotIn(secret, text)
+        status, resp = self.call("POST", "/v1/handoffs", {"request_id": "req-s-0000000000006", "quote_job_id": "q" * 24,
+                                                          "customer": {**CUSTOMER, "card_number": "4111111111111111"}, "customer_confirmed": True})
+        self.assertEqual(status, 422)
+        self.assertEqual(len(server.aoa.calls), before, "a refused request reached the automation")
+
+    def test_unknown_keys_bad_json_and_big_bodies_are_refused(self):
+        self.assertEqual(self.call("POST", "/v1/quotes", {"request_id": "req-u-0000000000001", "service_address": ADDRESS,
+                                                          "products": PRODUCTS, "extra": 1})[0], 400)
+        self.assertEqual(self.call("POST", "/v1/quotes", raw=b"not json")[0], 400)
+        self.assertEqual(self.call("POST", "/v1/quotes", raw=b"{}", ctype="text/plain")[0], 415)
+        self.assertEqual(self.call("POST", "/v1/quotes", raw=b"{" + b" " * 20000 + b"}")[0], 413)
+
+    def test_handoff_needs_a_finished_quote(self):
+        status, _ = self.call("POST", "/v1/handoffs", {"request_id": "req-h-0000000000001", "quote_job_id": "n" * 24,
+                                                       "customer": CUSTOMER, "customer_confirmed": True})
+        self.assertEqual(status, 404)
+        failed = self.quote("req-h-0000000000002", {**ADDRESS, "street": "1 Notfound Way"})
+        self.assertEqual(self.wait(failed)["status"], "address_not_found")
+        status, _ = self.call("POST", "/v1/handoffs", {"request_id": "req-h-0000000000003", "quote_job_id": failed,
+                                                       "customer": CUSTOMER, "customer_confirmed": True})
+        self.assertEqual(status, 409)
+
+    def test_handoff_reuses_the_quote_and_keeps_the_portal_link_inside(self):
+        quote_id = self.quote("req-ok-000000000001")
+        quote = self.wait(quote_id)
+        body = {"request_id": "req-ok-000000000002", "quote_job_id": quote_id, "customer": CUSTOMER, "customer_confirmed": True}
+        status, started = self.call("POST", "/v1/handoffs", body)
+        self.assertEqual(status, 202)
+        result = self.wait(started["job_id"])
+        self.assertEqual(result["status"], "handoff_ready")
+        self.assertEqual(result["order_ref"], quote["order_ref"])
+        self.assertNotIn("attspoc.com", json.dumps(result))
+        sent = server.aoa.calls[-1]
+        self.assertEqual((sent["order_ref"], sent["service_address"], sent["products"]), (quote["order_ref"], ADDRESS, PRODUCTS))
+        files = [p for p in Path(QUEUE).glob("*.json") if quote["order_ref"] in p.name]
+        self.assertEqual(len(files), 1)
+        self.assertIn("attspoc.com", files[0].read_text(encoding="utf-8"))
+        # A second submission for the same quote returns the finished hand-off instead of preparing another.
+        status, again = self.call("POST", "/v1/handoffs", {**body, "request_id": "req-ok-000000000003"})
+        self.assertEqual((status, again["job_id"]), (202, started["job_id"]))
+
+    def test_capacity_limit(self):
+        old, server.MAX_QUEUED = server.MAX_QUEUED, 0
+        try:
+            status, body = self.call("POST", "/v1/quotes", {"request_id": "req-cap-00000000001", "service_address": ADDRESS, "products": PRODUCTS})
+            self.assertEqual((status, body["error"]), (429, "busy"))
+        finally:
+            server.MAX_QUEUED = old
+
+
+@unittest.skipUnless(REAL_MODULE_DIR and (Path(REAL_MODULE_DIR) / "att_order_automation.py").exists(),
+                     "set ATTSPOC_MODULE_DIR to the folder with att_order_automation.py")
+class RealAutomationTests(unittest.TestCase):
+    """The real module's own refusals (they return before any browser starts)."""
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, REAL_MODULE_DIR)
+        import importlib
+        cls.aoa = importlib.import_module("att_order_automation")
+
+    def run_order(self, payload):
+        import asyncio
+        return asyncio.run(self.aoa.process_att_order(payload))
+
+    def test_sensitive_fields_rejected_by_the_automation(self):
+        r = self.run_order({"order_ref": "test-ref-1", "mode": "handoff", "customer_confirmed": True, "service_address": ADDRESS,
+                            "customer": {**CUSTOMER, "ssn": "123-45-6789"}, "products": PRODUCTS})
+        self.assertEqual(r["status"], "sensitive_data_rejected")
+        self.assertNotIn("123-45-6789", json.dumps(r))
+
+    def test_handoff_without_confirmation_refused(self):
+        r = self.run_order({"order_ref": "test-ref-2", "mode": "handoff", "customer_confirmed": False, "service_address": ADDRESS,
+                            "customer": CUSTOMER, "products": PRODUCTS})
+        self.assertEqual(r["status"], "not_confirmed")
+
+    def test_service_payload_shape_is_valid_for_the_automation(self):
+        self.aoa.OrderRequest.model_validate({"order_ref": "UW-ABCDEFGH", "mode": "quote", "service_address": ADDRESS, "products": PRODUCTS})
+        self.aoa.OrderRequest.model_validate({"order_ref": "UW-ABCDEFGH", "mode": "handoff", "customer_confirmed": True,
+                                              "service_address": ADDRESS, "products": PRODUCTS, "customer": CUSTOMER})
+
+
+if __name__ == "__main__":
+    unittest.main()

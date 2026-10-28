@@ -44,7 +44,10 @@ The phone number and tracking IDs are not written into the code. They are read f
 | `NEXT_PUBLIC_GADS_ID` (optional until available) | Google Ads account tag ID | `AW-` + digits |
 | `NEXT_PUBLIC_GADS_CALL_LABEL` (optional until available) | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
 | `NEXT_PUBLIC_GADS_SWAP_LABEL` (optional) | Conversion label for "calls from website" (number swap); if empty, the call label is used | |
-| `NEXT_PUBLIC_ORDER_URL` (optional) | Where every "Order Now" button goes. Leave empty to use `/att/check-availability?intent=order&plan=<offer id>&source=<page>`, which focuses the ZIP field and shows the selected plan. When set, the same `intent`, `plan` and `source` values plus any `gclid`/`gbraid`/`wbraid`/`utm_*` are added to it. | full `https://` URL |
+| `NEXT_PUBLIC_ORDER_URL` (optional) | Leave empty. Every "Order Now" button then opens the online order page `/att/order?plan=<offer id>&source=<page>`. Only set it to send the buttons to a different https address instead; `plan`, `source` and any `gclid`/`gbraid`/`wbraid`/`utm_*` are then added to that address. | full `https://` URL |
+| `ATTSPOC_SERVICE_URL` (optional, server only) | The https address of **order-service**, which runs the AT&T partner-portal order automation (section 11). Until it is set, the order page shows the plan and says "Online ordering is currently unavailable. Please call …". | `https://orders.example.com` format |
+| `ATTSPOC_SERVICE_KEY` (optional, server only) | The shared secret for order-service: the **same** random value (32+ characters) as on order-service. Never put it in a `NEXT_PUBLIC_` variable. | random letters/digits |
+| `ATTSPOC_QUOTE_TIMEOUT_S` / `ATTSPOC_HANDOFF_TIMEOUT_S` (optional) | How long the order page waits for a quote or for the order request before showing the "please call" message. | seconds, default `240` |
 | `NEXT_PUBLIC_SITE_INDEXABLE` (optional) | `1` lets search engines index the site, `0` blocks them. Leave it unset: indexing is then off on a `*.vercel.app` address and on once a custom domain is attached. Set `1` if the live domain reaches this project through a rewrite from another project. | `1` or `0` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` (optional) | Email address shown on the Contact page and in the footer | defaults to Backoffice@urbanwirelessusa.com |
 
@@ -143,7 +146,9 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
   Google Ads call conversion (label from `NEXT_PUBLIC_GADS_CALL_LABEL`) and a `phone_click` event. "Calls from
   website" number swapping is configured with the displayed number.
 - **Events** for GA4/GTM: `phone_click`, `order_click`, `zip_check`, `cta_click` — each with the page, offer id and
-  value (the offer's monthly price, or 0).
+  value (the offer's monthly price, or 0). The online order page adds `begin_order`, `order_quote_started`,
+  `order_quote_shown`, `order_step_details`, `order_submit` and `order_failed` (with a non-personal `reason`), each
+  with the plan id and value. No event ever carries a name, address, phone number or email.
 - **Click IDs:** `gclid`, `gbraid`, `wbraid` and `utm_*` values are kept on the address bar as visitors move around the
   site, and stored in a first-party cookie for 90 days when advertising consent allows it.
 - **Landing pages for ads (no menu):** `/att/lp/fiber`, `/att/lp/internet-air`, `/att/lp/wireless`. They point search
@@ -162,13 +167,70 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
 | O-06 | Legal review of Privacy, Terms, Cookie Policy, CCPA notice, Accessibility statement, Disclaimer | Counsel |
 | O-07 | Confirm company details: legal name, address, hours, email | Business owner |
 | O-08 | Confirm each AT&T promotion may be offered through the retailer channel | AT&T program manager |
+| O-17 | The automation's integration handbook, specialist runbook and Aria prompt (not in the folder) | Automation team |
+| O-18 | Where specialists receive prepared orders (queue folder / internal webhook) and who watches it | Business owner |
+| O-19 | Rotate the partner portal key (hard-coded in `attspoc_probe.py`) | Automation team / AT&T portal admin |
+| O-20 | Retention for the automation's screenshots and test files with customer data | Business owner |
+| O-21 | A host for order-service (single always-on container, HTTPS) | Business owner / IT |
 | — | Offers not shown because they are unconfirmed, online-only or TV (YouTube TV): see OPEN_ITEMS X-03…X-13 | — |
+
+## 11. Online ordering (Order Now)
+
+Every **Order Now** button opens `/att/order`. The page is not indexed, not in the sitemap and never cached. The
+visitor:
+
+1. confirms the plan, answers every option (nothing is preselected), and enters the service address;
+2. waits about 45 seconds while the **SPOC order automation** checks the address in the AT&T partner portal and
+   returns the real monthly price;
+3. sees that quote with every line itemised;
+4. enters name, phone, email, billing language and contact preference;
+5. submits.
+
+The automation then prepares the order in the portal **without** running the credit check. A specialist
+receives it and completes the credit check, payment and submission with the customer. The visitor gets a
+reference number (for example `UW-7K3M9QX2`).
+
+**What makes the page stop and show "please call":**
+
+- an unrequested product in the portal cart (for example a DIRECTV bundle);
+- a paid add-on the visitor declined;
+- any portal error or timeout;
+- the service not configured.
+
+**What the website never does:**
+
+- ask for or accept SSN, date of birth, card or bank details; the server refuses such requests;
+- put personal data in URLs, analytics or logs;
+- show a quote or confirmation the automation did not return.
+
+**Hosting.** The automation is Python and Chromium and needs about a minute per order, so it cannot run on
+Vercel. It runs as **order-service** (`order-service/`, see its README) on a single always-on container or
+small server, with HTTPS in front. The partner portal link (`ATTSPOC_URL`) is set there only.
+
+**Setup**
+
+1. Deploy `order-service` with `ATTSPOC_SERVICE_KEY` (random, 32+ characters) and `ATTSPOC_URL`.
+2. Point its specialist queue at a private folder and, optionally, an internal webhook. The specialist must
+   open each prepared order within 30 minutes (portal idle limit).
+3. In Vercel set `ATTSPOC_SERVICE_URL` (the service's https address) and the same `ATTSPOC_SERVICE_KEY`, then
+   redeploy.
+
+**Which plans can be ordered online.** AT&T Internet 300, 500, 1000 and 5000 and AT&T Internet Air (the
+automation's Internet flow). Wireless, phone and bundles show the call message.
+
+**Tests:** `npm run build:audit && npm run test:order` (site, against a local mock) and
+`python -m unittest discover -s tests` in `order-service/`.
+
+**Background:** `research/spoc-analysis.md` and `research/spoc-integration-plan.md`.
 
 ## 10. Where things are
 
 | Path | Contents |
 |---|---|
 | `att-site/src/data/offers.ts` | All prices, promotions and fine print |
+| `att-site/src/data/order-plans.ts` | Plans orderable online, their partner-portal names and option questions |
+| `att-site/src/components/order/`, `att-site/src/app/api/order/` | The order page and its server routes |
+| `order-service/` | The HTTP service that runs the order automation (not deployed to Vercel) |
 | `att-site/src/data/site.ts` | Company details, disclosure and trademark wording |
 | `att-site/src/data/faq.ts` | Frequently asked questions |
 | `att-site/src/styles/tokens.ts` | Brand colors (from att.com) |

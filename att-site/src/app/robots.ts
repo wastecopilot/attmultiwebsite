@@ -7,7 +7,8 @@ import { siteIndexable } from "@/lib/seo";
 export default function robots(): MetadataRoute.Robots {
   if (!siteIndexable) return { rules: [{ userAgent: "*", disallow: "/" }] };
   return {
-    rules: [{ userAgent: "*", allow: "/att/" }],
+    // The order API is not for crawlers; /att/order itself stays crawlable so its noindex is seen.
+    rules: [{ userAgent: "*", allow: "/att/", disallow: "/att/api/" }],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

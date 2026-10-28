@@ -1,0 +1,6 @@
+portal_url.txt
+specialist_queue/
+order_artifacts/
+tests/
+__pycache__/
+*.md

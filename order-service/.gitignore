@@ -1,0 +1,7 @@
+# The automation module is copied in at deploy time and never committed (see README.md).
+att_order_automation.py
+portal_url.txt
+# Customer data written at run time.
+specialist_queue/
+order_artifacts/
+__pycache__/

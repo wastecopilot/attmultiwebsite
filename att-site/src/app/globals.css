@@ -539,6 +539,18 @@ p {
   color: var(--att-danger);
   background: #fff;
 }
+/* Order flow: estimated progress while a quote or submission runs (fills to 90%; the result replaces it). */
+.order-progress-bar {
+  width: 5%;
+  animation-name: order-progress;
+  animation-timing-function: cubic-bezier(0.2, 0.6, 0.3, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes order-progress {
+  to {
+    width: 90%;
+  }
+}
 
 /* ------------------------------------------------------------------ cookie banner & dialog */
 .cookie-banner {

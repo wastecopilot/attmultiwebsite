@@ -33,6 +33,15 @@ const nextConfig: NextConfig = {
     return [
       { source: "/:path*", headers: securityHeaders },
       {
+        // Online order flow and its API: never indexed (the page also sets noindex; it is dynamic, so never cached).
+        source: "/order",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+      {
+        source: "/api/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+      {
         // Versioned files in /public (illustrations, icons): safe to cache for a year.
         source: "/(illustrations|icons)/:file*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],

@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "@/components/ui/AppLink";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { env } from "@/lib/env";
 import { track } from "@/lib/analytics";
-import { currentAttribution } from "@/lib/attribution";
+import { currentAttribution, decorateHref } from "@/lib/attribution";
 import type { Locale } from "@/data/i18n";
 
 interface OrderButtonProps {
@@ -20,21 +20,23 @@ interface OrderButtonProps {
   locale?: Locale;
 }
 
-/** Query string added to every order link: intent=order&plan=<offer id>&source=<page>. */
+/** Query string added to every order link: plan=<offer id>&source=<page>. */
 function orderParams(offerId: string | undefined, source: string): URLSearchParams {
-  const params = new URLSearchParams({ intent: "order" });
+  const params = new URLSearchParams();
   if (offerId) params.set("plan", offerId);
   params.set("source", source || "/");
   return params;
 }
 
 /**
- * "Order Now" link shown next to every Call Now button. Goes to NEXT_PUBLIC_ORDER_URL when it is set,
- * otherwise to the check-availability page. Every click fires the `order_click` event (page, offer id,
+ * "Order Now" link shown next to every Call Now button. Goes to the online order page (/att/order), or to
+ * NEXT_PUBLIC_ORDER_URL when that override is set. Click IDs and UTM values ride along (AttributionKeeper
+ * for internal links, below for an external URL). Every click fires the `order_click` event (page, offer id,
  * value), the same way PhoneLink fires `phone_click`; the call conversion is untouched.
  */
 export function OrderButton({ offerId, value = 0, placement, className, planName, locale = "en" }: OrderButtonProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const label = locale === "es" ? "Ordenar ahora" : "Order Now";
   const params = orderParams(offerId, pathname);
   const common = {
@@ -64,9 +66,20 @@ export function OrderButton({ offerId, value = 0, placement, className, planName
       </a>
     );
   }
-  const base = locale === "es" ? "/es/check-availability" : "/check-availability";
+  const href = `/order?${params.toString()}`;
   return (
-    <Link href={`${base}?${params.toString()}`} {...common} onClick={onTrack}>
+    <Link
+      href={href}
+      {...common}
+      onClick={(e) => {
+        onTrack();
+        // Navigate with the click IDs / UTM values already in the URL, so the order page never loses them
+        // (AttributionKeeper only re-adds them after the navigation, which can race with the router).
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !Object.keys(currentAttribution()).length) return;
+        e.preventDefault();
+        router.push(decorateHref(href));
+      }}
+    >
       {label}
     </Link>
   );

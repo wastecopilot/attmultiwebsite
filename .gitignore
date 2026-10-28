@@ -16,3 +16,8 @@ Thumbs.db
 
 # Lighthouse HTML viewers duplicate the JSON reports next to them
 audit/lighthouse/*.html
+
+# AT&T SPOC order automation working folder: holds the partner portal key, real customer test data and
+# portal screenshots. Never commit it. The deployable service wrapper lives in order-service/.
+/attspoc AT&T/
+/attspoc*/

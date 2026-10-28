@@ -16,7 +16,18 @@ declare global {
   }
 }
 
-export type TrackedEvent = "phone_click" | "order_click" | "zip_check" | "cta_click";
+export type TrackedEvent =
+  | "phone_click"
+  | "order_click"
+  | "zip_check"
+  | "cta_click"
+  // Online order flow (/att/order). Plan id and value only: never any personal data.
+  | "begin_order"
+  | "order_quote_started"
+  | "order_quote_shown"
+  | "order_step_details"
+  | "order_submit"
+  | "order_failed";
 
 export interface EventParams {
   offer_id?: string;

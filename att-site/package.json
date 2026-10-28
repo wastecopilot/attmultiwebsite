@@ -14,7 +14,8 @@
     "research:colors": "node scripts/research/extract-colors.mjs ../research/raw/colors.json",
     "build:audit": "node scripts/build-audit.mjs",
     "start:audit": "node scripts/start-audit.mjs",
-    "check:contrast": "node node_modules/tsx/dist/cli.mjs scripts/research/contrast.ts"
+    "check:contrast": "node node_modules/tsx/dist/cli.mjs scripts/research/contrast.ts",
+    "test:order": "node tests/mocks/run-order-tests.mjs"
   },
   "dependencies": {
     "next": "16.4.2",

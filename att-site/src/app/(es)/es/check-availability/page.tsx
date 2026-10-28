@@ -1,7 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 import { CallPanel, CheckList, PageHeader, SectionHeading } from "@/components/ui/Sections";
-import { AvailabilityZip } from "@/components/forms/AvailabilityZip";
-import { planSummaries } from "@/data/plan-summaries";
+import { ZipCheck } from "@/components/forms/ZipCheck";
 
 export const metadata = pageMetadata({
   title: "Verifique la disponibilidad de AT&T en su dirección",
@@ -41,7 +40,7 @@ export default function SpanishCheckAvailabilityPage() {
           <div className="card p-6 md:p-8">
             <h2 className="text-2xl font-bold text-ink">Ingrese su código postal</h2>
             <div className="mt-5">
-              <AvailabilityZip placement="es-availability-zip" plans={planSummaries("es")} locale="es" />
+              <ZipCheck placement="es-availability-zip" locale="es" />
             </div>
           </div>
         </div>

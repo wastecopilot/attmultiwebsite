@@ -72,9 +72,26 @@ if (orderUrl) {
     valid = false;
   }
   if (!valid) errors.push(`NEXT_PUBLIC_ORDER_URL="${orderUrl}" must be a full https:// URL.`);
-  else if (PLACEHOLDER.some((re) => re.test(orderUrl)) && !auditMode) errors.push(`NEXT_PUBLIC_ORDER_URL="${orderUrl}" looks like a placeholder. Leave it empty to use the check-availability page.`);
+  else if (PLACEHOLDER.some((re) => re.test(orderUrl)) && !auditMode) errors.push(`NEXT_PUBLIC_ORDER_URL="${orderUrl}" looks like a placeholder. Leave it empty to use the online order page.`);
+}
+
+// Optional order automation (server-side, read at request time, so never a build blocker): report its state.
+const serviceUrl = (process.env.ATTSPOC_SERVICE_URL ?? "").trim();
+const serviceKey = process.env.ATTSPOC_SERVICE_KEY ?? "";
+if (!serviceUrl || !serviceKey) {
+  notes.push("ATTSPOC_SERVICE_URL / ATTSPOC_SERVICE_KEY are not set; the order page shows the plan and asks visitors to call.");
 } else {
-  notes.push("NEXT_PUBLIC_ORDER_URL is not set; Order Now buttons go to /att/check-availability.");
+  let https = false;
+  try {
+    https = new URL(serviceUrl).protocol === "https:";
+  } catch {
+    https = false;
+  }
+  if (!https) notes.push(`WARNING: ATTSPOC_SERVICE_URL must be an https:// address; online ordering stays off until it is.`);
+  if (serviceKey.length < 32) notes.push("WARNING: ATTSPOC_SERVICE_KEY is shorter than 32 characters; online ordering stays off until it is longer.");
+}
+if (Object.keys(process.env).some((k) => k.startsWith("NEXT_PUBLIC_ATTSPOC"))) {
+  errors.push("A NEXT_PUBLIC_ATTSPOC_* variable is set: the order service URL and key must never be public. Use ATTSPOC_SERVICE_URL / ATTSPOC_SERVICE_KEY.");
 }
 
 const tel = (process.env.NEXT_PUBLIC_PHONE_TEL ?? "").replace(/\D/g, "");
