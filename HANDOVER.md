@@ -171,7 +171,8 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
 | O-18 | Where specialists receive prepared orders (queue folder / internal webhook) and who watches it | Business owner |
 | O-19 | Rotate the partner portal key (hard-coded in `attspoc_probe.py`) | Automation team / AT&T portal admin |
 | O-20 | Retention for the automation's screenshots and test files with customer data | Business owner |
-| O-21 | A host for order-service (single always-on container, HTTPS) | Business owner / IT |
+| O-21 | A permanent host for order-service (Cloud Run, Railway or a company server; single instance, HTTPS). Until then it runs on the demo laptop through a quick tunnel (section 11) | Business owner / IT |
+| O-25 | Before hosting: stop order-service from logging the automation's portal session ids | Developer |
 | — | Offers not shown because they are unconfirmed, online-only or TV (YouTube TV): see OPEN_ITEMS X-03…X-13 | — |
 
 ## 11. Online ordering (Order Now)
@@ -222,6 +223,84 @@ automation's Internet flow). Wireless, phone and bundles show the call message.
 `python -m unittest discover -s tests` in `order-service/`.
 
 **Background:** `research/spoc-analysis.md` and `research/spoc-integration-plan.md`.
+
+### Demo setup: this laptop and a Cloudflare quick tunnel (since 2026-10-28)
+
+**This is a demo setup, not the permanent one.** order-service runs on the demo laptop at
+`127.0.0.1:8787`, which other computers cannot reach. A free Cloudflare quick tunnel gives it a public
+address such as `https://<random words>.trycloudflare.com`, which the Vercel site calls. No cloud account,
+billing or card is needed.
+
+**Start and stop** (from the project folder on the laptop):
+
+- **Start:** double-click `start-order-service.bat` (or run `./start-order-service.sh`). It starts:
+  - order-service, as one process;
+  - the tunnel;
+  - a keep-awake helper.
+
+  Then it prints the tunnel address. The three run hidden and keep running after the window is closed.
+- **Stop:** double-click `stop-order-service.bat` (or run `./stop-order-service.sh`).
+- **After a laptop restart,** run the start script again.
+
+**Connect the website** in Vercel (Settings → Environment Variables, Production), then **redeploy**:
+
+| Setting | Value |
+|---|---|
+| `ATTSPOC_SERVICE_URL` | the tunnel address the start script prints |
+| `ATTSPOC_SERVICE_KEY` | the value of `ATTSPOC_SERVICE_KEY` in `order-service/.env.local` on the laptop (unchanged across restarts) |
+| `NEXT_PUBLIC_PHONE_DISPLAY` | `(877) 365-2069` (the build fails without it) |
+| `NEXT_PUBLIC_PHONE_TEL` | `+18773652069` |
+
+Changes to environment variables only take effect after a redeploy.
+
+**Two things to know**
+
+- **The address changes every time the tunnel starts:** after running the start script again, or after the
+  laptop restarts. Each time, paste the new address into `ATTSPOC_SERVICE_URL` in Vercel and redeploy.
+- **The laptop must stay on, awake and online.** If it is off, asleep or offline, or the service is
+  stopped, Order Now shows the "please call us" screen. The site never shows a quote or a reference that
+  the automation did not return.
+
+**Sleep.** While the service runs, the keep-awake helper asks Windows not to sleep. This is the same request a
+video player makes, and no setting is changed. Closing the lid can still put the laptop to sleep, so for the
+demo keep it plugged in and set:
+
+- Settings → System → Power & battery → Screen, sleep & hibernate timeouts → "When plugged in, put my
+  device to sleep after" → **Never**;
+- Control Panel → Hardware and Sound → Power Options → "Choose what closing the lid does" → "When I close
+  the lid", Plugged in → **Do nothing**.
+
+**Where things are on the laptop.** None of these are in the repository.
+
+| Path | Contents |
+|---|---|
+| `order-service/.env.local` | Service key, port and folders. Git-ignored. |
+| `attspoc AT&T/portal_url.txt` | The partner portal link with the partner key. The service reads it from this file. It is never copied, logged or committed, and the key exists only on this laptop. |
+| `order-service/local/` | The scripts behind the start and stop files (also `start-order-service.*`, `stop-order-service.*` in the project folder). Laptop only, not committed. |
+| `order-service/.run/` | The service log, the tunnel log and the current tunnel address. The service log holds no personal data, portal addresses or session ids. |
+| `order-service/specialist_queue/` | One file per prepared order. A specialist must open each within 30 minutes; delete it afterwards. |
+| `order-service/order_artifacts/` | The automation's portal screenshots. Delete after the demo. |
+
+**Tested 2026-10-28 through the tunnel:**
+
+- The health check answered.
+- Requests with no key or a wrong key were refused (401).
+- SSN, date-of-birth, card and bank fields were refused (422).
+- One real quote via the website, with the README test order (Internet Air, Hicksville, Test Customer):
+  $55.00/mo. in 43 s.
+- The order request was prepared in 16 s, reference `UW-PGBV78XM`. The credit-check section was shown and
+  not used, Continue was not clicked, and no order was placed.
+- The queue file and screenshots were then deleted.
+
+**Not for real customers.** Cloudflare gives quick tunnels no uptime guarantee, the address is random, and
+ordering depends on one laptop. The permanent version needs a hosted server with a fixed https address:
+
+- Google Cloud Run, with min = max = 1 instance and CPU always allocated;
+- Railway, single instance;
+- or a company server.
+
+Run `order-service/` there as described in its README, with the partner link in `ATTSPOC_URL`
+(OPEN_ITEMS O-21, O-25).
 
 ## 10. Where things are
 
