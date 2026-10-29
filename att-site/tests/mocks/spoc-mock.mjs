@@ -147,10 +147,15 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
-function sensitive(value, path = "") {
-  if (Array.isArray(value)) return value.flatMap((v, i) => sensitive(v, `${path}[${i}]`));
+// Like order-service: only the hand-off may carry the credit-check fields, at exactly these paths.
+const CREDIT_CHECK_PATHS = new Set(["customer.credit_check.date_of_birth", "customer.credit_check.ssn"]);
+
+function sensitive(value, path = "", allowed = new Set()) {
+  if (Array.isArray(value)) return value.flatMap((v, i) => sensitive(v, `${path}[${i}]`, allowed));
   if (!value || typeof value !== "object") return [];
-  return Object.entries(value).flatMap(([k, v]) => (SENSITIVE_KEY_RE.test(k) ? [`${path}${k}`] : sensitive(v, `${path}${k}.`)));
+  return Object.entries(value).flatMap(([k, v]) =>
+    allowed.has(`${path}${k}`) && typeof v === "string" ? [] : SENSITIVE_KEY_RE.test(k) ? [`${path}${k}`] : sensitive(v, `${path}${k}.`, allowed),
+  );
 }
 
 function addJob(kind, requestId, job, ms, outcome) {
@@ -178,8 +183,10 @@ const server = http.createServer(async (req, res) => {
     } catch {
       return send(res, 400, { error: "invalid_request" });
     }
-    received.push({ path: url.pathname, body });
-    if (sensitive(body).length) return send(res, 422, { error: "sensitive_data_rejected" });
+    // The log never keeps credit-check values (tests check nothing sensitive is stored anywhere).
+    const logged = url.pathname === "/v1/handoffs" && body.customer?.credit_check ? { ...body, customer: { ...body.customer, credit_check: "[received]" } } : body;
+    received.push({ path: url.pathname, body: logged });
+    if (sensitive(body, "", url.pathname === "/v1/handoffs" ? CREDIT_CHECK_PATHS : new Set()).length) return send(res, 422, { error: "sensitive_data_rejected" });
   }
 
   const jobMatch = url.pathname.match(/^\/v1\/jobs\/([A-Za-z0-9_-]{16,64})$/);

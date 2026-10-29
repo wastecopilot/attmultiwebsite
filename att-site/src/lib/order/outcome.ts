@@ -56,7 +56,7 @@ export type OrderOutcome =
   | { screen: "plan_unavailable" }
   | { screen: "no_service" }
   | { screen: "call"; reason: "unrequested" | "price_mismatch" | "not_online" }
-  | { screen: "details"; fields: ("firstName" | "lastName" | "phone" | "email")[] }
+  | { screen: "details"; fields: ("firstName" | "lastName" | "phone" | "email" | "dateOfBirth" | "ssn")[] }
   | { screen: "done"; reference: string }
   | { screen: "failed"; retryable: boolean; reason: string };
 
@@ -190,7 +190,7 @@ function quoteOutcome(data: Record<string, unknown>, expected: Expected, offer: 
   };
 }
 
-const CUSTOMER_FIELDS = { first_name: "firstName", last_name: "lastName", phone: "phone", email: "email", email_confirm: "email" } as const;
+const CUSTOMER_FIELDS = { first_name: "firstName", last_name: "lastName", phone: "phone", email: "email", email_confirm: "email", date_of_birth: "dateOfBirth", ssn: "ssn" } as const;
 
 export function toOutcome(result: AutomationResult | undefined, expected: Expected = {}): OrderOutcome {
   if (!result || typeof result.status !== "string") return failed("no_result");

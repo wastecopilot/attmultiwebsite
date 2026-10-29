@@ -1,8 +1,9 @@
 /**
  * Order form validation, shared by the order page (instant feedback) and the /api/order routes (the
- * authority). The site never collects SSN, date of birth, card or bank details: requests carrying such
- * fields, or values that look like them, are refused before anything is sent on, and the values are
- * never echoed back or logged.
+ * authority). Card and bank details are never collected. Date of birth and SSN are accepted in one place
+ * only: the credit-check section of the order request (`creditCheck`, with the customer's consent), checked
+ * by validateCreditCheck. Anywhere else, fields named like them or values that look like them are refused
+ * before anything is sent on, and values are never echoed back or logged.
  */
 
 export const US_STATES: Record<string, string> = {
@@ -123,6 +124,37 @@ export function validateCustomer(raw: Partial<CustomerInput>): { value: Customer
   if (value.email.length > 254 || !/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(value.email)) errors.email = "Enter a valid email address.";
   if (!errors.email && value.confirmEmail !== value.email) errors.confirmEmail = "The email addresses do not match.";
   if (!value.billingLanguage) errors.billingLanguage = "Select a billing language.";
+  return { value, errors };
+}
+
+export interface CreditCheckInput {
+  /** mm/dd/yyyy, as the portal's credit-check field takes it. */
+  dateOfBirth: string;
+  /** ###-##-#### */
+  ssn: string;
+  /** "Before we continue with your order, we will need to initiate a credit check. Is that OK?" */
+  consent: boolean;
+}
+
+/** Valid SSN shape: not area 000, 666 or 9xx, not group 00, not serial 0000. */
+const SSN_RE = /^(?!000|666|9\d\d)\d{3}(?!00)\d{2}(?!0000)\d{4}$/;
+
+export function validateCreditCheck(raw: Partial<CreditCheckInput>, today = new Date()): { value: CreditCheckInput; errors: FieldErrors<CreditCheckInput> } {
+  const digits = (typeof raw.ssn === "string" ? raw.ssn : "").replace(/\D/g, "");
+  const dob = typeof raw.dateOfBirth === "string" ? raw.dateOfBirth.trim() : "";
+  const value: CreditCheckInput = {
+    dateOfBirth: dob,
+    ssn: digits.length === 9 ? `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}` : digits,
+    consent: raw.consent === true,
+  };
+  const errors: FieldErrors<CreditCheckInput> = {};
+  const m = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/((?:19|20)\d{2})$/.exec(dob);
+  const date = m ? new Date(Date.UTC(Number(m[3]), Number(m[1]) - 1, Number(m[2]))) : null;
+  const age = date ? (today.getTime() - date.getTime()) / (365.2425 * 86_400_000) : -1;
+  if (!date || date.getUTCDate() !== Number(m![2])) errors.dateOfBirth = "Enter your date of birth as MM/DD/YYYY.";
+  else if (age < 18 || age > 120) errors.dateOfBirth = "You must be at least 18 years old to order.";
+  if (!SSN_RE.test(digits)) errors.ssn = "Enter your 9-digit Social Security number.";
+  if (!value.consent) errors.consent = "Please agree to the credit check to continue.";
   return { value, errors };
 }
 

@@ -198,6 +198,36 @@ class ServiceTests(unittest.TestCase):
         status, resp = self.call("POST", "/v1/quotes", {**body, "plans_job_id": ok, "options": {"autopay": ["x"]}})
         self.assertEqual((status, resp["fields"]), (400, ["options"]))
 
+    def test_credit_check_is_accepted_only_on_the_handoff_and_never_logged(self):
+        credit = {"consent": True, "date_of_birth": "01/15/1985", "ssn": "001-01-0001"}
+        # Anywhere else it is refused.
+        status, body = self.call("POST", "/v1/quotes", {"request_id": "req-cc-0000000000001", "service_address": ADDRESS, "products": PRODUCTS, "ssn": "001-01-0001"})
+        self.assertEqual((status, body["error"]), (422, "sensitive_data_rejected"))
+        status, _ = self.call("POST", "/v1/handoffs", {"request_id": "req-cc-0000000000002", "quote_job_id": "q" * 24,
+                                                       "customer": {**CUSTOMER, "ssn": "001-01-0001"}, "customer_confirmed": True})
+        self.assertEqual(status, 422)
+        # Card or bank data next to it is still refused.
+        status, _ = self.call("POST", "/v1/handoffs", {"request_id": "req-cc-0000000000003", "quote_job_id": "q" * 24,
+                                                       "customer": {**CUSTOMER, "credit_check": {**credit, "card_number": "4111111111111111"}}, "customer_confirmed": True})
+        self.assertEqual(status, 422)
+        # On the hand-off, at customer.credit_check, it is passed to the automation.
+        quote_id = self.quote("req-cc-0000000000004")
+        self.wait(quote_id)
+        with self.assertLogs("order_service", level="INFO") as logs:
+            status, started = self.call("POST", "/v1/handoffs", {"request_id": "req-cc-0000000000005", "quote_job_id": quote_id,
+                                                                 "customer": {**CUSTOMER, "credit_check": credit}, "customer_confirmed": True})
+            self.assertEqual(status, 202, started)
+            result = self.wait(started["job_id"])
+        self.assertEqual(result["status"], "handoff_ready")
+        self.assertEqual(server.aoa.calls[-1]["customer"]["credit_check"], credit)
+        joined = " ".join(logs.output) + json.dumps(result)
+        for secret in ("001-01-0001", "01/15/1985"):
+            self.assertNotIn(secret, joined)
+        for f in Path(QUEUE).glob("*.json"):
+            text = f.read_text(encoding="utf-8")
+            self.assertNotIn("001-01-0001", text)
+            self.assertNotIn("01/15/1985", text)
+
     def test_capacity_limit(self):
         old, server.MAX_QUEUED = server.MAX_QUEUED, 0
         try:

@@ -192,11 +192,12 @@ page is not indexed, not in the sitemap and never cached. It works like the AT&T
    discount text); items with a single option (equipment, installation) are shown as included; nothing else is
    preselected;
 4. sees the quote: the portal cart line for line, shown only when its total equals the att.com price;
-5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and
-   confirms;
+5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and, in a
+   "Credit check" section like the portal's, agrees to the credit check and enters date of birth and SSN (masked);
 6. reviews and submits.
 
-The automation then prepares the order in the portal **without** running the credit check. A specialist
+The automation then fills the portal's Personal Information page, including the two credit-check fields, and
+stops **before Continue**, so the credit check runs only when the specialist clicks Continue (OPEN_ITEMS O-33). A specialist
 receives it and completes the credit check, payment and submission with the customer. The visitor gets a
 reference number (for example `UW-7K3M9QX2`).
 

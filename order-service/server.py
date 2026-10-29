@@ -84,6 +84,10 @@ VALUE_SCAN_SKIP = {"phone", "zip_code", "email", "request_id", "quote_job_id", "
 # Defence in depth: no string that could be a portal link or session id ever leaves in a public result.
 PORTAL_TEXT_RE = re.compile(r"attspoc|\(S\([a-z0-9]+\)\)", re.I)
 MAX_OPTION_ANSWERS = 12
+# Website only (self-service customers, no voice agent): the hand-off may carry the date of birth and SSN the
+# customer entered for AT&T's credit check, at exactly these two paths. Never logged or stored here; card and
+# bank details stay refused everywhere.
+CREDIT_CHECK_PATHS = frozenset({"customer.credit_check.date_of_birth", "customer.credit_check.ssn"})
 
 
 def _luhn_ok(digits: str) -> bool:
@@ -97,22 +101,25 @@ def _luhn_ok(digits: str) -> bool:
     return total % 10 == 0
 
 
-def sensitive_paths(value: Any, path: str = "") -> list[str]:
-    """Key paths that carry (or are named like) SSN, DOB, card or bank data. Values are never returned."""
+def sensitive_paths(value: Any, path: str = "", allowed: frozenset = frozenset()) -> list[str]:
+    """Key paths that carry (or are named like) SSN, DOB, card or bank data, except the `allowed` ones.
+    Values are never returned."""
     hits: list[str] = []
     if isinstance(value, dict):
         for k, v in value.items():
             p = f"{path}.{k}" if path else str(k)
+            if p in allowed and isinstance(v, str):
+                continue
             if SENSITIVE_KEY_RE.search(str(k)):
                 hits.append(p)
                 continue
             if isinstance(v, str) and str(k) not in VALUE_SCAN_SKIP and _sensitive_text(v):
                 hits.append(p)
                 continue
-            hits += sensitive_paths(v, p)
+            hits += sensitive_paths(v, p, allowed)
     elif isinstance(value, list):
         for i, v in enumerate(value):
-            hits += sensitive_paths(v, f"{path}[{i}]")
+            hits += sensitive_paths(v, f"{path}[{i}]", allowed)
     return hits
 
 
@@ -261,13 +268,22 @@ async def _run_job(job: Job, payload: dict) -> None:
     log.info("job %s %s finished: %s in %.1fs", job.id, job.kind, public.get("status"), time.monotonic() - t0)
 
 
+def without_credit_check(value: Any) -> Any:
+    """Drops credit-check details (date of birth, SSN) wherever they appear: they never go to the queue."""
+    if isinstance(value, dict):
+        return {k: without_credit_check(v) for k, v in value.items() if k not in ("credit_check", "ssn", "date_of_birth")}
+    if isinstance(value, list):
+        return [without_credit_check(v) for v in value]
+    return value
+
+
 def deliver_to_specialist(job: Job, handoff: dict) -> bool:
     """Write the hand-off (portal link + tasks) to the private queue folder and notify the webhook, if set."""
     entry = {
         "reference": job.order_ref,
         "source": "website",
         "received_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "handoff": handoff,
+        "handoff": without_credit_check(handoff),
     }
     body = json.dumps(entry, indent=2).encode("utf-8")
     stored = False
@@ -482,7 +498,7 @@ class Handler(BaseHTTPRequestHandler):
         token = header[7:] if header.startswith("Bearer ") else ""
         return bool(token) and hmac.compare_digest(token.encode(), SERVICE_KEY.encode())
 
-    def _json_body(self) -> dict:
+    def _json_body(self, allowed: frozenset = frozenset()) -> dict:
         if "application/json" not in (self.headers.get("Content-Type") or ""):
             raise ApiError(415, "json_required")
         try:
@@ -497,7 +513,7 @@ class Handler(BaseHTTPRequestHandler):
             raise ApiError(400, "invalid_request")
         if not isinstance(body, dict):
             raise ApiError(400, "invalid_request")
-        rejected = sensitive_paths(body)
+        rejected = sensitive_paths(body, allowed=allowed)
         if rejected:
             log.warning("request refused: sensitive fields %s (values not logged)", rejected)
             raise ApiError(422, "sensitive_data_rejected", fields=rejected)
@@ -526,7 +542,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(401, {"error": "unauthorised"})
         jobs.purge()
         try:
-            body = self._json_body()
+            body = self._json_body(CREDIT_CHECK_PATHS if path == "/v1/handoffs" else frozenset())
             create = {"/v1/plans": create_plans, "/v1/quotes": create_quote, "/v1/handoffs": create_handoff}[path]
             job = create(body)
         except ApiError as e:

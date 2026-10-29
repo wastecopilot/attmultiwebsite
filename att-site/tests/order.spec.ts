@@ -33,7 +33,9 @@ const ORDER_EVENTS = [
 ];
 const attComPrice = (id: string) => offers.find((o) => o.id === id)!.price!.amount;
 const PERSON = { first: "Flowtester", last: "Ordercheck", phone: "(214) 555-0147", email: "flow.tester@example.com" };
-const PII_MARKERS = [PERSON.first, PERSON.last, "2145550147", "555-0147", PERSON.email, "flow.tester", "Plainview", "Courtenay", "Lakeforest"];
+// Local-mock test values only (never sent beyond localhost).
+const CREDIT = { dob: "01/15/1985", ssn: "001-01-0001" };
+const PII_MARKERS = [PERSON.first, PERSON.last, "2145550147", "555-0147", PERSON.email, "flow.tester", "Plainview", "Courtenay", "Lakeforest", CREDIT.dob, CREDIT.ssn, "001010001"];
 
 const ADDRESSES = {
   atlanta: { street: "915 Courtenay Dr NE", city: "Atlanta", state: "GA", zip: "30306" },
@@ -151,7 +153,6 @@ async function address(page: Page, where: Site | string, extra: { unit?: string 
 
 async function expectPlans(page: Page, ids: string[]) {
   await expect(page.getByRole("heading", { name: "Plans Available at Your Address" })).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByText("Plans and prices shown for your address.")).toBeVisible();
   await expect(page.locator("[data-plan-card]")).toHaveCount(ids.length);
   for (const id of ids) await expect(page.locator(`[data-plan-card="${id}"]`)).toBeVisible();
 }
@@ -190,6 +191,11 @@ async function details(page: Page, email = PERSON.email) {
   await page.getByLabel("English", { exact: true }).check();
   // The phone/text permission is a separate, optional box and starts unchecked.
   await expect(page.locator("#order-contact")).not.toBeChecked();
+  // The credit check, as on the portal's Personal Information page: consent, date of birth, SSN (masked).
+  await page.locator("#order-credit-consent").check();
+  await page.getByLabel("Date of birth (MM/DD/YYYY)", { exact: true }).fill(CREDIT.dob);
+  await page.getByLabel("Social Security number", { exact: true }).fill(CREDIT.ssn);
+  await expect(page.getByLabel("Social Security number", { exact: true })).toHaveAttribute("type", "password");
   await page.locator("#order-consent").check();
   await page.getByRole("button", { name: "Review Order Request" }).click();
   await expect(page.getByRole("heading", { name: "Review and Submit" })).toBeVisible();
@@ -592,9 +598,10 @@ test("API refuses SSN, date of birth, card and bank data, and none reaches the a
   for (const secret of ["123-45-6789", "4111", "01/02/1990", "dateOfBirth", "cardNumber", "bankAccount", "routingNumber", "sec-check-"]) expect(log).not.toContain(secret);
 });
 
-test("The order form never asks for SSN, date of birth, card or bank details", async ({ page }) => {
+test("Date of birth and SSN are asked only in the credit-check section; card and bank details never", async ({ page }) => {
   await prepare(page);
-  const forbidden = /ssn|social security|birth|\bdob\b|card|cvv|cvc|expir|bank|routing|account number|iban|\bpin\b/i;
+  const never = /card|cvv|cvc|expir|bank|routing|account number|iban|\bpin\b/i;
+  const creditOnly = /ssn|social security|birth|\bdob\b/i;
   const scan = async () => {
     const fields = await page.locator("main input, main select, main textarea").evaluateAll((els) =>
       els.map((el) => {
@@ -603,11 +610,14 @@ test("The order form never asks for SSN, date of birth, card or bank details", a
         const copy = e.labels?.[0]?.cloneNode(true) as HTMLElement | undefined;
         copy?.querySelectorAll(".text-ink-muted").forEach((n) => n.remove());
         const label = copy?.textContent ?? "";
-        return [e.name, e.id, e.autocomplete, e.getAttribute("aria-label") ?? "", label, e.type].join(" | ");
+        return { text: [e.name, e.id, e.autocomplete, e.getAttribute("aria-label") ?? "", label].join(" | "), inCreditCheck: Boolean(e.closest("[data-credit-check]")), type: e.type };
       }),
     );
-    for (const f of fields) expect(f).not.toMatch(forbidden);
-    expect(await page.locator('main input[type="password"]').count()).toBe(0);
+    for (const f of fields) {
+      expect(f.text).not.toMatch(never);
+      if (!f.inCreditCheck) expect(f.text).not.toMatch(creditOnly);
+      if (f.type === "password") expect(f.inCreditCheck).toBe(true);
+    }
   };
   await open(page, "internet-air");
   await scan();
@@ -620,6 +630,7 @@ test("The order form never asks for SSN, date of birth, card or bank details", a
   await toQuote(page, "$55.00");
   await page.getByRole("button", { name: "Continue" }).click();
   await scan();
+  await expect(page.locator("[data-credit-check]")).toContainText("Before we continue with your order, we will need to initiate a credit check. Is that OK?");
 });
 
 test("Order page: noindex, no-store, not in the sitemap; server log holds no personal data", async ({ request }, info) => {

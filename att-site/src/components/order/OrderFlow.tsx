@@ -11,8 +11,10 @@ import { amount } from "@/lib/order/price";
 import {
   US_STATES,
   validateAddress,
+  validateCreditCheck,
   validateCustomer,
   type AddressInput,
+  type CreditCheckInput,
   type CustomerInput,
   type FieldErrors,
   type OptionAnswers,
@@ -44,6 +46,7 @@ const STEPS = ["Address", "Plans", "Options", "Your quote", "Your details", "Rev
 const STEP_INDEX: Partial<Record<Step, number>> = { address: 0, plans: 1, options: 2, quote: 3, details: 4, review: 5 };
 const WORK_STEP: Record<Work, number> = { plans: 0, options: 1, quote: 2, submit: 5 };
 const EMPTY_ADDRESS: AddressInput = { street: "", unit: "", city: "", state: "", zip: "" };
+const EMPTY_CREDIT_CHECK: CreditCheckInput = { dateOfBirth: "", ssn: "", consent: false };
 const EMPTY_CUSTOMER: CustomerInput = { firstName: "", lastName: "", phone: "", email: "", confirmEmail: "", billingLanguage: "", contactByPhone: false };
 
 const ADDRESS_NOTICE = {
@@ -105,6 +108,10 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const [customer, setCustomer] = useState<CustomerInput>(EMPTY_CUSTOMER);
   const [customerErrors, setCustomerErrors] = useState<FieldErrors<CustomerInput>>({});
   const [consent, setConsent] = useState(false);
+  // Date of birth and SSN live only in this state, are sent once with the order request and are cleared after.
+  const [creditCheck, setCreditCheck] = useState<CreditCheckInput>(EMPTY_CREDIT_CHECK);
+  const [creditErrors, setCreditErrors] = useState<FieldErrors<CreditCheckInput>>({});
+  const [showSsn, setShowSsn] = useState(false);
   const [consentError, setConsentError] = useState("");
   const [reference, setReference] = useState("");
   const [stop, setStop] = useState<Stop | null>(null);
@@ -143,6 +150,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   useEffect(() => () => abortRef.current?.abort(), []);
 
   const fail = (next: Stop, reason: string) => {
+    if (next.kind !== "failed" || next.retry !== "submit") setCreditCheck(EMPTY_CREDIT_CHECK);
     track("order_failed", { offer_id: offerId, value, reason });
     setStop(next);
     setStep("stop");
@@ -316,29 +324,42 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const submitDetails = (e: FormEvent) => {
     e.preventDefault();
     const { value: clean, errors } = validateCustomer(customer);
+    const { value: cleanCredit, errors: ccErrors } = validateCreditCheck(creditCheck);
     setCustomerErrors(errors);
+    setCreditErrors(ccErrors);
     setConsentError(consent ? "" : "Please confirm to continue.");
-    if (Object.keys(errors).length || !consent) return;
+    if (Object.keys(errors).length || Object.keys(ccErrors).length || !consent) return;
     setCustomer(clean);
+    setCreditCheck(cleanCredit);
+    setShowSsn(false);
     setStep("review");
   };
 
   const submitOrder = async () => {
     if (!quote) return;
     track("order_submit", { offer_id: offerId, value: amount(quote.total) });
-    const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, consent: true }, { offerId: plan?.id, zip: address.zip, options: { ...autoAnswers, ...answers } }, timeouts.handoffSeconds);
+    const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, creditCheck, consent: true }, { offerId: plan?.id, zip: address.zip, options: { ...autoAnswers, ...answers } }, timeouts.handoffSeconds);
     if (!res) return;
     const { outcome } = res;
     switch (outcome.screen) {
       case "done":
+        setCreditCheck(EMPTY_CREDIT_CHECK);
         setReference(outcome.reference);
         setStep("done");
         return;
-      case "details":
+      case "details": {
         track("order_failed", { offer_id: offerId, value, reason: "customer_details_rejected" });
-        setCustomerErrors(Object.fromEntries(outcome.fields.map((f) => [f, f === "email" ? EMAIL_REJECTED : "Please check this detail and try again."])));
+        const contact = outcome.fields.filter((f) => f !== "dateOfBirth" && f !== "ssn");
+        setCustomerErrors(Object.fromEntries(contact.map((f) => [f, f === "email" ? EMAIL_REJECTED : "Please check this detail and try again."])));
+        setCreditErrors({
+          ...(outcome.fields.includes("dateOfBirth") ? { dateOfBirth: "The date of birth was not accepted. Please check it." } : {}),
+          ...(outcome.fields.includes("ssn") ? { ssn: "The Social Security number was not accepted. Please check it." } : {}),
+        });
+        // Only an SSN the portal refused has to be typed again; otherwise the customer just fixes the field named.
+        if (outcome.fields.includes("ssn")) setCreditCheck((c) => ({ ...c, ssn: "" }));
         setStep("details");
         return;
+      }
       case "call":
         return fail({ kind: "unrequested" }, "unrequested_items");
       case "failed":
@@ -648,7 +669,70 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                 {consentError}
               </p>
             ) : null}
-            <p className="field-hint mt-4">We never ask for your Social Security number, date of birth or payment details online.</p>
+            <fieldset className="mt-6 rounded-xl border-2 border-brand p-4" data-credit-check>
+              <legend className="px-1 font-semibold text-ink">Credit check</legend>
+              <p className="text-ink">Before we continue with your order, we will need to initiate a credit check. Is that OK?</p>
+              <div className="mt-3 flex gap-3">
+                <input
+                  id="order-credit-consent"
+                  type="checkbox"
+                  className="field-check mt-0.5"
+                  checked={creditCheck.consent}
+                  onChange={(e) => setCreditCheck({ ...creditCheck, consent: e.target.checked })}
+                  aria-invalid={Boolean(creditErrors.consent)}
+                  aria-describedby={creditErrors.consent ? "order-credit-consent-error" : undefined}
+                />
+                <label htmlFor="order-credit-consent" className="text-sm text-ink">
+                  Yes, I agree to a credit check for this order. My date of birth and Social Security number are used only for this credit check.
+                </label>
+              </div>
+              {creditErrors.consent ? (
+                <p id="order-credit-consent-error" className="field-error" role="alert">
+                  {creditErrors.consent}
+                </p>
+              ) : null}
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <Field label="Date of birth (MM/DD/YYYY)" error={creditErrors.dateOfBirth}>
+                  {(p) => (
+                    <input
+                      {...p}
+                      inputMode="numeric"
+                      autoComplete="bday"
+                      placeholder="mm/dd/yyyy"
+                      maxLength={10}
+                      value={creditCheck.dateOfBirth}
+                      onChange={(e) => {
+                        const d = e.target.value.replace(/\D/g, "").slice(0, 8);
+                        setCreditCheck({ ...creditCheck, dateOfBirth: [d.slice(0, 2), d.slice(2, 4), d.slice(4)].filter(Boolean).join("/") });
+                      }}
+                    />
+                  )}
+                </Field>
+                <Field label="Social Security number" error={creditErrors.ssn}>
+                  {(p) => (
+                    <div className="flex gap-2">
+                      <input
+                        {...p}
+                        type={showSsn ? "text" : "password"}
+                        inputMode="numeric"
+                        autoComplete="off"
+                        placeholder="###-##-####"
+                        maxLength={11}
+                        value={creditCheck.ssn}
+                        onChange={(e) => {
+                          const d = e.target.value.replace(/\D/g, "").slice(0, 9);
+                          setCreditCheck({ ...creditCheck, ssn: [d.slice(0, 3), d.slice(3, 5), d.slice(5)].filter(Boolean).join("-") });
+                        }}
+                      />
+                      <button type="button" className="btn btn-ghost shrink-0" onClick={() => setShowSsn((v) => !v)} aria-pressed={showSsn}>
+                        {showSsn ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                  )}
+                </Field>
+              </div>
+              <p className="field-hint mt-3">Sent securely with your order request and not stored on this website. We never ask for card or bank details here.</p>
+            </fieldset>
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
               <button type="button" className="btn btn-ghost" onClick={() => setStep("quote")}>
                 Back
@@ -681,6 +765,9 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
               ) : null}
               <Summary label="Monthly total">
                 {quote.total} <span className="text-ink-muted">plus taxes and fees</span>
+              </Summary>
+              <Summary label="Credit check" onEdit={() => setStep("details")}>
+                Agreed. Date of birth and Social Security number provided.
               </Summary>
               <Summary label="Contact details" onEdit={() => setStep("details")}>
                 {customer.firstName} {customer.lastName}
