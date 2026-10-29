@@ -1,4 +1,6 @@
 import Link from "@/components/ui/AppLink";
+import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { pageMetadata } from "@/lib/seo";
 import { getOffer, offersBy } from "@/data/offers";
 import { faqsFor } from "@/data/faq";
@@ -57,9 +59,13 @@ export default function InternetPage() {
               </p>
               <AsOf offer={fiber300} />
               <FinePrint offer={fiber300} />
-              <Link href="/internet/fiber" className="btn btn-primary mt-6">
+              <Link href="/internet/fiber" className="link mt-5 inline-block font-semibold">
                 View AT&amp;T Fiber Plans
               </Link>
+              <div className="cta-pair mt-4">
+                <PhoneLink placement="internet-compare-fiber" offerId={fiber300.id} value={fiber300.price?.amount} className="btn btn-primary" label="Call Now" />
+                <OrderButton placement="internet-compare-fiber" offerId={fiber300.id} value={fiber300.price?.amount} planName={fiber300.title} className="btn btn-secondary" />
+              </div>
             </article>
             <article className="card p-6 md:p-8" data-reveal aria-labelledby="cmp-air">
               <AirIcon className="h-9 w-9 text-brand-strong" />
@@ -73,9 +79,13 @@ export default function InternetPage() {
               </p>
               <AsOf offer={air} />
               <FinePrint offer={air} />
-              <Link href="/internet/internet-air" className="btn btn-primary mt-6">
+              <Link href="/internet/internet-air" className="link mt-5 inline-block font-semibold">
                 View AT&amp;T Internet Air
               </Link>
+              <div className="cta-pair mt-4">
+                <PhoneLink placement="internet-compare-air" offerId={air.id} value={air.price?.amount} className="btn btn-primary" label="Call Now" />
+                <OrderButton placement="internet-compare-air" offerId={air.id} value={air.price?.amount} planName={air.title} className="btn btn-secondary" />
+              </div>
             </article>
           </div>
         </div>

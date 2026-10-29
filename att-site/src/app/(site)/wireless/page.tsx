@@ -72,6 +72,10 @@ export default function WirelessPage() {
                 <Link href="/wireless/plans" className="link mt-auto pt-4 text-sm font-semibold">
                   {p.title.replace("℠", "")} plan details
                 </Link>
+                <div className="cta-pair mt-4">
+                  <PhoneLink placement="wireless-plan-card" offerId={p.id} value={p.price!.amount} className="btn btn-primary" label="Call Now" />
+                  <OrderButton placement="wireless-plan-card" offerId={p.id} value={p.price!.amount} planName={p.title} className="btn btn-secondary" />
+                </div>
               </article>
             ))}
           </div>

@@ -79,6 +79,10 @@ export default function HomePage() {
             ) : null}
             <AsOf offer={hero} />
             <FinePrint offer={hero} />
+            <div className="cta-pair mt-5">
+              <PhoneLink placement="home-featured-card" offerId={hero.id} value={hero.price?.amount} className="btn btn-primary" label="Call Now" />
+              <OrderButton placement="home-featured-card" offerId={hero.id} value={hero.price?.amount} planName={hero.title} className="btn btn-secondary" />
+            </div>
           </div>
         </div>
       </section>
@@ -135,6 +139,10 @@ export default function HomePage() {
                   <Link href={s.href} className="link mt-auto pt-5 font-semibold">
                     {s.link}
                   </Link>
+                  <div className="cta-pair mt-4">
+                    <PhoneLink placement="home-service-card" offerId={o.id} value={o.price?.amount} className="btn btn-primary" label="Call Now" />
+                    <OrderButton placement="home-service-card" offerId={o.id} value={o.price?.amount} planName={o.title} className="btn btn-secondary" />
+                  </div>
                 </article>
               );
             })}

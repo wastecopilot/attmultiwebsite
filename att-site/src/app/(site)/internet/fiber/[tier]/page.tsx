@@ -1,4 +1,6 @@
 import Link from "@/components/ui/AppLink";
+import { PhoneLink } from "@/components/PhoneLink";
+import { OrderButton } from "@/components/OrderButton";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { offersBy } from "@/data/offers";
@@ -69,16 +71,20 @@ export default async function FiberTierPage({ params }: { params: Promise<{ tier
           <SectionHeading eyebrow="Compare" id="tier-compare-title" title="Other AT&T Fiber Speeds" />
           <ul className="mt-8 grid gap-4 sm:grid-cols-3">
             {others.map((o) => (
-              <li key={o.id}>
-                <Link href={`/internet/fiber/${tierSlug(o)}`} className="card block p-5 hover:border-brand-strong">
-                  <span className="block text-sm font-semibold tracking-wide text-ink-muted uppercase">{o.speed}</span>
-                  <span className="mt-1 block text-lg font-bold text-ink">{o.title}</span>
-                  {o.price ? (
-                    <span className="mt-1 block text-ink-muted">
-                      {formatMoney(o.price.amount)}/mo. {o.price.qualifier}
-                    </span>
-                  ) : null}
+              <li key={o.id} className="card flex flex-col p-5">
+                <span className="block text-sm font-semibold tracking-wide text-ink-muted uppercase">{o.speed}</span>
+                <Link href={`/internet/fiber/${tierSlug(o)}`} className="link mt-1 block text-lg font-bold">
+                  {o.title}
                 </Link>
+                {o.price ? (
+                  <span className="mt-1 block text-ink-muted">
+                    {formatMoney(o.price.amount)}/mo. {o.price.qualifier}
+                  </span>
+                ) : null}
+                <div className="cta-pair mt-auto pt-4">
+                  <PhoneLink placement="tier-other-card" offerId={o.id} value={o.price?.amount} className="btn btn-primary" label="Call Now" />
+                  <OrderButton placement="tier-other-card" offerId={o.id} value={o.price?.amount} planName={o.title} className="btn btn-secondary" />
+                </div>
               </li>
             ))}
           </ul>
