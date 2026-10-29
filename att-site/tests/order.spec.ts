@@ -246,9 +246,17 @@ async function expectCreditMessage(page: Page, result: "analyst_review" | "appro
   }
   await expect(box).toContainText(`Name: ${PERSON.first} ${PERSON.last}`);
   await expect(page.locator('a[data-phone-link="order-credit"]')).toBeVisible();
-  await expect(box).not.toContainText(/specialist/i);
+  await expect(box).not.toContainText(/specialist|please call/i);
   await expect(page.locator("[data-order-reference]")).toHaveCount(0);
   for (const section of ["Billing Address", "Terms", "Scheduling", "Account Security", "ABP - AutoPay Option"]) await expect(page.locator("[data-next-steps]")).toContainText(section);
+}
+
+/** Continue takes the customer to their own order page on AT&T's partner portal (intercepted here) to finish it. */
+async function continueToPortal(page: Page) {
+  await page.route("https://www.attspoc.com/**", (route) => route.fulfill({ status: 200, contentType: "text/html", body: "<title>portal</title>" }));
+  await page.locator("[data-portal-continue]").click();
+  await page.waitForURL(/^https:\/\/www\.attspoc\.com\/e\/\(S\([a-z0-9]{24}\)\)\/OE\/Checkout\/Checkout\.aspx$/);
+  expect(page.url()).not.toContain("key=");
 }
 
 /** An honest stop screen: Call Now present, no reference number, no total. */
@@ -329,6 +337,7 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
     expect(urls).not.toContain(encodeURIComponent(marker));
   }
   expect(errors).toEqual([]);
+  await continueToPortal(page);
 });
 
 // Cards show att.com prices; the portal carts for AutoPay taken and $0 items chosen equal them.
@@ -361,6 +370,7 @@ for (const [offer, card, price, total] of FIBER) {
     await submit(page);
     await answerAccountValidation(page);
     await expectCreditMessage(page);
+    await continueToPortal(page);
   });
 }
 
@@ -376,6 +386,7 @@ test("Credit check passed: the complete message and the sections that follow", a
   await submit(page);
   await answerAccountValidation(page);
   await expectCreditMessage(page, "approved");
+  await continueToPortal(page);
 });
 
 test("Credit check without Account Validation questions goes straight to the message", async ({ page }) => {

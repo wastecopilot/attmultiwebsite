@@ -26,9 +26,11 @@ file, its page kept open) or credit_check_done (the portal's answer). The custom
 
 Every /v1 call needs "Authorization: Bearer <ATTSPOC_SERVICE_KEY>".
 
-What never leaves this process: the partner portal link (ATTSPOC_URL), the result's `handoff` block
-(a bearer link to the prepared portal session: it goes to the specialist queue only), and the result's
-internal keys (removed by the automation's own to_aria()). Request bodies and personal data are never
+What never leaves this process: the partner portal link (ATTSPOC_URL, with the partner key), the result's
+`handoff` block (it goes to the specialist queue) and the result's internal keys (removed by the automation's
+own to_aria()). One exception: after the credit check, a website customer gets the link to their own order's
+page (data.continue_url, no partner key in it) to finish Billing Address, Terms, Scheduling, Account Security
+and AutoPay there themselves. Request bodies and personal data are never
 logged. See README.md for setup and deployment.
 """
 
@@ -89,6 +91,8 @@ CARD_CANDIDATE_RE = re.compile(r"(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)")
 VALUE_SCAN_SKIP = {"phone", "zip_code", "email", "request_id", "quote_job_id", "plans_job_id", "questions_job_id", "order_ref"}
 # Defence in depth: no string that could be a portal link or session id ever leaves in a public result.
 PORTAL_TEXT_RE = re.compile(r"attspoc|\(S\([a-z0-9]+\)\)", re.I)
+# The customer's own order page on the portal (session link, no partner key), handed over after the credit check.
+PORTAL_ORDER_URL_RE = re.compile(r"https://www\.attspoc\.com/e/\(S\([a-z0-9]{16,40}\)\)/OE/[A-Za-z]{2,30}/[A-Za-z]{2,30}\.aspx", re.I)
 MAX_OPTION_ANSWERS = 12
 # Website only (self-service customers, no voice agent): the hand-off may carry the date of birth and SSN the
 # customer entered for AT&T's credit check, at exactly these two paths. Never logged or stored here; card and
@@ -286,6 +290,10 @@ async def _run_job(job: Job, payload: dict) -> None:
             # Nobody would follow up, so the website must not tell the customer that someone will.
             result = {**result, "status": "handoff_undelivered", "retryable": False}
     public = scrub_public(aoa.to_aria(result), keep_order_id=job.kind != "plans")
+    url = str((handoff or {}).get("portal_url") or "")
+    if public.get("status") == "credit_check_done" and PORTAL_ORDER_URL_RE.fullmatch(url):
+        # The customer finishes the order on the portal page themselves (Billing Address onward).
+        public["data"] = {**(public.get("data") or {}), "continue_url": url}
     jobs.finish(job, public)
     log.info("job %s %s finished: %s in %.1fs", job.id, job.kind, public.get("status"), time.monotonic() - t0)
 

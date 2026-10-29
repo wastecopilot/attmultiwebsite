@@ -4,7 +4,8 @@
  * only says which of those plans are available at the address, which options a plan has, and what the cart
  * holds. A quote is shown only when the portal cart total equals the att.com price for the chosen plan and
  * options, and the cart holds nothing the visitor did not choose. Never sent to the browser: the portal's own
- * card prices, option prices, staff scripts, internal ids or any portal link.
+ * card prices, option prices, staff scripts, internal ids or portal links, except one: after the credit check,
+ * the link to the customer's own order page, where they finish the order themselves (no partner key in it).
  */
 import { offers } from "@/data/offers";
 import type { Offer } from "@/data/offer-types";
@@ -66,7 +67,7 @@ export type OrderOutcome =
   | { screen: "details"; fields: ("firstName" | "lastName" | "phone" | "email" | "dateOfBirth" | "ssn")[] }
   | { screen: "identity"; questions: IdentityQuestion[]; orderId: string }
   /** The portal's Credit Check Message: analyst review needed, approved (the next section opened) or anything else. */
-  | { screen: "credit"; result: "analyst_review" | "approved" | "other"; reference: string; hours: string; orderId: string }
+  | { screen: "credit"; result: "analyst_review" | "approved" | "other"; reference: string; hours: string; orderId: string; continueUrl: string }
   | { screen: "done"; reference: string; orderId: string }
   | { screen: "failed"; retryable: boolean; reason: string };
 
@@ -97,6 +98,8 @@ const orderIdOf = (data: Record<string, unknown>) => {
   return /^[A-Z]{2,8}\d{6,14}$/.test(id) ? id : "";
 };
 const INTERNET_SECTIONS = new Set(["internet"]);
+/** The customer's own order page on the portal (session link), where they finish Billing Address onward. */
+const PORTAL_ORDER_URL_RE = /^https:\/\/www\.attspoc\.com\/e\/\(S\([a-z0-9]{16,40}\)\)\/OE\/[A-Za-z]{2,30}\/[A-Za-z]{2,30}\.aspx$/i;
 
 /** The att.com offers a visitor may order online, by id. */
 export function onlineOffer(offerId: string | undefined): Offer | undefined {
@@ -256,6 +259,7 @@ export function toOutcome(result: AutomationResult | undefined, expected: Expect
         reference: /^[A-Z0-9][A-Z0-9-]{5,39}$/i.test(reference) ? reference : "",
         hours: /^[A-Za-z0-9 ,.:;&()-]*$/.test(hours) ? hours : "",
         orderId: orderIdOf(data),
+        continueUrl: PORTAL_ORDER_URL_RE.test(str(data.continue_url, 200)) ? str(data.continue_url, 200) : "",
       };
     }
     case "handoff_ready": {

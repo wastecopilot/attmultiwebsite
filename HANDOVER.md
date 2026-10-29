@@ -197,8 +197,10 @@ page is not indexed, not in the sitemap and never cached. It works like the AT&T
 6. reviews and submits ("Verifying Your Information" while it runs, about one to two minutes);
 7. answers AT&T's **Account Validation** questions (from their credit file), when the portal asks them;
 8. sees the portal's **Credit Check Message** with the Order ID: for "This account requires analyst review",
-   the credit reference and Call Now; the later sections (Billing Address, Terms, Scheduling, Account
-   Security, ABP - AutoPay Option) are listed as on the portal.
+   the credit reference; the later sections (Billing Address, Terms, Scheduling, Account Security,
+   ABP - AutoPay Option) are listed as on the portal;
+9. clicks **Continue**, which opens their own order on AT&T's partner order page, and finishes those sections
+   and the checkout there themselves (DECISIONS D-55).
 
 The automation fills the portal's Personal Information page, including the two credit-check fields, clicks
 Continue, fills the Info Quality Check from the customer's details, enters the customer's Account Validation

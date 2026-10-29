@@ -88,5 +88,5 @@ async def answer_identity_questions(payload: dict) -> dict:
     return {**base, "status": "credit_check_done", "retryable": False,
             "data": {"cart_order_id": "DSIX1", "credit_check": {"outcome": "analyst_review", "reference": "U20260000000000001",
                                                                "hours": "M-F 9am-9pm ET, Sat 9am-8pm ET"}},
-            "handoff": {"portal_url": "https://www.attspoc.com/e/(S(abc123))/oe/Checkout/Checkout.aspx",
+            "handoff": {"portal_url": "https://www.attspoc.com/e/(S(abcdefghijklmnopqrstuvwx))/OE/Checkout/Checkout.aspx",
                         "credit_check_outcome": "analyst_review", "tasks": ["Call the analyst line with the customer"]}}

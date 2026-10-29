@@ -259,7 +259,13 @@ class ServiceTests(unittest.TestCase):
         self.assertEqual(result["status"], "credit_check_done")
         self.assertEqual(result["data"]["credit_check"]["outcome"], "analyst_review")
         self.assertEqual(server.aoa.calls[-1], {"order_ref": quote["order_ref"], "answers": body["answers"]})
+        # The customer gets the link to their own order page to finish there; nothing else from the portal.
+        url = result["data"].pop("continue_url")
+        self.assertEqual(url, "https://www.attspoc.com/e/(S(abcdefghijklmnopqrstuvwx))/OE/Checkout/Checkout.aspx")
         self.assertNotIn("attspoc", json.dumps(result))
+        self.assertNotIn("key=", url)
+        # Questions (no credit answer yet) never carry the link.
+        self.assertNotIn("continue_url", asked["data"])
         self.assertNotIn("TEST LENDER", " ".join(logs.output))
         # The portal link goes to staff; no answers, SSN or date of birth with it.
         files = [p for p in Path(QUEUE).glob("*.json") if quote["order_ref"] in p.name]

@@ -24,7 +24,7 @@ import { newRequestId, startJob, waitForJob } from "./order-api";
 type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "verify" | "credit" | "working" | "done" | "stop" | "not_online";
 type Work = "plans" | "options" | "quote" | "submit" | "verify";
 /** The portal's Credit Check Message, as the automation read it. */
-type Credit = { result: "analyst_review" | "approved" | "other"; reference: string; hours: string };
+type Credit = { result: "analyst_review" | "approved" | "other"; reference: string; hours: string; continueUrl: string };
 type Quote = { jobId: string; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[]; orderId: string };
 /** Screens that end the online flow: the visitor is asked to call. */
 type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "mismatch" } | { kind: "no_service" };
@@ -368,7 +368,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
       setCreditCheck(EMPTY_CREDIT_CHECK);
       setQuestions([]);
       setIdentityAnswers({});
-      setCredit({ result: outcome.result, reference: outcome.reference, hours: outcome.hours });
+      setCredit({ result: outcome.result, reference: outcome.reference, hours: outcome.hours, continueUrl: outcome.continueUrl });
       setOrderId(outcome.orderId || quote?.orderId || "");
       track("order_credit_check", { offer_id: offerId, value, result: outcome.result });
       setStep("credit");
@@ -921,26 +921,16 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
             {credit.result === "analyst_review" ? (
               <>
                 <p className="mt-4 text-ink">This account requires analyst review.</p>
-                <p className="mt-1 text-ink">
-                  Please call <PhoneLink placement="order-credit-review-text" offerId={offerId} value={value} className="link font-semibold" /> to continue. We complete the review with
-                  AT&amp;T together with you.
-                </p>
                 {credit.hours ? <p className="mt-1 text-ink">Hours - {credit.hours}</p> : null}
               </>
             ) : credit.result === "approved" ? (
-              <>
-                <p className="mt-4 text-ink">Your credit check is complete.</p>
-                <p className="mt-1 text-ink">
-                  Please call <PhoneLink placement="order-credit-approved-text" offerId={offerId} value={value} className="link font-semibold" /> to complete Billing Address, Terms,
-                  Scheduling, Account Security and the AutoPay option.
-                </p>
-              </>
+              <p className="mt-4 text-ink">Your credit check is complete.</p>
             ) : (
-              <p className="mt-4 text-ink">
-                AT&amp;T could not complete the credit check online. Please call <PhoneLink placement="order-credit-other-text" offerId={offerId} value={value} className="link font-semibold" /> to
-                continue your order.
-              </p>
+              <p className="mt-4 text-ink">AT&amp;T has answered your credit check.</p>
             )}
+            {credit.continueUrl ? (
+              <p className="mt-2 text-ink">Continue to finish your order: Billing Address, Terms, Scheduling, Account Security and the AutoPay option.</p>
+            ) : null}
             <div className="mt-4 rounded-xl bg-surface-alt p-4 text-ink" data-authentication-data>
               <p className="font-semibold">Authentication Data</p>
               {credit.reference ? <p data-credit-reference>Reference #: {credit.reference}</p> : null}
@@ -949,8 +939,13 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
               </p>
               <p>Phone: {customer.phone}</p>
             </div>
-            <div className="mt-6">
-              <PhoneLink placement="order-credit" offerId={offerId} value={value} className="btn btn-primary" label="Call Now" />
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              {credit.continueUrl ? (
+                <a href={credit.continueUrl} className="btn btn-primary" data-portal-continue onClick={() => track("order_continue_portal", { offer_id: offerId, value, result: credit.result })}>
+                  Continue
+                </a>
+              ) : null}
+              <PhoneLink placement="order-credit" offerId={offerId} value={value} className={credit.continueUrl ? "btn btn-secondary" : "btn btn-primary"} label="Call Now" />
             </div>
             <LaterSections />
           </div>

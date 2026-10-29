@@ -31,6 +31,7 @@ export type TrackedEvent =
   | "order_submit"
   | "order_identity_questions"
   | "order_credit_check"
+  | "order_continue_portal"
   | "order_failed";
 
 export interface EventParams {

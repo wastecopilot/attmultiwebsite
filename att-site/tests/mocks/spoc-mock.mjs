@@ -146,6 +146,8 @@ const TEST_QUESTIONS = [
   { key: "q1", question: "TEST question one: which of these is the test lender?", choices: ["TEST LENDER A", "TEST LENDER B", "NONE OF THE ABOVE"] },
   { key: "q2", question: "TEST question two: what is the test amount?", choices: ["$100 - $199", "$200 - $299", "NONE OF THE ABOVE"] },
 ];
+// A made-up order page link in the portal's format (tests intercept it; nothing is opened on attspoc.com).
+const CONTINUE_URL = "https://www.attspoc.com/e/(S(abcdefghijklmnopqrstuvwx))/OE/Checkout/Checkout.aspx";
 const CREDIT = {
   review: { outcome: "analyst_review", reference: "U20260000000000001", hours: "M-F 9am-9pm ET, Sat 9am-8pm ET" },
   approved: { outcome: "approved", reference: "", hours: "" },
@@ -157,7 +159,7 @@ function handoffOutcome(job, quote) {
   if (email.startsWith("handofffail@")) return result("portal_error", job.order_ref);
   const cart = cartFor(quote.products[0].plan_name, quote.products[0].options);
   if (!job.creditCheck || email.startsWith("handoffready@")) return result("handoff_ready", job.order_ref, cart);
-  if (email.startsWith("noquestions@")) return result("credit_check_done", job.order_ref, { ...cart, credit_check: CREDIT.review });
+  if (email.startsWith("noquestions@")) return result("credit_check_done", job.order_ref, { ...cart, credit_check: CREDIT.review, continue_url: CONTINUE_URL });
   return result("identity_questions", job.order_ref, { ...cart, identity_questions: TEST_QUESTIONS });
 }
 
@@ -264,7 +266,7 @@ const server = http.createServer(async (req, res) => {
     if (Object.keys(answers).length !== qs.length || qs.some((q) => !q.choices.includes(answers[q.key]))) return send(res, 400, { error: "invalid_request", fields: ["answers"] });
     const job = { order_ref: asked.order_ref, email: asked.email };
     const credit = job.email.startsWith("approved@") ? CREDIT.approved : CREDIT.review;
-    addJob("verify", body.request_id, job, HANDOFF_MS, result("credit_check_done", job.order_ref, { cart_order_id: "DSIX000000001", credit_check: credit }));
+    addJob("verify", body.request_id, job, HANDOFF_MS, result("credit_check_done", job.order_ref, { cart_order_id: "DSIX000000001", credit_check: credit, continue_url: CONTINUE_URL }));
     return send(res, 202, { job_id: job.id, kind: "verify", state: "running" });
   }
   return send(res, 404, { error: "not_found" });
