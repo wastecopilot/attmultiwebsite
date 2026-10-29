@@ -35,7 +35,7 @@ export default async function OrderPage({ searchParams }: { searchParams: Search
         trail={[{ name: "Order", path: "/order" }]}
         eyebrow="Order Online"
         title="Order AT&T Internet"
-        intro="Enter your service address to see which AT&T Internet plans are available there, choose your options and send your order request. A specialist completes the credit check and payment with you."
+        intro="Enter your service address to see which AT&T Internet plans are available there, choose your options and complete your order."
       />
       <section className="section" aria-label="Order steps">
         <div className="container-x">
