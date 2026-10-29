@@ -51,13 +51,13 @@ export type OrderOutcome =
       autoAnswers: OptionAnswers;
       hiddenAddOns: string[];
     }
-  | { screen: "quote"; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[] }
+  | { screen: "quote"; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[]; orderId: string }
   | { screen: "address"; reason: AddressReason }
   | { screen: "plan_unavailable" }
   | { screen: "no_service" }
   | { screen: "call"; reason: "unrequested" | "price_mismatch" | "not_online" }
   | { screen: "details"; fields: ("firstName" | "lastName" | "phone" | "email" | "dateOfBirth" | "ssn")[] }
-  | { screen: "done"; reference: string }
+  | { screen: "done"; reference: string; orderId: string }
   | { screen: "failed"; retryable: boolean; reason: string };
 
 /** What the visitor asked for, used to check the portal's answer. */
@@ -81,6 +81,11 @@ const isDecline = (title: string) => norm(title).startsWith("decline");
 // Option descriptions sometimes carry instructions for sales staff ("Please ask the Customer ..."); never shown.
 const STAFF_SCRIPT = /ask the customer|the customer should|customer answers|let me know if you would like|\bagent\b|\brep\b/i;
 const TOTAL_RE = /^-?\$\d[\d,]*(\.\d{2})?$/;
+/** The portal's Order ID, e.g. "DSIX276643530" (shown to the customer as on the portal's cart). */
+const orderIdOf = (data: Record<string, unknown>) => {
+  const id = str(data.cart_order_id, 30);
+  return /^[A-Z]{2,8}\d{6,14}$/.test(id) ? id : "";
+};
 const INTERNET_SECTIONS = new Set(["internet"]);
 
 /** The att.com offers a visitor may order online, by id. */
@@ -187,6 +192,7 @@ function quoteOutcome(data: Record<string, unknown>, expected: Expected, offer: 
     lines: lines.filter((l) => l.item && l.charge).map(({ item, detail, charge }) => ({ item, detail: detail.includes("$") ? "" : detail, charge })),
     included: strings(data.included_items, 160, 12),
     chosen,
+    orderId: orderIdOf(data),
   };
 }
 
@@ -222,7 +228,7 @@ export function toOutcome(result: AutomationResult | undefined, expected: Expect
     }
     case "handoff_ready": {
       const reference = str(result.order_ref, 40);
-      return /^[A-Z]{2}-[A-Z0-9]{6,12}$/.test(reference) ? { screen: "done", reference } : failed("no_reference");
+      return /^[A-Z]{2}-[A-Z0-9]{6,12}$/.test(reference) ? { screen: "done", reference, orderId: orderIdOf(data) } : failed("no_reference");
     }
     case "session_expired":
     case "portal_error":

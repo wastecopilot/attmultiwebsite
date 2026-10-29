@@ -23,7 +23,7 @@ import { newRequestId, startJob, waitForJob } from "./order-api";
 
 type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "working" | "done" | "stop" | "not_online";
 type Work = "plans" | "options" | "quote" | "submit";
-type Quote = { jobId: string; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[] };
+type Quote = { jobId: string; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[]; orderId: string };
 /** Screens that end the online flow: the visitor is asked to call. */
 type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "mismatch" } | { kind: "no_service" };
 
@@ -115,6 +115,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const [showSsn, setShowSsn] = useState(false);
   const [consentError, setConsentError] = useState("");
   const [reference, setReference] = useState("");
+  const [orderId, setOrderId] = useState("");
   const [stop, setStop] = useState<Stop | null>(null);
   const [retried, setRetried] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -250,7 +251,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         setStep("options");
         return;
       case "quote":
-        setQuote({ jobId, total: outcome.total, attComPrice: outcome.attComPrice, lines: outcome.lines, included: outcome.included, chosen: outcome.chosen });
+        setQuote({ jobId, total: outcome.total, attComPrice: outcome.attComPrice, lines: outcome.lines, included: outcome.included, chosen: outcome.chosen, orderId: outcome.orderId });
         track("order_quote_shown", { offer_id: offerId, value: amount(outcome.total) });
         setStep("quote");
         return;
@@ -346,6 +347,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
       case "done":
         setCreditCheck(EMPTY_CREDIT_CHECK);
         setReference(outcome.reference);
+        setOrderId(outcome.orderId || quote?.orderId || "");
         setStep("done");
         return;
       case "details": {
@@ -761,6 +763,11 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                   <h3 id="order-cart-title" className="text-lg font-bold text-ink">
                     Shopping Cart
                   </h3>
+                  {quote.orderId ? (
+                    <p className="mt-1 text-ink" data-order-id>
+                      Order ID: <span className="font-bold">{quote.orderId}</span>
+                    </p>
+                  ) : null}
                   <p className="mt-1 text-sm text-ink-muted">{plan.title}</p>
                   <QuoteTable quote={quote} compact />
                 </div>
@@ -818,9 +825,9 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         {step === "done" ? (
           <div role="status">
             <StepHeading ref={headingRef}>Thank You. Your Order Request Has Been Received.</StepHeading>
-            <p className="mt-4 text-ink">Reference number</p>
-            <p className="mt-1 text-3xl font-bold tracking-wide text-ink" data-order-reference>
-              {reference}
+            <p className="mt-4 text-ink">{orderId ? "Order ID" : "Reference number"}</p>
+            <p className="mt-1 text-3xl font-bold tracking-wide text-ink" data-order-reference={reference} data-order-id={orderId || undefined}>
+              {orderId || reference}
             </p>
             <p className="mt-4 text-ink">A specialist will contact you to complete the credit check and payment. Please keep your reference number for your records.</p>
             <div className="mt-6">

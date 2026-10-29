@@ -150,12 +150,13 @@ def new_order_ref() -> str:
     return "UW-" + "".join(secrets.choice(_REF_ALPHABET) for _ in range(8))
 
 
-def scrub_public(value: Any) -> Any:
-    """Drops portal-internal values from a result before it is stored for the website."""
+def scrub_public(value: Any, keep_order_id: bool = False) -> Any:
+    """Drops portal-internal values from a result before it is stored for the website. The portal's Order ID
+    (cart_order_id) is kept for quotes and hand-offs: the customer sees it, as in the portal's cart."""
     if isinstance(value, dict):
-        return {k: scrub_public(v) for k, v in value.items() if k != "cart_order_id"}
+        return {k: scrub_public(v, keep_order_id) for k, v in value.items() if keep_order_id or k != "cart_order_id"}
     if isinstance(value, list):
-        return [scrub_public(v) for v in value]
+        return [scrub_public(v, keep_order_id) for v in value]
     if isinstance(value, str) and PORTAL_TEXT_RE.search(value):
         return ""
     return value
@@ -263,7 +264,7 @@ async def _run_job(job: Job, payload: dict) -> None:
         if not delivered:
             # Nobody would follow up, so the website must not tell the customer that someone will.
             result = {**result, "status": "handoff_undelivered", "retryable": False}
-    public = scrub_public(aoa.to_aria(result))
+    public = scrub_public(aoa.to_aria(result), keep_order_id=job.kind != "plans")
     jobs.finish(job, public)
     log.info("job %s %s finished: %s in %.1fs", job.id, job.kind, public.get("status"), time.monotonic() - t0)
 

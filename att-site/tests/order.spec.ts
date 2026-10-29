@@ -207,7 +207,9 @@ async function submit(page: Page) {
 
 async function expectDone(page: Page) {
   await expect(page.getByRole("heading", { name: /Thank You/ })).toBeVisible({ timeout: 20_000 });
-  await expect(page.locator("[data-order-reference]")).toHaveText(/^UW-[A-Z0-9]{8}$/);
+  // The portal's Order ID is shown (our own reference stays on the element for support).
+  await expect(page.locator("[data-order-reference]")).toHaveText(/^[A-Z]{2,8}\d{6,14}$/);
+  await expect(page.locator("[data-order-reference]")).toHaveAttribute("data-order-reference", /^UW-[A-Z0-9]{8}$/);
   await expect(page.getByText("A specialist will contact you to complete the credit check and payment.")).toBeVisible();
   await expect(page.locator('a[data-phone-link="order-done"]')).toBeVisible();
 }
