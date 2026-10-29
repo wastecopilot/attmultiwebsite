@@ -45,6 +45,7 @@ The phone number and tracking IDs are not written into the code. They are read f
 | `NEXT_PUBLIC_GADS_CALL_LABEL` (optional until available) | Google Ads conversion label for "clicks on phone number" | letters/digits from Google Ads |
 | `NEXT_PUBLIC_GADS_SWAP_LABEL` (optional) | Conversion label for "calls from website" (number swap); if empty, the call label is used | |
 | `NEXT_PUBLIC_ORDER_URL` (optional) | Leave empty. Every "Order Now" button then opens the online order page `/att/order?plan=<offer id>&source=<page>`. Only set it to send the buttons to a different https address instead; `plan`, `source` and any `gclid`/`gbraid`/`wbraid`/`utm_*` are then added to that address. | full `https://` URL |
+| `ATTSPOC_PARTNER_URL` (optional, server only) | **Current setup (owner's decision, 29 Oct):** the AT&T partner order link, exactly as in `attspoc AT&T\portal_url.txt`. When set, `/att/order` (where every Order Now button leads) sends visitors straight to AT&T's partner order page, and they order there themselves; order-service and the tunnel are then not needed. Only an `https://…attspoc.com` address is followed. Server only, so the link is not in the pages' code. Leave empty to use the site's own order pages (section 11). | `https://www.attspoc.com/?key=…` |
 | `ATTSPOC_SERVICE_URL` (optional, server only) | The https address of **order-service**, which runs the AT&T partner-portal order automation (section 11). Until it is set, the order page shows the plan and says "Online ordering is currently unavailable. Please call …". | `https://orders.example.com` format |
 | `ATTSPOC_SERVICE_KEY` (optional, server only) | The shared secret for order-service: the **same** random value (32+ characters) as on order-service. Never put it in a `NEXT_PUBLIC_` variable. | random letters/digits |
 | `ATTSPOC_QUOTE_TIMEOUT_S` / `ATTSPOC_HANDOFF_TIMEOUT_S` (optional) | How long the order page waits for each portal step (plans, options, quote) or for the order request before showing the "please call" message. | seconds, default `240` |
@@ -178,6 +179,10 @@ Photos are set up as named "slots" in `att-site/src/data/images.ts`. Each slot s
 | — | Offers not shown because they are unconfirmed, online-only or TV (YouTube TV): see OPEN_ITEMS X-03…X-13 | — |
 
 ## 11. Online ordering (Order Now)
+
+**Since 29 Oct the owner's choice is to send customers straight to AT&T's partner order page:** set
+`ATTSPOC_PARTNER_URL` in Vercel (section 3) and redeploy; every Order Now button then opens attspoc. The rest of
+this section describes the site's own order pages, used when that setting is empty.
 
 Every **Order Now** button opens `/att/order?plan=<offer id>&source=<page>` (click IDs and `utm_*` kept). The
 page is not indexed, not in the sitemap and never cached. It works like the AT&T partner portal

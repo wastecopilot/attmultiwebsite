@@ -1,7 +1,9 @@
+import { redirect } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { offers } from "@/data/offers";
 import { ONLINE_ORDER_CATEGORIES, portalNameForOffer } from "@/data/order-plans";
 import { orderTimeouts, serviceConfigured } from "@/lib/order/service";
+import { partnerOrderUrl } from "@/lib/order/partner";
 import { PageHeader } from "@/components/ui/Sections";
 import { OrderFlow } from "@/components/order/OrderFlow";
 
@@ -17,9 +19,12 @@ type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 /**
  * Online order flow. Reading searchParams makes this page render per request, so it is never cached
  * (Next.js sends Cache-Control: private, no-cache, no-store). It is noindex and not in the sitemap.
+ * With ATTSPOC_PARTNER_URL set, every visitor is sent straight to AT&T's partner order page instead.
  */
 export default async function OrderPage({ searchParams }: { searchParams: SearchParams }) {
   const sp = await searchParams;
+  const partner = partnerOrderUrl();
+  if (partner) redirect(partner);
   const rawPlan = typeof sp.plan === "string" ? sp.plan : "";
   // Only an offer id or a portal plan id (letters, digits, dashes) is used; anything else is ignored.
   const planId = /^[a-z0-9-]{2,80}$/.test(rawPlan) ? rawPlan : "";
