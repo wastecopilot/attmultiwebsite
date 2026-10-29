@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "@/components/ui/AppLink";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { BASE_PATH } from "@/data/site";
 import { env } from "@/lib/env";
 import { track } from "@/lib/analytics";
 import { currentAttribution, decorateHref } from "@/lib/attribution";
@@ -29,14 +29,15 @@ function orderParams(offerId: string | undefined, source: string): URLSearchPara
 }
 
 /**
- * "Order Now" link shown next to every Call Now button. Goes to the online order page (/att/order), or to
- * NEXT_PUBLIC_ORDER_URL when that override is set. Click IDs and UTM values ride along (AttributionKeeper
+ * "Order Now" link shown next to every Call Now button. Goes to /att/order, or to NEXT_PUBLIC_ORDER_URL when
+ * that override is set. A plain link (a full page load, not an in-app navigation): when ATTSPOC_PARTNER_URL is set,
+ * the server answers /att/order with a redirect, so the browser goes straight from the current page to AT&T's
+ * partner page, with no empty page in between. Click IDs and UTM values ride along (AttributionKeeper
  * for internal links, below for an external URL). Every click fires the `order_click` event (page, offer id,
  * value), the same way PhoneLink fires `phone_click`; the call conversion is untouched.
  */
 export function OrderButton({ offerId, value = 0, placement, className, planName, locale = "en" }: OrderButtonProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const label = locale === "es" ? "Ordenar ahora" : "Order Now";
   const params = orderParams(offerId, pathname);
   const common = {
@@ -66,21 +67,18 @@ export function OrderButton({ offerId, value = 0, placement, className, planName
       </a>
     );
   }
-  const href = `/order?${params.toString()}`;
+  const href = `${BASE_PATH}/order?${params.toString()}`;
   return (
-    <Link
+    <a
       href={href}
       {...common}
       onClick={(e) => {
         onTrack();
-        // Navigate with the click IDs / UTM values already in the URL, so the order page never loses them
-        // (AttributionKeeper only re-adds them after the navigation, which can race with the router).
-        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !Object.keys(currentAttribution()).length) return;
-        e.preventDefault();
-        router.push(decorateHref(href));
+        // The click IDs / UTM values go into the address before the browser follows it.
+        e.currentTarget.href = decorateHref(href);
       }}
     >
       {label}
-    </Link>
+    </a>
   );
 }

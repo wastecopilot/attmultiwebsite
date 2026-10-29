@@ -312,8 +312,8 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
 
   const events = await dataLayerEvents(page);
   const order = events.map((e) => String(e.event)).filter((e) => ORDER_EVENTS.includes(e));
+  // order_click is sent on the page where Order Now was clicked; the order page (a full page load) starts afresh.
   expect(order).toEqual([
-    "order_click",
     "begin_order",
     "order_plans_shown",
     "order_options_chosen",
