@@ -267,6 +267,8 @@ billing or card is needed.
   Then it prints the tunnel address. The three run hidden and keep running after the window is closed.
 - **Stop:** double-click `stop-order-service.bat` (or run `./stop-order-service.sh`).
 - **After a laptop restart,** run the start script again.
+- **Restart only order-service** (for example after the automation was updated): `restart-order-service.bat`.
+  The tunnel keeps running, so its address and the Vercel setting stay the same.
 
 **Connect the website** in Vercel (Settings → Environment Variables, Production), then **redeploy**:
 
