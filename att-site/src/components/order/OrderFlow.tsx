@@ -394,7 +394,8 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   }
 
   return (
-    <div className="mx-auto max-w-3xl">
+    // Step 5 is wider: like the portal's Personal Information page, it shows the cart beside the form.
+    <div className={`mx-auto ${step === "details" && quote ? "max-w-6xl" : "max-w-3xl"}`}>
       {currentIndex !== undefined ? <StepIndicator current={currentIndex} /> : null}
 
       <div className="card mt-6 p-5 md:p-8">
@@ -602,145 +603,168 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         ) : null}
 
         {step === "details" ? (
-          <form onSubmit={submitDetails} noValidate>
-            <StepHeading ref={headingRef}>Your Details</StepHeading>
-            <p className="mt-2 text-ink-muted">We use these details to contact you about your order request.</p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <Field label="First name" error={customerErrors.firstName}>
-                {(p) => <input {...p} autoComplete="given-name" maxLength={40} value={customer.firstName} onChange={(e) => setCustomer({ ...customer, firstName: e.target.value })} />}
-              </Field>
-              <Field label="Last name" error={customerErrors.lastName}>
-                {(p) => <input {...p} autoComplete="family-name" maxLength={40} value={customer.lastName} onChange={(e) => setCustomer({ ...customer, lastName: e.target.value })} />}
-              </Field>
-              <Field label="Phone number" error={customerErrors.phone} className="sm:col-span-2">
-                {(p) => <input {...p} type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} value={customer.phone} onChange={(e) => setCustomer({ ...customer, phone: e.target.value })} />}
-              </Field>
-              <Field label="Email address" error={customerErrors.email}>
-                {(p) => <input {...p} type="email" autoComplete="email" maxLength={254} value={customer.email} onChange={(e) => setCustomer({ ...customer, email: e.target.value })} />}
-              </Field>
-              <Field label="Confirm email address" error={customerErrors.confirmEmail}>
-                {(p) => (
-                  <input
-                    {...p}
-                    type="email"
-                    autoComplete="email"
-                    maxLength={254}
-                    value={customer.confirmEmail}
-                    onChange={(e) => setCustomer({ ...customer, confirmEmail: e.target.value })}
-                    onPaste={(e) => e.preventDefault()}
-                  />
-                )}
-              </Field>
-            </div>
-            <RadioGroup
-              legend="Billing language"
-              name="billingLanguage"
-              value={customer.billingLanguage}
-              error={customerErrors.billingLanguage}
-              options={[
-                { value: "english", label: "English" },
-                { value: "spanish", label: "Spanish" },
-              ]}
-              onChange={(v) => setCustomer({ ...customer, billingLanguage: v as CustomerInput["billingLanguage"] })}
-            />
-            <div className="mt-6 flex gap-3">
-              <input id="order-contact" type="checkbox" className="field-check mt-0.5" checked={customer.contactByPhone} onChange={(e) => setCustomer({ ...customer, contactByPhone: e.target.checked })} />
-              <label htmlFor="order-contact" className="text-sm text-ink">
-                Optional: you may contact me by phone or text with information about my services, such as installation and repair appointments, billing and account
-                information, and customer satisfaction inquiries.
-              </label>
-            </div>
-            <div className="mt-4 flex gap-3">
-              <input id="order-consent" type="checkbox" className="field-check mt-0.5" checked={consent} onChange={(e) => setConsent(e.target.checked)} aria-invalid={Boolean(consentError)} aria-describedby={consentError ? "order-consent-error" : undefined} />
-              <label htmlFor="order-consent" className="text-sm text-ink">
-                I confirm that the details above are correct and agree to be contacted by phone or email about this order request. I have read the{" "}
-                <Link href="/privacy" className="link" target="_blank" rel="noopener">
-                  Privacy Policy
-                </Link>{" "}
-                and{" "}
-                <Link href="/terms" className="link" target="_blank" rel="noopener">
-                  Terms of Use
-                </Link>
-                .
-              </label>
-            </div>
-            {consentError ? (
-              <p id="order-consent-error" className="field-error" role="alert">
-                {consentError}
-              </p>
-            ) : null}
-            <fieldset className="mt-6 rounded-xl border-2 border-brand p-4" data-credit-check>
-              <legend className="px-1 font-semibold text-ink">Credit check</legend>
-              <p className="text-ink">Before we continue with your order, we will need to initiate a credit check. Is that OK?</p>
-              <div className="mt-3 flex gap-3">
-                <input
-                  id="order-credit-consent"
-                  type="checkbox"
-                  className="field-check mt-0.5"
-                  checked={creditCheck.consent}
-                  onChange={(e) => setCreditCheck({ ...creditCheck, consent: e.target.checked })}
-                  aria-invalid={Boolean(creditErrors.consent)}
-                  aria-describedby={creditErrors.consent ? "order-credit-consent-error" : undefined}
-                />
-                <label htmlFor="order-credit-consent" className="text-sm text-ink">
-                  Yes, I agree to a credit check for this order. My date of birth and Social Security number are used only for this credit check.
-                </label>
-              </div>
-              {creditErrors.consent ? (
-                <p id="order-credit-consent-error" className="field-error" role="alert">
-                  {creditErrors.consent}
-                </p>
-              ) : null}
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <Field label="Date of birth (MM/DD/YYYY)" error={creditErrors.dateOfBirth}>
+          <form onSubmit={submitDetails} noValidate className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="min-w-0">
+              <StepHeading ref={headingRef}>Your Details</StepHeading>
+              <p className="mt-2 text-ink-muted">Entering your information allows us to communicate with you about your order and set up your service.</p>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <Field label="First name" error={customerErrors.firstName}>
+                  {(p) => <input {...p} autoComplete="given-name" maxLength={40} value={customer.firstName} onChange={(e) => setCustomer({ ...customer, firstName: e.target.value })} />}
+                </Field>
+                <Field label="Last name" error={customerErrors.lastName}>
+                  {(p) => <input {...p} autoComplete="family-name" maxLength={40} value={customer.lastName} onChange={(e) => setCustomer({ ...customer, lastName: e.target.value })} />}
+                </Field>
+                <Field label="Phone number" error={customerErrors.phone} className="sm:col-span-2">
+                  {(p) => <input {...p} type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} value={customer.phone} onChange={(e) => setCustomer({ ...customer, phone: e.target.value })} />}
+                </Field>
+                <Field label="Email address" error={customerErrors.email}>
+                  {(p) => <input {...p} type="email" autoComplete="email" maxLength={254} value={customer.email} onChange={(e) => setCustomer({ ...customer, email: e.target.value })} />}
+                </Field>
+                <Field label="Confirm email address" error={customerErrors.confirmEmail}>
                   {(p) => (
                     <input
                       {...p}
-                      inputMode="numeric"
-                      autoComplete="bday"
-                      placeholder="mm/dd/yyyy"
-                      maxLength={10}
-                      value={creditCheck.dateOfBirth}
-                      onChange={(e) => {
-                        const d = e.target.value.replace(/\D/g, "").slice(0, 8);
-                        setCreditCheck({ ...creditCheck, dateOfBirth: [d.slice(0, 2), d.slice(2, 4), d.slice(4)].filter(Boolean).join("/") });
-                      }}
+                      type="email"
+                      autoComplete="email"
+                      maxLength={254}
+                      value={customer.confirmEmail}
+                      onChange={(e) => setCustomer({ ...customer, confirmEmail: e.target.value })}
+                      onPaste={(e) => e.preventDefault()}
                     />
                   )}
                 </Field>
-                <Field label="Social Security number" error={creditErrors.ssn}>
-                  {(p) => (
-                    <div className="flex gap-2">
+              </div>
+              <RadioGroup
+                legend="Billing language"
+                name="billingLanguage"
+                value={customer.billingLanguage}
+                error={customerErrors.billingLanguage}
+                options={[
+                  { value: "english", label: "English" },
+                  { value: "spanish", label: "Spanish" },
+                ]}
+                onChange={(v) => setCustomer({ ...customer, billingLanguage: v as CustomerInput["billingLanguage"] })}
+              />
+              <div className="mt-6 flex gap-3">
+                <input id="order-contact" type="checkbox" className="field-check mt-0.5" checked={customer.contactByPhone} onChange={(e) => setCustomer({ ...customer, contactByPhone: e.target.checked })} />
+                <label htmlFor="order-contact" className="text-sm text-ink">
+                  Optional: you may contact me by phone or text with information about my services, such as installation and repair appointments, billing and account
+                  information, and customer satisfaction inquiries.
+                </label>
+              </div>
+              <div className="mt-4 flex gap-3">
+                <input id="order-consent" type="checkbox" className="field-check mt-0.5" checked={consent} onChange={(e) => setConsent(e.target.checked)} aria-invalid={Boolean(consentError)} aria-describedby={consentError ? "order-consent-error" : undefined} />
+                <label htmlFor="order-consent" className="text-sm text-ink">
+                  I confirm that the details above are correct and agree to be contacted by phone or email about this order request. I have read the{" "}
+                  <Link href="/privacy" className="link" target="_blank" rel="noopener">
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/terms" className="link" target="_blank" rel="noopener">
+                    Terms of Use
+                  </Link>
+                  .
+                </label>
+              </div>
+              {consentError ? (
+                <p id="order-consent-error" className="field-error" role="alert">
+                  {consentError}
+                </p>
+              ) : null}
+              <fieldset className="mt-6 rounded-xl border-2 border-brand p-4" data-credit-check>
+                <legend className="px-1 font-semibold text-ink">Credit check</legend>
+                <p className="text-ink">Before we continue with your order, we will need to initiate a credit check. Is that OK?</p>
+                <div className="mt-3 flex gap-3">
+                  <input
+                    id="order-credit-consent"
+                    type="checkbox"
+                    className="field-check mt-0.5"
+                    checked={creditCheck.consent}
+                    onChange={(e) => setCreditCheck({ ...creditCheck, consent: e.target.checked })}
+                    aria-invalid={Boolean(creditErrors.consent)}
+                    aria-describedby={creditErrors.consent ? "order-credit-consent-error" : undefined}
+                  />
+                  <label htmlFor="order-credit-consent" className="text-sm text-ink">
+                    Yes, I agree to a credit check for this order. My date of birth and Social Security number are used only for this credit check.
+                  </label>
+                </div>
+                {creditErrors.consent ? (
+                  <p id="order-credit-consent-error" className="field-error" role="alert">
+                    {creditErrors.consent}
+                  </p>
+                ) : null}
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <Field label="Date of birth (MM/DD/YYYY)" error={creditErrors.dateOfBirth}>
+                    {(p) => (
                       <input
                         {...p}
-                        type={showSsn ? "text" : "password"}
                         inputMode="numeric"
-                        autoComplete="off"
-                        placeholder="###-##-####"
-                        maxLength={11}
-                        value={creditCheck.ssn}
+                        autoComplete="bday"
+                        placeholder="mm/dd/yyyy"
+                        maxLength={10}
+                        value={creditCheck.dateOfBirth}
                         onChange={(e) => {
-                          const d = e.target.value.replace(/\D/g, "").slice(0, 9);
-                          setCreditCheck({ ...creditCheck, ssn: [d.slice(0, 3), d.slice(3, 5), d.slice(5)].filter(Boolean).join("-") });
+                          const d = e.target.value.replace(/\D/g, "").slice(0, 8);
+                          setCreditCheck({ ...creditCheck, dateOfBirth: [d.slice(0, 2), d.slice(2, 4), d.slice(4)].filter(Boolean).join("/") });
                         }}
                       />
-                      <button type="button" className="btn btn-ghost shrink-0" onClick={() => setShowSsn((v) => !v)} aria-pressed={showSsn}>
-                        {showSsn ? "Hide" : "Show"}
-                      </button>
-                    </div>
-                  )}
-                </Field>
+                    )}
+                  </Field>
+                  <Field label="Social Security number" error={creditErrors.ssn}>
+                    {(p) => (
+                      <div className="flex gap-2">
+                        <input
+                          {...p}
+                          type={showSsn ? "text" : "password"}
+                          inputMode="numeric"
+                          autoComplete="off"
+                          placeholder="###-##-####"
+                          maxLength={11}
+                          value={creditCheck.ssn}
+                          onChange={(e) => {
+                            const d = e.target.value.replace(/\D/g, "").slice(0, 9);
+                            setCreditCheck({ ...creditCheck, ssn: [d.slice(0, 3), d.slice(3, 5), d.slice(5)].filter(Boolean).join("-") });
+                          }}
+                        />
+                        <button type="button" className="btn btn-ghost shrink-0" onClick={() => setShowSsn((v) => !v)} aria-pressed={showSsn}>
+                          {showSsn ? "Hide" : "Show"}
+                        </button>
+                      </div>
+                    )}
+                  </Field>
+                </div>
+                <p className="field-hint mt-3">Sent securely with your order request and not stored on this website. We never ask for card or bank details here.</p>
+              </fieldset>
+              <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
+                <button type="button" className="btn btn-ghost" onClick={() => setStep("quote")}>
+                  Back
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Review Order Request
+                </button>
               </div>
-              <p className="field-hint mt-3">Sent securely with your order request and not stored on this website. We never ask for card or bank details here.</p>
-            </fieldset>
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
-              <button type="button" className="btn btn-ghost" onClick={() => setStep("quote")}>
-                Back
-              </button>
-              <button type="submit" className="btn btn-primary">
-                Review Order Request
-              </button>
+              <div className="mt-6 rounded-xl bg-surface-alt p-4 text-sm text-ink" data-next-steps>
+                <p className="font-semibold">After the credit check, a specialist completes these with you:</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5">
+                  <li>Billing address</li>
+                  <li>Terms</li>
+                  <li>Installation scheduling</li>
+                  <li>Account security</li>
+                  <li>AutoPay payment setup</li>
+                </ul>
+              </div>
             </div>
+            {quote && plan ? (
+              <aside className="lg:sticky lg:top-28 lg:self-start" aria-labelledby="order-cart-title" data-order-cart>
+                <div className="rounded-xl border border-border p-4">
+                  <h3 id="order-cart-title" className="text-lg font-bold text-ink">
+                    Shopping Cart
+                  </h3>
+                  <p className="mt-1 text-sm text-ink-muted">{plan.title}</p>
+                  <QuoteTable quote={quote} compact />
+                </div>
+              </aside>
+            ) : null}
           </form>
         ) : null}
 
