@@ -182,7 +182,7 @@ async function toQuote(page: Page, total: string) {
 
 async function details(page: Page, email = PERSON.email) {
   await page.getByRole("button", { name: "Continue" }).click();
-  await expect(page.getByRole("heading", { name: "Your Details" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Personal Information" })).toBeVisible();
   await page.getByLabel("First name").fill(PERSON.first);
   await page.getByLabel("Last name").fill(PERSON.last);
   await page.getByLabel("Phone number").fill(PERSON.phone);
@@ -427,7 +427,7 @@ test("Rejected email: the portal's refusal is explained on the same screen, then
   await toQuote(page, "$55.00");
   await details(page, "rejected@example.com");
   await submit(page);
-  await expect(page.getByRole("heading", { name: "Your Details" })).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByRole("heading", { name: "Personal Information" })).toBeVisible({ timeout: 20_000 });
   await expect(page.getByText("This email address was not accepted. Please enter a working email address that can receive mail.")).toBeVisible();
   await expect(page.locator("[data-order-reference]")).toHaveCount(0);
   await page.getByLabel("Email address", { exact: true }).fill(PERSON.email);
@@ -450,7 +450,7 @@ test("Confirm email must match before the review", async ({ page }) => {
   await page.getByLabel("Confirm email address").fill("other@example.com");
   await page.getByRole("button", { name: "Review Order Request" }).click();
   await expect(page.getByText("The email addresses do not match.")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Your Details" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Personal Information" })).toBeVisible();
 });
 
 test("Address needs a unit: asked on the address step, then the plans", async ({ page }) => {

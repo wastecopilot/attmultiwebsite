@@ -47,7 +47,8 @@ const STEP_INDEX: Partial<Record<Step, number>> = { address: 0, plans: 1, option
 const WORK_STEP: Record<Work, number> = { plans: 0, options: 1, quote: 2, submit: 5 };
 const EMPTY_ADDRESS: AddressInput = { street: "", unit: "", city: "", state: "", zip: "" };
 const EMPTY_CREDIT_CHECK: CreditCheckInput = { dateOfBirth: "", ssn: "", consent: false };
-const EMPTY_CUSTOMER: CustomerInput = { firstName: "", lastName: "", phone: "", email: "", confirmEmail: "", billingLanguage: "", contactByPhone: false };
+// English is pre-selected for billing, as on the portal's Personal Information page.
+const EMPTY_CUSTOMER: CustomerInput = { firstName: "", lastName: "", phone: "", email: "", confirmEmail: "", billingLanguage: "english", contactByPhone: false };
 
 const ADDRESS_NOTICE = {
   not_found: "We could not confirm this service address. Please check the street address and ZIP code.",
@@ -605,7 +606,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         {step === "details" ? (
           <form onSubmit={submitDetails} noValidate className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
             <div className="min-w-0">
-              <StepHeading ref={headingRef}>Your Details</StepHeading>
+              <StepHeading ref={headingRef}>Personal Information</StepHeading>
               <p className="mt-2 text-ink-muted">Entering your information allows us to communicate with you about your order and set up your service.</p>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <Field label="First name" error={customerErrors.firstName}>
@@ -743,14 +744,14 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                   Review Order Request
                 </button>
               </div>
-              <div className="mt-6 rounded-xl bg-surface-alt p-4 text-sm text-ink" data-next-steps>
-                <p className="font-semibold">After the credit check, a specialist completes these with you:</p>
-                <ul className="mt-2 list-disc space-y-1 pl-5">
-                  <li>Billing address</li>
-                  <li>Terms</li>
-                  <li>Installation scheduling</li>
-                  <li>Account security</li>
-                  <li>AutoPay payment setup</li>
+              <div className="mt-6" data-next-steps>
+                <p className="text-sm text-ink-muted">After the credit check, a specialist completes these sections with you:</p>
+                <ul className="mt-2 grid gap-2">
+                  {["Billing Address", "Terms", "Scheduling", "Account Security", "ABP - AutoPay Option"].map((t) => (
+                    <li key={t} className="rounded-lg bg-surface-alt px-4 py-3 text-lg text-brand-strong">
+                      {t}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
