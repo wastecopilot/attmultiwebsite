@@ -23,7 +23,7 @@ const SSN_VALUE_RE = /(?<!\d)\d{3}[- ]\d{2}[- ]\d{4}(?!\d)|(?<!\d)\d{9}(?!\d)/;
 const DATE_VALUE_RE = /(?<!\d)(0?[1-9]|1[0-2])[/.-](0?[1-9]|[12]\d|3[01])[/.-](19|20)?\d{2}(?!\d)/;
 const CARD_CANDIDATE_RE = /(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)/g;
 /** Strictly formatted fields that are validated on their own (and would trip the value patterns). */
-const VALUE_SCAN_SKIP = new Set(["phone", "zip", "email", "confirmEmail", "requestId", "quoteJobId", "plansJobId", "jobId"]);
+const VALUE_SCAN_SKIP = new Set(["phone", "zip", "email", "confirmEmail", "requestId", "quoteJobId", "plansJobId", "questionsJobId", "jobId"]);
 
 function luhn(digits: string): boolean {
   let sum = 0;
@@ -171,6 +171,13 @@ export function validOptionAnswers(raw: unknown): raw is OptionAnswers {
         /^[a-z][a-z0-9_]{1,40}$/.test(k) && (typeof v === "boolean" || (typeof v === "string" && v.length > 0 && v.length <= 200)),
     )
   );
+}
+
+/** Account Validation answers: question key (q1, q2, ...) -> the choice picked. order-service accepts only offered choices. */
+export function validIdentityAnswers(raw: unknown): raw is Record<string, string> {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return false;
+  const entries = Object.entries(raw);
+  return entries.length > 0 && entries.length <= 20 && entries.every(([k, v]) => /^q\d{1,2}$/.test(k) && typeof v === "string" && v.length > 0 && v.length <= 200);
 }
 
 export const isRequestId = (s: unknown): s is string => typeof s === "string" && /^[A-Za-z0-9_-]{16,80}$/.test(s);

@@ -6,7 +6,7 @@ import type { Offer } from "@/data/offer-types";
 import { AsOf, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
 import { PhoneLink } from "@/components/PhoneLink";
 import { track } from "@/lib/analytics";
-import type { ChosenOption, Expected, OptionGroup, OrderOutcome, QuoteLine } from "@/lib/order/outcome";
+import type { ChosenOption, Expected, IdentityQuestion, OptionGroup, OrderOutcome, QuoteLine } from "@/lib/order/outcome";
 import { amount } from "@/lib/order/price";
 import {
   US_STATES,
@@ -21,8 +21,10 @@ import {
 } from "@/lib/order/validation";
 import { newRequestId, startJob, waitForJob } from "./order-api";
 
-type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "working" | "done" | "stop" | "not_online";
-type Work = "plans" | "options" | "quote" | "submit";
+type Step = "address" | "plans" | "options" | "quote" | "details" | "review" | "verify" | "credit" | "working" | "done" | "stop" | "not_online";
+type Work = "plans" | "options" | "quote" | "submit" | "verify";
+/** The portal's Credit Check Message, as the automation read it. */
+type Credit = { result: "analyst_review" | "approved" | "other"; reference: string; hours: string };
 type Quote = { jobId: string; total: string; attComPrice: string; lines: QuoteLine[]; included: string[]; chosen: ChosenOption[]; orderId: string };
 /** Screens that end the online flow: the visitor is asked to call. */
 type Stop = { kind: "failed"; retryable: boolean; retry?: Work } | { kind: "unrequested" } | { kind: "mismatch" } | { kind: "no_service" };
@@ -42,9 +44,11 @@ interface OrderFlowProps {
   timeouts: { quoteSeconds: number; handoffSeconds: number };
 }
 
-const STEPS = ["Address", "Plans", "Options", "Your quote", "Your details", "Review"] as const;
-const STEP_INDEX: Partial<Record<Step, number>> = { address: 0, plans: 1, options: 2, quote: 3, details: 4, review: 5 };
-const WORK_STEP: Record<Work, number> = { plans: 0, options: 1, quote: 2, submit: 5 };
+const STEPS = ["Address", "Plans", "Options", "Your quote", "Your details", "Review", "Credit check"] as const;
+const STEP_INDEX: Partial<Record<Step, number>> = { address: 0, plans: 1, options: 2, quote: 3, details: 4, review: 5, verify: 6, credit: 6 };
+const WORK_STEP: Record<Work, number> = { plans: 0, options: 1, quote: 2, submit: 6, verify: 6 };
+/** The portal's checkout sections after the credit check, listed as on its page. */
+const LATER_SECTIONS = ["Billing Address", "Terms", "Scheduling", "Account Security", "ABP - AutoPay Option"] as const;
 const EMPTY_ADDRESS: AddressInput = { street: "", unit: "", city: "", state: "", zip: "" };
 const EMPTY_CREDIT_CHECK: CreditCheckInput = { dateOfBirth: "", ssn: "", consent: false };
 // English is pre-selected for billing, as on the portal's Personal Information page.
@@ -61,7 +65,9 @@ const WORK_TEXT: Record<Work, { title: string; text: string; seconds: number }> 
   plans: { title: "Checking the Plans at Your Address", text: "This usually takes less than a minute. Please keep this page open.", seconds: 45 },
   options: { title: "Getting the Options for Your Plan", text: "This usually takes less than a minute. Please keep this page open.", seconds: 30 },
   quote: { title: "Preparing Your Quote", text: "This usually takes less than a minute. Please keep this page open.", seconds: 40 },
-  submit: { title: "Sending Your Order Request", text: "This usually takes less than a minute. Please keep this page open.", seconds: 25 },
+  // The portal's own wording while it runs the credit check.
+  submit: { title: "Verifying Your Information", text: "Thank you for your patience. We're almost there. This can take a minute or two; please keep this page open.", seconds: 90 },
+  verify: { title: "Verifying Your Information", text: "Thank you for your patience. We're almost there. Please keep this page open.", seconds: 60 },
 };
 
 /** An option group where AT&T offers a single choice at no charge (e.g. equipment, installation): no question to ask. */
@@ -83,8 +89,9 @@ function showPlanInUrl(offerId: string) {
 
 /**
  * The online order flow, mirroring the AT&T partner portal: Address → Plans at that address → Options →
- * Your quote (the portal cart) → Your details → Review → reference. Plans, prices, options and the cart
- * are only ever the portal's own answers; every failure ends on an honest "please call" screen. No
+ * Your quote (the portal cart) → Personal Information → Review → credit check (the portal's Account
+ * Validation questions, then its Credit Check Message). Plans, prices, options, the cart, the questions and
+ * the credit answer are only ever the portal's own; every failure ends on an honest "please call" screen. No
  * personal data is kept outside this component's state.
  */
 export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline, source, onlineAvailable, timeouts }: OrderFlowProps) {
@@ -116,6 +123,12 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const [consentError, setConsentError] = useState("");
   const [reference, setReference] = useState("");
   const [orderId, setOrderId] = useState("");
+  // AT&T's Account Validation questions and the customer's answers: kept only until the portal answers.
+  const [questions, setQuestions] = useState<IdentityQuestion[]>([]);
+  const [questionsJobId, setQuestionsJobId] = useState("");
+  const [identityAnswers, setIdentityAnswers] = useState<Record<string, string>>({});
+  const [identityError, setIdentityError] = useState("");
+  const [credit, setCredit] = useState<Credit | null>(null);
   const [stop, setStop] = useState<Stop | null>(null);
   const [retried, setRetried] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -162,7 +175,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const run = async (kind: Work, body: unknown, expected: Expected, seconds: number): Promise<{ jobId: string; outcome: OrderOutcome } | null> => {
     setWork(kind);
     setStep("working");
-    const started = await startJob(kind === "submit" ? "submit" : kind === "plans" ? "plans" : "quote", body);
+    const started = await startJob(kind === "options" ? "quote" : kind, body);
     if (started.kind !== "started") {
       fail({ kind: "failed", retryable: started.kind === "unavailable", retry: kind }, started.kind === "rejected" ? "rejected" : "unavailable");
       return null;
@@ -171,7 +184,8 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
     const outcome = await waitForJob(started.jobId, expected, seconds, abortRef.current.signal);
     if (outcome === "aborted") return null;
     if (outcome === "timeout") {
-      fail({ kind: "failed", retryable: kind !== "submit", retry: kind }, "page_timeout");
+      // A submission or answers may still be running at AT&T: never start them again from here.
+      fail({ kind: "failed", retryable: kind !== "submit" && kind !== "verify", retry: kind }, "page_timeout");
       return null;
     }
     return { jobId: started.jobId, outcome };
@@ -337,12 +351,39 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
     setStep("review");
   };
 
+  /** The credit-check outcomes of a submission or of the answers; false for any other screen. */
+  const handleCreditOutcome = (jobId: string, outcome: OrderOutcome): boolean => {
+    if (outcome.screen === "identity") {
+      setCreditCheck(EMPTY_CREDIT_CHECK); // AT&T has them now; not kept on this page
+      setQuestions(outcome.questions);
+      setQuestionsJobId(jobId);
+      setIdentityAnswers({});
+      setIdentityError("");
+      if (outcome.orderId) setOrderId(outcome.orderId);
+      track("order_identity_questions", { offer_id: offerId, value, questions_count: outcome.questions.length });
+      setStep("verify");
+      return true;
+    }
+    if (outcome.screen === "credit") {
+      setCreditCheck(EMPTY_CREDIT_CHECK);
+      setQuestions([]);
+      setIdentityAnswers({});
+      setCredit({ result: outcome.result, reference: outcome.reference, hours: outcome.hours });
+      setOrderId(outcome.orderId || quote?.orderId || "");
+      track("order_credit_check", { offer_id: offerId, value, result: outcome.result });
+      setStep("credit");
+      return true;
+    }
+    return false;
+  };
+
   const submitOrder = async () => {
     if (!quote) return;
     track("order_submit", { offer_id: offerId, value: amount(quote.total) });
     const res = await run("submit", { requestId: newRequestId(), quoteJobId: quote.jobId, customer, creditCheck, consent: true }, { offerId: plan?.id, zip: address.zip, options: { ...autoAnswers, ...answers } }, timeouts.handoffSeconds);
     if (!res) return;
     const { outcome } = res;
+    if (handleCreditOutcome(res.jobId, outcome)) return;
     switch (outcome.screen) {
       case "done":
         setCreditCheck(EMPTY_CREDIT_CHECK);
@@ -372,6 +413,22 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
     }
   };
 
+  // ------------------------------------------------------------------ credit check: Account Validation
+  const submitAnswers = async (e: FormEvent) => {
+    e.preventDefault();
+    if (questions.some((q) => !identityAnswers[q.key])) {
+      setIdentityError("Please answer each question.");
+      return;
+    }
+    setIdentityError("");
+    const answers = Object.fromEntries(questions.map((q) => [q.key, identityAnswers[q.key]]));
+    const res = await run("verify", { requestId: newRequestId(), questionsJobId, answers }, {}, timeouts.handoffSeconds);
+    if (!res) return;
+    if (handleCreditOutcome(res.jobId, res.outcome)) return;
+    setIdentityAnswers({});
+    return fail({ kind: "failed", retryable: false }, res.outcome.screen === "failed" ? res.outcome.reason : "unexpected_screen");
+  };
+
   const retry = () => {
     if (!stop || stop.kind !== "failed" || !stop.retry) return;
     setRetried(true);
@@ -379,6 +436,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
     if (stop.retry === "plans") void findPlansFor(address);
     else if (stop.retry === "options") void getOptions();
     else if (stop.retry === "quote") void getQuote(answers);
+    else if (stop.retry === "verify") setStep("verify"); // the answers never reached AT&T; they are still filled in
     else void submitOrder();
   };
 
@@ -746,16 +804,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                   Review Order Request
                 </button>
               </div>
-              <div className="mt-6" data-next-steps>
-                <p className="text-sm text-ink-muted">After the credit check, a specialist completes these sections with you:</p>
-                <ul className="mt-2 grid gap-2">
-                  {["Billing Address", "Terms", "Scheduling", "Account Security", "ABP - AutoPay Option"].map((t) => (
-                    <li key={t} className="rounded-lg bg-surface-alt px-4 py-3 text-lg text-brand-strong">
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <LaterSections />
             </div>
             {quote && plan ? (
               <aside className="lg:sticky lg:top-28 lg:self-start" aria-labelledby="order-cart-title" data-order-cart>
@@ -810,7 +859,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
               </Summary>
             </dl>
             <QuoteTable quote={quote} compact />
-            <p className="mt-4 text-sm text-ink-muted">A specialist completes the credit check and payment with you before your order is placed.</p>
+            <p className="mt-4 text-sm text-ink-muted">When you submit, your details go to AT&amp;T and the credit check runs. This can take a minute or two.</p>
             <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
               <button type="button" className="btn btn-ghost" onClick={() => setStep("details")}>
                 Back
@@ -822,6 +871,91 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
           </div>
         ) : null}
 
+        {step === "verify" ? (
+          <form onSubmit={submitAnswers} noValidate data-account-validation>
+            <StepHeading ref={headingRef}>Account Validation</StepHeading>
+            <p className="mt-2 text-ink-muted">To confirm your identity, AT&amp;T asks these questions from your credit file. Choose one answer for each question.</p>
+            {orderId ? (
+              <p className="mt-2 text-ink" data-order-id>
+                Order ID: <span className="font-bold">{orderId}</span>
+              </p>
+            ) : null}
+            <div className="mt-5 grid gap-4">
+              {questions.map((q) => (
+                <Field key={q.key} label={q.question} error={identityError && !identityAnswers[q.key] ? "Please choose an answer." : undefined}>
+                  {(p) => (
+                    <select {...p} value={identityAnswers[q.key] ?? ""} onChange={(e) => setIdentityAnswers((a) => ({ ...a, [q.key]: e.target.value }))}>
+                      <option value="">Please Select One</option>
+                      {q.choices.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </Field>
+              ))}
+            </div>
+            {identityError ? (
+              <p className="field-error" role="alert">
+                {identityError}
+              </p>
+            ) : null}
+            <div className="mt-6">
+              <button type="submit" className="btn btn-primary w-full sm:w-auto">
+                Continue
+              </button>
+            </div>
+            <LaterSections />
+          </form>
+        ) : null}
+
+        {step === "credit" && credit ? (
+          <div role="status" data-credit-result={credit.result}>
+            <StepHeading ref={headingRef}>Credit Check Message</StepHeading>
+            {orderId ? (
+              <p className="mt-2 text-ink" data-order-id>
+                Order ID: <span className="font-bold">{orderId}</span>
+              </p>
+            ) : null}
+            {credit.result === "analyst_review" ? (
+              <>
+                <p className="mt-4 text-ink">This account requires analyst review.</p>
+                <p className="mt-1 text-ink">
+                  Please call <PhoneLink placement="order-credit-review-text" offerId={offerId} value={value} className="link font-semibold" /> to continue. We complete the review with
+                  AT&amp;T together with you.
+                </p>
+                {credit.hours ? <p className="mt-1 text-ink">Hours - {credit.hours}</p> : null}
+              </>
+            ) : credit.result === "approved" ? (
+              <>
+                <p className="mt-4 text-ink">Your credit check is complete.</p>
+                <p className="mt-1 text-ink">
+                  Please call <PhoneLink placement="order-credit-approved-text" offerId={offerId} value={value} className="link font-semibold" /> to complete Billing Address, Terms,
+                  Scheduling, Account Security and the AutoPay option.
+                </p>
+              </>
+            ) : (
+              <p className="mt-4 text-ink">
+                AT&amp;T could not complete the credit check online. Please call <PhoneLink placement="order-credit-other-text" offerId={offerId} value={value} className="link font-semibold" /> to
+                continue your order.
+              </p>
+            )}
+            <div className="mt-4 rounded-xl bg-surface-alt p-4 text-ink" data-authentication-data>
+              <p className="font-semibold">Authentication Data</p>
+              {credit.reference ? <p data-credit-reference>Reference #: {credit.reference}</p> : null}
+              <p>
+                Name: {customer.firstName} {customer.lastName}
+              </p>
+              <p>Phone: {customer.phone}</p>
+            </div>
+            <div className="mt-6">
+              <PhoneLink placement="order-credit" offerId={offerId} value={value} className="btn btn-primary" label="Call Now" />
+            </div>
+            <LaterSections />
+          </div>
+        ) : null}
+
         {step === "done" ? (
           <div role="status">
             <StepHeading ref={headingRef}>Thank You. Your Order Request Has Been Received.</StepHeading>
@@ -829,7 +963,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
             <p className="mt-1 text-3xl font-bold tracking-wide text-ink" data-order-reference={reference} data-order-id={orderId || undefined}>
               {orderId || reference}
             </p>
-            <p className="mt-4 text-ink">A specialist will contact you to complete the credit check and payment. Please keep your reference number for your records.</p>
+            <p className="mt-4 text-ink">We will contact you to complete your order. Please keep your {orderId ? "Order ID" : "reference number"} for your records.</p>
             <div className="mt-6">
               <PhoneLink placement="order-done" offerId={offerId} value={value} className="btn btn-primary" label="Call Now" />
             </div>
@@ -888,6 +1022,19 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         ) : null}
       </div>
     </div>
+  );
+}
+
+/** The portal's later checkout sections, shown as on its page: they open after the credit check. */
+function LaterSections() {
+  return (
+    <ul className="mt-6 grid gap-2" data-next-steps aria-label="Next sections">
+      {LATER_SECTIONS.map((t) => (
+        <li key={t} className="rounded-lg bg-surface-alt px-4 py-3 text-lg text-brand-strong">
+          {t}
+        </li>
+      ))}
+    </ul>
   );
 }
 

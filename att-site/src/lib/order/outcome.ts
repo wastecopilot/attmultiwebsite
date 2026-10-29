@@ -35,6 +35,13 @@ export interface QuoteLine {
   charge: string;
 }
 
+/** One of AT&T's Account Validation questions (from the customer's credit file) and its choices. */
+export interface IdentityQuestion {
+  key: string;
+  question: string;
+  choices: string[];
+}
+
 export interface ChosenOption {
   group: string;
   choice: string;
@@ -57,6 +64,9 @@ export type OrderOutcome =
   | { screen: "no_service" }
   | { screen: "call"; reason: "unrequested" | "price_mismatch" | "not_online" }
   | { screen: "details"; fields: ("firstName" | "lastName" | "phone" | "email" | "dateOfBirth" | "ssn")[] }
+  | { screen: "identity"; questions: IdentityQuestion[]; orderId: string }
+  /** The portal's Credit Check Message: analyst review needed, approved (the next section opened) or anything else. */
+  | { screen: "credit"; result: "analyst_review" | "approved" | "other"; reference: string; hours: string; orderId: string }
   | { screen: "done"; reference: string; orderId: string }
   | { screen: "failed"; retryable: boolean; reason: string };
 
@@ -225,6 +235,28 @@ export function toOutcome(result: AutomationResult | undefined, expected: Expect
     case "invalid_customer_details": {
       const fields = [...new Set(list(data.fields).map((f) => CUSTOMER_FIELDS[str(f, 40) as keyof typeof CUSTOMER_FIELDS]).filter(Boolean))];
       return { screen: "details", fields: fields.length ? fields : ["email"] };
+    }
+    case "identity_questions": {
+      const raw = list(data.identity_questions).map(record);
+      const questions = raw
+        .map((q) => ({ key: str(q.key, 4), question: str(q.question, 300), choices: strings(q.choices, 200, 20) }))
+        .filter((q) => /^q\d{1,2}$/.test(q.key) && q.question && q.choices.length);
+      return questions.length && questions.length === raw.length && raw.length <= 20
+        ? { screen: "identity", questions, orderId: orderIdOf(data) }
+        : failed("questions_unreadable");
+    }
+    case "credit_check_done": {
+      const cc = record(data.credit_check);
+      const result = cc.outcome === "analyst_review" || cc.outcome === "approved" ? cc.outcome : "other";
+      const reference = str(cc.reference, 40);
+      const hours = str(cc.hours, 120);
+      return {
+        screen: "credit",
+        result,
+        reference: /^[A-Z0-9][A-Z0-9-]{5,39}$/i.test(reference) ? reference : "",
+        hours: /^[A-Za-z0-9 ,.:;&()-]*$/.test(hours) ? hours : "",
+        orderId: orderIdOf(data),
+      };
     }
     case "handoff_ready": {
       const reference = str(result.order_ref, 40);

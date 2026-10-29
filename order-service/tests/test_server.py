@@ -218,7 +218,7 @@ class ServiceTests(unittest.TestCase):
                                                                  "customer": {**CUSTOMER, "credit_check": credit}, "customer_confirmed": True})
             self.assertEqual(status, 202, started)
             result = self.wait(started["job_id"])
-        self.assertEqual(result["status"], "handoff_ready")
+        self.assertEqual(result["status"], "identity_questions")
         self.assertEqual(server.aoa.calls[-1]["customer"]["credit_check"], credit)
         joined = " ".join(logs.output) + json.dumps(result)
         for secret in ("001-01-0001", "01/15/1985"):
@@ -227,6 +227,50 @@ class ServiceTests(unittest.TestCase):
             text = f.read_text(encoding="utf-8")
             self.assertNotIn("001-01-0001", text)
             self.assertNotIn("01/15/1985", text)
+
+    def test_credit_check_questions_are_answered_on_the_same_order(self):
+        credit = {"consent": True, "date_of_birth": "01/15/1985", "ssn": "001-01-0001"}
+        quote_id = self.quote("req-av-0000000000001")
+        quote = self.wait(quote_id)
+        handoff = {"request_id": "req-av-0000000000002", "quote_job_id": quote_id,
+                   "customer": {**CUSTOMER, "credit_check": credit}, "customer_confirmed": True}
+        status, started = self.call("POST", "/v1/handoffs", handoff)
+        self.assertEqual(status, 202)
+        asked = self.wait(started["job_id"])
+        self.assertEqual(asked["status"], "identity_questions")
+        self.assertEqual([q["key"] for q in asked["data"]["identity_questions"]], ["q1", "q2"])
+        self.assertEqual(asked["data"]["cart_order_id"], "DSIX1")
+        self.assertEqual([p for p in Path(QUEUE).glob("*.json") if quote["order_ref"] in p.name], [])   # nothing for staff yet
+        # Submitting again does not start a second credit check.
+        status, again = self.call("POST", "/v1/handoffs", {**handoff, "request_id": "req-av-0000000000003"})
+        self.assertEqual((status, again["job_id"]), (202, started["job_id"]))
+        # Answers must be exactly the offered choices, for every question.
+        body = {"request_id": "req-av-0000000000004", "questions_job_id": started["job_id"],
+                "answers": {"q1": "TEST LENDER A", "q2": "NONE OF THE ABOVE"}}
+        for bad in ({"q1": "TEST LENDER A"}, {"q1": "TEST LENDER A", "q2": "$999"}, {"q1": "TEST LENDER A", "q2": "NONE OF THE ABOVE", "q3": "x"}):
+            status, resp = self.call("POST", "/v1/verifications", {**body, "answers": bad})
+            self.assertEqual((status, resp.get("fields")), (400, ["answers"]))
+        self.assertEqual(self.call("POST", "/v1/verifications", {**body, "questions_job_id": quote_id})[0], 404)
+        self.assertEqual(self.call("POST", "/v1/verifications", {**body, "answers": {"q1": "x", "card_number": "4111111111111111"}})[0], 422)
+        with self.assertLogs("order_service", level="INFO") as logs:
+            status, verify = self.call("POST", "/v1/verifications", body)
+            self.assertEqual(status, 202, verify)
+            result = self.wait(verify["job_id"])
+        self.assertEqual(result["status"], "credit_check_done")
+        self.assertEqual(result["data"]["credit_check"]["outcome"], "analyst_review")
+        self.assertEqual(server.aoa.calls[-1], {"order_ref": quote["order_ref"], "answers": body["answers"]})
+        self.assertNotIn("attspoc", json.dumps(result))
+        self.assertNotIn("TEST LENDER", " ".join(logs.output))
+        # The portal link goes to staff; no answers, SSN or date of birth with it.
+        files = [p for p in Path(QUEUE).glob("*.json") if quote["order_ref"] in p.name]
+        self.assertEqual(len(files), 1)
+        text = files[0].read_text(encoding="utf-8")
+        self.assertIn("attspoc.com", text)
+        for secret in ("TEST LENDER", "001-01-0001", "01/15/1985"):
+            self.assertNotIn(secret, text)
+        # The page takes one set of answers.
+        status, again = self.call("POST", "/v1/verifications", {**body, "request_id": "req-av-0000000000005"})
+        self.assertEqual((status, again["job_id"]), (202, verify["job_id"]))
 
     def test_capacity_limit(self):
         old, server.MAX_QUEUED = server.MAX_QUEUED, 0

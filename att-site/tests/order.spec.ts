@@ -29,6 +29,8 @@ const ORDER_EVENTS = [
   "order_quote_shown",
   "order_step_details",
   "order_submit",
+  "order_identity_questions",
+  "order_credit_check",
   "order_failed",
 ];
 const attComPrice = (id: string) => offers.find((o) => o.id === id)!.price!.amount;
@@ -210,8 +212,43 @@ async function expectDone(page: Page) {
   // The portal's Order ID is shown (our own reference stays on the element for support).
   await expect(page.locator("[data-order-reference]")).toHaveText(/^[A-Z]{2,8}\d{6,14}$/);
   await expect(page.locator("[data-order-reference]")).toHaveAttribute("data-order-reference", /^UW-[A-Z0-9]{8}$/);
-  await expect(page.getByText("A specialist will contact you to complete the credit check and payment.")).toBeVisible();
+  await expect(page.getByText("We will contact you to complete your order.")).toBeVisible();
   await expect(page.locator('a[data-phone-link="order-done"]')).toBeVisible();
+}
+
+const ORDER_ID = /Order ID: [A-Z]{2,8}\d{6,14}/;
+
+/** The credit check, as on the portal: AT&T's Account Validation questions (one answer each), then Continue. */
+async function answerAccountValidation(page: Page) {
+  await expect(page.getByRole("heading", { name: "Account Validation" })).toBeVisible({ timeout: 20_000 });
+  await expect(page.locator("[data-order-id]")).toHaveText(ORDER_ID);
+  const form = page.locator("[data-account-validation]");
+  await form.getByRole("button", { name: "Continue" }).click();
+  await expect(page.getByText("Please answer each question.")).toBeVisible();
+  const selects = form.locator("select");
+  await expect(selects).toHaveCount(2);
+  for (let i = 0; i < 2; i++) await selects.nth(i).selectOption({ index: i + 1 });
+  await form.getByRole("button", { name: "Continue" }).click();
+}
+
+/** The portal's Credit Check Message, with the Order ID, the call button and the sections that follow. */
+async function expectCreditMessage(page: Page, result: "analyst_review" | "approved" = "analyst_review") {
+  await expect(page.getByRole("heading", { name: "Credit Check Message" })).toBeVisible({ timeout: 20_000 });
+  const box = page.locator("[data-credit-result]");
+  await expect(box).toHaveAttribute("data-credit-result", result);
+  await expect(page.locator("[data-order-id]")).toHaveText(ORDER_ID);
+  if (result === "analyst_review") {
+    await expect(box).toContainText("This account requires analyst review.");
+    await expect(box).toContainText("Hours - M-F 9am-9pm ET, Sat 9am-8pm ET");
+    await expect(page.locator("[data-credit-reference]")).toHaveText("Reference #: U20260000000000001");
+  } else {
+    await expect(box).toContainText("Your credit check is complete.");
+  }
+  await expect(box).toContainText(`Name: ${PERSON.first} ${PERSON.last}`);
+  await expect(page.locator('a[data-phone-link="order-credit"]')).toBeVisible();
+  await expect(box).not.toContainText(/specialist/i);
+  await expect(page.locator("[data-order-reference]")).toHaveCount(0);
+  for (const section of ["Billing Address", "Terms", "Scheduling", "Account Security", "ABP - AutoPay Option"]) await expect(page.locator("[data-next-steps]")).toContainText(section);
 }
 
 /** An honest stop screen: Call Now present, no reference number, no total. */
@@ -261,11 +298,24 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
   await expect(page.getByText("AT&T Extended Wi-Fi")).toHaveCount(0);
   await details(page);
   await submit(page);
-  await expectDone(page);
+  await expect(page.getByRole("heading", { name: "Verifying Your Information" })).toBeVisible();
+  await answerAccountValidation(page);
+  await expectCreditMessage(page);
 
   const events = await dataLayerEvents(page);
   const order = events.map((e) => String(e.event)).filter((e) => ORDER_EVENTS.includes(e));
-  expect(order).toEqual(["order_click", "begin_order", "order_plans_shown", "order_options_chosen", "order_quote_started", "order_quote_shown", "order_step_details", "order_submit"]);
+  expect(order).toEqual([
+    "order_click",
+    "begin_order",
+    "order_plans_shown",
+    "order_options_chosen",
+    "order_quote_started",
+    "order_quote_shown",
+    "order_step_details",
+    "order_submit",
+    "order_identity_questions",
+    "order_credit_check",
+  ]);
   for (const e of events.filter((e) => ORDER_EVENTS.includes(String(e.event)))) {
     expect(e.offer_id).toBe("internet-air");
     expect(typeof e.value).toBe("number");
@@ -289,7 +339,7 @@ const FIBER: [string, string, string, string][] = [
   ["fiber-5000", "fiber-5000", "110", "$110.00"],
 ];
 for (const [offer, card, price, total] of FIBER) {
-  test(`Success: ${card} at the Atlanta test address, every step to the reference`, async ({ page }) => {
+  test(`Success: ${card} at the Atlanta test address, every step to the credit check`, async ({ page }) => {
     await prepare(page);
     await open(page, offer);
     await address(page, "atlanta");
@@ -309,9 +359,62 @@ for (const [offer, card, price, total] of FIBER) {
     await toQuote(page, total);
     await details(page);
     await submit(page);
-    await expectDone(page);
+    await answerAccountValidation(page);
+    await expectCreditMessage(page);
   });
 }
+
+test("Credit check passed: the complete message and the sections that follow", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page, "approved@example.com");
+  await submit(page);
+  await answerAccountValidation(page);
+  await expectCreditMessage(page, "approved");
+});
+
+test("Credit check without Account Validation questions goes straight to the message", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page, "noquestions@example.com");
+  await submit(page);
+  await expectCreditMessage(page);
+  await expect(page.getByRole("heading", { name: "Account Validation" })).toHaveCount(0);
+});
+
+test("If the portal stops before the credit check, the Order ID screen is shown", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page, "handoffready@example.com");
+  await submit(page);
+  await expectDone(page);
+});
+
+test("Account Validation answers: only q1, q2, ... with text values reach the automation", async ({ request }, info) => {
+  test.skip(isMobile(info), "API check runs once");
+  const post = (data: unknown) => request.post("/att/api/order/verify", { data, headers: { "Content-Type": "application/json" } });
+  const base = { requestId: "verify-req-000000000001", questionsJobId: "j".repeat(24), answers: { q1: "TEST LENDER A" } };
+  for (const bad of [{ ...base, answers: {} }, { ...base, answers: { ssn: "123-45-6789" } }, { ...base, answers: { q1: 5 } }, { ...base, extra: 1 }, { ...base, questionsJobId: "x" }]) {
+    expect((await post(bad)).status()).toBe(400);
+  }
+  // A well-formed answer for a job that asked nothing ends at order-service (404 there, unavailable here).
+  expect((await post(base)).status()).toBe(503);
+});
 
 test("Portal plans that att.com does not list (Internet 100) are hidden", async ({ page }) => {
   await prepare(page);
@@ -419,7 +522,7 @@ test("The $77 case: a cart total that differs from att.com (an unchosen paid add
   expect(names).not.toContain("order_quote_shown");
 });
 
-test("Rejected email: the portal's refusal is explained on the same screen, then the reference", async ({ page }) => {
+test("Rejected email: the portal's refusal is explained on the same screen, then the credit check", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
   await address(page, "hicksville");
@@ -436,7 +539,8 @@ test("Rejected email: the portal's refusal is explained on the same screen, then
   await page.getByLabel("Confirm email address").fill(PERSON.email);
   await page.getByRole("button", { name: "Review Order Request" }).click();
   await submit(page);
-  await expectDone(page);
+  await answerAccountValidation(page);
+  await expectCreditMessage(page);
 });
 
 test("Confirm email must match before the review", async ({ page }) => {

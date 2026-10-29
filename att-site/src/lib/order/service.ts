@@ -6,7 +6,8 @@
  *   ATTSPOC_SERVICE_URL        https base URL of order-service
  *   ATTSPOC_SERVICE_KEY        shared secret (same value as on order-service)
  *   ATTSPOC_QUOTE_TIMEOUT_S    how long the order page waits for plans, options or a quote (default 240)
- *   ATTSPOC_HANDOFF_TIMEOUT_S  how long it waits for a submission (default 240)
+ *   ATTSPOC_HANDOFF_TIMEOUT_S  how long it waits for a submission or the credit check (default 330: the
+ *                              automation itself stops after 300 s)
  */
 
 export interface AutomationResult {
@@ -19,7 +20,7 @@ export interface AutomationResult {
 
 export interface JobView {
   job_id: string;
-  kind: "plans" | "quote" | "handoff";
+  kind: "plans" | "quote" | "handoff" | "verify";
   state: "running" | "done";
   result?: AutomationResult;
 }
@@ -52,7 +53,7 @@ function seconds(name: string, fallback: number): number {
 /** Waiting limits handed to the order page (not secret). */
 export const orderTimeouts = () => ({
   quoteSeconds: seconds("ATTSPOC_QUOTE_TIMEOUT_S", 240),
-  handoffSeconds: seconds("ATTSPOC_HANDOFF_TIMEOUT_S", 240),
+  handoffSeconds: seconds("ATTSPOC_HANDOFF_TIMEOUT_S", 330),
 });
 
 async function call<T>(method: "GET" | "POST", path: string, body?: unknown): Promise<ServiceResponse<T>> {
@@ -82,5 +83,9 @@ export const startQuote = (body: { request_id: string; plans_job_id: string; pla
 
 export const startHandoff = (body: { request_id: string; quote_job_id: string; customer: Record<string, unknown>; customer_confirmed: true }) =>
   call<JobView>("POST", "/v1/handoffs", body);
+
+/** The customer's Account Validation answers (question key -> chosen answer), for the job that asked them. */
+export const startVerify = (body: { request_id: string; questions_job_id: string; answers: Record<string, string> }) =>
+  call<JobView>("POST", "/v1/verifications", body);
 
 export const getJob = (jobId: string) => call<JobView>("GET", `/v1/jobs/${encodeURIComponent(jobId)}`);

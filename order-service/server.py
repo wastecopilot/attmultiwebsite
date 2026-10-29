@@ -11,12 +11,18 @@ an HTTP server (standard library only) plus one asyncio event loop that runs the
     POST /v1/quotes            -> 202 {"job_id", "state"}      body: {request_id, plans_job_id, plan_name, options}
                                                                (or the older {request_id, service_address, products})
     POST /v1/handoffs          -> 202 {"job_id", "state"}      body: {request_id, quote_job_id, customer, customer_confirmed}
+    POST /v1/verifications     -> 202 {"job_id", "state"}      body: {request_id, questions_job_id, answers}
     GET  /v1/jobs/<job_id>     -> {"job_id", "kind", "state": "running" | "done", "result"?}
 
 A plans job lists the Internet plans at the address (nothing is added to the cart) and keeps that portal
 session open; quotes made from it reuse the session. A quote without an answer for every option group
 returns options_required with the portal's real option list; the next quote with the answers continues
 on the same Options page.
+
+A hand-off from the website carries the customer's credit-check details: the automation then runs AT&T's
+credit check and returns identity_questions (the portal's "Account Validation" questions from the credit
+file, its page kept open) or credit_check_done (the portal's answer). The customer's answers go to
+/v1/verifications, which continues on that page until the portal answers.
 
 Every /v1 call needs "Authorization: Bearer <ATTSPOC_SERVICE_KEY>".
 
@@ -80,7 +86,7 @@ SSN_VALUE_RE = re.compile(r"(?<!\d)\d{3}[- ]\d{2}[- ]\d{4}(?!\d)|(?<!\d)\d{9}(?!
 DATE_VALUE_RE = re.compile(r"(?<!\d)(0?[1-9]|1[0-2])[/.-](0?[1-9]|[12]\d|3[01])[/.-](19|20)?\d{2}(?!\d)")
 CARD_CANDIDATE_RE = re.compile(r"(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)")
 # Fields whose values are strictly formatted elsewhere (and would trip the value patterns).
-VALUE_SCAN_SKIP = {"phone", "zip_code", "email", "request_id", "quote_job_id", "plans_job_id", "order_ref"}
+VALUE_SCAN_SKIP = {"phone", "zip_code", "email", "request_id", "quote_job_id", "plans_job_id", "questions_job_id", "order_ref"}
 # Defence in depth: no string that could be a portal link or session id ever leaves in a public result.
 PORTAL_TEXT_RE = re.compile(r"attspoc|\(S\([a-z0-9]+\)\)", re.I)
 MAX_OPTION_ANSWERS = 12
@@ -88,6 +94,11 @@ MAX_OPTION_ANSWERS = 12
 # customer entered for AT&T's credit check, at exactly these two paths. Never logged or stored here; card and
 # bank details stay refused everywhere.
 CREDIT_CHECK_PATHS = frozenset({"customer.credit_check.date_of_birth", "customer.credit_check.ssn"})
+# The customer's Account Validation answers (choices the portal offered, checked against them before use).
+MAX_QUESTIONS = 20
+ANSWER_PATHS = frozenset(f"answers.q{i}" for i in range(1, MAX_QUESTIONS + 1))
+# Results after which a hand-off is not prepared again for the same quote.
+FINAL_HANDOFF_STATUSES = {"handoff_ready", "identity_questions", "credit_check_done"}
 
 
 def _luhn_ok(digits: str) -> bool:
@@ -165,7 +176,7 @@ def scrub_public(value: Any, keep_order_id: bool = False) -> Any:
 @dataclass
 class Job:
     id: str
-    kind: str                      # "plans" | "quote" | "handoff"
+    kind: str                      # "plans" | "quote" | "handoff" | "verify"
     request_id: str
     order_ref: str
     created: float = field(default_factory=time.time)
@@ -175,6 +186,7 @@ class Job:
     products: Optional[list] = None
     quote_job_id: Optional[str] = None       # handoffs: the quote they continue
     plans_job_id: Optional[str] = None       # quotes made from a plans job
+    questions_job_id: Optional[str] = None   # verifications: the job whose Account Validation questions they answer
 
     def view(self) -> dict:
         out = {"job_id": self.id, "kind": self.kind, "state": self.state}
@@ -212,6 +224,10 @@ class JobStore:
     def handoffs_for(self, quote_job_id: str) -> list[Job]:
         with self._lock:
             return [j for j in self._jobs.values() if j.kind == "handoff" and j.quote_job_id == quote_job_id]
+
+    def verifications_for(self, questions_job_id: str) -> list[Job]:
+        with self._lock:
+            return [j for j in self._jobs.values() if j.kind == "verify" and j.questions_job_id == questions_job_id]
 
     def running_for_order(self, order_ref: str) -> Optional[Job]:
         with self._lock:
@@ -253,7 +269,12 @@ class Runner:
 async def _run_job(job: Job, payload: dict) -> None:
     t0 = time.monotonic()
     try:
-        result = await (aoa.list_plans(payload) if job.kind == "plans" else aoa.process_att_order(payload))
+        if job.kind == "plans":
+            result = await aoa.list_plans(payload)
+        elif job.kind == "verify":
+            result = await aoa.answer_identity_questions(payload)
+        else:
+            result = await aoa.process_att_order(payload)
     except Exception as e:  # the automation's entry points never raise; guard anyway
         log.error("job %s %s raised %s", job.id, job.kind, type(e).__name__)
         result = {"status": "portal_error", "order_ref": job.order_ref, "message": "", "retryable": True, "data": {}}
@@ -261,7 +282,7 @@ async def _run_job(job: Job, payload: dict) -> None:
     handoff = result.pop("handoff", None)
     if handoff is not None:
         delivered = await asyncio.get_running_loop().run_in_executor(None, deliver_to_specialist, job, handoff)
-        if not delivered:
+        if not delivered and result.get("status") == "handoff_ready":
             # Nobody would follow up, so the website must not tell the customer that someone will.
             result = {**result, "status": "handoff_undelivered", "retryable": False}
     public = scrub_public(aoa.to_aria(result), keep_order_id=job.kind != "plans")
@@ -459,9 +480,9 @@ def _create_handoff(body: dict) -> Job:
         raise ApiError(404, "quote_not_found")
     if quote.state != "done" or (quote.result or {}).get("status") != "quote_ready":
         raise ApiError(409, "quote_not_ready")
-    # One hand-off per quote at a time; a successful one is final.
+    # One hand-off per quote at a time; a successful one (or one that ran the credit check) is final.
     for other in jobs.handoffs_for(quote.id):
-        if other.state == "running" or (other.result or {}).get("status") == "handoff_ready":
+        if other.state == "running" or (other.result or {}).get("status") in FINAL_HANDOFF_STATUSES:
             return other
     # Same order_ref, address and products as the quote, so the automation resumes the quoted portal session.
     payload = {"order_ref": quote.order_ref, "mode": "handoff", "customer_confirmed": True,
@@ -476,6 +497,46 @@ def _create_handoff(body: dict) -> Job:
     return job
 
 
+def create_verification(body: dict) -> Job:
+    with _create_lock:
+        return _create_verification(body)
+
+
+def _create_verification(body: dict) -> Job:
+    """The customer's answers to the Account Validation questions a hand-off (or an earlier verification)
+    returned. They continue that job's portal page, which takes one set of answers."""
+    _require_keys(body, {"request_id", "questions_job_id", "answers"})
+    request_id = _request_id(body)
+    existing = jobs.find_request("verify", request_id)
+    if existing:
+        return existing
+    asked = jobs.get(body["questions_job_id"]) if isinstance(body["questions_job_id"], str) else None
+    if asked is None or asked.kind not in ("handoff", "verify"):
+        raise ApiError(404, "questions_not_found")
+    if asked.state != "done" or (asked.result or {}).get("status") != "identity_questions":
+        raise ApiError(409, "questions_not_ready")
+    questions = (asked.result or {}).get("data", {}).get("identity_questions") or []
+    answers = body["answers"]
+    if (not isinstance(answers, dict) or not questions or len(questions) > MAX_QUESTIONS
+            or set(answers) != {q.get("key") for q in questions}
+            or any(answers[q["key"]] not in (q.get("choices") or []) for q in questions)):
+        raise ApiError(400, "invalid_request", fields=["answers"])
+    others = jobs.verifications_for(asked.id)
+    if others:
+        return others[0]
+    if jobs.running_for_order(asked.order_ref):
+        raise ApiError(409, "order_busy")
+    payload = {"order_ref": asked.order_ref, "answers": answers}
+    _validate_with_automation(payload, "IdentityAnswers")
+    _check_capacity()
+    job = Job(id=secrets.token_urlsafe(18), kind="verify", request_id=request_id, order_ref=asked.order_ref,
+              questions_job_id=asked.id)
+    jobs.add(job)
+    runner.start(job, payload)
+    log.info("job %s verification started (questions %s)", job.id, asked.id)
+    return job
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "order-service"
     sys_version = ""
@@ -483,7 +544,23 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt: str, *args: Any) -> None:  # no client IPs or query strings in the log
         pass
 
+    def _drain(self) -> None:
+        """Reads (and drops) a request body nothing has read, so a refusal reaches the client instead of a
+        connection reset. Bodies far over the limit are not read; the connection is closed instead."""
+        if self.command != "POST" or getattr(self, "_body_read", False):
+            return
+        self._body_read = True
+        try:
+            length = int(self.headers.get("Content-Length") or "0")
+        except ValueError:
+            length = -1
+        if 0 < length <= 4 * MAX_BODY_BYTES:
+            self.rfile.read(length)
+        elif length:
+            self.close_connection = True
+
     def _send(self, status: int, body: dict) -> None:
+        self._drain()
         data = json.dumps(body).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
@@ -508,6 +585,7 @@ class Handler(BaseHTTPRequestHandler):
             raise ApiError(400, "invalid_request")
         if length <= 0 or length > MAX_BODY_BYTES:
             raise ApiError(413 if length > MAX_BODY_BYTES else 400, "invalid_request")
+        self._body_read = True
         try:
             body = json.loads(self.rfile.read(length))
         except (json.JSONDecodeError, UnicodeDecodeError):
@@ -537,14 +615,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
-        if path not in ("/v1/plans", "/v1/quotes", "/v1/handoffs"):
+        if path not in ("/v1/plans", "/v1/quotes", "/v1/handoffs", "/v1/verifications"):
             return self._send(404, {"error": "not_found"})
         if not self._authorised():
             return self._send(401, {"error": "unauthorised"})
         jobs.purge()
         try:
-            body = self._json_body(CREDIT_CHECK_PATHS if path == "/v1/handoffs" else frozenset())
-            create = {"/v1/plans": create_plans, "/v1/quotes": create_quote, "/v1/handoffs": create_handoff}[path]
+            allowed = {"/v1/handoffs": CREDIT_CHECK_PATHS, "/v1/verifications": ANSWER_PATHS}.get(path, frozenset())
+            body = self._json_body(allowed)
+            create = {"/v1/plans": create_plans, "/v1/quotes": create_quote, "/v1/handoffs": create_handoff,
+                      "/v1/verifications": create_verification}[path]
             job = create(body)
         except ApiError as e:
             return self._send(e.status, e.body)

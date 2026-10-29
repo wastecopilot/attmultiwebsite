@@ -10,7 +10,7 @@ const POLL_MS = 2500;
 
 export type StartResult = { kind: "started"; jobId: string } | { kind: "unavailable" } | { kind: "rejected" };
 
-export async function startJob(path: "plans" | "quote" | "submit", body: unknown): Promise<StartResult> {
+export async function startJob(path: "plans" | "quote" | "submit" | "verify", body: unknown): Promise<StartResult> {
   try {
     const res = await fetch(`${API}/${path}`, {
       method: "POST",

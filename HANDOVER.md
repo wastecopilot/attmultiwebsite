@@ -194,12 +194,16 @@ page is not indexed, not in the sitemap and never cached. It works like the AT&T
 4. sees the quote: the portal cart line for line, shown only when its total equals the att.com price;
 5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and, in a
    "Credit check" section like the portal's, agrees to the credit check and enters date of birth and SSN (masked);
-6. reviews and submits.
+6. reviews and submits ("Verifying Your Information" while it runs, about one to two minutes);
+7. answers AT&T's **Account Validation** questions (from their credit file), when the portal asks them;
+8. sees the portal's **Credit Check Message** with the Order ID: for "This account requires analyst review",
+   the credit reference and Call Now; the later sections (Billing Address, Terms, Scheduling, Account
+   Security, ABP - AutoPay Option) are listed as on the portal.
 
-The automation then fills the portal's Personal Information page, including the two credit-check fields, and
-stops **before Continue**, so the credit check runs only when the specialist clicks Continue (OPEN_ITEMS O-33). A specialist
-receives it and completes the credit check, payment and submission with the customer. The visitor gets a
-reference number (for example `UW-7K3M9QX2`).
+The automation fills the portal's Personal Information page, including the two credit-check fields, clicks
+Continue, fills the Info Quality Check from the customer's details, enters the customer's Account Validation
+answers and stops at the Credit Check Message (OPEN_ITEMS O-33, O-34). A queue file with the portal link and
+the next task goes to staff (for analyst review: call the number on the portal's message with the customer).
 
 **Plan names and prices come only from att.com** (`src/data/offers.ts`, re-checked 28 Oct, see
 `research/att-com-verified.md`), on the marketing pages and the order page alike, each with its "Pricing as of"

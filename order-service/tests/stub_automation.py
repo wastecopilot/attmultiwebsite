@@ -27,6 +27,10 @@ AIR_GROUPS = [
 ]
 
 
+QUESTIONS = [{"key": "q1", "question": "TEST question: which test lender?", "choices": ["TEST LENDER A", "NONE OF THE ABOVE"]},
+             {"key": "q2", "question": "TEST question: which test amount?", "choices": ["$100 - $199", "NONE OF THE ABOVE"]}]
+
+
 def to_aria(result: dict) -> dict:
     return {k: v for k, v in result.items() if k not in _INTERNAL_RESULT_KEYS}
 
@@ -68,6 +72,21 @@ async def process_att_order(payload: dict) -> dict:
                     "data": {"product_type": "internet", "option_groups": AIR_GROUPS, "unanswered": ["autopay", "wifi_extender"],
                              "included_items": ["AT&T All-Fi Hub"], "cart_order_id": "DSIX1"}}
         return {**base, "status": "quote_ready", "retryable": False, "data": {"cart_order_id": "DSIX1", "cart_summary": cart}}
+    if payload["customer"].get("credit_check"):
+        # Website orders run the credit check: Account Validation questions (invented test wording).
+        return {**base, "status": "identity_questions", "retryable": False,
+                "data": {"cart_order_id": "DSIX1", "cart_summary": cart, "identity_questions": QUESTIONS}}
     return {**base, "status": "handoff_ready", "retryable": False, "data": {"cart_order_id": "DSIX1", "cart_summary": cart},
             "handoff": {"portal_url": "https://www.attspoc.com/e/(S(abc123))/oe/Checkout/Checkout.aspx",
                         "customer": payload["customer"], "tasks": ["Run the credit check"]}}
+
+
+async def answer_identity_questions(payload: dict) -> dict:
+    calls.append(payload)
+    await asyncio.sleep(0.2)
+    base = _base(payload)
+    return {**base, "status": "credit_check_done", "retryable": False,
+            "data": {"cart_order_id": "DSIX1", "credit_check": {"outcome": "analyst_review", "reference": "U20260000000000001",
+                                                               "hours": "M-F 9am-9pm ET, Sat 9am-8pm ET"}},
+            "handoff": {"portal_url": "https://www.attspoc.com/e/(S(abc123))/oe/Checkout/Checkout.aspx",
+                        "credit_check_outcome": "analyst_review", "tasks": ["Call the analyst line with the customer"]}}

@@ -130,9 +130,24 @@ One page of accordion panels, opened in order:
 2. Air: "Shipping & Billing Address"; Fiber: "Billing Address" and "Account Security".
 3. "Terms", "Scheduling", "ABP - AutoPay Option".
 
-The automation stops after the non-sensitive Personal Information fields and **never clicks Continue**, so no
-credit check is run and nothing is submitted. A specialist completes the credit check, addresses, terms,
-scheduling and payment.
+**After Continue (website orders, since 29 Oct; owner's manual run and recording of 29 Oct):**
+
+1. "Verifying your information... Thank you for your patience. We're almost there." (loading modal).
+2. Sometimes "Is the address below entered correctly?" (`#AddressPopup`, Yes = `..._AddressConfirmOkBtn`).
+3. **Info Quality Check** modal (`#qualityModal`, verified in saved HTML): "For your protection, we would like
+   to confirm some of your data. Please review the information below and press Next to continue". Empty
+   First Name *, Last Name *, Phone Number * (`..._txtFirstNameValidationCheck`, `..._txtLastNameValidationCheck`,
+   `..._txtPhoneQualityCheck`), "Service Address: <street>, <ZIP+4>", Close / Next (`..._btnQualityNext`).
+4. **Account Validation**: questions from the credit file, one dropdown each ("Please Select One", several
+   names or ranges, "NONE OF THE ABOVE"), e.g. the provider, monthly payment and term of an auto loan, the
+   provider of a bank card opened around a given month; Continue ("One moment please...").
+5. **Credit Check Message**: an orange note "If the review has not been completed within 30 minutes, the page
+   will timeout. Refresh", then e.g. "This account requires analyst review. Please call 866-371-8083 with the
+   Customer to continue. Hours - M-F 9am-9pm ET, Sat 9am-8pm ET", "Authentication Data: Reference #: U…, Name,
+   Phone", and Continue (in the recording, Continue showed the same message again while the review was open).
+   Below: Billing Address, Terms, Scheduling, Account Security, ABP - AutoPay Option (still closed).
+
+The automation stops at the Credit Check Message (or when Billing Address unlocks) and submits nothing.
 
 Validation seen on screen: "Enter valid phone number." (while typing), "Email is invalid. Please fix." (red
 envelope icon), and on 28 Oct "We were unable to verify your email, please confirm your entry before
