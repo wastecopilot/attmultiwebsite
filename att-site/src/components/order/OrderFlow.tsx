@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode, type Ref } from "react";
 import Link from "@/components/ui/AppLink";
 import type { Offer } from "@/data/offer-types";
-import { AsOf, Conditions, FinePrint, formatAsOf, Price } from "@/components/offers/OfferBits";
+import { AsOf, Conditions, FinePrint, Price } from "@/components/offers/OfferBits";
 import { PhoneLink } from "@/components/PhoneLink";
 import { track } from "@/lib/analytics";
 import type { ChosenOption, Expected, OptionGroup, OrderOutcome, QuoteLine } from "@/lib/order/outcome";
@@ -59,6 +59,9 @@ const WORK_TEXT: Record<Work, { title: string; text: string; seconds: number }> 
   quote: { title: "Preparing Your Quote", text: "This usually takes less than a minute. Please keep this page open.", seconds: 40 },
   submit: { title: "Sending Your Order Request", text: "This usually takes less than a minute. Please keep this page open.", seconds: 25 },
 };
+
+/** An option group where AT&T offers a single choice at no charge (e.g. equipment, installation): no question to ask. */
+const isFixed = (g: OptionGroup) => g.choices.length === 1 && g.choices[0].kind === "free";
 
 /** att.com's own AutoPay & paperless discount paragraph from the plan's fine print, shown with the AutoPay choice. */
 const autopayText = (offer: Offer) => offer.finePrint.split(/\n\n/).find((p) => /^auto ?pay & paperless bill discount/i.test(p.trim())) ?? "";
@@ -228,8 +231,12 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
         setIncluded(outcome.included);
         setAutoAnswers(outcome.autoAnswers);
         setHiddenAddOns(outcome.hiddenAddOns);
-        // Keep the visitor's earlier answers for groups that are still offered; nothing else is preselected.
-        setAnswers(Object.fromEntries(Object.entries(sentAnswers).filter(([k, v]) => outcome.groups.some((g) => g.key === k && g.choices.some((c) => c.title === v)))));
+        // Single-choice items are taken as they are (there is nothing to choose); earlier answers are kept for
+        // groups still offered; nothing else is preselected.
+        setAnswers({
+          ...Object.fromEntries(Object.entries(sentAnswers).filter(([k, v]) => outcome.groups.some((g) => g.key === k && g.choices.some((c) => c.title === v)))),
+          ...Object.fromEntries(outcome.groups.filter(isFixed).map((g) => [g.key, g.choices[0].title])),
+        });
         setOptionsNotice(Object.keys(sentAnswers).length ? "The plan asked for one more choice. Please check the options below." : "");
         setStep("options");
         return;
@@ -453,7 +460,6 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                 {plansNotice}
               </p>
             ) : null}
-            <p className="mt-4 text-sm text-ink-muted">These AT&amp;T plans are available at your address. Plan names and prices are as published on att.com.</p>
             <PlanList plans={available.map((id) => plans.find((p) => p.id === id)!).filter(Boolean)} selected={planId} onChoose={choosePlan} />
             {planError ? (
               <p className="field-error" role="alert">
@@ -484,7 +490,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
             ) : null}
             <p className="mt-4 text-ink">Choose one option in each section. Paid add-ons are only added if you choose them.</p>
             <div className="mt-2 space-y-2">
-              {groups.map((g) => (
+              {groups.filter((g) => !isFixed(g)).map((g) => (
                 <RadioGroup
                   key={g.key}
                   legend={g.heading || "Please choose an option"}
@@ -501,9 +507,23 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
                 />
               ))}
             </div>
+            {groups.some(isFixed) ? (
+              <div className="mt-6" data-fixed-options>
+                <p className="field-label">Included with your plan</p>
+                <p className="field-hint mb-2">AT&amp;T offers one option for each of these with this plan.</p>
+                <ul className="grid gap-2">
+                  {groups.filter(isFixed).map((g) => (
+                    <li key={g.key} className="rounded-xl border border-border p-3">
+                      <span className="block text-ink">{g.choices[0].title}</span>
+                      {g.choices[0].details ? <span className="mt-1 block text-sm text-ink-muted">{g.choices[0].details}</span> : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             {hiddenAddOns.length ? (
               <p className="mt-6 text-sm text-ink-muted" data-hidden-addons>
-                Paid add-ons without a price published on att.com are not added online. Please call us if you would like to add one.
+                Some paid add-ons can only be added by phone. Please call us if you would like one.
               </p>
             ) : null}
             {included.length ? (
@@ -539,10 +559,6 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
               {plan.title} at {addressText}, with the options you chose.
             </p>
             <QuoteTable quote={quote} />
-            <p className="mt-3 text-sm text-ink" data-att-price-match>
-              This total matches the att.com price for {plan.title} with your options ({quote.attComPrice}/mo., pricing as of{" "}
-              <time dateTime={plan.retrievedAt}>{formatAsOf(plan.retrievedAt)}</time>).
-            </p>
             {quote.included.length ? (
               <div className="mt-5">
                 <p className="field-label">Included with this offer</p>
@@ -721,10 +737,10 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
               </>
             ) : stop.kind === "no_service" ? (
               <>
-                <StepHeading ref={headingRef}>No Plans Available Online for This Address</StepHeading>
+                <StepHeading ref={headingRef}>AT&amp;T Internet Is Not Available at This Address</StepHeading>
                 <p className="mt-3 text-ink">
-                  We could not find AT&amp;T Internet plans to order online at this address. Please check the address, or call{" "}
-                  <PhoneLink placement="order-no-service-text" offerId={offerId} value={value} className="link font-semibold" /> to confirm the services available there.
+                  AT&amp;T Internet plans are not available at this address. Please check the address, or call{" "}
+                  <PhoneLink placement="order-no-service-text" offerId={offerId} value={value} className="link font-semibold" /> to ask about the services available there.
                 </p>
               </>
             ) : (

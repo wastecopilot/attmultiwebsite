@@ -47,7 +47,6 @@ const AUTOPAY_YES = /^AutoPay\/Paperless Billing Discount/;
 const AUTOPAY_NO = /^Decline AutoPay\/Paperless Billing/;
 const EXTENDER_YES = /^Next-generation Wi-Fi experience/;
 const EXTENDER_NO = /^Decline Extended Wi-Fi Coverage Service/;
-const EQUIPMENT = /^AT&T Internet Equipment Fee/;
 const FIBER_INSTALL = /^AT&T Professional Install\b/;
 
 // Every page in the build, plus the dynamic order page.
@@ -218,7 +217,7 @@ async function expectStop(page: Page, heading: RegExp) {
 
 const FAILED = /We Could Not Complete Your Request Online/;
 const CALL = /Please Call Us to Complete Your Order/;
-const NO_PLANS = /No Plans Available Online for This Address/;
+const NO_PLANS = /AT&T Internet Is Not Available at This Address/;
 const lineAmounts = (page: Page) => page.locator("[data-quote-line] td:last-child").allInnerTexts();
 
 // ---------------------------------------------------------------------------------------------------------
@@ -252,7 +251,6 @@ test("Success: Internet Air from its Order Now button; events in order; no perso
   await expect(page.getByRole("cell", { name: /^AT&T Internet Air/ })).toBeVisible();
   await expect(page.getByRole("cell", { name: /^AutoPay\/Paperless Billing Discount/ })).toBeVisible();
   await expect(page.getByText("AT&T Extended Wi-Fi")).toHaveCount(0);
-  await expect(page.locator("[data-att-price-match]")).toContainText("$55.00/mo.");
   await details(page);
   await submit(page);
   await expectDone(page);
@@ -294,7 +292,11 @@ for (const [offer, card, price, total] of FIBER) {
     await expect(page.locator(`[data-plan-card="${card}"] a`, { hasText: "Broadband Facts" })).toHaveAttribute("href", /^https:\/\/www\.att\.com\//);
     await toOptions(page);
     await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
-    await pick(page, [AUTOPAY_YES, EQUIPMENT, FIBER_INSTALL]);
+    // Equipment and installation have one option each, so they are shown as included, not asked.
+    await expect(page.locator("[data-fixed-options]")).toContainText("AT&T Internet Equipment Fee");
+    await expect(page.locator("[data-fixed-options]")).toContainText("AT&T Professional Install");
+    await expect(page.getByRole("radio", { name: FIBER_INSTALL })).toHaveCount(0);
+    await pick(page, [AUTOPAY_YES]);
     await expect(page.getByText("Unlimited Data").first()).toBeVisible();
     await toQuote(page, total);
     await details(page);
@@ -324,7 +326,7 @@ test("Every price shown comes from att.com: plan cards and the quote total", asy
   }
   await choosePlan(page, "fiber-500");
   await toOptions(page);
-  await pick(page, [AUTOPAY_YES, EQUIPMENT, FIBER_INSTALL]);
+  await pick(page, [AUTOPAY_YES]);
   await toQuote(page, `$${attComPrice("fiber-500")}.00`);
 });
 

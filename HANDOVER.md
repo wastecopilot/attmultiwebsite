@@ -189,7 +189,8 @@ page is not indexed, not in the sitemap and never cached. It works like the AT&T
    otherwise the page says so ("AT&T Internet 1000 is not available at this address") and shows the plans
    that are;
 3. chooses the options the portal lists for that plan: AutoPay is an explicit choice (with att.com's $10/mo.
-   discount text), and nothing is preselected;
+   discount text); items with a single option (equipment, installation) are shown as included; nothing else is
+   preselected;
 4. sees the quote: the portal cart line for line, shown only when its total equals the att.com price;
 5. enters name, phone, email and confirm email, billing language, an optional phone/text permission, and
    confirms;
