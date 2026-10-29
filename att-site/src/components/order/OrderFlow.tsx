@@ -9,6 +9,7 @@ import { track } from "@/lib/analytics";
 import type { ChosenOption, Expected, IdentityQuestion, OptionGroup, OrderOutcome, QuoteLine } from "@/lib/order/outcome";
 import { amount } from "@/lib/order/price";
 import {
+  PHONE_MESSAGE,
   US_STATES,
   validateAddress,
   validateCreditCheck,
@@ -60,6 +61,7 @@ const ADDRESS_NOTICE = {
   ambiguous: "More than one address matched. Please check the street address, apartment or unit number and ZIP code.",
 } as const;
 const EMAIL_REJECTED = "This email address was not accepted. Please enter a working email address that can receive mail.";
+const DETAILS_REJECTED = "AT&T did not accept some of these details. Please check them and submit again.";
 
 const WORK_TEXT: Record<Work, { title: string; text: string; seconds: number }> = {
   plans: { title: "Checking the Plans at Your Address", text: "This usually takes less than a minute. Please keep this page open.", seconds: 45 },
@@ -121,6 +123,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
   const [creditErrors, setCreditErrors] = useState<FieldErrors<CreditCheckInput>>({});
   const [showSsn, setShowSsn] = useState(false);
   const [consentError, setConsentError] = useState("");
+  const [detailsNotice, setDetailsNotice] = useState("");
   const [reference, setReference] = useState("");
   const [orderId, setOrderId] = useState("");
   // AT&T's Account Validation questions and the customer's answers: kept only until the portal answers.
@@ -344,6 +347,7 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
     setCustomerErrors(errors);
     setCreditErrors(ccErrors);
     setConsentError(consent ? "" : "Please confirm to continue.");
+    setDetailsNotice("");
     if (Object.keys(errors).length || Object.keys(ccErrors).length || !consent) return;
     setCustomer(clean);
     setCreditCheck(cleanCredit);
@@ -394,7 +398,8 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
       case "details": {
         track("order_failed", { offer_id: offerId, value, reason: "customer_details_rejected" });
         const contact = outcome.fields.filter((f) => f !== "dateOfBirth" && f !== "ssn");
-        setCustomerErrors(Object.fromEntries(contact.map((f) => [f, f === "email" ? EMAIL_REJECTED : "Please check this detail and try again."])));
+        setCustomerErrors(Object.fromEntries(contact.map((f) => [f, f === "email" ? EMAIL_REJECTED : f === "phone" ? PHONE_MESSAGE : "Please check this detail and try again."])));
+        setDetailsNotice(outcome.fields.length ? "" : DETAILS_REJECTED);
         setCreditErrors({
           ...(outcome.fields.includes("dateOfBirth") ? { dateOfBirth: "The date of birth was not accepted. Please check it." } : {}),
           ...(outcome.fields.includes("ssn") ? { ssn: "The Social Security number was not accepted. Please check it." } : {}),
@@ -668,6 +673,11 @@ export function OrderFlow({ initialOffer, plans, planParam, planOrderableOnline,
             <div className="min-w-0">
               <StepHeading ref={headingRef}>Personal Information</StepHeading>
               <p className="mt-2 text-ink-muted">Entering your information allows us to communicate with you about your order and set up your service.</p>
+              {detailsNotice ? (
+                <p className="mt-4 rounded-xl bg-surface-alt p-4 text-ink" role="alert" data-details-notice>
+                  {detailsNotice}
+                </p>
+              ) : null}
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <Field label="First name" error={customerErrors.firstName}>
                   {(p) => <input {...p} autoComplete="given-name" maxLength={40} value={customer.firstName} onChange={(e) => setCustomer({ ...customer, firstName: e.target.value })} />}

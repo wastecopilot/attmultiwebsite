@@ -57,6 +57,7 @@ export function sensitivePaths(value: unknown, path = ""): string[] {
 }
 
 const SENSITIVE_MESSAGE = "Please do not enter Social Security, date of birth, card or bank details here.";
+export const PHONE_MESSAGE = "Enter a valid 10-digit US phone number. Numbers with 555 are not accepted.";
 
 export interface AddressInput {
   street: string;
@@ -120,7 +121,8 @@ export function validateCustomer(raw: Partial<CustomerInput>): { value: Customer
   if (!name.test(value.firstName)) errors.firstName = "Enter your first name (at least 2 letters).";
   if (!name.test(value.lastName)) errors.lastName = "Enter your last name (at least 2 letters).";
   const digits = phoneDigits(value.phone);
-  if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(digits)) errors.phone = "Enter a 10-digit US phone number.";
+  // The portal's own rule: area code [2-9][0-8]x and exchange [2-9]xx, neither of them 555.
+  if (!/^(?!555)[2-9][0-8]\d(?!555)[2-9]\d{6}$/.test(digits)) errors.phone = PHONE_MESSAGE;
   if (value.email.length > 254 || !/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/.test(value.email)) errors.email = "Enter a valid email address.";
   if (!errors.email && value.confirmEmail !== value.email) errors.confirmEmail = "The email addresses do not match.";
   if (!value.billingLanguage) errors.billingLanguage = "Select a billing language.";

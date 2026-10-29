@@ -237,7 +237,8 @@ export function toOutcome(result: AutomationResult | undefined, expected: Expect
       return call("unrequested");
     case "invalid_customer_details": {
       const fields = [...new Set(list(data.fields).map((f) => CUSTOMER_FIELDS[str(f, 40) as keyof typeof CUSTOMER_FIELDS]).filter(Boolean))];
-      return { screen: "details", fields: fields.length ? fields : ["email"] };
+      // No field named: the page says some details were not accepted, without guessing which.
+      return { screen: "details", fields };
     }
     case "identity_questions": {
       const raw = list(data.identity_questions).map(record);

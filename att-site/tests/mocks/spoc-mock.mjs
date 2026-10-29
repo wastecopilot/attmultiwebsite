@@ -16,6 +16,7 @@
  *   quote call:  planmissing (plan_not_found), bundle (DIRECTV pushed into the cart), extender (a declined
  *                $12 Extended Wi-Fi line stays in the cart: the "$77" case)
  * Customer email:  rejected@...  invalid_customer_details (email) ;  handofffail@...  portal_error on the handoff
+ *                  phonerejected@...  the phone refused ;  unnamed@...  details refused without a field named
  *                  With the credit check (the website always sends it) the hand-off returns identity_questions
  *                  (invented TEST questions), and /v1/verifications returns credit_check_done (analyst review);
  *                  approved@...  the credit check passes ;  noquestions@...  analyst review without questions ;
@@ -157,6 +158,8 @@ function handoffOutcome(job, quote) {
   const email = job.email;
   if (email.startsWith("rejected@")) return result("invalid_customer_details", job.order_ref, { fields: ["email"], field_errors: ["We were unable to verify your email, please confirm your entry before continuing."] });
   if (email.startsWith("handofffail@")) return result("portal_error", job.order_ref);
+  if (email.startsWith("phonerejected@")) return result("invalid_customer_details", job.order_ref, { fields: ["phone"], field_errors: ["Enter valid phone number."] });
+  if (email.startsWith("unnamed@")) return result("invalid_customer_details", job.order_ref, { fields: [], field_errors: ["Required."] });
   const cart = cartFor(quote.products[0].plan_name, quote.products[0].options);
   if (!job.creditCheck || email.startsWith("handoffready@")) return result("handoff_ready", job.order_ref, cart);
   if (email.startsWith("noquestions@")) return result("credit_check_done", job.order_ref, { ...cart, credit_check: CREDIT.review, continue_url: CONTINUE_URL });

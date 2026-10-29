@@ -34,10 +34,10 @@ const ORDER_EVENTS = [
   "order_failed",
 ];
 const attComPrice = (id: string) => offers.find((o) => o.id === id)!.price!.amount;
-const PERSON = { first: "Flowtester", last: "Ordercheck", phone: "(214) 555-0147", email: "flow.tester@example.com" };
+const PERSON = { first: "Flowtester", last: "Ordercheck", phone: "(214) 360-0147", email: "flow.tester@example.com" };
 // Local-mock test values only (never sent beyond localhost).
 const CREDIT = { dob: "01/15/1985", ssn: "001-01-0001" };
-const PII_MARKERS = [PERSON.first, PERSON.last, "2145550147", "555-0147", PERSON.email, "flow.tester", "Plainview", "Courtenay", "Lakeforest", CREDIT.dob, CREDIT.ssn, "001010001"];
+const PII_MARKERS = [PERSON.first, PERSON.last, "2143600147", "360-0147", PERSON.email, "flow.tester", "Plainview", "Courtenay", "Lakeforest", CREDIT.dob, CREDIT.ssn, "001010001"];
 
 const ADDRESSES = {
   atlanta: { street: "915 Courtenay Dr NE", city: "Atlanta", state: "GA", zip: "30306" },
@@ -570,6 +570,52 @@ test("Confirm email must match before the review", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Personal Information" })).toBeVisible();
 });
 
+test("Phone numbers the portal refuses (555) are caught before the review", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page);
+  await page.getByRole("button", { name: "Back" }).click();
+  for (const phone of ["(200) 555-3121", "(555) 360-0147", "(214) 160-0147"]) {
+    await page.getByLabel("Phone number").fill(phone);
+    await page.getByRole("button", { name: "Review Order Request" }).click();
+    await expect(page.getByText("Enter a valid 10-digit US phone number. Numbers with 555 are not accepted.")).toBeVisible();
+  }
+});
+
+test("A phone the portal refuses is named as the phone, never as the email", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page, "phonerejected@example.com");
+  await submit(page);
+  await expect(page.getByRole("heading", { name: "Personal Information" })).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText("Enter a valid 10-digit US phone number. Numbers with 555 are not accepted.")).toBeVisible();
+  await expect(page.getByText(/email address was not accepted/)).toHaveCount(0);
+});
+
+test("Details refused without a field named: a general notice, no field blamed", async ({ page }) => {
+  await prepare(page);
+  await open(page, "internet-air");
+  await address(page, "hicksville");
+  await expectPlans(page, ["internet-air"]);
+  await toOptions(page);
+  await pick(page, [AUTOPAY_YES]);
+  await toQuote(page, "$55.00");
+  await details(page, "unnamed@example.com");
+  await submit(page);
+  await expect(page.locator("[data-details-notice]")).toHaveText("AT&T did not accept some of these details. Please check them and submit again.", { timeout: 20_000 });
+  await expect(page.getByText(/email address was not accepted/)).toHaveCount(0);
+});
+
 test("Address needs a unit: asked on the address step, then the plans", async ({ page }) => {
   await prepare(page);
   await open(page, "internet-air");
@@ -687,7 +733,7 @@ test("API refuses SSN, date of birth, card and bank data, and none reaches the a
   const address = { street: "300 Plainview Road", unit: "", city: "Hicksville", state: "NY", zip: "11801" };
   const plans = { requestId: "sec-check-0000000000000", address };
   const quote = { requestId: "sec-check-0000000000001", plansJobId: "a".repeat(24), planName: "AT&T Internet Air", options: {} };
-  const customer = { firstName: "Testa", lastName: "Testb", phone: "2145550147", email: "sec@example.com", confirmEmail: "sec@example.com", billingLanguage: "english", contactByPhone: false };
+  const customer = { firstName: "Testa", lastName: "Testb", phone: "2143600147", email: "sec@example.com", confirmEmail: "sec@example.com", billingLanguage: "english", contactByPhone: false };
   const submitBody = { requestId: "sec-check-0000000000002", quoteJobId: "a".repeat(24), customer, consent: true };
   const cases: [string, unknown][] = [
     ["plans", { ...plans, ssn: "123-45-6789" }],
